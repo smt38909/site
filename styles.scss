@@ -1,0 +1,661 @@
+/*-- scss:defaults --*/
+// =============================================================================
+// LEDGER  —  site theme for Dr. Richa [Surname]
+// Direction B of planning/design-directions-v1.html, chosen 2026-08-27.
+//
+// Two sections below, and Quarto needs both comment markers exactly as written:
+//   scss:defaults  — variables. Change colours and fonts HERE.
+//   scss:rules     — layout. Leave alone unless you are changing the design.
+// =============================================================================
+
+// ---- The palette. "Ice on a white card", chosen 27 Aug 2026. ---------------
+// Accent must NOT be green or amber: those two are spoken for by the badges.
+$accent:        #12657B;   // links, active tab, PDF buttons
+$accent-dark:   #0E4C5C;
+$accent-tint:   #F2F8FA;
+$accent-edge:   #CFE0E6;
+
+// ---- Neutrals --------------------------------------------------------------
+$ink:           #12263A;   // headings, paper titles
+$ink-2:         #33465C;   // running text
+$ink-3:         #5A6B7E;   // citations, captions, role line
+$rule:          #E7EDF2;   // hairlines inside the card
+$rule-soft:     #EFF3F7;
+$paper:         #FFFFFF;   // the card
+$ground:        #E3EBF3;   // the tinted page behind the card
+
+// Why #E3EBF3 and not the lighter #EDF2F7 the palette study started from:
+// the card has no border, only a shadow, and on the lighter ground it
+// separated by just 1.13x — not enough to read as a card. Do not "correct" this.
+
+// ---- Chip colours ----------------------------------------------------------
+// Tag TEXT uses $ink-3, the same grey as every other piece of secondary text.
+// It used to have a grey of its own (#4A5C6E) sitting between $ink-2 and
+// $ink-3 for no reason; that is why the site had seven text greys instead of
+// four. Do not reintroduce it.
+$chip-bg:       #F5F8FB;   // research-area tags
+$chip-edge:     #DDE5EC;
+
+// ---- Bootstrap / Quarto variables ------------------------------------------
+$font-family-sans-serif: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-monospace:  "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+// 100%, NOT 16px. A px value here emits `html { font-size: 16px }`, which
+// overrides the default text size a visitor has set in their own browser.
+// 100% inherits it, and every rem below scales with it. Do not "pin" this.
+$font-size-root: 100%;
+
+$body-color:      $ink-2;
+$body-bg:         $ground;   // the page; the card is painted in scss:rules
+$link-color:      $accent;
+$link-hover-color:$accent-dark;
+
+$headings-font-weight: 600;
+$headings-color:  $ink;
+$h1-font-size:    1.6rem;
+$h2-font-size:    0.82rem;   // section bars are small caps, not big headings
+$h3-font-size:    1.15rem;   // must clear 1rem body text; 1.05 was too close
+
+$navbar-bg:       $paper;
+$navbar-fg:       $ink;
+$navbar-hl:       $accent;
+
+$table-border-color: $rule;
+
+
+/*-- scss:rules --*/
+// =============================================================================
+// LAYOUT. You should not need to edit anything below this line.
+//
+// THE TYPE SCALE. Every piece of text on the site is one of these eight steps.
+// If you are about to type a font-size that is not on this list, use the
+// nearest step instead — near-duplicates (0.95 next to 0.98, 0.85 next to 0.86)
+// are what make a page look subtly untidy without anyone being able to say why.
+//
+//   1.7rem   27px   page title (h1)
+//   1.35rem  22px   stat numerals (mono)
+//   1.15rem  18px   subsection heading (h3)
+//   1rem     16px   body text, subtitle, list items          <- the floor for prose
+//   0.98rem  16px   item titles: .ti, .tt, .pub-title
+//   0.94rem  15px   navbar links
+//   0.86rem  14px   descriptions: .de, .td, .pub-cite, .pub-abstract
+//   0.82rem  13px   labels: h2 bars, .tag, .l, .fignote, .minihead, buttons, footer
+//   0.8rem   13px   mono years and badges                    <- nothing goes below this
+//
+// Text colours are four, no more: $ink (titles), $ink-2 (body), $ink-3
+// (secondary), $accent / $accent-dark (links and years).
+// =============================================================================
+
+body { line-height: 1.62; background: $ground; }
+
+// =============================================================================
+// THE CARD
+// Quarto's grid already sizes and centres main.content (see grid: body-width in
+// _quarto.yml) — so the card IS main.content. Do not add a wrapper; the two
+// would fight over width and the page would drift off-centre.
+// =============================================================================
+main.content {
+  background: $paper;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(18, 38, 58, .05),
+              0 16px 34px -18px rgba(18, 38, 58, .34);
+  padding: 34px 44px 42px;
+  margin-top: 28px;
+  margin-bottom: 30px;
+}
+
+// On a phone the card keeps a thin margin and much less padding. Removing the
+// margin entirely makes the card invisible and the tint vanishes; keeping the
+// desktop padding throws away the width her long paper titles need.
+@media (max-width: 575px) {
+  main.content {
+    // Horizontal margin is 0 on purpose: Quarto's own grid already reserves a
+    // 24px gutter each side at this width, which is the tint you see beside the
+    // card. Adding our own margin on top just narrows the text for no gain.
+    margin: 10px 0 14px;
+    padding: 22px 18px 26px;
+    border-radius: 4px;
+  }
+}
+
+// Long DOIs, URLs and journal names must never push the page sideways.
+main p, main li, main td, main th, .pub-cite, .pub-title { overflow-wrap: break-word; }
+
+// ---- Navbar: a hairline, not a bar of colour -------------------------------
+.navbar {
+  border-bottom: 1px solid $rule;
+  box-shadow: none;
+  padding-top: 0;
+  padding-bottom: 0;
+  min-height: 54px;
+}
+.navbar-brand { font-weight: 600; letter-spacing: -0.01em; font-size: 1rem; }
+.navbar .navbar-nav .nav-link {
+  color: $ink-3;
+  font-size: 0.94rem;
+  padding: 1rem 0.85rem;
+  border-bottom: 2px solid transparent;
+}
+.navbar .navbar-nav .nav-link:hover { color: $ink; }
+.navbar .navbar-nav .nav-link.active,
+.navbar .navbar-nav .nav-link[aria-current="page"] {
+  color: $ink;
+  font-weight: 600;
+  border-bottom-color: $accent;
+}
+
+// ---- Title block -----------------------------------------------------------
+#title-block-header .quarto-title h1.title {
+  font-size: 1.7rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.15rem;
+}
+#title-block-header .quarto-title .subtitle {
+  font-size: 1rem;
+  color: $ink-3;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+#title-block-header { margin-bottom: 1.6rem; }
+
+// ---- Section bars: PUBLICATIONS, TEACHING, and friends ---------------------
+// Quarto wraps each ## in <section class="level2">, so the spacing has to go
+// on the section — a margin on the h2 alone collapses away.
+main section.level2 { margin-top: 2.6rem; }
+main section.level2:first-child { margin-top: 0; }
+main section.level2 > h2 { margin-top: 0; }
+main section.level3 { margin-top: 1.6rem; }
+main section.level3 > h3 { margin-top: 0; }
+
+main h2 {
+  margin-top: 2.6rem;
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid $ink;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: $ink;
+}
+main h3 {
+  margin-top: 1.6rem;
+  font-size: 1.15rem;
+  color: $ink;
+}
+
+// ---- Profile header: text left, photo right --------------------------------
+// The photo is the FIRST element in index.qmd (so it comes first when the grid
+// collapses on a phone) but is placed into column 2 here.
+//
+// Two things below are load-bearing, both learned the hard way:
+//   1. column-gap, NOT gap. The photo spans many rows; a row-gap would be
+//      multiplied across every one of those empty implicit rows.
+//   2. grid-row: 1 / span 30, NOT 1 / -1. `-1` resolves against the EXPLICIT
+//      grid, which here is a single row, so the photo stretched row 1 to its
+//      own height and left ~90px of blank space under the first short line
+//      ("Hi, I'm Richa."). Same trap as .pub. Do not "simplify" it back.
+.profile {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 170px;
+  column-gap: 1.8rem;
+  align-items: start;
+  margin-bottom: 1.6rem;
+}
+.profile > * { margin: 0; grid-column: 1; }
+.profile > * + * { margin-top: 0.75rem; }
+.profile > *:first-child {
+  grid-column: 2;
+  grid-row: 1 / span 30;
+  margin-top: 0;
+}
+.profile > *:nth-child(2) { margin-top: 0; }   // first line of text, sits at the top
+.profile img,
+.headshot {
+  width: 170px;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 3px;
+  display: block;
+}
+@media (max-width: 767px) {
+  .profile { grid-template-columns: 1fr; }
+  .profile > *, .profile > *:first-child { grid-column: 1; grid-row: auto; }
+  .profile > *:first-child { margin-bottom: 1rem; }
+  .profile img, .headshot { width: 128px; height: 128px; }
+}
+
+// ---- Research threads: three summary cards ---------------------------------
+// One card per strand of her research. The text mirrors research.qmd's overview
+// headings; keep the two in step.
+// Three fixed columns, not auto-fit: auto-fit drops to two on an iPad and
+// leaves the third card sitting alone with a hole beside it. Three threads
+// belong on one row or stacked, never 2+1.
+.threads {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin: 1rem 0 0;
+  align-items: stretch;
+}
+@media (max-width: 767px) {
+  .threads { grid-template-columns: 1fr; }
+}
+.thread {
+  border: 1px solid $rule;
+  border-left: 3px solid $accent;
+  padding: 0.7rem 0.9rem 0.8rem;
+}
+.thread p { margin: 0; }
+.thread .tt {
+  display: block;
+  font-size: 0.98rem;   // same step as .entry .ti and .pub-title
+  font-weight: 600;
+  line-height: 1.3;
+  color: $ink;
+}
+.thread .td {
+  display: block;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: $ink-3;
+  margin-top: 0.3rem;
+}
+
+// ---- Stat band: the "at a glance" numbers ----------------------------------
+// Four tinted panels instead of four bullets. Numbers are set in the mono face
+// so the digits line up; the label carries the qualifier in brackets.
+.stats {
+  display: grid;
+  // 140px, not 150: at 150 a 390px-wide phone falls 4px short of fitting two
+  // panels per row and stacks all four. 140 gives it a 2x2 block.
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.6rem;
+  margin: 1.8rem 0 0;
+}
+.stat {
+  background: $accent-tint;
+  border: 1px solid $accent-edge;
+  padding: 0.6rem 0.8rem 0.65rem;
+}
+.stat p { margin: 0; }
+.stat .n {
+  display: block;
+  font-family: $font-family-monospace;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  color: $ink;
+  font-variant-numeric: tabular-nums;
+}
+.stat .l {
+  display: block;
+  font-size: 0.82rem;
+  line-height: 1.5;   // same as .de / .td / .tag
+  color: $ink-3;
+  margin-top: 0.15rem;
+}
+.fignote { display: block; font-size: 0.82rem; color: $ink-3; margin-top: 0.45rem; font-style: italic; }
+
+// ---- Paired columns --------------------------------------------------------
+// Appointments beside Education, Recognitions beside Professional service.
+// The section spacing normally lives on section.level2; inside a pair it has to
+// be zeroed, or the right-hand column starts lower than the left.
+.cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2.4rem;
+  margin-top: 2.6rem;
+  align-items: start;
+}
+// Quarto folds the ::: {.col} div INTO the section it wraps, so each grid item
+// is <section class="level2 col">, not a wrapper div. Selectors target the
+// section itself; without this the 2.6rem section spacing stacks on top of the
+// .cols margin and opens a double gap above every pair.
+.cols > section.level2,
+.cols > .col { margin-top: 0; }
+.cols h2 { margin-top: 0; }
+.cols ul { padding-left: 1.05rem; margin-bottom: 0; }
+.cols li { margin: 0.25rem 0; }
+@media (max-width: 767px) {
+  .cols { grid-template-columns: 1fr; }
+  .cols > .col + .col { margin-top: 2.2rem; }
+}
+
+// ---- Entry rows: appointments and degrees ----------------------------------
+// Year stacked above the title rather than beside it: in a half-width column
+// a left year rail would leave too little room for the institution line.
+// A continuous rail with a dot per entry. The rail is the entry's own
+// border-left, so consecutive entries join into one unbroken line; the dot is
+// an ::before pulled half its width onto that border. The white ring around
+// the dot is a box-shadow, not a border, so it does not shift the dot's centre.
+.entry {
+  position: relative;
+  padding: 0 0 1rem 1.15rem;
+  border-left: 1px solid $rule;
+}
+.entry:last-of-type { padding-bottom: 0.2rem; }
+.entry::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 0.42rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: $accent;
+  box-shadow: 0 0 0 3px $paper;
+}
+.entry p { margin: 0; }
+.entry .yr {
+  display: block;
+  font-family: $font-family-monospace;
+  font-size: 0.8rem;
+  line-height: 1.4;   // body leading is too airy for a one-line mono label
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: $accent;
+  font-variant-numeric: tabular-nums;
+}
+.entry .ti {
+  display: block;
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: $ink;
+  margin-top: 0.1rem;
+}
+.entry .de {
+  display: block;
+  font-size: 0.86rem;   // same step as .thread .td and .pub-cite
+  line-height: 1.5;
+  color: $ink-3;
+  margin-top: 0.1rem;
+}
+// Sits after the last .entry, outside the rail, so it gets its own top margin
+// rather than inheriting the timeline's indent.
+.minihead {
+  display: block;
+  font-size: 0.82rem;   // was 0.72 (11.5px), the second-smallest text on the page
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $ink-3;
+  margin: 1.1rem 0 0.35rem;
+}
+
+// ---- Collaborations: a wrapping row, not a stacked list --------------------
+.inline-list ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.8rem;
+  margin: 0;
+  padding: 0;
+}
+// No font-size here: these bullets sit at body size like every other list.
+.inline-list li { position: relative; padding-left: 0.85rem; margin: 0; }
+.inline-list li::before { content: "\2022"; position: absolute; left: 0; color: $accent; }
+
+// ---- Measure ---------------------------------------------------------------
+// The card is 900px wide so the paired columns have room. Running prose must
+// not follow it out to ~95 characters, so cap the paragraphs that sit directly
+// in a section. Anything inside .profile, .entry or a table is unaffected.
+// 68ch, not 74ch: `ch` is the width of a zero, which is wider than the average
+// lowercase letter in Source Sans 3, so 74ch was rendering as ~81 characters —
+// past the 45-75 the measure is supposed to hold to. 68ch lands at ~74.
+main > p,
+main section.level2 > p,
+main section.level3 > p { max-width: 68ch; }
+// The hero paragraphs live inside .profile, so the rule above does not reach
+// them; without this the intro ran to 76 characters.
+.profile > p { max-width: 68ch; }
+
+// ---- Tag rows: research areas, profile links -------------------------------
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.9rem 0 0; }
+.tags p { margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tag {
+  display: inline-block;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: $ink-3;
+  background: $chip-bg;
+  border: 1px solid $chip-edge;
+  padding: 0.15rem 0.5rem;
+}
+.linkrow { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.9rem 0 0; }
+.linkrow p { margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.linkrow a {
+  font-size: 0.82rem;
+  color: $accent-dark;
+  background: $accent-tint;
+  border: 1px solid $accent-edge;
+  padding: 0.2rem 0.55rem;
+  text-decoration: none;
+}
+.linkrow a:hover { background: #E7F1F3; color: $accent-dark; }
+
+// =============================================================================
+// PUBLICATION ROWS  —  the heart of the design.
+// One ::: pub wrapper per paper. First paragraph = year + badge, pinned to the
+// left column; everything after it stacks in the right column.
+// =============================================================================
+.pub {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  grid-auto-rows: min-content;
+  align-items: start;
+  column-gap: 1.25rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid $rule-soft;
+}
+.pub > *        { grid-column: 2; margin: 0.3rem 0 0; }
+.pub > *:first-child {
+  grid-column: 1;
+  grid-row: 1 / span 20;   // span, not 1/-1: the rows here are implicit
+  margin: 0.1rem 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+.pub > *:nth-child(2) { margin-top: 0; }
+
+.pub-year {
+  font-family: $font-family-monospace;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: $ink;
+  font-variant-numeric: tabular-nums;
+}
+.pub-title,
+.pub > p:nth-child(2) strong {
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: $ink;
+}
+.pub-cite {
+  display: block;
+  font-size: 0.86rem;
+  color: $ink-3;
+  line-height: 1.5;
+}
+.pub-links a {
+  display: inline-block;
+  font-size: 0.8rem;
+  color: $accent;
+  background: $accent-tint;
+  border: 1px solid $accent-edge;
+  padding: 0.15rem 0.55rem;
+  margin-right: 0.35rem;
+  text-decoration: none;
+}
+.pub-links a:hover { background: #E7F1F3; }
+.pub-abstract {
+  display: block;
+  font-size: 0.86rem;
+  color: $ink-3;
+  line-height: 1.55;
+  max-width: 60ch;
+}
+
+@media (max-width: 575px) {
+  .pub { grid-template-columns: 1fr; row-gap: 0.15rem; }
+  .pub > *, .pub > *:first-child { grid-column: 1; grid-row: auto; }
+  .pub > *:first-child { flex-direction: row; align-items: center; margin-bottom: 0.35rem; }
+}
+
+// ---- Version badges (v2 §3.3). Colours are fixed by the spec. --------------
+// 0.75rem, not 0.66: the badge is the one label a visitor most needs to read
+// (open access vs under embargo) and 10.6px was the smallest text on the site.
+.badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0;
+  border: 1px solid transparent;
+  white-space: normal;
+  text-align: left;
+}
+.badge-oa      { background: #E6F4EA; color: #1E6B34; border-color: #BFE3CB; }
+.badge-am      { background: #FDF3E0; color: #8A5A10; border-color: #F2DDB4; }
+.badge-embargo { background: #F0F0F0; color: #5A5A5A; border-color: #DCDCDC; }
+
+// ---- Tables (appointments, teaching notes) --------------------------------
+main table {
+  font-size: 0.92rem;
+  border-top: 1px solid $ink;
+  border-bottom: 1px solid $rule;
+}
+main table thead th {
+  border-bottom: 1px solid $rule;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $ink-3;
+}
+main table td, main table th { padding: 0.55rem 0.6rem; }
+main table tbody tr + tr td { border-top: 1px solid $rule-soft; }
+main table a { display: inline-block; padding: 0.15rem 0; }
+
+// ---- Teaching: interactive tool frames ------------------------------------
+.tool-frame iframe,
+iframe.tool {
+  width: 100%;
+  border: 1px solid $rule;
+  border-radius: 3px;
+  background: $paper;
+}
+// A fixed 520px frame swallows a phone screen; give it a share of the viewport.
+@media (max-width: 575px) {
+  .tool-frame iframe, iframe.tool { height: 68vh; min-height: 320px; }
+}
+
+// Standalone link that should look and behave like a button (not inline prose).
+.linkbtn {
+  display: inline-block;
+  font-size: 0.86rem;
+  color: $accent;
+  background: $accent-tint;
+  border: 1px solid $accent-edge;
+  padding: 0.3rem 0.7rem;
+  text-decoration: none;
+}
+.linkbtn:hover { background: #E7F1F3; }
+
+// ---- Inline code (file names, paths) --------------------------------------
+code:not(.sourceCode) {
+  color: $ink-3;
+  background: #F7F9FA;
+  border: 1px solid $rule-soft;
+  border-radius: 2px;
+  padding: 0.02rem 0.28rem;
+  font-size: 0.86em;
+}
+
+// ---- Footer ---------------------------------------------------------------
+.nav-footer {
+  background: transparent;
+  border-top: 0;
+  font-size: 0.82rem;
+  color: $ink-3;
+  margin-top: 0.5rem;
+}
+// Quarto puts font-size: .825em on the three footer cells themselves, which
+// COMPOUNDS on the 0.82rem above and renders the copyright line at 10.8px —
+// the smallest text on the site, in the corner where the eye already
+// struggles. Reset the cells, not the paragraph: the paragraph inherits.
+// Quarto's selector is `.nav-footer .nav-footer-left`, so a bare
+// `.nav-footer-left` loses on specificity no matter how late it appears.
+.nav-footer .nav-footer-left,
+.nav-footer .nav-footer-center,
+.nav-footer .nav-footer-right { font-size: inherit; }
+.nav-footer p { margin-bottom: 0; }
+
+// ---- Keyboard focus -------------------------------------------------------
+a:focus-visible, .nav-link:focus-visible {
+  outline: 2px solid $accent;
+  outline-offset: 2px;
+}
+
+
+// =============================================================================
+// TOUCH DEVICES
+// Phones and tablets only (a coarse pointer with no hover). Desktop keeps the
+// tighter spacing above. 44px is Apple's minimum comfortable tap target, and
+// the PDF button is the most-tapped thing on this site.
+// =============================================================================
+@media (hover: none) and (pointer: coarse) {
+
+  .pub-links a,
+  .linkrow a,
+  .linkbtn {
+    min-height: 44px;
+    padding-left: 0.95rem;
+    padding-right: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.88rem;
+  }
+  .pub-links a { margin-bottom: 0.4rem; }
+  .linkrow { gap: 0.5rem; }
+  .linkrow p { gap: 0.5rem; }
+
+  main table a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  // The active-page underline spans the whole width once the navbar collapses
+  // into a stacked menu, where it reads as a divider. Use a left bar instead.
+  @media (max-width: 991px) {
+    .navbar .navbar-nav .nav-link.active,
+    .navbar .navbar-nav .nav-link[aria-current="page"] {
+      border-bottom-color: transparent;
+      box-shadow: inset 3px 0 0 $accent;
+      padding-left: 0.85rem;
+    }
+  }
+}
+
+
+// =============================================================================
+// PRINT
+// A tinted ground and a drop shadow waste ink and add nothing on paper.
+// =============================================================================
+@media print {
+  body { background: #fff; }
+  main.content {
+    background: #fff;
+    box-shadow: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+  }
+  .navbar, .nav-footer { display: none; }
+}

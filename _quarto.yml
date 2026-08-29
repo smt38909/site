@@ -1,0 +1,56 @@
+# ============================================================================
+# Quarto project configuration — the whole site is wired together here.
+# Design: "Ledger" (direction B), see planning/design-directions-v1.html.
+# ============================================================================
+
+project:
+  type: website
+  output-dir: _site        # rendered HTML lands here; git-ignored (never edited by hand)
+
+website:
+  title: "Dr. Richa Singh"
+  # site-url is REQUIRED for Google Scholar tags to build correctly (Plan §5, §Phase-4).
+  # Domain registered 2026-08-27.
+  site-url: "https://drrichasingh.in"
+
+  navbar:
+    # Three short tabs fit comfortably on a tablet — only phones need the
+    # hamburger. Default is 'lg' (992px), which hides the tabs on an iPad.
+    collapse-below: md
+    left:
+      - href: index.qmd
+        text: Profile
+      - href: research.qmd
+        text: Research & Papers
+      - href: teaching.qmd
+        text: Teaching
+
+  page-footer:
+    left: "© Dr. Richa Singh · Department of Biotechnology, SIES College, Mumbai"
+    right: "Built with Quarto"
+
+  # Bonus, near-free once site-url is set: an XML sitemap for Search Console (v2 §8.3).
+  # Quarto generates it automatically for a website project.
+
+format:
+  html:
+    # cosmo is only the base Bootstrap; styles.scss is the actual design.
+    theme: [cosmo, styles.scss]
+    toc: false
+    # The little paragraph anchors Quarto adds beside headings are ~15px tap
+    # targets on a phone, right next to real links. Off.
+    anchor-sections: false
+    # 900px so the Profile page's paired columns (Appointments beside Education)
+    # have room. Running text does NOT follow it out that far: styles.scss caps
+    # section paragraphs at 74ch, which keeps the ~70-character measure that
+    # matters most for readability.
+    grid:
+      body-width: 900px
+    # Typefaces. Fallback stacks in styles.scss cover it if these ever fail to load.
+    include-in-header:
+      - text: |
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+    # google-scholar is set PER PAPER PAGE (in each papers/*.qmd), not globally,
+    # because only paper pages should emit citation meta tags. See _templates/paper-template.qmd.

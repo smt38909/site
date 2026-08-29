@@ -1,0 +1,37 @@
+# =============================================================================
+# Renders the Quarto site and publishes it to GitHub Pages.
+#
+# This runs on GitHub's computers, not yours. Every time anything is pushed to
+# the main branch — including an edit Richa makes in the browser — GitHub
+# rebuilds the site and puts the result live. Nobody has to run anything.
+#
+# You should not need to edit this file.
+# =============================================================================
+
+on:
+  # Rebuild whenever anything lands on main
+  push:
+    branches: main
+  # ...and allow a manual rebuild from the Actions tab if ever needed
+  workflow_dispatch:
+
+name: Quarto Publish
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Render and publish
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

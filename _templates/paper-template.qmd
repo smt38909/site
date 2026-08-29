@@ -1,0 +1,42 @@
+---
+# =============================================================================
+# PAPER PAGE TEMPLATE  —  copy this into papers/, rename to papers/YYYY-slug.qmd,
+# fill every blank, then delete these comment lines.
+#
+# This front matter is the ONLY part you edit. Quarto turns it into the hidden
+# Google Scholar meta tags (citation_title, citation_author, citation_pdf_url, …).
+# Requirements: v2 §3.3 (visible entry) + §4.1 (hidden tags).
+# =============================================================================
+
+title: "Exact title as published — do not paraphrase or shorten"
+description: "Two–three sentence abstract. Reused as the citation_abstract tag and helps Google."
+
+# Authors: same order as published, Surname + initials style is fine.
+author:
+  - name: R. Singh
+  - name: A. Patil
+  - name: S. Deshmukh
+
+citation:
+  type: article-journal
+  container-title: "Bioresource Technology"     # journal name, exact
+  volume: "371"
+  page: "128-139"                                # split on the hyphen automatically
+  issued: "2023"                                 # publication year (or YYYY-MM)
+  doi: "10.xxxx/xxxxx"
+  # pdf-url is THE most important line — it becomes citation_pdf_url, the tag that
+  # points Google Scholar at your free PDF and merges it under "All versions".
+  # Use the full public URL, not a relative path:
+  pdf-url: "https://drrichasingh.in/papers/2023-biochar-dye.pdf"
+
+# Emit the Scholar meta tags for this page. (Set only on paper pages.)
+google-scholar: true
+---
+
+<!--
+Optional visible body. The publications list (research.qmd) already shows the
+badge, citation line, and links, so this page can be minimal — or repeat the
+abstract and a link to the PDF for visitors who land here directly.
+-->
+
+[Optional: abstract paragraph and a direct link to the PDF.]

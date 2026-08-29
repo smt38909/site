@@ -1,0 +1,291 @@
+---
+# Tab 2 — Research & Papers.  Structure: v2 §3.  Page title: v2 §8.1.
+# Publication list transcribed from her CV (Aug 2026). See private/doi-todo.md
+# for the outstanding DOI and PDF work.
+pagetitle: "Research & Publications — Dr. Richa Singh"
+title-prefix: ""
+title: "Research & Publications"
+---
+
+## Research overview
+
+### Bacterial synthesis of metal nanoparticles
+
+Environmental bacteria — *Acinetobacter* species in particular — can be induced to
+reduce metal salts into nanoparticles of controlled size and shape. My doctoral and
+subsequent work established the conditions under which this happens, identified
+lignin peroxidase and a purified protein fraction as agents of the reduction, and
+characterised the silver, gold and selenium particles that result. The appeal is
+that the synthesis runs in water, at room temperature, without the reducing agents
+that conventional routes depend on.
+
+### What the particles are good for
+
+Biogenic nanoparticles turn out to be active where conventional antimicrobials are
+struggling. We have shown silver nanoparticles disrupting *Acinetobacter* biofilms,
+acting in synergy with existing antibiotics against nosocomial strains, working
+against *Candida albicans*, and — with phytogenic silver and gold particles —
+against *Mycobacterium tuberculosis*. Selenium nanoparticles from *Acinetobacter*
+sp. SW30 proved cytotoxic to breast cancer cells.
+
+### Cleaning up: dyes, microplastics and waste as a resource
+
+Textile dye in water is both a pollutant and a convenient test substrate. Recent
+work uses banana and carrot peel waste as a biosorbent for procion magenta and
+black azabache dyes, and gold nanocatalysts to decolorise dye effluent. A current
+review thread asks whether nano-adsorbents can be made to capture microplastics.
+
+### Science education
+
+A parallel strand, with colleagues at SIES, looks at how teachers actually learn —
+the effect of online professional courses on teaching practice, experiential
+learning that blends MOOCs with project work and internships, and how public
+understanding of food-contact materials shifts with education.
+
+## Publications
+
+*Badges show what is available here. Green means the publisher's open-access PDF is
+hosted on this site; amber means an accepted manuscript posted after its embargo;
+grey means the paper is available from the publisher only.*
+
+<!-- ===========================================================================
+  HOW TO ADD A PAPER
+  ---------------------------------------------------------------------------
+  Copy a block from _templates/publication-block.md, paste it at the TOP of this
+  list, and fill in the blanks. Every entry keeps the same five elements in the
+  same order (v2 §3.4). Do not edit the ::: pub lines — they are what puts the
+  year and badge in the left column.
+
+  OUTSTANDING WORK ON THIS LIST (see private/doi-todo.md):
+    1. No DOI links yet — her CV does not carry them. Once added, each entry
+       gains a line:  [[DOI → published version](https://doi.org/10.XXXX/XXXXX)]{.pub-links}
+    2. No PDFs are hosted yet. Every entry is therefore badged grey. As each
+       paper's rights are checked against Open Policy Finder and the signed
+       agreement, entries flip to green or amber and gain a PDF link.
+=========================================================================== -->
+
+::: {.pub}
+[2026]{.pub-year} [In press]{.badge .badge-embargo}
+
+[Biosorption of procion magenta and black azabache textile dyes using banana and carrot peel waste: a comparative analysis of pure and blended systems]{.pub-title}
+
+[Patil SB, **Singh R** — *International Journal of Phytoremediation* (accepted).]{.pub-cite}
+:::
+
+::: {.pub}
+[2026]{.pub-year} [In press]{.badge .badge-embargo}
+
+[Nano-adsorbent for removal of microplastics: cross-material insights, performance and practical applications]{.pub-title}
+
+[**Singh R** — *Next Research* (accepted).]{.pub-cite}
+:::
+
+::: {.pub}
+[2026]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Online professional courses' impact on teaching and personal growth]{.pub-title}
+
+[**Singh R**, Menon T, Yoosuf S — *Canadian Journal of Learning and Technology* 52(1): 1–20.]{.pub-cite}
+:::
+
+::: {.pub}
+[2025]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Practices and perceptions of food contact materials: impact of education in the Indian context]{.pub-title}
+
+[Vishwakarma OV, Patil SB, **Singh R** — *Proceedings of the Indian National Science Academy* 91: 1351–1364.]{.pub-cite}
+:::
+
+::: {.pub}
+[2024]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Antibacterial activity of bio-silver nanoparticles in combination with antibiotics]{.pub-title}
+
+[**Singh R** — *Iranian Journal of Materials Science and Engineering* 21: 1.]{.pub-cite}
+:::
+
+::: {.pub}
+[2024]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Naturally occurring nanomaterials (NONPs): a review]{.pub-title}
+
+[Raut S, **Singh R**, Lekhak U — *Next Sustainability* 3: 100037.]{.pub-cite}
+:::
+
+::: {.pub}
+[2020]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Green synthesis of AuNPs by *Acinetobacter* sp. GWRVA25: optimization, characterization and its antioxidant activity]{.pub-title}
+
+[Nadhe SB, Wadhwani SA, **Singh R**, Chopade BA — *Frontiers in Chemistry* 8: article 474.]{.pub-cite}
+:::
+
+::: {.pub}
+[2019]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[*Acinetobacter* sp. mediated synthesis of AgNPs, its optimization, characterization and synergistic antifungal activity against *Candida albicans*]{.pub-title}
+
+[Nadhe SB, **Singh R**, Wadhwani SA, Chopade BA — *Journal of Applied Microbiology* 127: 445–458.]{.pub-cite}
+:::
+
+::: {.pub}
+[2018]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Antibacterial activities of bacteriagenic silver nanoparticles against nosocomial *Acinetobacter baumannii*]{.pub-title}
+
+[**Singh R**, Vora J, Nadhe S, Wadhwani SA, et al. — *Journal of Nanoscience and Nanotechnology* 18: 3806–3815.]{.pub-cite}
+:::
+
+::: {.pub}
+[2018]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Decolorization of textile dyes by combination of gold nanocatalysts obtained from *Acinetobacter* sp. SW30 and NaBH₄]{.pub-title}
+
+[Wadhwani SA, Shedbalkar UU, Nadhe S, **Singh R**, et al. — *Environmental Technology & Innovation* 9: 186–197.]{.pub-cite}
+:::
+
+::: {.pub}
+[2018]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Catalytic activity of chemical and biological nanosilver: a comparative study]{.pub-title}
+
+[**Singh R**, Jain B — *JETIR* 5: 243–253.]{.pub-cite}
+:::
+
+::: {.pub}
+[2017]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Lignin peroxidase mediated silver nanoparticle synthesis in *Acinetobacter* sp.]{.pub-title}
+
+[**Singh R**, Shedbalkar UU, Nadhe SB, Wadhwani SA, et al. — *AMB Express* 7: 226.]{.pub-cite}
+:::
+
+::: {.pub}
+[2017]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Biosynthesis of gold and selenium nanoparticles by purified protein from *Acinetobacter* sp. SW30]{.pub-title}
+
+[Wadhwani SA, Shedbalkar UU, **Singh R**, Chopade BA — *Enzyme and Microbial Technology* 111: 81–86.]{.pub-cite}
+:::
+
+::: {.pub}
+[2017]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Green synthesis of selenium nanoparticles using *Acinetobacter* sp. SW30: optimization, characterization and its anticancer activity in breast cancer cells]{.pub-title}
+
+[Wadhwani SA, Gorain M, Banerjee P, Shedbalkar U, **Singh R**, et al. — *International Journal of Nanomedicine* 12: 6841–6855.]{.pub-cite}
+:::
+
+::: {.pub}
+[2016]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Phytogenic silver, gold and bimetallic nanoparticles as novel antitubercular agents]{.pub-title}
+
+[**Singh R**, Nawale L, Arkile M, Wadhwani S, et al. — *International Journal of Nanomedicine* 11: 1889–1897.]{.pub-cite}
+:::
+
+::: {.pub}
+[2016]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Nanoparticles for control of biofilms of *Acinetobacter* species]{.pub-title}
+
+[**Singh R**, Nadhe S, Wadhwani S, Shedbalkar U, et al. — *Materials* 9: 383.]{.pub-cite}
+:::
+
+::: {.pub}
+[2016]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Biogenic selenium nanoparticles: current status and future prospects]{.pub-title}
+
+[Wadhwani SA, Shedbalkar UU, **Singh R**, Chopade BA — *Applied Microbiology and Biotechnology* 100: 2555–2566.]{.pub-cite}
+:::
+
+::: {.pub}
+[2016]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Kinetics of gold nanoparticles by *Acinetobacter* sp. SW30]{.pub-title}
+
+[Wadhwani SA, Shedbalkar UU, **Singh R**, Vashisth P, et al. — *Indian Journal of Microbiology* 56: 439–444.]{.pub-cite}
+:::
+
+::: {.pub}
+[2015]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Chemical and biological metal nanoparticles as antimycobacterial agents: a comparative study]{.pub-title}
+
+[**Singh R**, Nawale LU, Arkile M, et al. — *International Journal of Antimicrobial Agents* 46: 183–188.]{.pub-cite}
+:::
+
+::: {.pub}
+[2015]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Bacteriagenic silver nanoparticles: synthesis, mechanism and applications]{.pub-title}
+
+[**Singh R**, Shedbalkar UU, Wadhwani SA, Chopade BA — *Applied Microbiology and Biotechnology* 99: 4579–4593.]{.pub-cite}
+:::
+
+::: {.pub}
+[2014]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Microbial synthesis of gold nanoparticles: current status and future prospects]{.pub-title}
+
+[Shedbalkar U, **Singh R**, Wadhwani S, Gaidhani S, et al. — *Advances in Colloid and Interface Science* 209: 40–48.]{.pub-cite}
+:::
+
+::: {.pub}
+[2014]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Novel polyhedral gold nanoparticles: green synthesis, optimization and characterization by an environmental isolate of *Acinetobacter* sp. SW30]{.pub-title}
+
+[Wadhwani SA, Shedbalkar UU, **Singh R**, Karve MS, et al. — *World Journal of Microbiology and Biotechnology* 30: 2723–2731.]{.pub-cite}
+:::
+
+::: {.pub}
+[2013]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Biofilm disruption activity of silver nanoparticles synthesized by *Acinetobacter calcoaceticus* PUCM 1005]{.pub-title}
+
+[Gaidhani S, **Singh R**, Singh D, Patel U, et al. — *Materials Letters* 108: 324–327.]{.pub-cite}
+:::
+
+::: {.pub}
+[2013]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Synthesis, optimization and characterization of silver nanoparticles from *Acinetobacter calcoaceticus* and their enhanced antibacterial activity when combined with antibiotics]{.pub-title}
+
+[**Singh R**, Wagh P, Wadhwani S, Gaidhani S, et al. — *International Journal of Nanomedicine* 8: 4277–4290.]{.pub-cite}
+:::
+
+::: {.pub}
+[2009]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[APO-1/FAS gene: structural and functional characteristics in systemic lupus erythematosus (SLE) and other autoimmune disorders]{.pub-title}
+
+[**Singh R**, Pradhan V, Patwardhan M, Ghosh K — *Indian Journal of Human Genetics* 15(3): 11–15.]{.pub-cite}
+:::
+
+## Book chapters
+
+::: {.pub}
+[2026]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Metal and metal-oxide nanoparticles: emerging tools in cancer therapy and bioimaging]{.pub-title}
+
+[**Singh R** — In: *Applications of Nanomaterials for Oncology*, IGI Global Publishing, New York, pp. 189–230.]{.pub-cite}
+:::
+
+::: {.pub}
+[2026]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Role of professional courses in fostering holistic development in teaching professionals]{.pub-title}
+
+[**Singh R**, Menon T, Yoosuf S — In: *Trends in Training and Development*, Higher Education Forum, India, pp. 60–64.]{.pub-cite}
+:::
+
+::: {.pub}
+[2025]{.pub-year} [Publisher site]{.badge .badge-embargo}
+
+[Experiential learning: a blend of MOOCs, project-based learning and internships]{.pub-title}
+
+[Menon T, Yoosuf S, **Singh R** — In: *Teaching Learning Innovations*, Higher Education Forum, India, pp. 25–30.]{.pub-cite}
+:::

@@ -1,0 +1,17 @@
+# Quarto rendered output — regenerated on every build, never committed by hand
+/_site/
+/.quarto/
+
+# Editor / OS cruft
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+
+# Safety net: never let anything from the private area in, even if misplaced here.
+# (private/ lives OUTSIDE this folder by design; this is belt-and-braces.)
+**/private/
+tracking.*
+*-source/
+
+**/*.quarto_ipynb

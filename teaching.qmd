@@ -1,0 +1,74 @@
+---
+# Tab 3 — Teaching.  Structure: v2 §7.  Page title: v2 §8.1.
+pagetitle: "Teaching Notes & E-content — Dr. Richa Singh"
+title-prefix: ""
+title: "Teaching"
+subtitle: "Course notes and interactive tools, free for anyone to use."
+---
+
+I have taught undergraduate and postgraduate biotechnology at SIES College since
+2017, and have designed UG and PG curricula under the National Education Policy
+and the college's autonomous framework. Anything I can usefully share ends up on
+this page.
+
+## Courses taught
+
+- Nanotechnology
+- Intellectual Property Rights
+- Biostatistics
+- Immunology
+- Cytogenetics
+- Research Methodology
+
+## Course notes
+
+<!-- TODO: drop PDFs into site/teaching/ and add a row per set of notes.
+     Keep filenames permanent once published — a renamed file breaks every
+     link and bookmark pointing at it (v2 §6). -->
+
+| Course | Material | Format |
+|--------|----------|--------|
+| *Notes will appear here as they are prepared.* | | |
+
+## Interactive tools
+
+Small teaching tools that run entirely in the browser — nothing to install, and
+free for any student or teacher to use.
+
+<!-- TODO: drop a standalone HTML tool into site/tools/ and point the iframe at
+     it, then delete this comment. Until there is a real tool here, this whole
+     section is commented out so the page doesn't show an empty box.
+
+::: {.tool-frame}
+```{=html}
+<iframe src="tools/example-tool.html"
+        height="520"
+        title="Interactive teaching tool"></iframe>
+```
+:::
+
+[Open full screen](tools/example-tool.html){.linkbtn}
+-->
+
+*Coming soon.*
+
+## Mentoring
+
+- Mentor for SWAYAM-NPTEL courses since 2018, with more than ten topper mentees
+- Academic and career mentoring for undergraduate and postgraduate students
+- Convener, RUSA-sponsored Bioinformatics workshop for undergraduates
+- Organiser of LTMT-sponsored workshops on proteomics and epigenetics for faculty and research scholars
+- Organiser of seminars, guest lectures, exhibitions, field projects, industrial visits and alumni meets
+
+## Student research projects
+
+Postgraduate dissertations guided, each leading to publications and conference
+presentations:
+
+- Synthesis, optimisation and biotechnological applications of silver nanoparticles (2018)
+- The material matters: exploring consumer practices and safety perceptions of cookware materials (2024)
+- Exploring the potential of banana and carrot peels for dye biosorption (2025)
+
+Seven undergraduate projects have also been guided to conference presentation,
+including work on bioethanol from plant and waste mangrove apple feedstocks, and
+CRISPR/Cas9 genome editing in *Staphylococcus aureus*.
