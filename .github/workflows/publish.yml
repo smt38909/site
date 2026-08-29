@@ -5,6 +5,13 @@
 # the main branch — including an edit Richa makes in the browser — GitHub
 # rebuilds the site and puts the result live. Nobody has to run anything.
 #
+# PREREQUISITE (learned the hard way, 28 Aug 2026): this Action cannot create the
+# gh-pages branch. `quarto publish gh-pages` refuses to run unless that branch
+# already exists on the remote, and exits in ~17s with:
+#   "the remote origin does not have a branch named gh-pages"
+# It was created once by running `quarto publish gh-pages` locally. If the repo is
+# ever recreated from scratch, do that once by hand before expecting this to work.
+#
 # You should not need to edit this file.
 # =============================================================================
 
