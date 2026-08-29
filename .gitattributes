@@ -1,0 +1,15 @@
+# Keep line endings consistent no matter which machine or editor touches a file.
+#
+# Without this, files edited on Windows (CRLF) and files written by tooling on
+# Linux (LF) show up as "every line changed" even when the text is identical.
+# text=auto lets Git detect text vs binary; eol=lf stores and checks out LF
+# everywhere. VS Code, Quarto and GitHub all handle LF without complaint.
+* text=auto eol=lf
+
+# Never touch these — Git detects them as binary, this just makes it explicit.
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.pdf binary
+*.woff binary
+*.woff2 binary
