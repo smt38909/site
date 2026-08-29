@@ -51,3 +51,45 @@ Two constraints the design depends on:
 - DNS still to be set at the registrar: four A records to `185.199.108–111.153`,
   four AAAA records to `2606:50c0:800{0..3}::153`, and `www` as a CNAME to
   `<username>.github.io`.
+
+## Holding mode — currently ON
+
+The public site is showing a single white "Coming soon" page. The real pages are
+not built at all while this is on, so nothing of the site is reachable: not
+`research.html`, not `teaching.html`, not her photo, not the CV. Verified — the
+previous versions of those files were deleted from what GitHub serves.
+
+The whole switch is four lines in `_quarto.yml`, under `project:`.
+
+**Holding mode ON** (what is there now):
+
+```yaml
+  render:
+    - holding.qmd
+  resources:
+    - "!*.qmd"
+```
+
+**To put the real site live**, replace those four lines with:
+
+```yaml
+  render:
+    - "*.qmd"
+    - "!holding.qmd"
+```
+
+Commit and sync. The Action rebuilds and the full site replaces the holding page
+in about two minutes. To go back, swap them again.
+
+### Two things not to "tidy up"
+
+- **The navbar entries point at `.html`, not `.qmd`.** That is deliberate. With
+  `.qmd` hrefs, Quarto copies the page sources into the published site while
+  holding mode is on, which puts the content back in public view.
+- **`!holding.qmd` must stay in the normal-mode render list.** Without it,
+  `holding.qmd` also builds to `index.html` and collides with the real homepage,
+  which silently breaks the build — the CV, the photo and the sitemap stop
+  being published.
+
+`holding.qmd` itself never needs editing. It carries a `noindex` tag so search
+engines do not record "Coming soon" as the site's content.

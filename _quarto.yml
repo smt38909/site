@@ -7,6 +7,21 @@ project:
   type: website
   output-dir: _site        # rendered HTML lands here; git-ignored (never edited by hand)
 
+  # ===================== HOLDING MODE: currently ON =====================
+  # Only the "Coming soon" page is published. The real pages are not built,
+  # so nothing of the site is reachable by anyone.
+  #
+  # TO PUT THE REAL SITE LIVE, replace the four lines below with:
+  #     render:
+  #       - "*.qmd"
+  #       - "!holding.qmd"
+  # ...then commit and sync. Nothing else needs changing.
+  render:
+    - holding.qmd
+  resources:
+    - "!*.qmd"
+  # ===================== HOLDING MODE: end ===============================
+
 website:
   title: "Dr. Richa Singh"
   # site-url is REQUIRED for Google Scholar tags to build correctly (Plan §5, §Phase-4).
@@ -18,11 +33,11 @@ website:
     # hamburger. Default is 'lg' (992px), which hides the tabs on an iPad.
     collapse-below: md
     left:
-      - href: index.qmd
+      - href: index.html
         text: Profile
-      - href: research.qmd
+      - href: research.html
         text: Research & Papers
-      - href: teaching.qmd
+      - href: teaching.html
         text: Teaching
 
   page-footer:

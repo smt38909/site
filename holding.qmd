@@ -1,0 +1,48 @@
+---
+# =============================================================================
+# TEMPORARY HOLDING PAGE  —  "Coming soon"
+#
+# This page is published ONLY while HOLDING MODE is switched on in _quarto.yml.
+# When it is on, the real pages are not built at all, so nothing of the site is
+# reachable by anyone. Switching back is a change to _quarto.yml alone; leave
+# this file exactly as it is.
+#
+# See the "Holding mode" section of README.md for the two-line switch.
+# =============================================================================
+pagetitle: "Coming soon"
+title-prefix: ""
+output-file: index.html
+format:
+  html:
+    theme: none
+    minimal: true
+    page-layout: custom
+    toc: false
+    include-in-header:
+      text: |
+        <meta name="robots" content="noindex,nofollow">
+        <style>
+          /* The site's navbar and footer would otherwise show here. This page is
+             meant to give nothing away, so they are hidden. */
+          #quarto-header, .navbar, .nav-footer { display: none !important; }
+
+          html, body { margin: 0; padding: 0; background: #ffffff; }
+
+          .coming-soon {
+            position: fixed; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+            background: #ffffff;
+            color: #12263A;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                         Helvetica, Arial, sans-serif;
+            font-size: clamp(22px, 4.5vw, 32px);
+            letter-spacing: -0.01em;
+            text-align: center;
+            padding: 24px;
+          }
+        </style>
+---
+
+::: {.coming-soon}
+Coming soon
+:::
