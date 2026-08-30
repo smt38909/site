@@ -13,9 +13,15 @@
 #    (`title-block-style: none` does NOT do this — it emits the title and the
 #    subtitle as two separate headers instead of removing them.)
 # 2. Below the hero, each pair of sections is a ::: {.cols} wrapper holding two
-#    ::: {.col} blocks — Appointments beside Education, Recognitions beside
-#    Professional service. If you add a section, either give it a partner or
-#    leave it full width; a lone .col leaves a hole.
+#    ::: {.col} blocks. The pairing is deliberate and load-bearing (Nikhil's
+#    round-3 notes 2 and 3): section headings line up across the two columns
+#    ONLY because paired sections share a grid row.
+#        row 1  Appointments          | Education
+#        row 2  Recognitions & awards | Fellowships
+#        row 3  Professional services | Collaborations
+#    Do not re-nest Fellowships under Education, and do not make Collaborations
+#    full width again — either change breaks the alignment. If you add a section,
+#    give it a partner; a lone .col leaves a hole.
 pagetitle: "Dr. Richa Singh — Assistant Professor of Biotechnology, SIES College, Mumbai"
 title-prefix: ""
 title: "Dr. Richa Singh"
@@ -33,16 +39,20 @@ subtitle: "Assistant Professor, Department of Biotechnology · SIES College of A
 
 <h1 class="name">Dr. Richa Singh</h1>
 
-[Assistant Professor, Department of Biotechnology · SIES College of Arts, Science and Commerce (Autonomous), Mumbai]{.role}
+<!-- Three lines, not one (note 1): designation / department / college and city.
+     Keep them as three paragraphs inside the .role div; styles.scss removes the
+     paragraph margins so they read as one tight block. -->
+::: {.role}
+Assistant Professor
 
-::: {.linkrow}
-[Email](mailto:richas@sies.edu.in) [ORCID](https://orcid.org/0000-0001-7184-9958) [CV (PDF)](cv/richa-singh-cv.pdf)
+Department of Biotechnology
+
+SIES College of Arts, Science and Commerce (Autonomous), Mumbai
 :::
 
-<!-- TODO: add her Google Scholar profile once we have the URL. It belongs in
-     the row above, first, because it is the link most visitors will want:
-       [Google Scholar](https://scholar.google.com/citations?user=XXXXXXXX)
-     Left out for now rather than shipping a link that goes nowhere. -->
+::: {.linkrow}
+[Email](mailto:richas@sies.edu.in) [ORCID](https://orcid.org/0000-0001-7184-9958) [Scholar](https://scholar.google.com/citations?user=Q0xrBW8AAAAJ&hl=en) [CV](cv/richa-singh-cv.pdf)
+:::
 ::::
 
 :::: {.summary}
@@ -75,7 +85,9 @@ world.
 
 ## Research
 
-My work runs across three threads:
+<!-- Richa's round-1 note 9 tied this line to the summary's font and size, so it
+     follows the summary down to 0.86rem rather than staying at body size. -->
+[My work runs across three threads:]{.leadline}
 
 <!-- Each thread is a one-sentence summary of a section on the Research page.
      If research.qmd's overview changes, change these too — they are the only
@@ -93,17 +105,17 @@ My work runs across three threads:
 
 ::: {.thread}
 [Survey-based research]{.tt}
-[Analyzing data collected from target groups, on wide range of themes such as online professional courses, MOOCs, consumer perception of food contact materials, etc.]{.td}
+[Analyzing data collected from target groups, on wide range of themes such as online professional courses, hybrid learning, consumer perception of food contact materials, etc.]{.td}
 :::
 ::::
 
 <!-- Metrics are a snapshot, not a live feed. Worth refreshing once a year from
-     her Google Scholar profile, and updating the date below when you do.
-     TODO: once we have her Scholar URL, make "Google Scholar" in the note a link. -->
+     her Google Scholar profile, and updating the date below when you do. -->
 :::: {.stats}
 ::: {.stat}
 [28]{.n}
-[publications (25 journal articles, 3 book chapters)]{.l}
+[publications]{.l}
+[(25 journal articles, 3 book chapters)]{.l}
 :::
 
 ::: {.stat}
@@ -122,12 +134,13 @@ My work runs across three threads:
 :::
 
 ::: {.stat}
-[10]{.n}
-[research students guided (3 PG, 7 UG)]{.l}
+[11]{.n}
+[projects guided]{.l}
+[(4 PG, 7 UG)]{.l}
 :::
 ::::
 
-[Figures as of August 2026. Citation metrics from Google Scholar.]{.fignote}
+[Figures as of August 2026. Citation metrics from [Google Scholar](https://scholar.google.com/citations?user=Q0xrBW8AAAAJ&hl=en).]{.fignote}
 
 :::: {.cols}
 ::: {.col}
@@ -164,22 +177,14 @@ My work runs across three threads:
 ::: {.entry}
 [2010]{.yr}
 [M.Sc. Biotechnology]{.ti}
-[University of Mumbai · First class with distinction (73.8%)]{.de}
+[University of Mumbai]{.de}
 :::
 
 ::: {.entry}
 [2008]{.yr}
 [B.Sc. (Hons.) Biotechnology]{.ti}
-[Panjab University · First class with distinction (81.3%)]{.de}
+[Panjab University]{.de}
 :::
-
-<!-- An h3, not a styled span: a third-level heading nests inside the Education
-     section, so it cannot break the two-column grid the way a second ## would.
-     It is styled to match the section bars above it (Richa's note 18). -->
-### Fellowships
-
-- CSIR-UGC NET, Life Sciences (2010)
-- ICMR Junior Research Fellowship (2010)
 :::
 ::::
 
@@ -195,17 +200,26 @@ My work runs across three threads:
 :::
 
 ::: {.col}
-## Professional service
+## Fellowships
+
+- CSIR-UGC NET, Life Sciences (2010)
+- ICMR Junior Research Fellowship (2010)
+:::
+::::
+
+:::: {.cols}
+::: {.col}
+## Professional services
 
 - Journal reviewer: *Frontiers in Microbiology*; *Frontiers in Biotechnology & Bioengineering*
 - Invited speaker at workshops on the CSIR-UGC NET examination, research methodology and research data analysis
 - Adjudicator for research paper and poster presentation competitions at various academic institutions
 :::
-::::
 
+::: {.col}
 ## Collaborations
 
-::: {.inline-list}
-- Collaborative project with the Indian Women Scientists' Association
+- Collaborative projects with the Indian Women Scientists' Association, Mumbai and Department of Physics, University of Mumbai
 - Ph.D. work carried out with Prof. B. A. Chopade's group, Savitribai Phule Pune University
 :::
+::::

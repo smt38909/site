@@ -75,12 +75,20 @@ $table-border-color: $rule;
 //   1.7rem   27px   page title (h1)
 //   1.35rem  22px   stat numerals (mono)
 //   1.15rem  18px   subsection heading (h3)
-//   1rem     16px   body text, subtitle, list items          <- the floor for prose
+//   1rem     16px   body text on research.qmd and teaching.qmd
 //   0.98rem  16px   item titles: .ti, .tt, .pub-title
 //   0.94rem  15px   navbar links
-//   0.86rem  14px   descriptions: .de, .td, .pub-cite, .pub-abstract
+//   0.86rem  14px   ** the Profile page's body size ** and all descriptions:
+//                   the summary, .de, .td, .pub-cite, .pub-abstract, and every
+//                   bullet list on the Profile page
 //   0.82rem  13px   labels: h2/h3 bars, .tag, .l, .fignote, buttons, footer
 //   0.8rem   13px   mono years and badges                    <- nothing goes below this
+//
+// Round 2 of Nikhil's review (30 Aug 2026) deliberately flattened the Profile
+// page: prose and secondary detail share one size and one colour there, so no
+// 1rem text remains on that page. He was shown that this drops the page's main
+// prose below the 16px accessibility floor and chose it knowingly. The other two
+// pages still run at 1rem — do not "unify" them without asking.
 //
 // Text colours are four, no more: $ink (titles), $ink-2 (body), $ink-3
 // (secondary), $accent / $accent-dark (links and years).
@@ -234,11 +242,13 @@ main h1.name {
   color: $ink;
 }
 .role {
-  display: block;
   font-size: 0.86rem;
-  line-height: 1.5;
+  line-height: 1.45;
   color: $ink-3;
 }
+// Note 1: three separate paragraphs (designation / department / college and
+// city) that have to read as one block, so their margins go.
+.role p { margin: 0; }
 
 // Richa's note 3: keep the distance from the top edge of the white card to
 // "Hi, I'm Richa." exactly as it was when the title block sat above it. That
@@ -247,7 +257,9 @@ main h1.name {
 .summary { margin-top: 67px; }
 .summary > * { margin: 0; }
 .summary > * + * { margin-top: 0.75rem; }
-.summary p { max-width: 68ch; }
+// Notes 3 and 4: the summary takes the size and leading of the entry detail
+// lines, but keeps the body colour ($ink-2, inherited) rather than their grey.
+.summary p { max-width: 68ch; font-size: 0.86rem; line-height: 1.5; }
 
 @media (max-width: 767px) {
   .profile { grid-template-columns: 1fr; }
@@ -255,6 +267,10 @@ main h1.name {
   .summary { margin-top: 1.6rem; }
   .profile img, .headshot { width: 160px; height: 160px; }
 }
+
+// The Research lead line was tied to the summary's font and size by Richa's
+// round-1 note 9, so it follows the summary down.
+.leadline { display: block; font-size: 0.86rem; line-height: 1.5; }
 
 // ---- Research threads: three summary cards ---------------------------------
 // One card per strand of her research. The text mirrors research.qmd's overview
@@ -312,6 +328,7 @@ main h1.name {
   background: $ground;
   border: 1px solid $ground-edge;
   padding: 0.6rem 0.8rem 0.65rem;
+  text-align: center;   // note 5
 }
 .stat p { margin: 0; }
 .stat .n {
@@ -329,6 +346,9 @@ main h1.name {
   color: $ink-3;
   margin-top: 0.15rem;
 }
+// Note 7: the first tile's parenthetical sits on its own line, tight under the
+// label rather than a paragraph apart.
+.stat .l + .l { margin-top: 0; }
 .fignote { display: block; font-size: 0.82rem; color: $ink-3; margin-top: 0.45rem; font-style: italic; }
 
 // ---- Paired columns --------------------------------------------------------
@@ -349,8 +369,18 @@ main h1.name {
 .cols > section.level2,
 .cols > .col { margin-top: 0; }
 .cols h2 { margin-top: 0; }
+// Below 992px Quarto applies
+//   #quarto-content section:first-of-type h2:first-of-type { margin-top: 1rem }
+// which lands on the LEFT column of each pair only — it is the first <section>
+// among its siblings — and knocked the paired headings 16px out of line on an
+// iPad. The extra class here outranks it; without this the whole point of the
+// three-row structure fails at exactly the widths where the columns are
+// tightest. Verified aligned at 810, 1024 and 1280.
+#quarto-content .cols > section.level2 > h2:first-of-type { margin-top: 0; }
 .cols ul { padding-left: 1.05rem; margin-bottom: 0; }
-.cols li { margin: 0.25rem 0; }
+// Notes 10 and 11: Recognitions and Professional service bullets at the
+// description size, in the body colour they already had.
+.cols li { margin: 0.25rem 0; font-size: 0.86rem; line-height: 1.5; }
 @media (max-width: 767px) {
   .cols { grid-template-columns: 1fr; }
   .cols > .col + .col { margin-top: 2.2rem; }
@@ -402,51 +432,31 @@ main h1.name {
   color: $ink;
   margin-top: 0.1rem;
 }
+// Note 8: institution lines keep their size but take the body colour, not the
+// secondary grey. With note 3 shrinking the summary to match, prose and detail
+// are now identical on this page — that flatness is intentional.
 .entry .de {
   display: block;
   font-size: 0.86rem;   // same step as .thread .td and .pub-cite
   line-height: 1.5;
-  color: $ink-3;
+  color: $ink-2;
   margin-top: 0.1rem;
 }
 // Richa's note 18: "Fellowships" is an h3 inside the Education column, styled
 // to match the ## section bars above it — same small caps, same rule. An h3
 // nests inside the level-2 section, so unlike a second ## it cannot become a
 // third grid item and break the pair.
-// Two classes in the selector on purpose: the global `main section.level3 > h3`
-// rule zeroes the heading margin and would otherwise win on specificity, which
-// is what pinned "FELLOWSHIPS" to the bottom of the B.Sc. entry.
-.cols section.level3 { margin-top: 1.9rem; }
-.cols section.level3 > h3 {
-  margin: 0 0 0.7rem;
-  padding-bottom: 0.45rem;
-  border-bottom: 1px solid $ink;
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-  color: $ink;
-}
-// Note 20: the fellowship bullets take the smaller description size she
-// highlighted, not body size.
-.cols section.level3 li {
-  font-size: 0.86rem;
-  line-height: 1.5;
-  color: $ink-3;
-}
+// NOTE: Fellowships used to be an h3 nested inside the Education column, with
+// its own rules here to make it look like a section bar. Round 3 promoted it to
+// a full ## section in its own grid column so it lines up with Recognitions &
+// awards, so that machinery is gone. If an h3 ever appears inside .cols again it
+// will render at the normal h3 size, not as a bar.
 
-// ---- Collaborations: a wrapping row, not a stacked list --------------------
-.inline-list ul {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem 1.8rem;
-  margin: 0;
-  padding: 0;
-}
-// No font-size here: these bullets sit at body size like every other list.
-.inline-list li { position: relative; padding-left: 0.85rem; margin: 0; }
-.inline-list li::before { content: "\2022"; position: absolute; left: 0; color: $accent; }
+// NOTE: .inline-list (a wrapping row of bulleted items) was built for the old
+// full-width Collaborations block. Round 3 moved Collaborations into a column
+// beside Professional services, where it is an ordinary list, so the component
+// is gone. Its custom "\2022" bullet is what note 1 was about: it rendered
+// smaller than the default markers on every other list. Ordinary markers now.
 
 // ---- Measure ---------------------------------------------------------------
 // The card is 900px wide so the paired columns have room. Running prose must

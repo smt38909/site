@@ -52,44 +52,48 @@ Two constraints the design depends on:
   four AAAA records to `2606:50c0:800{0..3}::153`, and `www` as a CNAME to
   `<username>.github.io`.
 
-## Holding mode — currently ON
+## What is published — currently ONE PAGE, live
 
-The public site is showing a single white "Coming soon" page. The real pages are
-not built at all while this is on, so nothing of the site is reachable: not
-`research.html`, not `teaching.html`, not her photo, not the CV. Verified — the
-previous versions of those files were deleted from what GitHub serves.
+The site went live on 30 Aug 2026 with **only the Profile page**. `research.qmd`
+and `teaching.qmd` are not finished, so they are neither rendered nor published,
+and the navbar has no tabs — just her name.
 
-The whole switch is four lines in `_quarto.yml`, under `project:`.
-
-**Holding mode ON** (what is there now):
+The whole switch is the render list in `_quarto.yml`, under `project:`:
 
 ```yaml
   render:
-    - holding.qmd
+    - index.qmd
   resources:
     - "!*.qmd"
 ```
 
-**To put the real site live**, replace those four lines with:
+`resources: "!*.qmd"` is not decoration. Without it Quarto copies unrendered
+`.qmd` files into the published site as project resources, and the unfinished
+pages become readable in public. Leave it in place whatever else changes.
 
-```yaml
-  render:
-    - "*.qmd"
-    - "!holding.qmd"
-```
+**To publish a page when it is ready**, do two things together: add it to the
+render list, and uncomment its entry in the navbar block below `collapse-below`.
+A page with no navbar entry is unreachable; a navbar entry with no page is a 404.
 
-Commit and sync. The Action rebuilds and the full site replaces the holding page
-in about two minutes. To go back, swap them again.
+**To go back to the holding page**, change the render list to `- holding.qmd`.
+`holding.qmd` is still in this folder, unchanged, and carries its own `noindex`
+tag so search engines never record "Coming soon" as the site's content. It never
+needs editing.
 
 ### Two things not to "tidy up"
 
 - **The navbar entries point at `.html`, not `.qmd`.** That is deliberate. With
-  `.qmd` hrefs, Quarto copies the page sources into the published site while
-  holding mode is on, which puts the content back in public view.
-- **`!holding.qmd` must stay in the normal-mode render list.** Without it,
-  `holding.qmd` also builds to `index.html` and collides with the real homepage,
-  which silently breaks the build — the CV, the photo and the sitemap stop
-  being published.
+  `.qmd` hrefs, Quarto copies the page sources into the published site.
+- **If you ever switch the render list to a wildcard** (`"*.qmd"`), you must also
+  exclude `holding.qmd` with `"!holding.qmd"`. Otherwise it builds to
+  `index.html` as well and collides with the real homepage, which silently breaks
+  the build — the CV, the photo and the sitemap stop being published.
 
-`holding.qmd` itself never needs editing. It carries a `noindex` tag so search
-engines do not record "Coming soon" as the site's content.
+### Verified at launch
+
+Rendered and inspected before going live: the published site contains
+`index.html`, `CNAME`, the CV, the headshot, `robots.txt`, `sitemap.xml`,
+`search.json` and the theme assets, and **no `.qmd` source of any kind**.
+`robots.txt` permits indexing, nothing carries `noindex`, the sitemap lists only
+`index.html`, and no local link on the page is broken. The CV contains no mobile
+number, no personal email and no referees; the headshot carries no EXIF data.

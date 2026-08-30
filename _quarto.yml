@@ -7,20 +7,26 @@ project:
   type: website
   output-dir: _site        # rendered HTML lands here; git-ignored (never edited by hand)
 
-  # ===================== HOLDING MODE: currently ON =====================
-  # Only the "Coming soon" page is published. The real pages are not built,
-  # so nothing of the site is reachable by anyone.
+  # ===================== WHAT GETS PUBLISHED =====================
+  # LIVE since 30 Aug 2026, as a SINGLE PAGE. Only index.qmd is built.
   #
-  # TO PUT THE REAL SITE LIVE, replace the four lines below with:
-  #     render:
-  #       - "*.qmd"
-  #       - "!holding.qmd"
-  # ...then commit and sync. Nothing else needs changing.
+  # research.qmd and teaching.qmd are NOT ready and are NOT rendered. The
+  # `resources: "!*.qmd"` line below is what keeps their source out of the
+  # published site as well — without it Quarto copies unrendered .qmd files
+  # across as project resources and the unfinished pages become readable in
+  # public. It is load-bearing. Do not remove it.
+  #
+  # TO ADD A PAGE when it is ready: add it to the render list AND uncomment its
+  # entry in the navbar below. Both — a page with no navbar entry is unreachable,
+  # a navbar entry with no page is a 404.
+  #
+  # TO GO BACK TO THE HOLDING PAGE: change the render list to `- holding.qmd`.
+  # holding.qmd is untouched in this folder and carries its own noindex tag.
   render:
-    - holding.qmd
+    - index.qmd
   resources:
     - "!*.qmd"
-  # ===================== HOLDING MODE: end ===============================
+  # ===============================================================
 
 website:
   title: "Dr. Richa Singh"
@@ -32,13 +38,18 @@ website:
     # Three short tabs fit comfortably on a tablet — only phones need the
     # hamburger. Default is 'lg' (992px), which hides the tabs on an iPad.
     collapse-below: md
-    left:
-      - href: index.html
-        text: Profile
-      - href: research.html
-        text: Research & Papers
-      - href: teaching.html
-        text: Teaching
+    # No tabs while the site is a single page (30 Aug 2026): two tabs leading
+    # to pages that do not exist would 404, and one lone "Profile" tab beside
+    # the name is redundant. The navbar shows her name and the search box.
+    # Uncomment an entry here at the same time as adding its page to the render
+    # list above.
+    # left:
+    #   - href: index.html
+    #     text: Profile
+    #   - href: research.html
+    #     text: Research & Papers
+    #   - href: teaching.html
+    #     text: Teaching
 
   page-footer:
     left: "© Dr. Richa Singh · Department of Biotechnology, SIES College, Mumbai"
