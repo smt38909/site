@@ -22,7 +22,8 @@ $ink-3:         #5A6B7E;   // citations, captions, role line
 $rule:          #E7EDF2;   // hairlines inside the card
 $rule-soft:     #EFF3F7;
 $paper:         #FFFFFF;   // the card
-$ground:        #E3EBF3;   // the tinted page behind the card
+$ground:        #E3EBF3;   // the tinted page behind the card, and the stat tiles
+$ground-edge:   #C7D7E7;   // the same ice, darkened, for the stat tile borders
 
 // Why #E3EBF3 and not the lighter #EDF2F7 the palette study started from:
 // the card has no border, only a shadow, and on the lighter ground it
@@ -78,7 +79,7 @@ $table-border-color: $rule;
 //   0.98rem  16px   item titles: .ti, .tt, .pub-title
 //   0.94rem  15px   navbar links
 //   0.86rem  14px   descriptions: .de, .td, .pub-cite, .pub-abstract
-//   0.82rem  13px   labels: h2 bars, .tag, .l, .fignote, .minihead, buttons, footer
+//   0.82rem  13px   labels: h2/h3 bars, .tag, .l, .fignote, buttons, footer
 //   0.8rem   13px   mono years and badges                    <- nothing goes below this
 //
 // Text colours are four, no more: $ink (titles), $ink-2 (body), $ink-3
@@ -183,45 +184,76 @@ main h3 {
   color: $ink;
 }
 
-// ---- Profile header: text left, photo right --------------------------------
-// The photo is the FIRST element in index.qmd (so it comes first when the grid
-// collapses on a phone) but is placed into column 2 here.
+// The Profile page carries its own name and designation inside the hero, so
+// Quarto's automatic title block is hidden THERE ONLY. :has() scopes it to a
+// page containing .profile, leaving research.qmd and teaching.qmd untouched.
+// Front matter keeps title/subtitle: they still feed <title>, the search index
+// and the SEO metadata. Do not "fix" this with title-block-style: none — that
+// option splits the block into two headers rather than removing it.
+main.content:has(.profile) > #title-block-header { display: none; }
+// Quarto's `#quarto-content > * { padding-top: 14px }` carries an ID and beats
+// the 34px in main.content's own shorthand, so the card has always had a 14px
+// top padding — the old title block was what supplied the breathing room. With
+// the block hidden, restore the padding on THIS page only, matching specificity.
+#quarto-content > main.content:has(.profile) { padding-top: 34px; }
+
+// ---- Hero: identity left, summary right ----------------------------------
+// Richa's review moved the name and designation off the top of the page and in
+// beside the photo, then flipped the whole block to the left (her notes 1, 6, 7).
+// Quarto's own title block is switched off in index.qmd's front matter.
 //
-// Two things below are load-bearing, both learned the hard way:
-//   1. column-gap, NOT gap. The photo spans many rows; a row-gap would be
-//      multiplied across every one of those empty implicit rows.
-//   2. grid-row: 1 / span 30, NOT 1 / -1. `-1` resolves against the EXPLICIT
-//      grid, which here is a single row, so the photo stretched row 1 to its
-//      own height and left ~90px of blank space under the first short line
-//      ("Hi, I'm Richa."). Same trap as .pub. Do not "simplify" it back.
+// column-gap, NOT gap: nothing here spans rows any more, but a row-gap would
+// still open a gap between the two stacked halves on a phone. Keep it explicit.
 .profile {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 170px;
-  column-gap: 1.8rem;
+  grid-template-columns: 240px minmax(0, 1fr);
+  column-gap: 2rem;
   align-items: start;
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.8rem;
 }
-.profile > * { margin: 0; grid-column: 1; }
-.profile > * + * { margin-top: 0.75rem; }
-.profile > *:first-child {
-  grid-column: 2;
-  grid-row: 1 / span 30;
-  margin-top: 0;
-}
-.profile > *:nth-child(2) { margin-top: 0; }   // first line of text, sits at the top
+.identity { grid-column: 1; }
+.summary  { grid-column: 2; }
+
+.identity > * { margin: 0; }
+.identity > * + * { margin-top: 0.85rem; }
 .profile img,
 .headshot {
-  width: 170px;
-  height: 170px;
+  width: 240px;
+  height: 240px;
   object-fit: cover;
   border-radius: 3px;
   display: block;
 }
+// The name is a real <h1> (written as raw HTML in index.qmd so Quarto does not
+// wrap it in a <section> and break this grid). Same size as the old title block.
+main h1.name {
+  font-size: 1.7rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  color: $ink;
+}
+.role {
+  display: block;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: $ink-3;
+}
+
+// Richa's note 3: keep the distance from the top edge of the white card to
+// "Hi, I'm Richa." exactly as it was when the title block sat above it. That
+// was 101px; the card's own top padding is 34px, so the summary carries the
+// remaining 67px. If you change main.content's padding, change this too.
+.summary { margin-top: 67px; }
+.summary > * { margin: 0; }
+.summary > * + * { margin-top: 0.75rem; }
+.summary p { max-width: 68ch; }
+
 @media (max-width: 767px) {
   .profile { grid-template-columns: 1fr; }
-  .profile > *, .profile > *:first-child { grid-column: 1; grid-row: auto; }
-  .profile > *:first-child { margin-bottom: 1rem; }
-  .profile img, .headshot { width: 128px; height: 128px; }
+  .identity, .summary { grid-column: 1; }
+  .summary { margin-top: 1.6rem; }
+  .profile img, .headshot { width: 160px; height: 160px; }
 }
 
 // ---- Research threads: three summary cards ---------------------------------
@@ -272,9 +304,13 @@ main h3 {
   gap: 0.6rem;
   margin: 1.8rem 0 0;
 }
+// Richa's note 14: the tiles take the page's own ice background, not the
+// paler accent tint. The border is that ice a few steps darker, so the tile
+// still has an edge against the white card. The three .thread cards were
+// explicitly left alone.
 .stat {
-  background: $accent-tint;
-  border: 1px solid $accent-edge;
+  background: $ground;
+  border: 1px solid $ground-edge;
   padding: 0.6rem 0.8rem 0.65rem;
 }
 .stat p { margin: 0; }
@@ -341,7 +377,7 @@ main h3 {
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: $accent;
+  background: $ink;
   box-shadow: 0 0 0 3px $paper;
 }
 .entry p { margin: 0; }
@@ -352,7 +388,10 @@ main h3 {
   line-height: 1.4;   // body leading is too airy for a one-line mono label
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: $accent;
+  // Richa's note 15: dots and years in a darker blue that sits with the
+  // background. $ink is the deep navy already used for titles, so this stays
+  // inside the four-colour palette instead of introducing a fifth.
+  color: $ink;
   font-variant-numeric: tabular-nums;
 }
 .entry .ti {
@@ -370,16 +409,30 @@ main h3 {
   color: $ink-3;
   margin-top: 0.1rem;
 }
-// Sits after the last .entry, outside the rail, so it gets its own top margin
-// rather than inheriting the timeline's indent.
-.minihead {
-  display: block;
-  font-size: 0.82rem;   // was 0.72 (11.5px), the second-smallest text on the page
+// Richa's note 18: "Fellowships" is an h3 inside the Education column, styled
+// to match the ## section bars above it — same small caps, same rule. An h3
+// nests inside the level-2 section, so unlike a second ## it cannot become a
+// third grid item and break the pair.
+// Two classes in the selector on purpose: the global `main section.level3 > h3`
+// rule zeroes the heading margin and would otherwise win on specificity, which
+// is what pinned "FELLOWSHIPS" to the bottom of the B.Sc. entry.
+.cols section.level3 { margin-top: 1.9rem; }
+.cols section.level3 > h3 {
+  margin: 0 0 0.7rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid $ink;
+  font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
+  color: $ink;
+}
+// Note 20: the fellowship bullets take the smaller description size she
+// highlighted, not body size.
+.cols section.level3 li {
+  font-size: 0.86rem;
+  line-height: 1.5;
   color: $ink-3;
-  margin: 1.1rem 0 0.35rem;
 }
 
 // ---- Collaborations: a wrapping row, not a stacked list --------------------
@@ -409,7 +462,9 @@ main section.level3 > p { max-width: 68ch; }
 // them; without this the intro ran to 76 characters.
 .profile > p { max-width: 68ch; }
 
-// ---- Tag rows: research areas, profile links -------------------------------
+// ---- Tag rows and profile links --------------------------------------------
+// NOTE: .tags / .tag are currently unused — Richa's note 5 removed the research
+// area chips from the Profile page. Left in place as a working component.
 .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.9rem 0 0; }
 .tags p { margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .tag {

@@ -2,6 +2,19 @@
 /_site/
 /.quarto/
 
+# Stray STANDALONE renders. Rendering a single .qmd outside the project context
+# (VS Code's Render button can do this) writes the page and its asset folder
+# NEXT TO the source instead of into _site/. Two reasons these must never be
+# committed: they are build output, and Quarto treats unrecognised files in the
+# project folder as resources — so a leftover index.html here can be copied over
+# the freshly built _site/index.html and put a stale page on the live site.
+# There are no hand-written .html source files in this project; every page is a
+# .qmd, so anything matching these names is output.
+/index.html
+/research.html
+/teaching.html
+/site_libs/
+
 # Editor / OS cruft
 .DS_Store
 Thumbs.db
