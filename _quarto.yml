@@ -30,11 +30,18 @@ project:
 
 website:
   title: "Dr. Richa Singh"
+  # The RS monogram. `favicon` replaces the browser's default globe in the tab;
+  # `navbar: logo:` puts the same mark to the left of her name. Both files live
+  # in images/ and are published as page resources. The uncropped original is
+  # kept out of the public repo, in private/rs-icon-master.png.
+  favicon: images/rs-icon-32.png
   # site-url is REQUIRED for Google Scholar tags to build correctly (Plan §5, §Phase-4).
   # Domain registered 2026-08-27.
   site-url: "https://drrichasingh.in"
 
   navbar:
+    logo: images/rs-icon-180.png
+    logo-alt: "Dr. Richa Singh"
     # Three short tabs fit comfortably on a tablet — only phones need the
     # hamburger. Default is 'lg' (992px), which hides the tabs on an iPad.
     collapse-below: md
@@ -75,6 +82,7 @@ format:
     # Typefaces. Fallback stacks in styles.scss cover it if these ever fail to load.
     include-in-header:
       - text: |
+          <link rel="apple-touch-icon" sizes="180x180" href="images/rs-icon-180.png">
           <link rel="preconnect" href="https://fonts.googleapis.com">
           <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
           <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">

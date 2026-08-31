@@ -53,7 +53,7 @@ $link-hover-color:$accent-dark;
 $headings-font-weight: 600;
 $headings-color:  $ink;
 $h1-font-size:    1.6rem;
-$h2-font-size:    0.82rem;   // section bars are small caps, not big headings
+$h2-font-size:    0.9rem;    // section bars are small caps, not big headings
 $h3-font-size:    1.15rem;   // must clear 1rem body text; 1.05 was too close
 
 $navbar-bg:       $paper;
@@ -76,19 +76,21 @@ $table-border-color: $rule;
 //   1.35rem  22px   stat numerals (mono)
 //   1.15rem  18px   subsection heading (h3)
 //   1rem     16px   body text on research.qmd and teaching.qmd
-//   0.98rem  16px   item titles: .ti, .tt, .pub-title
-//   0.94rem  15px   navbar links
-//   0.86rem  14px   ** the Profile page's body size ** and all descriptions:
-//                   the summary, .de, .td, .pub-cite, .pub-abstract, and every
-//                   bullet list on the Profile page
-//   0.82rem  13px   labels: h2/h3 bars, .tag, .l, .fignote, buttons, footer
+//   1.06rem  17px   item titles: .ti, .tt, .pub-title
+//   0.94rem  15px   ** the Profile page's body size **, navbar links, and all
+//                   of its descriptions: the summary, .leadline, .de, .td and
+//                   every bullet list on the Profile page
+//   0.9rem   14px   section bars (h2)
+//   0.86rem  14px   .role, .pub-cite, .pub-abstract  (research page pending review)
+//   0.82rem  13px   small labels: .tag, .l, .fignote, buttons, footer
 //   0.8rem   13px   mono years and badges                    <- nothing goes below this
 //
-// Round 2 of Nikhil's review (30 Aug 2026) deliberately flattened the Profile
-// page: prose and secondary detail share one size and one colour there, so no
-// 1rem text remains on that page. He was shown that this drops the page's main
-// prose below the 16px accessibility floor and chose it knowingly. The other two
-// pages still run at 1rem — do not "unify" them without asking.
+// Round 2 (30 Aug) flattened the Profile page to one size; round 4 (30 Aug)
+// raised that size from 0.86rem to 0.94rem (15px) and lifted the headings with
+// it so the hierarchy still reads. Prose and secondary detail still share one
+// size and one colour on that page, deliberately. research.qmd and teaching.qmd
+// still run at 1rem body / 0.86rem citations — they have not been reviewed at
+// the new sizes, so do not "unify" them without asking.
 //
 // Text colours are four, no more: $ink (titles), $ink-2 (body), $ink-3
 // (secondary), $accent / $accent-dark (links and years).
@@ -180,7 +182,7 @@ main h2 {
   margin-bottom: 0.9rem;
   padding-bottom: 0.45rem;
   border-bottom: 1px solid $ink;
-  font-size: 0.82rem;
+  font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.11em;
   text-transform: uppercase;
@@ -250,16 +252,20 @@ main h1.name {
 // city) that have to read as one block, so their margins go.
 .role p { margin: 0; }
 
-// Richa's note 3: keep the distance from the top edge of the white card to
-// "Hi, I'm Richa." exactly as it was when the title block sat above it. That
-// was 101px; the card's own top padding is 34px, so the summary carries the
-// remaining 67px. If you change main.content's padding, change this too.
-.summary { margin-top: 67px; }
+// Richa's round-1 note 3 asked for the gap from the card's top edge to
+// "Hi, I'm Richa." to stay at 101px. Nikhil's round-4 note 2 asked to bring the
+// summary UP. His call supersedes hers: 24px here puts "Hi" 58px from the card
+// edge (34px padding + 24px), roughly halfway back, so the block still breathes
+// without floating. Raise or lower this one number to taste.
+.summary { margin-top: 24px; }
 .summary > * { margin: 0; }
 .summary > * + * { margin-top: 0.75rem; }
 // Notes 3 and 4: the summary takes the size and leading of the entry detail
 // lines, but keeps the body colour ($ink-2, inherited) rather than their grey.
-.summary p { max-width: 68ch; font-size: 0.86rem; line-height: 1.5; }
+// Note 2: the 68ch cap left ~70px of the column unused on the right, which is
+// the "margin space" he asked to remove. The column itself is a fixed 540px, so
+// dropping the cap bounds the measure at ~72 characters — still inside 45-75.
+.summary p { font-size: 0.94rem; line-height: 1.55; }
 
 @media (max-width: 767px) {
   .profile { grid-template-columns: 1fr; }
@@ -270,7 +276,7 @@ main h1.name {
 
 // The Research lead line was tied to the summary's font and size by Richa's
 // round-1 note 9, so it follows the summary down.
-.leadline { display: block; font-size: 0.86rem; line-height: 1.5; }
+.leadline { display: block; font-size: 0.94rem; line-height: 1.55; }
 
 // ---- Research threads: three summary cards ---------------------------------
 // One card per strand of her research. The text mirrors research.qmd's overview
@@ -296,14 +302,14 @@ main h1.name {
 .thread p { margin: 0; }
 .thread .tt {
   display: block;
-  font-size: 0.98rem;   // same step as .entry .ti and .pub-title
+  font-size: 1.06rem;   // same step as .entry .ti and .pub-title
   font-weight: 600;
   line-height: 1.3;
   color: $ink;
 }
 .thread .td {
   display: block;
-  font-size: 0.86rem;
+  font-size: 0.94rem;
   line-height: 1.5;
   color: $ink-3;
   margin-top: 0.3rem;
@@ -380,7 +386,7 @@ main h1.name {
 .cols ul { padding-left: 1.05rem; margin-bottom: 0; }
 // Notes 10 and 11: Recognitions and Professional service bullets at the
 // description size, in the body colour they already had.
-.cols li { margin: 0.25rem 0; font-size: 0.86rem; line-height: 1.5; }
+.cols li { margin: 0.25rem 0; font-size: 0.94rem; line-height: 1.5; }
 @media (max-width: 767px) {
   .cols { grid-template-columns: 1fr; }
   .cols > .col + .col { margin-top: 2.2rem; }
@@ -426,7 +432,7 @@ main h1.name {
 }
 .entry .ti {
   display: block;
-  font-size: 0.98rem;
+  font-size: 1.06rem;
   font-weight: 600;
   line-height: 1.3;
   color: $ink;
@@ -437,11 +443,14 @@ main h1.name {
 // are now identical on this page — that flatness is intentional.
 .entry .de {
   display: block;
-  font-size: 0.86rem;   // same step as .thread .td and .pub-cite
+  font-size: 0.94rem;
   line-height: 1.5;
   color: $ink-2;
   margin-top: 0.1rem;
 }
+// Note 7: the Visiting Faculty entry is two .de lines, one institution each, so
+// they must sit tight together rather than a paragraph apart.
+.entry .de + .de { margin-top: 0; }
 // Richa's note 18: "Fellowships" is an h3 inside the Education column, styled
 // to match the ## section bars above it — same small caps, same rule. An h3
 // nests inside the level-2 section, so unlike a second ## it cannot become a
@@ -533,7 +542,7 @@ main section.level3 > p { max-width: 68ch; }
 }
 .pub-title,
 .pub > p:nth-child(2) strong {
-  font-size: 0.98rem;
+  font-size: 1.06rem;
   font-weight: 600;
   line-height: 1.35;
   color: $ink;

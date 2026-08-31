@@ -51,7 +51,7 @@ SIES College of Arts, Science and Commerce (Autonomous), Mumbai
 :::
 
 ::: {.linkrow}
-[Email](mailto:richas@sies.edu.in) [ORCID](https://orcid.org/0000-0001-7184-9958) [Scholar](https://scholar.google.com/citations?user=Q0xrBW8AAAAJ&hl=en) [CV](cv/richa-singh-cv.pdf)
+[Email](mailto:richas@sies.edu.in) [ORCID](https://orcid.org/0000-0001-7184-9958){target="_blank" rel="noopener"} [Scholar](https://scholar.google.com/citations?user=Q0xrBW8AAAAJ&hl=en){target="_blank" rel="noopener"} [CV](cv/richa-singh-cv.pdf){target="_blank" rel="noopener"}
 :::
 ::::
 
@@ -115,7 +115,7 @@ world.
 ::: {.stat}
 [28]{.n}
 [publications]{.l}
-[(25 journal articles, 3 book chapters)]{.l}
+[(25 journal articles, 3&nbsp;book&nbsp;chapters)]{.l}
 :::
 
 ::: {.stat}
@@ -140,7 +140,7 @@ world.
 :::
 ::::
 
-[Figures as of August 2026. Citation metrics from [Google Scholar](https://scholar.google.com/citations?user=Q0xrBW8AAAAJ&hl=en).]{.fignote}
+[Figures as of August 2026. Citation metrics from [Google Scholar](https://scholar.google.com/citations?user=Q0xrBW8AAAAJ&hl=en){target="_blank" rel="noopener"}.]{.fignote}
 
 :::: {.cols}
 ::: {.col}
@@ -161,7 +161,8 @@ world.
 ::: {.entry}
 [Ongoing]{.yr}
 [Visiting Faculty]{.ti}
-[Departments of Biotechnology and Biophysics, University of Mumbai; Centre of Excellence in Basic Sciences (UM-DAE-CEBS), Mumbai]{.de}
+[Departments of Biotechnology and Biophysics, University of Mumbai;]{.de}
+[Centre of Excellence in Basic Sciences (UM-DAE-CEBS), Mumbai]{.de}
 :::
 :::
 
@@ -193,7 +194,6 @@ world.
 ## Recognitions & awards
 
 - Recognised Ph.D. guide in Biotechnology, University of Mumbai
-- Approved teacher for M.Sc. Biotechnology (By Papers and By Research), University of Mumbai, since 2023
 - Dr. A. J. Desai / Dr. L. H. Hiranandani Award for best paper presentation, 33rd Annual Conference of the Mumbai Hematology Group
 - Roll of Honour (Academics), 3rd position in the University
 - Consistently top-performing mentor, SWAYAM-NPTEL courses
