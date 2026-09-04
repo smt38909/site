@@ -117,6 +117,31 @@ def fix(path):
         return text
     html = _drop_bibtex_abstract(html)
 
+    # Double-encoded entities in citation_* attributes (4 Sep 2026). Several
+    # abstracts contain a bare "<" or ">" in a measurement - "MICs of <3 ug/mL",
+    # ">70% dye removal", "(p<0.05)". Pandoc turns those into &gt;/&lt; when it
+    # writes the page, and the attribute-escaping pass then escapes the & again,
+    # so the tag Scholar reads ends up carrying "&amp;amp;gt;70%". The visible
+    # abstract is unaffected - this only ever hits the meta tags. The same
+    # fault hits any citation_* value with an "&" in it, e.g. the journal name
+    # "Environmental Technology & Innovation", so every citation_* tag is swept. Collapse the
+    # surplus &amp; layers back to one correctly-encoded entity. The lookahead
+    # means only an "&amp;" that actually prefixes an entity is touched, so an
+    # abstract that legitimately discusses "&amp;" is left alone.
+    _DOUBLED = re.compile(r'&amp;(?=(?:amp;)*(?:lt|gt|amp|quot|apos|#[0-9]+|#x[0-9A-Fa-f]+);)')
+
+    def _collapse_entities(m):
+        value = m.group(2)
+        while True:
+            once = _DOUBLED.sub('&', value)
+            if once == value:
+                break
+            value = once
+        return m.group(1) + value + m.group(3)
+
+    html = re.sub(r'(<meta name="citation_[a-z_]+" content=")([^"]*)(")',
+                  _collapse_entities, html)
+
     # Richa's note (4 Sep 2026, second pass). CSL renders only the FIRST author
     # inverted ("Patil, Samiksha B., and Richa Singh") and separates with commas.
     # She wants every author inverted and semicolon-separated. The citation_author
