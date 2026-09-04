@@ -75,22 +75,23 @@ $table-border-color: $rule;
 //   1.7rem   27px   page title (h1)
 //   1.35rem  22px   stat numerals (mono)
 //   1.15rem  18px   subsection heading (h3)
-//   1rem     16px   body text on research.qmd and teaching.qmd
+//   1rem     16px   body text on teaching.qmd (research.qmd moved to 0.94rem)
 //   1.06rem  17px   item titles: .ti, .tt, .pub-title
 //   0.94rem  15px   ** the Profile page's body size **, navbar links, and all
-//                   of its descriptions: the summary, .leadline, .de, .td and
-//                   every bullet list on the Profile page
+//                   of its descriptions: the summary, .leadline, .de, .td,
+//                   every bullet list on the Profile page, and .pub-abstract
 //   0.9rem   14px   section bars (h2)
-//   0.86rem  14px   .role, .pub-cite, .pub-abstract  (research page pending review)
+//   0.86rem  14px   .role, .pub-cite
 //   0.82rem  13px   small labels: .tag, .l, .fignote, buttons, footer
 //   0.8rem   13px   mono years and badges                    <- nothing goes below this
 //
 // Round 2 (30 Aug) flattened the Profile page to one size; round 4 (30 Aug)
 // raised that size from 0.86rem to 0.94rem (15px) and lifted the headings with
 // it so the hierarchy still reads. Prose and secondary detail still share one
-// size and one colour on that page, deliberately. research.qmd and teaching.qmd
-// still run at 1rem body / 0.86rem citations — they have not been reviewed at
-// the new sizes, so do not "unify" them without asking.
+// size and one colour on that page, deliberately. Round 5 (2 Sep) brought
+// research.qmd's overview prose to 0.94rem to match its abstracts; teaching.qmd
+// still runs at 1rem body and has not been reviewed, so do not "unify" it
+// without asking.
 //
 // Text colours are four, no more: $ink (titles), $ink-2 (body), $ink-3
 // (secondary), $accent / $accent-dark (links and years).
@@ -201,6 +202,29 @@ main h3 {
 // and the SEO metadata. Do not "fix" this with title-block-style: none — that
 // option splits the block into two headers rather than removing it.
 main.content:has(.profile) > #title-block-header { display: none; }
+// Round 5 (2 Sep 2026), research page only. Three changes, all scoped with
+// :has(.pub) so they reach research.qmd and leave teaching.qmd alone until it
+// has been reviewed.
+//
+// 1. The title block goes. The navbar tab already reads "Research &
+//    Publications"; repeating it as an h1 immediately below said it twice.
+//    Front matter KEEPS title: -- it still feeds <title>, the search index and
+//    the SEO metadata that v2 §8.1 specifies. Do not delete it there.
+// 2. The 68ch measure comes off the overview prose. It was leaving a wide
+//    gutter on the right while the publication entries below ran the full
+//    width of the card, and the mismatch was the first thing you saw.
+// 3. Overview prose drops from 1rem to 0.94rem, matching the abstracts.
+//    Bold subheadings (h3) are untouched, so the hierarchy still reads.
+main.content:has(.pub) > #title-block-header { display: none; }
+// Round 6 (3 Sep 2026), Richa's note 1: the whole overview drops 1px. The
+// subheads come down with the prose so the hierarchy holds its shape --
+// round 5 left them alone because only the prose moved that time.
+main.content:has(.pub) section.level2 > p,
+main.content:has(.pub) section.level3 > p {
+  max-width: none;
+  font-size: 0.88rem;
+}
+main.content:has(.pub) section.level3 > h3 { font-size: 1.09rem; }
 // Quarto's `#quarto-content > * { padding-top: 14px }` carries an ID and beats
 // the 34px in main.content's own shorthand, so the card has always had a 14px
 // top padding — the old title block was what supplied the breathing room. With
@@ -518,10 +542,13 @@ main section.level3 > p { max-width: 68ch; }
   grid-auto-rows: min-content;
   align-items: start;
   column-gap: 1.25rem;
-  padding: 1rem 0;
+  // Note 9 (markup round, 2 Sep 2026): compacted from 1rem to cut scrolling,
+  // now that every entry carries an abstract.
+  // Note 21 (round 6, 3 Sep 2026): 0.7rem -> 0.55rem, tightening the list again.
+  padding: 0.55rem 0;
   border-bottom: 1px solid $rule-soft;
 }
-.pub > *        { grid-column: 2; margin: 0.3rem 0 0; }
+.pub > *        { grid-column: 2; margin: 0.18rem 0 0; }
 .pub > *:first-child {
   grid-column: 1;
   grid-row: 1 / span 20;   // span, not 1/-1: the rows here are implicit
@@ -529,7 +556,7 @@ main section.level3 > p { max-width: 68ch; }
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.4rem;
+  gap: 0.3rem;
 }
 .pub > *:nth-child(2) { margin-top: 0; }
 
@@ -540,17 +567,26 @@ main section.level3 > p { max-width: 68ch; }
   color: $ink;
   font-variant-numeric: tabular-nums;
 }
+// Round 6 (3 Sep 2026), Richa's note 2: every publication detail -1px.
+// 4 Sep 2026: titles go to full bold (700) and down another 1px to 0.94rem.
+// NOTE: 700 does nothing on its own - Source Sans 3 was being loaded at 400
+// and 600 only, so the browser had no bold face and fell back to 600. The
+// weight is now requested in _quarto.yml's Google Fonts URL. If that line is
+// ever trimmed, these titles quietly stop being bold.
 .pub-title,
 .pub > p:nth-child(2) strong {
-  font-size: 1.06rem;
-  font-weight: 600;
+  font-size: 0.94rem;
+  font-weight: 700;
   line-height: 1.35;
   color: $ink;
 }
+// Note 8 (markup round, 2 Sep 2026): the citation line and the abstract were
+// both $ink-3 and read as one undifferentiated grey block. The citation now
+// takes $ink-2, the running-text ink, leaving the abstract lighter beneath it.
 .pub-cite {
   display: block;
-  font-size: 0.86rem;
-  color: $ink-3;
+  font-size: 0.8rem;
+  color: $ink-2;
   line-height: 1.5;
 }
 .pub-links a {
@@ -564,12 +600,36 @@ main section.level3 > p { max-width: 68ch; }
   text-decoration: none;
 }
 .pub-links a:hover { background: #E7F1F3; }
+// Notes 5 and 6 (markup round, 2 Sep 2026): 0.94rem is the same 15px the
+// Profile page's summary uses, so this adds no new step to the type scale.
+// The 60ch cap is gone -- it made abstracts wrap far short of the title and
+// citation above them, leaving a ragged column of white down the right.
+// RETIRED 4 Sep 2026. Abstracts came off the publication list -- it had grown to
+// nine printed pages -- and now live on each paper's own page, where Google
+// Scholar wants them anyway. The class stays defined, like .badge-embargo, so a
+// future entry can carry an inline abstract without rebuilding the rule.
 .pub-abstract {
   display: block;
-  font-size: 0.86rem;
+  font-size: 0.88rem;
   color: $ink-3;
-  line-height: 1.55;
-  max-width: 60ch;
+  line-height: 1.5;
+}
+
+// Every publication title is now a link to that paper's cite page (4 Sep 2026).
+// ALL 28 are links, so the list stays uniform -- that evenness was the whole
+// objection to linking only the sixteen that had pages. The underline is quiet
+// but permanent: a link nobody can see until they hover is not a link.
+.pub-title a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: $rule;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.pub-title a:hover,
+.pub-title a:focus-visible {
+  color: $accent;
+  text-decoration-color: $accent;
 }
 
 @media (max-width: 575px) {
@@ -578,12 +638,32 @@ main section.level3 > p { max-width: 68ch; }
   .pub > *:first-child { flex-direction: row; align-items: center; margin-bottom: 0.35rem; }
 }
 
-// ---- Version badges (v2 §3.3). Colours are fixed by the spec. --------------
+// ---- Version badges. FOUR states since 31 Aug 2026. ------------------------
+// v2 §3.3 fixes three colours: green = open access, amber = accepted manuscript,
+// grey = no PDF here. Grey was doing two different jobs, so it has been split —
+// but NOT by adding a fifth hue, which would break the four-colour palette:
+//
+//   .badge-pub      solid light grey    "Publisher site"  — settled state, no copy here
+//   .badge-embargo  white, dashed edge  "Under embargo"   — provisional, a copy is coming
+//
+// The dashed border is the whole distinction and it is deliberate: dashed reads as
+// pending, solid reads as final. Both stay inside the grey family.
+//
+// What a visitor is NOT told is whether we are allowed to host a paper and simply
+// have no file for it. That is our backlog, tracked in private/tracking.md — from
+// the reader's side "no copy here, follow the DOI" is one state, not two.
+//
 // 0.75rem, not 0.66: the badge is the one label a visitor most needs to read
 // (open access vs under embargo) and 10.6px was the smallest text on the site.
+// Round 6 (3 Sep 2026), Richa's note 3: the badge now uses .pub-year's
+// monospace face, so the year and the badge below it read as one stacked
+// unit in the left column, and drops 1px. This takes the badge BELOW the
+// 0.8rem floor the type-scale note above sets -- deliberate, on her
+// instruction, and the mono face carries small sizes better than the sans.
 .badge {
   display: inline-block;
-  font-size: 0.8rem;
+  font-family: $font-family-monospace;
+  font-size: 0.68rem;   // -1px again, 4 Sep 2026
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -596,7 +676,9 @@ main section.level3 > p { max-width: 68ch; }
 }
 .badge-oa      { background: #E6F4EA; color: #1E6B34; border-color: #BFE3CB; }
 .badge-am      { background: #FDF3E0; color: #8A5A10; border-color: #F2DDB4; }
-.badge-embargo { background: #F0F0F0; color: #5A5A5A; border-color: #DCDCDC; }
+.badge-pub     { background: #F0F0F0; color: #5A5A5A; border-color: #DCDCDC; }
+.badge-embargo { background: #FFFFFF; color: #5A5A5A; border-color: #C8C8C8;
+                 border-style: dashed; }
 
 // ---- Tables (appointments, teaching notes) --------------------------------
 main table {
@@ -732,4 +814,74 @@ a:focus-visible, .nav-link:focus-visible {
     padding: 0;
   }
   .navbar, .nav-footer { display: none; }
+}
+
+// ---- Note 21 (round 6, 3 Sep 2026): compact the research page ------------
+// "Compact the content by decreasing the space a bit." Scoped with :has(.pub)
+// so the Profile page, which Richa has already signed off, keeps its rhythm.
+main.content:has(.pub) h2 { margin-top: 2.1rem; margin-bottom: 0.75rem; }
+main.content:has(.pub) h3 { margin-top: 1.25rem; }
+
+// ---- Paper (cite) pages ---------------------------------------------------
+// First design pass, 4 Sep 2026. These pages were built as Scholar landing
+// pages and never reviewed; printing them made that obvious. Scoped on
+// #quarto-citation, which only a page with a `citation:` block produces, so
+// index.qmd and research.qmd are untouched.
+//
+// Order on the page is deliberate and is what Scholar's guidance asks for:
+// title, then authors and date, then the ABSTRACT, and only then the links and
+// the BibTeX. Do not move the abstract below the utility content.
+main.content:has(#quarto-citation) {
+  // Richa's note 1 (4 Sep 2026): the title sat hard against the top of the
+  // card. Drop it down so the page opens with a little air.
+  h1.title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-top: 1.4rem;
+    margin-bottom: 0.15rem;
+  }
+  .quarto-title-meta { margin-top: 1.2rem; }
+  .quarto-title-meta-heading {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $ink-3;
+  }
+  .quarto-title-meta-contents { font-size: 0.88rem; color: $ink-2; }
+
+  .abstract {
+    margin-top: 1.5rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid $rule-soft;
+  }
+  .abstract .block-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $ink;
+    margin-bottom: 0.5rem;
+  }
+  .abstract p {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: $ink-3;
+    margin: 0;
+  }
+
+  // Her note 2: the CITATION heading and the BibTeX label were flush against
+  // the left edge of the tinted box. Inset the whole appendix.
+  #quarto-appendix { font-size: 0.88rem; }
+  #quarto-appendix .quarto-appendix-contents,
+  #quarto-appendix > .quarto-appendix-contents {
+    padding-left: 1.4rem;
+    padding-right: 1.4rem;
+  }
+  #quarto-appendix .quarto-appendix-secondary-label,
+  #quarto-appendix h2 { padding-left: 0; }
+
+  // and give the back link room so it does not touch the citation box
+  #quarto-appendix { margin-top: 2rem; }
 }

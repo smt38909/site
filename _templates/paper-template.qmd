@@ -17,11 +17,24 @@ author:
   - name: A. Patil
   - name: S. Deshmukh
 
+# Publication date. Becomes citation_publication_date, which Scholar treats as
+# mandatory for indexing alongside the title and first author.
+date: "2023-05-01"
+
 citation:
   type: article-journal
-  container-title: "Bioresource Technology"     # journal name, exact
+  container-title: "Bioresource Technology"      # journal name, exact
+  container-title-short: "Bioresour. Technol."   # ISO abbreviation -> citation_journal_abbrev
+  # ISSN -> citation_issn, which Scholar lists among the journal tags. Take it
+  # from the Crossref record for the DOI (issn-type); use the electronic ISSN
+  # where the journal has both, the only one where it has one. If the journal
+  # is not in Crossref, take it from the journal's own site.
+  issn: "0960-8524"
   volume: "371"
+  issue: "4"                                     # omit the line entirely if the journal has no issue
   page: "128-139"                                # split on the hyphen automatically
+  # For article-number journals (Materials, AMB Express, Next Sustainability,
+  # Frontiers) there is no page range — put the article number alone: page: "100037"
   issued: "2023"                                 # publication year (or YYYY-MM)
   doi: "10.xxxx/xxxxx"
   # pdf-url is THE most important line — it becomes citation_pdf_url, the tag that

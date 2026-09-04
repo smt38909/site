@@ -1,0 +1,35 @@
+---
+# Paper page. Front matter ONLY — Quarto turns it into the Google Scholar
+# citation_* meta tags. Generated 31 Aug 2026; see _templates/paper-template.qmd.
+title: "Antibacterial Activity of Biosilver Nanoparticles in Combination with Antibiotics"
+abstract: "Drug resistance among bacteria is a concerning issue in the medical field. Silver nanoparticles (AgNPs) are one of the promising novel nano-antibiotics. In the present study, AgNPs were synthesized using a cell-free extract of *Acinetobacter* sp. challenged with silver nitrate. Preliminary observation was done using UV-Vis spectrophotometry at 420 nm. The complete reduction of silver ions to AgNPs was confirmed through cyclic voltammetry. Electron microscopy revealed the formation of spherical-shaped nanoparticles of size up to 20 nm. These AgNPs were further used to determine their effect on the activity of various antibiotics against pathogenic bacteria such as *Neisseria* and *Xanthomans*. Higher antibacterial activity of AgNPs was observed against Gram-negative bacteria. Enhanced antibacterial action of AgNPs was observed with selective β-lactam antibiotics producing up to a 3-fold increase in area of zone of inhibition. On exposure to AgNPs, the minimum inhibitory concentration and minimum bactericidal concentration of antibiotics were lowered by up to 2000 times indicating potential synergistic action of AgNPs. This study signifies that the drug, which proved to be inefficient due to bacterial resistance, could be made functional again in the presence of AgNPs. This will help in the development of novel antibacterial formulations containing antibiotics and nanoparticles to combat multiple drug resistance in microorganisms"
+author:
+  - name:
+      given: "Richa"
+      family: "Singh"
+date: "2024-03"
+citation:
+  type: article-journal
+  container-title: "Iranian Journal of Materials Science and Engineering"
+  container-title-short: "Iran. J. Mater. Sci. Eng."
+  issn: "2383-3882"   # citation_issn; online ISSN, ijmse.iust.ac.ir - not in Crossref
+  volume: "21"
+  issue: "1"
+  page: "32-41"
+  issued: "2024-03"
+  doi: "10.22068/ijmse.3533"
+  pdf-url: "https://drrichasingh.in/papers/2024-biosilver-antibiotics.pdf"
+google-scholar: true
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2024-biosilver-antibiotics.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2024-biosilver-antibiotics.html">
+---
+
+*Iranian Journal of Materials Science and Engineering* 21(1): 32-41 (2024).
+
+[Download the PDF](2024-biosilver-antibiotics.pdf){target="_blank" rel="noopener"}
+
+[https://doi.org/10.22068/ijmse.3533](https://doi.org/10.22068/ijmse.3533){target="_blank" rel="noopener"}
+
+[← Back to all publications](../research.html)

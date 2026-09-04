@@ -1,0 +1,49 @@
+---
+# Paper page. NO hosted PDF for this one - the citation block therefore
+# carries no pdf-url, and the body offers the DOI only. Everything else
+# matches _templates/paper-template.qmd. Created 4 Sep 2026 so that every
+# publication has a crawlable landing page carrying a full abstract.
+title: "Microbial synthesis of gold nanoparticles: Current status and future prospects"
+abstract: "Gold nanoparticles have been employed in biomedicine since the last decade because of their unique optical, electrical and photothermal properties. Present review discusses the microbial synthesis, properties and biomedical applications of gold nanoparticles. Different microbial synthesis strategies used so far for obtaining better yield and stability have been described. It also includes different methods used for the characterization and analysis of gold nanoparticles, viz. UV–visible spectroscopy, Fourier transform infrared spectroscopy, X ray diffraction spectroscopy, scanning electron microscopy, transmission electron microscopy, atomic force microscopy, electron dispersive X ray, X ray photoelectron spectroscopy and cyclic voltametry. The different mechanisms involved in microbial synthesis of gold nanoparticles have been discussed. The information related to applications of microbially synthesized gold nanoparticles and patents on microbial synthesis of gold nanoparticles has been summarized."
+author:
+  - name:
+      given: "Utkarsha"
+      family: "Shedbalkar"
+  - name:
+      given: "Richa"
+      family: "Singh"
+  - name:
+      given: "Sweety"
+      family: "Wadhwani"
+  - name:
+      given: "Sharvari"
+      family: "Gaidhani"
+  - name:
+      given: "B.A."
+      family: "Chopade"
+date: "2014-07"
+citation:
+  type: article-journal
+  container-title: "Advances in Colloid and Interface Science"
+  container-title-short: "Adv Colloid Interface Sci"
+  issn: "0001-8686"
+  volume: "209"
+  page: "40-48"
+  issued: "2014-07"
+  doi: "10.1016/j.cis.2013.12.011"
+google-scholar: true
+# citation_abstract_html_url is not something Quarto emits; the canonical
+# link is not either. Both name THIS page as the article landing page.
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2014-microbial-aunp-review.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2014-microbial-aunp-review.html">
+---
+
+Shedbalkar UU, **Singh R**, Wadhwani SA, Gaidhani S, Chopade BA (2014). *Advances in Colloid and Interface Science* 209: 40–48.
+
+[https://doi.org/10.1016/j.cis.2013.12.011](https://doi.org/10.1016/j.cis.2013.12.011){target="_blank" rel="noopener"}
+
+*No copy is hosted here. Follow the link above for the published version.*
+
+[← Back to all publications](../research.html)

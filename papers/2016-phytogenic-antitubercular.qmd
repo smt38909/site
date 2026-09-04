@@ -1,0 +1,55 @@
+---
+# Paper page. Front matter ONLY — Quarto turns it into the Google Scholar
+# citation_* meta tags. Generated 31 Aug 2026; see _templates/paper-template.qmd.
+title: "Phytogenic silver, gold, and bimetallic nanoparticles as novel antitubercular agents"
+abstract: "Purpose: Multi- and extensively drug-resistant tuberculosis (TB) is a global threat to human health. It requires immediate action to seek new antitubercular compounds and devise alternate strategies. Nanomaterials, in the present scenario, have opened new avenues in medicine, diagnosis, and therapeutics. In view of this, the current study aims to determine the efficacy of phytogenic metal nanoparticles to inhibit mycobacteria. Methods: Silver (AgNPs), gold (AuNPs), and gold–silver bimetallic (Au–AgNPs) nanoparticles synthesized from medicinal plants, such as *Barleria prionitis*, *Plumbago zeylanica*, and *Syzygium cumini*, were tested against *Mycobacterium tuberculosis* and *M. bovis* BCG. In vitro and ex vivo macrophage infection model assays were designed to determine minimum inhibitory concentration (MIC) and half maximal inhibitory concentration of nanoparticles. Microscopic analyses were carried out to demonstrate intracellular uptake of nanoparticles in macrophages. Besides this, biocompatibility, specificity, and selectivity of nanoparticles were also established with respect to human cell lines. Results: Au–AgNPs exhibited highest antitubercular activity, with MIC of <2.56 μg/mL, followed by AgNPs. AuNPs did not show such activity at concentrations of up to 100 μg/mL. In vitro and ex vivo macrophage infection model assays revealed the inhibition of both active and dormant stage mycobacteria on exposure to Au–AgNPs. These nanoparticles were capable of entering macrophage cells and exhibited up to 45% cytotoxicity at 30 μg/mL (ten times MIC concentration) after 48 hours. Among these, Au–AgNPs synthesized from *S. cumini* were found to be more specific toward mycobacteria, with their selectivity index in the range of 94–108. Conclusion: This is the first study to report the antimycobacterial activity of AuNPs, AgNPs, and Au–AgNPs synthesized from medicinal plants. Among these, Au–AgNPs from *S. cumini* showed profound efficiency, specificity, and selectivity to kill mycobacteria. These should be investigated further to develop novel TB nanoantibiotics"
+author:
+  - name:
+      given: "Richa"
+      family: "Singh"
+  - name:
+      given: "Laxman"
+      family: "Nawale"
+  - name:
+      given: "Manisha"
+      family: "Arkile"
+  - name:
+      given: "Sweety"
+      family: "Wadhwani"
+  - name:
+      given: "Utkarsha"
+      family: "Shedbalkar"
+  - name:
+      given: "Snehal"
+      family: "Chopade"
+  - name:
+      given: "Dhiman"
+      family: "Sarkar"
+  - name:
+      given: "Balu Ananda"
+      family: "Chopade"
+date: "2016-05"
+citation:
+  type: article-journal
+  container-title: "International Journal of Nanomedicine"
+  container-title-short: "Int. J. Nanomedicine"
+  issn: "1178-2013"   # citation_issn; electronic, Crossref
+  volume: "11"
+  page: "1889-1897"
+  issued: "2016-05"
+  doi: "10.2147/IJN.S102488"
+  pdf-url: "https://drrichasingh.in/papers/2016-phytogenic-antitubercular.pdf"
+google-scholar: true
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2016-phytogenic-antitubercular.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2016-phytogenic-antitubercular.html">
+---
+
+*International Journal of Nanomedicine* 11: 1889-1897 (2016).
+
+[Download the PDF](2016-phytogenic-antitubercular.pdf){target="_blank" rel="noopener"}
+
+[https://doi.org/10.2147/IJN.S102488](https://doi.org/10.2147/IJN.S102488){target="_blank" rel="noopener"}
+
+[← Back to all publications](../research.html)

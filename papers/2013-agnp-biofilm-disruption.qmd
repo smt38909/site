@@ -1,0 +1,55 @@
+---
+# Paper page. NO hosted PDF for this one - the citation block therefore
+# carries no pdf-url, and the body offers the DOI only. Everything else
+# matches _templates/paper-template.qmd. Created 4 Sep 2026 so that every
+# publication has a crawlable landing page carrying a full abstract.
+title: "Biofilm disruption activity of silver nanoparticles synthesized by *Acinetobacter calcoaceticus* PUCM 1005"
+abstract: "Biosynthesis of silver nanoparticles (AgNPs) using *Acinetobacter calcoaceticus* PUCM 1005 and their application in biofilm disruption is described. Extracellular AgNPs were produced by 48 h grown culture when challenged with silver nitrate. AgNPs synthesis was found to be optimum at 40 mM AgNO3, 40 °C temperature and pH 5. UV–vis spectroscopy, energy dispersive spectra and X-ray diffraction analysis confirmed presence of AgNPs. Electron microscopy revealed the size range to be 4–40 nm. These AgNPs exhibited higher activity against planktonic Gram negative pathogens. However, they could disrupt biofilm formed by Gram negative and Gram positive pathogenic microorganisms. AgNP synthesis was protein mediated."
+author:
+  - name:
+      given: "Sharvari"
+      family: "Gaidhani"
+  - name:
+      given: "Richa"
+      family: "Singh"
+  - name:
+      given: "Divya"
+      family: "Singh"
+  - name:
+      given: "Urvashi"
+      family: "Patel"
+  - name:
+      given: "Kaivalya"
+      family: "Shevade"
+  - name:
+      given: "Richa"
+      family: "Yeshvekar"
+  - name:
+      given: "Balu Ananda"
+      family: "Chopade"
+date: "2013-10"
+citation:
+  type: article-journal
+  container-title: "Materials Letters"
+  container-title-short: "Mater Lett"
+  issn: "0167-577X"
+  volume: "108"
+  page: "324-327"
+  issued: "2013-10"
+  doi: "10.1016/j.matlet.2013.07.023"
+google-scholar: true
+# citation_abstract_html_url is not something Quarto emits; the canonical
+# link is not either. Both name THIS page as the article landing page.
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2013-agnp-biofilm-disruption.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2013-agnp-biofilm-disruption.html">
+---
+
+Gaidhani S, **Singh R**, Singh D, Patel U, Shevade K, Yeshvekar R, Chopade BA (2013). *Materials Letters* 108: 324–327.
+
+[https://doi.org/10.1016/j.matlet.2013.07.023](https://doi.org/10.1016/j.matlet.2013.07.023){target="_blank" rel="noopener"}
+
+*No copy is hosted here. Follow the link above for the published version.*
+
+[← Back to all publications](../research.html)

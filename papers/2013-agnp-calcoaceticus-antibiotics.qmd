@@ -1,0 +1,52 @@
+---
+# Paper page. Front matter ONLY — Quarto turns it into the Google Scholar
+# citation_* meta tags. Generated 31 Aug 2026; see _templates/paper-template.qmd.
+title: "Synthesis, optimization, and characterization of silver nanoparticles from Acinetobacter calcoaceticus and their enhanced antibacterial activity when combined with antibiotics"
+abstract: "Background: The development of nontoxic methods of synthesizing nanoparticles is a major step in nanotechnology to allow their application in nanomedicine. The present study aims to biosynthesize silver nanoparticles (AgNPs) using a cell-free extract of *Acinetobacter* spp. and evaluate their antibacterial activity. Methods: Eighteen strains of *Acinetobacter* were screened for AgNP synthesis. AgNPs were characterized using various techniques. Reaction parameters were optimized, and their effect on the morphology of AgNPs was studied. The synergistic potential of AgNPs on 14 antibiotics against seven pathogens was determined by disc-diffusion, broth-microdilution, and minimum bactericidal concentration assays. The efficacy of AgNPs was evaluated as per the minimum inhibitory concentration (MIC) breakpoints of the Clinical and Laboratory Standards Institute (CLSI) guidelines. Results: Only *A. calcoaceticus* LRVP54 produced AgNPs within 24 hours. Monodisperse spherical nanoparticles of 8–12 nm were obtained with 0.7 mM silver nitrate at 70 °C. During optimization, a blue-shift in ultraviolet-visible spectra was seen. X-ray diffraction data and lattice fringes (d 0.23 nm) observed under high-resolution transmission electron microscope confirmed the crystallinity of AgNPs. These AgNPs were found to be more effective against Gram-negative compared with Gram-positive microorganisms. Overall, AgNPs showed the highest synergy with vancomycin in the disc-diffusion assay. For *Enterobacter aerogenes*, a 3.8-fold increase in inhibition zone area was observed after the addition of AgNPs with vancomycin. Reduction in MIC and minimum bactericidal concentration was observed on exposure of AgNPs with antibiotics. Interestingly, multidrug-resistant *A. baumannii* was highly sensitized in the presence of AgNPs and became susceptible to antibiotics except cephalosporins. Similarly, the vancomycin-resistant strain of *Streptococcus mutans* was also found to be susceptible to antibiotic treatment when AgNPs were added. These biogenic AgNPs showed significant synergistic activity on the β-lactam class of antibiotics. Conclusion: This is the first report of synthesis of AgNPs using *A. calcoaceticus* LRVP54 and their significant synergistic activity with antibiotics resulting in increased susceptibility of multidrug-resistant bacteria evaluated as per MIC breakpoints of the CLSI standard"
+author:
+  - name:
+      given: "Richa"
+      family: "Singh"
+  - name:
+      given: "Priyanka"
+      family: "Wagh"
+  - name:
+      given: "Sweety"
+      family: "Wadhwani"
+  - name:
+      given: "Sharvari"
+      family: "Gaidhani"
+  - name:
+      given: "Avinash"
+      family: "Kumbhar"
+  - name:
+      given: "Jayesh"
+      family: "Bellare"
+  - name:
+      given: "Balu Ananda"
+      family: "Chopade"
+date: "2013-11"
+citation:
+  type: article-journal
+  container-title: "International Journal of Nanomedicine"
+  container-title-short: "Int. J. Nanomedicine"
+  issn: "1178-2013"   # citation_issn; electronic, Crossref
+  volume: "8"
+  page: "4277-4290"
+  issued: "2013-11"
+  doi: "10.2147/IJN.S48913"
+  pdf-url: "https://drrichasingh.in/papers/2013-agnp-calcoaceticus-antibiotics.pdf"
+google-scholar: true
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2013-agnp-calcoaceticus-antibiotics.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2013-agnp-calcoaceticus-antibiotics.html">
+---
+
+*International Journal of Nanomedicine* 8: 4277-4290 (2013).
+
+[Download the PDF](2013-agnp-calcoaceticus-antibiotics.pdf){target="_blank" rel="noopener"}
+
+[https://doi.org/10.2147/IJN.S48913](https://doi.org/10.2147/IJN.S48913){target="_blank" rel="noopener"}
+
+[← Back to all publications](../research.html)

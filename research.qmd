@@ -1,7 +1,58 @@
 ---
-# Tab 2 — Research & Papers.  Structure: v2 §3.  Page title: v2 §8.1.
-# Publication list transcribed from her CV (Aug 2026). See private/doi-todo.md
-# for the outstanding DOI and PDF work.
+# Tab 2 — Research & Publications.  Structure: v2 §3.  Page title: v2 §8.1.
+# The navbar label, the h1 and <title> all read "Research & Publications" — keep
+# them identical; "Research & Papers" was the old navbar wording (fixed 4 Sep 2026).
+# Publication list REBUILT 31 Aug 2026 from the Crossref record (and Europe PMC
+# where Crossref's author order was wrong), not from the CV transcription.
+# v2 §6.4 requires the title and author order here to match the published
+# version exactly, or Google Scholar will not merge our PDF onto her record.
+# See private/doi-todo.md for what is still outstanding.
+#
+# ---------------------------------------------------------------------------
+# MAINTAINER NOTES. These live in the front matter, NOT in an HTML comment in
+# the body: Pandoc passes <!-- --> straight through to the rendered page, so
+# anything written there is readable by anyone who views source on the live
+# site. YAML "#" comments are stripped at parse time and never reach the HTML.
+# Moved out of the body 3 Sep 2026 - keep new notes here.
+# ---------------------------------------------------------------------------
+#   HOW TO ADD A PAPER
+#   ---------------------------------------------------------------------------
+#   Copy a block from _templates/publication-block.md, paste it at the TOP of this
+#   list, and fill in the blanks. Every entry keeps the same five elements in the
+#   same order (v2 §3.4). Do not edit the ::: pub lines — they are what puts the
+#   year and badge in the left column.
+#
+#   STATE OF THIS LIST — 31 Aug 2026
+#     1. DOIs are IN. Most came from Crossref; the Iranian J Mater Sci Eng DOI
+#        (10.22068/ijmse.3533) does NOT exist in Crossref and was supplied by
+#        Nikhil from the printed page — it resolves to ijmse.iust.ac.ir. THREE
+#        entries still carry no DOI at all: JETIR and the two Higher Education
+#        Forum chapters. Expected — do not go looking for those.
+#     2. Titles, author order, volume, issue and pages were rebuilt from the
+#        published record and NO LONGER match the CV in several places. The CV is
+#        a transcription and had drifted. Do not "correct" these back.
+#     3. 16 papers now carry a PDF: 11 green (publisher's open-access file) and
+#        5 amber (her own accepted manuscript). Abstracts appear ONLY on entries
+#        with a hosted PDF, per the 31 Aug decision.
+#     4. NOTHING IS UNDER EMBARGO any more. Signed agreements were obtained for
+#        all three papers that once carried the dashed badge, and Springer,
+#        Taylor & Francis and Elsevier all permit the accepted manuscript on the
+#        author's own website with no embargo — the embargoes they publish apply
+#        to institutional repositories, not personal sites. The .badge-embargo
+#        class stays defined in styles.scss for future papers.
+#     5. EVERY entry carries an [HTML] link to its page in
+#        papers/ - all 28, including the ones with no PDF and no DOI. Relabelled
+#        from [Cite] on 4 Sep 2026. The link is NOT decoration: the paper page
+#        is what holds the
+#        citation_* meta tags, and Google Scholar only finds a page it can reach
+#        by following an ordinary HTML link (inclusion guidelines, "Crawl
+#        Guidelines"). Strip the link and the Scholar tags become unreachable and
+#        the PDF stops merging onto her record. Added 3 Sep 2026.
+#     6. The rest stay grey. One — the J Nanosci Nanotechnol paper — can never be
+#        posted: her signed copyright transfer forbids putting it on an open
+#        website in any version. The others simply have no file that may lawfully
+#        be hosted. Full reasoning lives in private/pdf-download-list.md; do not
+#        revisit it from this file.
 pagetitle: "Research & Publications — Dr. Richa Singh"
 title-prefix: ""
 title: "Research & Publications"
@@ -9,283 +60,323 @@ title: "Research & Publications"
 
 ## Research overview
 
-### Bacterial synthesis of metal nanoparticles
+### Bacterial synthesis and biomedical applications of metal nanoparticles
 
-Environmental bacteria — *Acinetobacter* species in particular — can be induced to
-reduce metal salts into nanoparticles of controlled size and shape. My doctoral and
-subsequent work established the conditions under which this happens, identified
-lignin peroxidase and a purified protein fraction as agents of the reduction, and
-characterised the silver, gold and selenium particles that result. The appeal is
-that the synthesis runs in water, at room temperature, without the reducing agents
-that conventional routes depend on.
-
-### What the particles are good for
+Environmental bacteria, *Acinetobacter* species, can be induced to reduce metal
+salts into nanoparticles of controlled size and shape. My doctoral and subsequent
+work established the optimized conditions for silver nanoparticle synthesis,
+identified lignin peroxidase as agents of the reduction, and characterised the
+silver, gold and selenium particles that result. The appeal is that the synthesis
+runs in aqueous environment at room temperature, without the reducing agents that
+conventional routes depend on.
 
 Biogenic nanoparticles turn out to be active where conventional antimicrobials are
 struggling. We have shown silver nanoparticles disrupting *Acinetobacter* biofilms,
-acting in synergy with existing antibiotics against nosocomial strains, working
-against *Candida albicans*, and — with phytogenic silver and gold particles —
-against *Mycobacterium tuberculosis*. Selenium nanoparticles from *Acinetobacter*
-sp. SW30 proved cytotoxic to breast cancer cells.
+acting in synergy with existing antibiotics against nosocomial strains, inhibiting
+*Candida albicans*, and suppressing *Mycobacterium* species. Selenium nanoparticles
+from *Acinetobacter* sp. SW30 proved cytotoxic to breast cancer cells.
 
-### Cleaning up: dyes, microplastics and waste as a resource
+### Applied environmental remediation
 
-Textile dye in water is both a pollutant and a convenient test substrate. Recent
-work uses banana and carrot peel waste as a biosorbent for procion magenta and
-black azabache dyes, and gold nanocatalysts to decolorise dye effluent. A current
-review thread asks whether nano-adsorbents can be made to capture microplastics.
+A complementary strand applies biogenic nanomaterials and low-cost biosorbents to
+pollution control. Bacteriogenic gold nanocatalysts decolorise textile dye effluent,
+while banana and carrot peel waste serve as effective biosorbents for Procion
+Magenta and Black Azabache dyes. A 2026 review extends this work to review the role
+of engineered nano-adsorbents to close the gap of critical microplastic–nanoplastic
+capture.
 
-### Science education
+### Survey-based research on science education and public understanding
 
-A parallel strand, with colleagues at SIES, looks at how teachers actually learn —
-the effect of online professional courses on teaching practice, experiential
-learning that blends MOOCs with project work and internships, and how public
-understanding of food-contact materials shifts with education.
+A separate strand of my work uses survey-based research as a vehicle to train
+postgraduate students in data collection, statistical analysis and scientific
+reasoning, giving them hands-on exposure to how empirical research is actually done.
+Working with PG students and my colleagues, I have guided surveys across multiple
+themes: educators' learning from online professional courses, public awareness and
+risk perception of food-contact materials, etc. Each of these studies has been
+published, turning the training exercise itself into a peer-reviewed contribution.
 
 ## Publications
 
-*Badges show what is available here. Green means the publisher's open-access PDF is
-hosted on this site; amber means an accepted manuscript posted after its embargo;
-grey means the paper is available from the publisher only.*
 
-<!-- ===========================================================================
-  HOW TO ADD A PAPER
-  ---------------------------------------------------------------------------
-  Copy a block from _templates/publication-block.md, paste it at the TOP of this
-  list, and fill in the blanks. Every entry keeps the same five elements in the
-  same order (v2 §3.4). Do not edit the ::: pub lines — they are what puts the
-  year and badge in the left column.
-
-  OUTSTANDING WORK ON THIS LIST (see private/doi-todo.md):
-    1. No DOI links yet — her CV does not carry them. Once added, each entry
-       gains a line:  [[DOI → published version](https://doi.org/10.XXXX/XXXXX)]{.pub-links}
-    2. No PDFs are hosted yet. Every entry is therefore badged grey. As each
-       paper's rights are checked against Open Policy Finder and the signed
-       agreement, entries flip to green or amber and gain a PDF link.
-=========================================================================== -->
 
 ::: {.pub}
-[2026]{.pub-year} [In press]{.badge .badge-embargo}
+[2026]{.pub-year} [Accepted MS]{.badge .badge-am}
 
-[Biosorption of procion magenta and black azabache textile dyes using banana and carrot peel waste: a comparative analysis of pure and blended systems]{.pub-title}
+[[Biosorption of Procion Magenta and Black Azabache textile dyes using banana and carrot peel waste: a comparative analysis of pure and blended systems](papers/2026-biosorption-dye-peel-waste.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[Patil SB, **Singh R** — *International Journal of Phytoremediation* (accepted).]{.pub-cite}
+[Patil SB, **Singh R** (2026). *International Journal of Phytoremediation*, advance online publication, pp. 1–19.]{.pub-cite}
+
+[[PDF](papers/2026-biosorption-dye-peel-waste.pdf){target="_blank" rel="noopener"} [HTML](papers/2026-biosorption-dye-peel-waste.html){target="_blank" rel="noopener"} [https://doi.org/10.1080/15226514.2026.2660151](https://doi.org/10.1080/15226514.2026.2660151){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2026]{.pub-year} [In press]{.badge .badge-embargo}
+[2026]{.pub-year} [Accepted MS]{.badge .badge-am}
 
-[Nano-adsorbent for removal of microplastics: cross-material insights, performance and practical applications]{.pub-title}
+[[Nano-adsorbents for microplastic removal – cross-material insights, performance and practical applications](papers/2026-nano-adsorbents-microplastics.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[**Singh R** — *Next Research* (accepted).]{.pub-cite}
+[**Singh R** (2026). *Next Research* 10: 101928.]{.pub-cite}
+
+[[PDF](papers/2026-nano-adsorbents-microplastics.pdf){target="_blank" rel="noopener"} [HTML](papers/2026-nano-adsorbents-microplastics.html){target="_blank" rel="noopener"} [https://doi.org/10.1016/j.nexres.2026.101928](https://doi.org/10.1016/j.nexres.2026.101928){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2026]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2026]{.pub-year} [Open access]{.badge .badge-oa}
 
-[Online professional courses' impact on teaching and personal growth]{.pub-title}
+[[Online Professional Courses' Impact on Teaching and Personal Growth](papers/2026-online-professional-courses.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[**Singh R**, Menon T, Yoosuf S — *Canadian Journal of Learning and Technology* 52(1): 1–20.]{.pub-cite}
+[**Singh R**, Menon T, Yoosuf S (2026). *Canadian Journal of Learning and Technology* 52(1): 1–20.]{.pub-cite}
+
+[[PDF](papers/2026-online-professional-courses.pdf){target="_blank" rel="noopener"} [HTML](papers/2026-online-professional-courses.html){target="_blank" rel="noopener"} [https://doi.org/10.21432/cjlt28974](https://doi.org/10.21432/cjlt28974){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2025]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2025]{.pub-year} [Accepted MS]{.badge .badge-am}
 
-[Practices and perceptions of food contact materials: impact of education in the Indian context]{.pub-title}
+[[Practices and perceptions of food contact materials: impact of education in the Indian context](papers/2025-food-contact-materials.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[Vishwakarma OV, Patil SB, **Singh R** — *Proceedings of the Indian National Science Academy* 91: 1351–1364.]{.pub-cite}
+[Vishwakarma OV, Patil SB, **Singh R** (2025). *Proceedings of the Indian National Science Academy* 91(4): 1351–1364.]{.pub-cite}
+
+[[PDF](papers/2025-food-contact-materials.pdf){target="_blank" rel="noopener"} [HTML](papers/2025-food-contact-materials.html){target="_blank" rel="noopener"} [https://doi.org/10.1007/s43538-025-00561-5](https://doi.org/10.1007/s43538-025-00561-5){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2024]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2024]{.pub-year} [Open access]{.badge .badge-oa}
 
-[Antibacterial activity of bio-silver nanoparticles in combination with antibiotics]{.pub-title}
+[[Antibacterial Activity of Biosilver Nanoparticles in Combination with Antibiotics](papers/2024-biosilver-antibiotics.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[**Singh R** — *Iranian Journal of Materials Science and Engineering* 21: 1.]{.pub-cite}
+[**Singh R** (2024). *Iranian Journal of Materials Science and Engineering* 21(1): 32–41.]{.pub-cite}
+
+[[PDF](papers/2024-biosilver-antibiotics.pdf){target="_blank" rel="noopener"} [HTML](papers/2024-biosilver-antibiotics.html){target="_blank" rel="noopener"} [https://doi.org/10.22068/ijmse.3533](https://doi.org/10.22068/ijmse.3533){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2024]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2024]{.pub-year} [Open access]{.badge .badge-oa}
 
-[Naturally occurring nanomaterials (NONPs): a review]{.pub-title}
+[[Naturally occurring nanoparticles (NONPs): A review](papers/2024-naturally-occurring-nanoparticles.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[Raut S, **Singh R**, Lekhak U — *Next Sustainability* 3: 100037.]{.pub-cite}
+[Raut SS, **Singh R**, Lekhak UM (2024). *Next Sustainability* 3: 100037.]{.pub-cite}
+
+[[PDF](papers/2024-naturally-occurring-nanoparticles.pdf){target="_blank" rel="noopener"} [HTML](papers/2024-naturally-occurring-nanoparticles.html){target="_blank" rel="noopener"} [https://doi.org/10.1016/j.nxsust.2024.100037](https://doi.org/10.1016/j.nxsust.2024.100037){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2020]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2020]{.pub-year} [Open access]{.badge .badge-oa}
 
-[Green synthesis of AuNPs by *Acinetobacter* sp. GWRVA25: optimization, characterization and its antioxidant activity]{.pub-title}
+[[Green Synthesis of AuNPs by *Acinetobacter* sp. GWRVA25: Optimization, Characterization, and Its Antioxidant Activity](papers/2020-aunp-gwrva25-antioxidant.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[Nadhe SB, Wadhwani SA, **Singh R**, Chopade BA — *Frontiers in Chemistry* 8: article 474.]{.pub-cite}
+[Nadhe SB, Wadhwani SA, **Singh R**, Chopade BA (2020). *Frontiers in Chemistry* 8: 474.]{.pub-cite}
+
+[[PDF](papers/2020-aunp-gwrva25-antioxidant.pdf){target="_blank" rel="noopener"} [HTML](papers/2020-aunp-gwrva25-antioxidant.html){target="_blank" rel="noopener"} [https://doi.org/10.3389/fchem.2020.00474](https://doi.org/10.3389/fchem.2020.00474){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2019]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2019]{.pub-year} [Publisher site]{.badge .badge-pub}
 
-[*Acinetobacter* sp. mediated synthesis of AgNPs, its optimization, characterization and synergistic antifungal activity against *Candida albicans*]{.pub-title}
+[[*Acinetobacter* sp. mediated synthesis of AgNPs, its optimization, characterization and synergistic antifungal activity against *C. albicans*](papers/2019-agnp-candida-antifungal.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[Nadhe SB, **Singh R**, Wadhwani SA, Chopade BA — *Journal of Applied Microbiology* 127: 445–458.]{.pub-cite}
+[Nadhe SB, **Singh R**, Wadhwani SA, Chopade BA (2019). *Journal of Applied Microbiology* 127(2): 445–458.]{.pub-cite}
+
+[[HTML](papers/2019-agnp-candida-antifungal.html){target="_blank" rel="noopener"} [https://doi.org/10.1111/jam.14305](https://doi.org/10.1111/jam.14305){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2018]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2018]{.pub-year} [Publisher site]{.badge .badge-pub}
 
-[Antibacterial activities of bacteriagenic silver nanoparticles against nosocomial *Acinetobacter baumannii*]{.pub-title}
+[[Antibacterial Activities of Bacteriagenic Silver Nanoparticles Against Nosocomial *Acinetobacter baumannii*](papers/2018-agnp-nosocomial-baumannii.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[**Singh R**, Vora J, Nadhe S, Wadhwani SA, et al. — *Journal of Nanoscience and Nanotechnology* 18: 3806–3815.]{.pub-cite}
+[**Singh R**, Vora J, Nadhe SB, Wadhwani SA, Shedbalkar UU, Chopade BA (2018). *Journal of Nanoscience and Nanotechnology* 18(6): 3806–3815.]{.pub-cite}
+
+[[HTML](papers/2018-agnp-nosocomial-baumannii.html){target="_blank" rel="noopener"} [https://doi.org/10.1166/jnn.2018.15013](https://doi.org/10.1166/jnn.2018.15013){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2018]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2018]{.pub-year} [Publisher site]{.badge .badge-pub}
 
-[Decolorization of textile dyes by combination of gold nanocatalysts obtained from *Acinetobacter* sp. SW30 and NaBH₄]{.pub-title}
+[[Decolorization of textile dyes by combination of gold nanocatalysts obtained from *Acinetobacter* sp. SW30 and NaBH~4~](papers/2018-aunp-dye-decolorization.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[Wadhwani SA, Shedbalkar UU, Nadhe S, **Singh R**, et al. — *Environmental Technology & Innovation* 9: 186–197.]{.pub-cite}
+[Wadhwani SA, Shedbalkar UU, Nadhe S, **Singh R**, Chopade BA (2018). *Environmental Technology & Innovation* 9: 186–197.]{.pub-cite}
+
+[[HTML](papers/2018-aunp-dye-decolorization.html){target="_blank" rel="noopener"} [https://doi.org/10.1016/j.eti.2017.12.001](https://doi.org/10.1016/j.eti.2017.12.001){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2018]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2018]{.pub-year} [Publisher site]{.badge .badge-pub}
 
-[Catalytic activity of chemical and biological nanosilver: a comparative study]{.pub-title}
+[[Biosynthesis of gold and selenium nanoparticles by purified protein from *Acinetobacter* sp. SW30](papers/2018-aunp-senp-purified-protein.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[**Singh R**, Jain B — *JETIR* 5: 243–253.]{.pub-cite}
+[Wadhwani SA, Shedbalkar UU, **Singh R**, Chopade BA (2018). *Enzyme and Microbial Technology* 111: 81–86.]{.pub-cite}
+
+[[HTML](papers/2018-aunp-senp-purified-protein.html){target="_blank" rel="noopener"} [https://doi.org/10.1016/j.enzmictec.2017.10.007](https://doi.org/10.1016/j.enzmictec.2017.10.007){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2017]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2018]{.pub-year} [Open access]{.badge .badge-oa}
 
-[Lignin peroxidase mediated silver nanoparticle synthesis in *Acinetobacter* sp.]{.pub-title}
+[[Catalytic activity of chemical and biological nanosilver: a comparative study](papers/2018-catalytic-nanosilver.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[**Singh R**, Shedbalkar UU, Nadhe SB, Wadhwani SA, et al. — *AMB Express* 7: 226.]{.pub-cite}
+[**Singh R**, Jain B (2018). *JETIR* 5: 243–253.]{.pub-cite}
+
+[[PDF](papers/2018-catalytic-nanosilver.pdf){target="_blank" rel="noopener"} [HTML](papers/2018-catalytic-nanosilver.html){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2017]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2017]{.pub-year} [Open access]{.badge .badge-oa}
 
-[Biosynthesis of gold and selenium nanoparticles by purified protein from *Acinetobacter* sp. SW30]{.pub-title}
+[[Lignin peroxidase mediated silver nanoparticle synthesis in *Acinetobacter* sp.](papers/2017-lignin-peroxidase-agnp.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[Wadhwani SA, Shedbalkar UU, **Singh R**, Chopade BA — *Enzyme and Microbial Technology* 111: 81–86.]{.pub-cite}
+[**Singh R**, Shedbalkar UU, Nadhe SB, Wadhwani SA, Chopade BA (2017). *AMB Express* 7(1): 226.]{.pub-cite}
+
+[[PDF](papers/2017-lignin-peroxidase-agnp.pdf){target="_blank" rel="noopener"} [HTML](papers/2017-lignin-peroxidase-agnp.html){target="_blank" rel="noopener"} [https://doi.org/10.1186/s13568-017-0528-5](https://doi.org/10.1186/s13568-017-0528-5){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2017]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2017]{.pub-year} [Open access]{.badge .badge-oa}
 
-[Green synthesis of selenium nanoparticles using *Acinetobacter* sp. SW30: optimization, characterization and its anticancer activity in breast cancer cells]{.pub-title}
+[[Green synthesis of selenium nanoparticles using *Acinetobacter* sp. SW30: optimization, characterization and its anticancer activity in breast cancer cells](papers/2017-senp-sw30-breast-cancer.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[Wadhwani SA, Gorain M, Banerjee P, Shedbalkar U, **Singh R**, et al. — *International Journal of Nanomedicine* 12: 6841–6855.]{.pub-cite}
+[Wadhwani SA, Gorain M, Banerjee P, Shedbalkar UU, **Singh R**, Kundu GC, Chopade BA (2017). *International Journal of Nanomedicine* 12: 6841–6855.]{.pub-cite}
+
+[[PDF](papers/2017-senp-sw30-breast-cancer.pdf){target="_blank" rel="noopener"} [HTML](papers/2017-senp-sw30-breast-cancer.html){target="_blank" rel="noopener"} [https://doi.org/10.2147/IJN.S139212](https://doi.org/10.2147/IJN.S139212){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2016]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2016]{.pub-year} [Open access]{.badge .badge-oa}
 
-[Phytogenic silver, gold and bimetallic nanoparticles as novel antitubercular agents]{.pub-title}
+[[Phytogenic silver, gold, and bimetallic nanoparticles as novel antitubercular agents](papers/2016-phytogenic-antitubercular.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[**Singh R**, Nawale L, Arkile M, Wadhwani S, et al. — *International Journal of Nanomedicine* 11: 1889–1897.]{.pub-cite}
+[**Singh R**, Nawale L, Arkile M, Wadhwani S, Shedbalkar U, Chopade S, Sarkar D, Chopade BA (2016). *International Journal of Nanomedicine* 11: 1889–1897.]{.pub-cite}
+
+[[PDF](papers/2016-phytogenic-antitubercular.pdf){target="_blank" rel="noopener"} [HTML](papers/2016-phytogenic-antitubercular.html){target="_blank" rel="noopener"} [https://doi.org/10.2147/IJN.S102488](https://doi.org/10.2147/IJN.S102488){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2016]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2016]{.pub-year} [Open access]{.badge .badge-oa}
 
-[Nanoparticles for control of biofilms of *Acinetobacter* species]{.pub-title}
+[[Nanoparticles for Control of Biofilms of *Acinetobacter* Species](papers/2016-nanoparticles-biofilm-control.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[**Singh R**, Nadhe S, Wadhwani S, Shedbalkar U, et al. — *Materials* 9: 383.]{.pub-cite}
+[**Singh R**, Nadhe S, Wadhwani S, Shedbalkar U, Chopade BA (2016). *Materials* 9(5): 383.]{.pub-cite}
+
+[[PDF](papers/2016-nanoparticles-biofilm-control.pdf){target="_blank" rel="noopener"} [HTML](papers/2016-nanoparticles-biofilm-control.html){target="_blank" rel="noopener"} [https://doi.org/10.3390/ma9050383](https://doi.org/10.3390/ma9050383){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2016]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2016]{.pub-year} [Publisher site]{.badge .badge-pub}
 
-[Biogenic selenium nanoparticles: current status and future prospects]{.pub-title}
+[[Biogenic selenium nanoparticles: current status and future prospects](papers/2016-biogenic-senp-review.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[Wadhwani SA, Shedbalkar UU, **Singh R**, Chopade BA — *Applied Microbiology and Biotechnology* 100: 2555–2566.]{.pub-cite}
+[Wadhwani SA, Shedbalkar UU, **Singh R**, Chopade BA (2016). *Applied Microbiology and Biotechnology* 100(6): 2555–2566.]{.pub-cite}
+
+[[HTML](papers/2016-biogenic-senp-review.html){target="_blank" rel="noopener"} [https://doi.org/10.1007/s00253-016-7300-7](https://doi.org/10.1007/s00253-016-7300-7){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2016]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2016]{.pub-year} [Publisher site]{.badge .badge-pub}
 
-[Kinetics of gold nanoparticles by *Acinetobacter* sp. SW30]{.pub-title}
+[[Kinetics of Synthesis of Gold Nanoparticles by *Acinetobacter* sp. SW30 Isolated from Environment](papers/2016-aunp-kinetics-sw30.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[Wadhwani SA, Shedbalkar UU, **Singh R**, Vashisth P, et al. — *Indian Journal of Microbiology* 56: 439–444.]{.pub-cite}
+[Wadhwani SA, Shedbalkar UU, **Singh R**, Vashisth P, Pruthi V, Chopade BA (2016). *Indian Journal of Microbiology* 56(4): 439–444.]{.pub-cite}
+
+[[HTML](papers/2016-aunp-kinetics-sw30.html){target="_blank" rel="noopener"} [https://doi.org/10.1007/s12088-016-0598-0](https://doi.org/10.1007/s12088-016-0598-0){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2015]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2015]{.pub-year} [Accepted MS]{.badge .badge-am}
 
-[Chemical and biological metal nanoparticles as antimycobacterial agents: a comparative study]{.pub-title}
+[[Chemical and biological metal nanoparticles as antimycobacterial agents: A comparative study](papers/2015-metal-np-antimycobacterial.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[**Singh R**, Nawale LU, Arkile M, et al. — *International Journal of Antimicrobial Agents* 46: 183–188.]{.pub-cite}
+[**Singh R**, Nawale LU, Arkile M, Shedbalkar UU, Wadhwani SA, Sarkar D, Chopade BA (2015). *International Journal of Antimicrobial Agents* 46(2): 183–188.]{.pub-cite}
+
+[[PDF](papers/2015-metal-np-antimycobacterial.pdf){target="_blank" rel="noopener"} [HTML](papers/2015-metal-np-antimycobacterial.html){target="_blank" rel="noopener"} [https://doi.org/10.1016/j.ijantimicag.2015.03.014](https://doi.org/10.1016/j.ijantimicag.2015.03.014){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2015]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2015]{.pub-year} [Accepted MS]{.badge .badge-am}
 
-[Bacteriagenic silver nanoparticles: synthesis, mechanism and applications]{.pub-title}
+[[Bacteriagenic silver nanoparticles: synthesis, mechanism, and applications](papers/2015-bacteriagenic-agnp-review.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[**Singh R**, Shedbalkar UU, Wadhwani SA, Chopade BA — *Applied Microbiology and Biotechnology* 99: 4579–4593.]{.pub-cite}
+[**Singh R**, Shedbalkar UU, Wadhwani SA, Chopade BA (2015). *Applied Microbiology and Biotechnology* 99(11): 4579–4593.]{.pub-cite}
+
+[[PDF](papers/2015-bacteriagenic-agnp-review.pdf){target="_blank" rel="noopener"} [HTML](papers/2015-bacteriagenic-agnp-review.html){target="_blank" rel="noopener"} [https://doi.org/10.1007/s00253-015-6622-1](https://doi.org/10.1007/s00253-015-6622-1){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2014]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2014]{.pub-year} [Publisher site]{.badge .badge-pub}
 
-[Microbial synthesis of gold nanoparticles: current status and future prospects]{.pub-title}
+[[Microbial synthesis of gold nanoparticles: Current status and future prospects](papers/2014-microbial-aunp-review.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[Shedbalkar U, **Singh R**, Wadhwani S, Gaidhani S, et al. — *Advances in Colloid and Interface Science* 209: 40–48.]{.pub-cite}
+[Shedbalkar UU, **Singh R**, Wadhwani SA, Gaidhani S, Chopade BA (2014). *Advances in Colloid and Interface Science* 209: 40–48.]{.pub-cite}
+
+[[HTML](papers/2014-microbial-aunp-review.html){target="_blank" rel="noopener"} [https://doi.org/10.1016/j.cis.2013.12.011](https://doi.org/10.1016/j.cis.2013.12.011){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2014]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2014]{.pub-year} [Publisher site]{.badge .badge-pub}
 
-[Novel polyhedral gold nanoparticles: green synthesis, optimization and characterization by an environmental isolate of *Acinetobacter* sp. SW30]{.pub-title}
+[[Novel polyhedral gold nanoparticles: green synthesis, optimization and characterization by environmental isolate of *Acinetobacter* sp. SW30](papers/2014-polyhedral-aunp-sw30.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[Wadhwani SA, Shedbalkar UU, **Singh R**, Karve MS, et al. — *World Journal of Microbiology and Biotechnology* 30: 2723–2731.]{.pub-cite}
+[Wadhwani SA, Shedbalkar UU, **Singh R**, Karve MS, Chopade BA (2014). *World Journal of Microbiology and Biotechnology* 30(10): 2723–2731.]{.pub-cite}
+
+[[HTML](papers/2014-polyhedral-aunp-sw30.html){target="_blank" rel="noopener"} [https://doi.org/10.1007/s11274-014-1696-y](https://doi.org/10.1007/s11274-014-1696-y){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2013]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2013]{.pub-year} [Publisher site]{.badge .badge-pub}
 
-[Biofilm disruption activity of silver nanoparticles synthesized by *Acinetobacter calcoaceticus* PUCM 1005]{.pub-title}
+[[Biofilm disruption activity of silver nanoparticles synthesized by *Acinetobacter calcoaceticus* PUCM 1005](papers/2013-agnp-biofilm-disruption.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[Gaidhani S, **Singh R**, Singh D, Patel U, et al. — *Materials Letters* 108: 324–327.]{.pub-cite}
+[Gaidhani S, **Singh R**, Singh D, Patel U, Shevade K, Yeshvekar R, Chopade BA (2013). *Materials Letters* 108: 324–327.]{.pub-cite}
+
+[[HTML](papers/2013-agnp-biofilm-disruption.html){target="_blank" rel="noopener"} [https://doi.org/10.1016/j.matlet.2013.07.023](https://doi.org/10.1016/j.matlet.2013.07.023){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2013]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2013]{.pub-year} [Open access]{.badge .badge-oa}
 
-[Synthesis, optimization and characterization of silver nanoparticles from *Acinetobacter calcoaceticus* and their enhanced antibacterial activity when combined with antibiotics]{.pub-title}
+[[Synthesis, optimization, and characterization of silver nanoparticles from *Acinetobacter calcoaceticus* and their enhanced antibacterial activity when combined with antibiotics](papers/2013-agnp-calcoaceticus-antibiotics.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[**Singh R**, Wagh P, Wadhwani S, Gaidhani S, et al. — *International Journal of Nanomedicine* 8: 4277–4290.]{.pub-cite}
+[**Singh R**, Wagh P, Wadhwani S, Gaidhani S, Kumbhar A, Bellare J, Chopade BA (2013). *International Journal of Nanomedicine* 8: 4277–4290.]{.pub-cite}
+
+[[PDF](papers/2013-agnp-calcoaceticus-antibiotics.pdf){target="_blank" rel="noopener"} [HTML](papers/2013-agnp-calcoaceticus-antibiotics.html){target="_blank" rel="noopener"} [https://doi.org/10.2147/IJN.S48913](https://doi.org/10.2147/IJN.S48913){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2009]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2009]{.pub-year} [Open access]{.badge .badge-oa}
 
-[APO-1/FAS gene: structural and functional characteristics in systemic lupus erythematosus (SLE) and other autoimmune disorders]{.pub-title}
+[[APO-1/Fas gene: Structural and functional characteristics in systemic lupus erythematosus and other autoimmune diseases](papers/2009-apo1-fas-sle.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[**Singh R**, Pradhan V, Patwardhan M, Ghosh K — *Indian Journal of Human Genetics* 15(3): 11–15.]{.pub-cite}
+[**Singh R**, Pradhan V, Patwardhan M, Ghosh K (2009). *Indian Journal of Human Genetics* 15(3): 98–102.]{.pub-cite}
+
+[[PDF](papers/2009-apo1-fas-sle.pdf){target="_blank" rel="noopener"} [HTML](papers/2009-apo1-fas-sle.html){target="_blank" rel="noopener"} [https://doi.org/10.4103/0971-6866.60184](https://doi.org/10.4103/0971-6866.60184){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ## Book chapters
 
 ::: {.pub}
-[2026]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2026]{.pub-year} [Publisher site]{.badge .badge-pub}
 
-[Metal and metal-oxide nanoparticles: emerging tools in cancer therapy and bioimaging]{.pub-title}
+[[Metal and metal-oxide nanoparticles: emerging tools in cancer therapy and bioimaging](papers/2026-metal-oxide-cancer-bioimaging.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[**Singh R** — In: *Applications of Nanomaterials for Oncology*, IGI Global Publishing, New York, pp. 189–230.]{.pub-cite}
+[**Singh R** (2026). In: *Applications of Nanomaterials for Oncology*, IGI Global, New York, pp. 189–230.]{.pub-cite}
+
+[[HTML](papers/2026-metal-oxide-cancer-bioimaging.html){target="_blank" rel="noopener"} [https://doi.org/10.4018/979-8-3373-3765-4.ch007](https://doi.org/10.4018/979-8-3373-3765-4.ch007){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2026]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2026]{.pub-year} [Publisher site]{.badge .badge-pub}
 
-[Role of professional courses in fostering holistic development in teaching professionals]{.pub-title}
+[[The Role of Professional Courses in Fostering Holistic Development in Teaching Professionals](papers/2026-professional-courses-chapter.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[**Singh R**, Menon T, Yoosuf S — In: *Trends in Training and Development*, Higher Education Forum, India, pp. 60–64.]{.pub-cite}
+[**Singh R**, Menon T, Yoosuf S (2026). In: *Trends in Training and Development*, Higher Education Forum, India, pp. 60–64.]{.pub-cite}
+
+[[HTML](papers/2026-professional-courses-chapter.html){target="_blank" rel="noopener"}]{.pub-links}
 :::
 
 ::: {.pub}
-[2025]{.pub-year} [Publisher site]{.badge .badge-embargo}
+[2025]{.pub-year} [Publisher site]{.badge .badge-pub}
 
-[Experiential learning: a blend of MOOCs, project-based learning and internships]{.pub-title}
+[[Experiential learning: a blend of MOOCs, project-based learning and internships](papers/2025-experiential-learning-chapter.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[Menon T, Yoosuf S, **Singh R** — In: *Teaching Learning Innovations*, Higher Education Forum, India, pp. 25–30.]{.pub-cite}
+[Menon T, Yoosuf S, **Singh R** (2025). In: *Teaching Learning Innovations*, Higher Education Forum, India, pp. 25–29.]{.pub-cite}
+
+[[HTML](papers/2025-experiential-learning-chapter.html){target="_blank" rel="noopener"}]{.pub-links}
 :::

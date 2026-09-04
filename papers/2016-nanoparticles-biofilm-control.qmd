@@ -1,0 +1,48 @@
+---
+# Paper page. Front matter ONLY — Quarto turns it into the Google Scholar
+# citation_* meta tags. Generated 31 Aug 2026; see _templates/paper-template.qmd.
+title: "Nanoparticles for Control of Biofilms of Acinetobacter Species"
+abstract: "Biofilms are the cause of 80% of microbial infections. *Acinetobacter* species have emerged as multi- and pan-drug-resistant bacteria and pose a great threat to human health. These act as nosocomial pathogens and form excellent biofilms, both on biotic and abiotic surfaces, leading to severe infections and diseases. Various methods have been developed for treatment and control of *Acinetobacter* biofilm including photodynamic therapy, radioimmunotherapy, prophylactic vaccines and antimicrobial peptides. Nanotechnology, in the present scenario, offers a promising alternative. Nanomaterials possess unique properties, and multiple bactericidal mechanisms render them more effective than conventional drugs. This review intends to provide an overview of *Acinetobacter* biofilm and the significant role of various nanoparticles as anti-biofouling agents, surface-coating materials and drug-delivery vehicles for biofilm control and treatment of *Acinetobacter* infections"
+author:
+  - name:
+      given: "Richa"
+      family: "Singh"
+  - name:
+      given: "Shradhda"
+      family: "Nadhe"
+  - name:
+      given: "Sweety"
+      family: "Wadhwani"
+  - name:
+      given: "Utkarsha"
+      family: "Shedbalkar"
+  - name:
+      given: "Balu Ananda"
+      family: "Chopade"
+date: "2016-05-18"
+citation:
+  type: article-journal
+  container-title: "Materials"
+  container-title-short: "Materials"
+  issn: "1996-1944"   # citation_issn; electronic, Crossref
+  volume: "9"
+  issue: "5"
+  page: "383"
+  issued: "2016-05-18"
+  doi: "10.3390/ma9050383"
+  pdf-url: "https://drrichasingh.in/papers/2016-nanoparticles-biofilm-control.pdf"
+google-scholar: true
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2016-nanoparticles-biofilm-control.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2016-nanoparticles-biofilm-control.html">
+      <meta name="citation_article_number" content="383">
+---
+
+*Materials* 9(5): 383 (2016).
+
+[Download the PDF](2016-nanoparticles-biofilm-control.pdf){target="_blank" rel="noopener"}
+
+[https://doi.org/10.3390/ma9050383](https://doi.org/10.3390/ma9050383){target="_blank" rel="noopener"}
+
+[← Back to all publications](../research.html)

@@ -1,0 +1,41 @@
+---
+# Paper page. Front matter ONLY — Quarto turns it into the Google Scholar
+# citation_* meta tags. Generated 31 Aug 2026; see _templates/paper-template.qmd.
+title: "Online Professional Courses’ Impact on Teaching and Personal Growth"
+abstract: "Online professional courses (OPCs) offer educators a flexible way to enhance their expertise and maintain teaching standards. The current study evaluates the significant role of OPCs in the professional lives of educators by analysing 62 participant responses obtained via an online survey. A notable proportion of 58.1% accessed OPCs through MOOC platforms, with 74.2% favouring subject-specific content. The motivators for OPC participation included professional development requirements, technological skill acquisition, teaching improvements, and personal growth. Post-OPC, educators reported substantial enhancements in topic delivery, technology utilization, and student engagement. Furthermore, chi-square tests of independence and Fisher's exact tests revealed notable improvements in soft skills, including a stronger growth mindset, increased confidence, enhanced problem-solving, greater adaptability, improved time management, and better communication. A significant association (p<.05) was observed between educators prioritizing teaching skills and trend awareness, and improved student engagement, adaptability, and problem-solving abilities. Participants who completed more OPCs demonstrated greater enthusiasm for self-directed learning and more effective topic delivery. The findings underscore the crucial role of OPCs in fostering educator development. The findings in this study suggest that the accessibility of self-paced, affordable online modules could encourage broader participation and contribute to improvements in teaching quality"
+author:
+  - name:
+      given: "Richa"
+      family: "Singh"
+  - name:
+      given: "Tara"
+      family: "Menon"
+  - name:
+      given: "Subi"
+      family: "Yoosuf"
+date: "2026-05-15"
+citation:
+  type: article-journal
+  container-title: "Canadian Journal of Learning and Technology"
+  container-title-short: "Can. J. Learn. Technol."
+  issn: "1499-6685"   # citation_issn; electronic, Crossref
+  volume: "52"
+  issue: "1"
+  page: "1-20"
+  issued: "2026-05-15"
+  doi: "10.21432/cjlt28974"
+  pdf-url: "https://drrichasingh.in/papers/2026-online-professional-courses.pdf"
+google-scholar: true
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2026-online-professional-courses.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2026-online-professional-courses.html">
+---
+
+*Canadian Journal of Learning and Technology* 52(1): 1-20 (2026).
+
+[Download the PDF](2026-online-professional-courses.pdf){target="_blank" rel="noopener"}
+
+[https://doi.org/10.21432/cjlt28974](https://doi.org/10.21432/cjlt28974){target="_blank" rel="noopener"}
+
+[← Back to all publications](../research.html)

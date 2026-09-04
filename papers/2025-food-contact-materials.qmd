@@ -1,0 +1,43 @@
+---
+# Paper page. Front matter ONLY - Quarto turns it into the Google Scholar
+# citation_* meta tags. See _templates/paper-template.qmd.
+title: "Practices and perceptions of food contact materials: impact of education in the Indian context"
+abstract: "Food contact materials (FCMs) are any substance or article that comes into direct or indirect contact with food during preparation, serving, processing, packaging, transportation or storage. These include materials such as utensils, plastics, glass, disposable materials, parts of equipment, storage tanks, etc. In recent years, these materials have drawn significant interest due to growing concerns over associated health risks. The current evaluations and regulations with respect to kitchen cookware, an important category of FCMs, are inadequate to fully safeguard human health. Additionally, preferences regarding cookware vary widely based on durability, convenience and other factors, making it essential to consider public opinions and usage habits when assessing potential risks. In the present study, for the first time, the effect of education level is evaluated on purchase decisions, standard practices and safety perception regarding different cookware used for food preparation among Indians. The survey data, collected from 227 respondents, revealed that stainless steel was considered the safest kitchen cookware, followed by copper and clay. Significant difference was observed in the safety perception of Teflon, aluminium, cast iron and glass materials (p<0.05) with respect to education. While a significant difference was not seen for factors influencing purchase decisions, respondents with higher education levels showed significant awareness about unsafe cookware, leaching of contaminants and their potential health risks (p<0.05). However, the findings revealed a gap between awareness and actual practices. Many highly educated individuals continued to use potentially unsafe cookware and failed to replace it over extended periods. These findings suggest that convenience often outweighs safety considerations in everyday decision-making. This highlights the urgent need for improved public education and targeted awareness initiatives to promote safer cookware choices and healthier kitchen practices"
+author:
+  - name:
+      given: "Omkar Vijay"
+      family: "Vishwakarma"
+  - name:
+      given: "Samiksha Bajirao"
+      family: "Patil"
+  - name:
+      given: "Richa"
+      family: "Singh"
+date: "2025-11-03"
+citation:
+  type: article-journal
+  container-title: "Proceedings of the Indian National Science Academy"
+  container-title-short: "Proc. Indian Natl. Sci. Acad."
+  issn: "2454-9983"   # citation_issn; electronic, Crossref
+  volume: "91"
+  issue: "4"
+  page: "1351-1364"
+  issued: "2025-11-03"
+  doi: "10.1007/s43538-025-00561-5"
+  pdf-url: "https://drrichasingh.in/papers/2025-food-contact-materials.pdf"
+google-scholar: true
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2025-food-contact-materials.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2025-food-contact-materials.html">
+---
+
+*Proceedings of the Indian National Science Academy* 91(4): 1351-1364 (2025).
+
+*Accepted manuscript, posted as permitted by the publishing agreement.*
+
+[Download the PDF](2025-food-contact-materials.pdf){target="_blank" rel="noopener"}
+
+[https://doi.org/10.1007/s43538-025-00561-5](https://doi.org/10.1007/s43538-025-00561-5){target="_blank" rel="noopener"}
+
+[← Back to all publications](../research.html)

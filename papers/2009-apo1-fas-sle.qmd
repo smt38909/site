@@ -1,0 +1,47 @@
+---
+# Paper page. Front matter ONLY — Quarto turns it into the Google Scholar
+# citation_* meta tags. Generated 31 Aug 2026; see _templates/paper-template.qmd.
+title: "APO-1/Fas gene: Structural and functional characteristics in systemic lupus erythematosus and other autoimmune diseases"
+abstract: "Systemic lupus erythematosus (SLE) is an autoimmune disorder affecting multiple organ systems. It is characterized by the presence of autoantibodies reactive against various self-antigens. Susceptibility to SLE is found to be associated with many major histocompatibility complex (MHC) and non-MHC genes, one of which is APO-1/Fas gene, which is present on chromosome 10 in humans. The APO-1/Fas promoter contains consensus sequences for binding of several transcription factors that affect the intensity of Fas expression in cells. The mutations in the APO-1/Fas promoter are associated with risk and severity in various autoimmune diseases and other malignancies. The APO-1/Fas receptor is expressed by many cell types. Two forms of APO-1/Fas protein that are involved in regulation of apoptosis have been identified. Fas receptor-mediated apoptosis plays a physiological and pathological role in killing of infected cell targets. In this review, we have focused on APO-1/Fas gene structure, promoter variants and its association with SLE and other autoimmune diseases. Functional aspects of Fas receptor in apoptosis are also discussed"
+author:
+  - name:
+      given: "Richa"
+      family: "Singh"
+  - name:
+      given: "Vandana"
+      family: "Pradhan"
+  - name:
+      given: "Manisha"
+      family: "Patwardhan"
+  - name:
+      given: "K."
+      family: "Ghosh"
+date: "2009"
+citation:
+  type: article-journal
+  container-title: "Indian Journal of Human Genetics"
+  container-title-short: "Indian J. Hum. Genet."
+  issn: "0971-6866"   # citation_issn; print-only, Crossref
+  volume: "15"
+  issue: "3"
+  page: "98-102"
+  issued: "2009"
+  doi: "10.4103/0971-6866.60184"
+  pdf-url: "https://drrichasingh.in/papers/2009-apo1-fas-sle.pdf"
+google-scholar: true
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2009-apo1-fas-sle.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2009-apo1-fas-sle.html">
+      <!-- Crossref holds only the year for this one; tools/scholar-meta.py
+           reads this marker, trims the date tags to the bare year and deletes it. -->
+      <meta name="x-scholar-date-precision" content="year">
+---
+
+*Indian Journal of Human Genetics* 15(3): 98-102 (2009).
+
+[Download the PDF](2009-apo1-fas-sle.pdf){target="_blank" rel="noopener"}
+
+[https://doi.org/10.4103/0971-6866.60184](https://doi.org/10.4103/0971-6866.60184){target="_blank" rel="noopener"}
+
+[← Back to all publications](../research.html)

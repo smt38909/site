@@ -1,0 +1,35 @@
+---
+# Paper page. Front matter ONLY — Quarto turns it into the Google Scholar
+# citation_* meta tags. Generated 31 Aug 2026; see _templates/paper-template.qmd.
+title: "Catalytic activity of chemical and biological nanosilver: a comparative study"
+abstract: "Dyes are used in various industries and laboratories as coloring agents. However, their unregulated disposal in environment poses a major threat for human health, plants and ecological balance. Hence, novel strategies are required for efficient decolorization and degradation of these synthetic dyes. Silver nanoparticles (SNPs) exhibit an excellent catalytic activity in organic reactions. The present study deals with synthesis, optimization and nanocatalytic activity of SNPs. Here, we have synthesized SNPs by two ways: chemical reduction using trisodium citrate and biological synthesis using *Murraya koenigii* leaf extract. Reaction parameters, such as silver nitrate concentration and temperature affected the rate of synthesis and morphology of SNPs. The nanoparticles were roughly spherical and crystalline with face-centered cubic structure. We further compared their nanocatalytic activity with respect to dye decolorization and found that plant mediated SNPs exhibit faster decolorization of congo red and trypan blue as compared to chemically synthesized SNPs. This is the first study to compare chemical and biological nanosilver for dye decolorization catalysis"
+author:
+  - name:
+      given: "Richa"
+      family: "Singh"
+  - name:
+      given: "Bhumika B."
+      family: "Jain"
+date: "2018-05"
+citation:
+  type: article-journal
+  container-title: "Journal of Emerging Technologies and Innovative Research"
+  container-title-short: "JETIR"
+  issn: "2349-5162"   # citation_issn; jetir.org - not in Crossref
+  volume: "5"
+  issue: "5"
+  page: "243-253"
+  issued: "2018-05"
+  pdf-url: "https://drrichasingh.in/papers/2018-catalytic-nanosilver.pdf"
+google-scholar: true
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2018-catalytic-nanosilver.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2018-catalytic-nanosilver.html">
+---
+
+*Journal of Emerging Technologies and Innovative Research* 5(5): 243-253 (2018).
+
+[Download the PDF](2018-catalytic-nanosilver.pdf){target="_blank" rel="noopener"}
+
+[← Back to all publications](../research.html)

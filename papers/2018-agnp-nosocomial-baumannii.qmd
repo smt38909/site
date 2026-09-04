@@ -1,0 +1,53 @@
+---
+# Paper page. NO hosted PDF for this one - the citation block therefore
+# carries no pdf-url, and the body offers the DOI only. Everything else
+# matches _templates/paper-template.qmd. Created 4 Sep 2026 so that every
+# publication has a crawlable landing page carrying a full abstract.
+title: "Antibacterial Activities of Bacteriagenic Silver Nanoparticles Against Nosocomial *Acinetobacter baumannii*"
+abstract: "*Acinetobacter baumannii* has emerged as one of the major nosocomial pathogens implicated in variety of severe infections and mortality. It is rapidly developing multi-drug resistance and also possesses surface colonization ability, which make it most difficult to treat through traditional antibiotics. This is an extensive study to describe the antibacterial activity of bacteriagenic silver nanoparticles (AgNPs) against *A. baumannii* AIIMS 7 in planktonic and biofilm mode. Minimum inhibitory concentration of antibiotics were in the range of 1 to 4096 μg/ml whereas AgNPs inhibited planktonic bacteria at concentration of 16 μg/ml. Fractional inhibitory concentration index revealed the synergistic interaction of AgNPs with doxycycline, tetracycline and erythromycin. Nanoparticles exhibited significant biofilm disruption activity with minimum biofilm eradication concentration of 2 mg/ml. Eradication of mature biofilm was enhanced on exposure to combination of AgNPs and antibiotics. These nanoparticles affected bacterial growth and distorted cellular morphology. Intracellular oxidative stress, induced in presence of AgNPs, also rendered bacteria susceptible to killing by nanoparticles. Besides this, AgNPs were found to interact with thiol-groups, which indicate their potential to interact with cellular proteins to exhibit antimicrobial activity."
+author:
+  - name:
+      given: "Richa"
+      family: "Singh"
+  - name:
+      given: "Jeet"
+      family: "Vora"
+  - name:
+      given: "Shradhda B"
+      family: "Nadhe"
+  - name:
+      given: "Sweety A"
+      family: "Wadhwani"
+  - name:
+      given: "Utkarsha U"
+      family: "Shedbalkar"
+  - name:
+      given: "Balu A"
+      family: "Chopade"
+date: "2018-06-01"
+citation:
+  type: article-journal
+  container-title: "Journal of Nanoscience and Nanotechnology"
+  container-title-short: "J Nanosci Nanotechnol"
+  issn: "1533-4880"
+  volume: "18"
+  issue: "6"
+  page: "3806-3815"
+  issued: "2018-06-01"
+  doi: "10.1166/jnn.2018.15013"
+google-scholar: true
+# citation_abstract_html_url is not something Quarto emits; the canonical
+# link is not either. Both name THIS page as the article landing page.
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2018-agnp-nosocomial-baumannii.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2018-agnp-nosocomial-baumannii.html">
+---
+
+**Singh R**, Vora J, Nadhe SB, Wadhwani SA, Shedbalkar UU, Chopade BA (2018). *Journal of Nanoscience and Nanotechnology* 18(6): 3806–3815.
+
+[https://doi.org/10.1166/jnn.2018.15013](https://doi.org/10.1166/jnn.2018.15013){target="_blank" rel="noopener"}
+
+*No copy is hosted here. Follow the link above for the published version.*
+
+[← Back to all publications](../research.html)

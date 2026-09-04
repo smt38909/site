@@ -1,0 +1,42 @@
+---
+# Paper page. NO hosted PDF for this one - the citation block therefore
+# carries no pdf-url, and the body offers the DOI only. Everything else
+# matches _templates/paper-template.qmd. Created 4 Sep 2026 so that every
+# publication has a crawlable landing page carrying a full abstract.
+title: "The Role of Professional Courses in Fostering Holistic Development in Teaching Professionals"
+abstract: "Online professional development (OPC) courses offer educators a flexible way to enhance their expertise and maintain teaching standards. Our study evaluates the significant role of OPC in the professional lives of our teaching staff by analyzing responses obtained via an online survey. A notable proportion accessed OPCs through MOOC platforms, with maximum favouring subject-specific content. The motivators for OPC participation included professional development requirements, technological skill acquisition, teaching improvements and personal growth. Post-OPC, educators reported substantial enhancements in topic delivery, technology utilization, and student engagement."
+author:
+  - name:
+      given: "Richa"
+      family: "Singh"
+  - name:
+      given: "Tara"
+      family: "Menon"
+  - name:
+      given: "Subi"
+      family: "Yoosuf"
+date: "2026"
+citation:
+  type: chapter
+  container-title: "Trends in Training and Development"
+  publisher: "Higher Education Forum"
+  publisher-place: "India"
+  page: "60-64"
+  issued: "2026"
+google-scholar: true
+# citation_abstract_html_url is not something Quarto emits; the canonical
+# link is not either. Both name THIS page as the article landing page.
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2026-professional-courses-chapter.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2026-professional-courses-chapter.html">
+      <!-- Crossref holds only the year for this one; tools/scholar-meta.py
+           reads this marker, trims the date tags to the bare year and deletes it. -->
+      <meta name="x-scholar-date-precision" content="year">
+---
+
+**Singh R**, Menon T, Yoosuf S (2026). In: *Trends in Training and Development*, Higher Education Forum, India, pp. 60–64.
+
+*No copy is hosted here, and this chapter has no DOI.*
+
+[← Back to all publications](../research.html)

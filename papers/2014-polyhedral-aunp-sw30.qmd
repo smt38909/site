@@ -1,0 +1,50 @@
+---
+# Paper page. NO hosted PDF for this one - the citation block therefore
+# carries no pdf-url, and the body offers the DOI only. Everything else
+# matches _templates/paper-template.qmd. Created 4 Sep 2026 so that every
+# publication has a crawlable landing page carrying a full abstract.
+title: "Novel polyhedral gold nanoparticles: green synthesis, optimization and characterization by environmental isolate of *Acinetobacter* sp. SW30"
+abstract: "Gold nanoparticles have enormous applications in cancer treatment, drug delivery and nanobiosensor due to their biocompatibility. Biological route of synthesis of metal nanoparticles are cost effective and eco-friendly. *Acinetobacter* sp. SW 30 isolated from activated sewage sludge produced cell bound as well as intracellular gold nanoparticles when challenged with HAuCl4 salt solution. We first time report the optimization of various physiological parameters such as age of culture, cell density and physicochemical parameters viz HAuCl4 concentration, temperature and pH which influence the synthesis of gold nanoparticles. Gold nanoparticles thus produced were characterized by various analytical techniques viz. UV–Visible spectroscopy, X-ray diffraction, cyclic voltammetry, transmission electron microscopy, selected area electron diffraction, high resolution transmission electron microscopy, environmental scanning electron microscopy, energy dispersive X-ray spectroscopy, atomic force microscopy and dynamic light scattering. Polyhedral gold nanoparticles of size 20 ± 10 nm were synthesized by 24 h grown culture of cell density 2.4 × 109 cfu/ml at 50 °C and pH 9 in 0.5 mM HAuCl4. It was found that most of the gold nanoparticles were released into solution from bacterial cell surface of *Acinetobacter* sp. at pH 9 and 50 °C."
+author:
+  - name:
+      given: "Sweety A."
+      family: "Wadhwani"
+  - name:
+      given: "Utkarsha U."
+      family: "Shedbalkar"
+  - name:
+      given: "Richa"
+      family: "Singh"
+  - name:
+      given: "Meena S."
+      family: "Karve"
+  - name:
+      given: "Balu A."
+      family: "Chopade"
+date: "2014-07-01"
+citation:
+  type: article-journal
+  container-title: "World Journal of Microbiology and Biotechnology"
+  container-title-short: "World J Microbiol Biotechnol"
+  issn: "1573-0972"
+  volume: "30"
+  issue: "10"
+  page: "2723-2731"
+  issued: "2014-07-01"
+  doi: "10.1007/s11274-014-1696-y"
+google-scholar: true
+# citation_abstract_html_url is not something Quarto emits; the canonical
+# link is not either. Both name THIS page as the article landing page.
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2014-polyhedral-aunp-sw30.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2014-polyhedral-aunp-sw30.html">
+---
+
+Wadhwani SA, Shedbalkar UU, **Singh R**, Karve MS, Chopade BA (2014). *World Journal of Microbiology and Biotechnology* 30(10): 2723–2731.
+
+[https://doi.org/10.1007/s11274-014-1696-y](https://doi.org/10.1007/s11274-014-1696-y){target="_blank" rel="noopener"}
+
+*No copy is hosted here. Follow the link above for the published version.*
+
+[← Back to all publications](../research.html)

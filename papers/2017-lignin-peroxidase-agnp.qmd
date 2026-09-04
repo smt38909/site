@@ -1,0 +1,48 @@
+---
+# Paper page. Front matter ONLY — Quarto turns it into the Google Scholar
+# citation_* meta tags. Generated 31 Aug 2026; see _templates/paper-template.qmd.
+title: "Lignin peroxidase mediated silver nanoparticle synthesis in Acinetobacter sp."
+abstract: "Metals present in environment render the bacteria to attain certain resistance machinery to survive, one of which is transformation of metal ions to nano forms. Various enzymes and proteins have been suggested to play significant role in synthesis of silver nanoparticles (AgNPs) in bacteria. In present study, we have purified lignin peroxidase from secreted enzyme extract of *Acinetobacter* sp. employing diethyl aminoethyl cellulose ion exchange and Biogel P-150 gel filtration column chromatography. The purified fraction has a specific activity of 1.571 U/mg with substrate n-propanol and 6.5-fold purification. The tetrameric enzyme, with molecular weight of 99 kDa, consisted of dimers of two polypetides of 23.9 and 24.6 kDa as revealed by native and SDS-PAGE. On exposure to purified enzyme, spherical polydispersed AgNPs of ~ 50 nm were obtained as observed under transmission electron microscope. Optimum activity of the purified enzyme was obtained at pH 2 and 60 °C with n-propanol as substrate. This is the first report describing the reduction of extracellular silver ions by lignin peroxidase purified from *Acinetobacter* sp"
+author:
+  - name:
+      given: "Richa"
+      family: "Singh"
+  - name:
+      given: "Utkarsha U."
+      family: "Shedbalkar"
+  - name:
+      given: "Shradhda B."
+      family: "Nadhe"
+  - name:
+      given: "Sweety A."
+      family: "Wadhwani"
+  - name:
+      given: "Balu A."
+      family: "Chopade"
+date: "2017-12"
+citation:
+  type: article-journal
+  container-title: "AMB Express"
+  container-title-short: "AMB Express"
+  issn: "2191-0855"   # citation_issn; electronic, Crossref
+  volume: "7"
+  issue: "1"
+  page: "226"
+  issued: "2017-12"
+  doi: "10.1186/s13568-017-0528-5"
+  pdf-url: "https://drrichasingh.in/papers/2017-lignin-peroxidase-agnp.pdf"
+google-scholar: true
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2017-lignin-peroxidase-agnp.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2017-lignin-peroxidase-agnp.html">
+      <meta name="citation_article_number" content="226">
+---
+
+*AMB Express* 7(1): 226 (2017).
+
+[Download the PDF](2017-lignin-peroxidase-agnp.pdf){target="_blank" rel="noopener"}
+
+[https://doi.org/10.1186/s13568-017-0528-5](https://doi.org/10.1186/s13568-017-0528-5){target="_blank" rel="noopener"}
+
+[← Back to all publications](../research.html)

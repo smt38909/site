@@ -1,0 +1,53 @@
+---
+# Paper page. NO hosted PDF for this one - the citation block therefore
+# carries no pdf-url, and the body offers the DOI only. Everything else
+# matches _templates/paper-template.qmd. Created 4 Sep 2026 so that every
+# publication has a crawlable landing page carrying a full abstract.
+title: "Kinetics of Synthesis of Gold Nanoparticles by *Acinetobacter* sp. SW30 Isolated from Environment"
+abstract: "Cell biomass and metal salt concentration have great influence on morphology of biosynthesized nanoparticle. The aim of present study was to evaluate the effect of varying cell density and gold salt concentrations on synthesis of nanoparticles and its morphology, which has not been studied in bacteria till now. When cells of *Acinetobacter* sp. SW30 were incubated with different cell density and gold chloride concentrations, tremendous variation in color of colloidal solution containing gold nanoparticles (AuNP) was observed indicating variation in their size and shapes. Surprisingly, monodispersed spherical AuNP of size ~19 nm were observed at lowest cell density and HAuCl4 salt concentration while increase in cell number resulted in formation of polyhedral AuNP (~39 nm). Significance of this study lays in the fact that the shape and dispersity of AuNP can be customized depending up on the requirement. FTIR spectrum revealed shift from 3221 to 3196 cm−1 indicating the presence and role of amino acids in Au3+ reduction while possible involvement of amide I and II groups in stabilization of AuNP. The rate constant was calculated for cell suspension of 2.1 × 109 cfu/ml challenged with 1.0 mM HAuCl4, incubated at 30 °C and pH 7 using the slopes of initial part of the plot log (Aα − At) versus time as 1.99 × 10−8 M. Also, this is the first study to report the kinetics of gold nanoparticle synthesis by *Acinetobacter* sp. SW30."
+author:
+  - name:
+      given: "Sweety A."
+      family: "Wadhwani"
+  - name:
+      given: "Utkarsha U."
+      family: "Shedbalkar"
+  - name:
+      given: "Richa"
+      family: "Singh"
+  - name:
+      given: "Priya"
+      family: "Vashisth"
+  - name:
+      given: "Vikas"
+      family: "Pruthi"
+  - name:
+      given: "Balu A."
+      family: "Chopade"
+date: "2016-05-27"
+citation:
+  type: article-journal
+  container-title: "Indian Journal of Microbiology"
+  container-title-short: "Indian J Microbiol"
+  issn: "0973-7715"
+  volume: "56"
+  issue: "4"
+  page: "439-444"
+  issued: "2016-05-27"
+  doi: "10.1007/s12088-016-0598-0"
+google-scholar: true
+# citation_abstract_html_url is not something Quarto emits; the canonical
+# link is not either. Both name THIS page as the article landing page.
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2016-aunp-kinetics-sw30.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2016-aunp-kinetics-sw30.html">
+---
+
+Wadhwani SA, Shedbalkar UU, **Singh R**, Vashisth P, Pruthi V, Chopade BA (2016). *Indian Journal of Microbiology* 56(4): 439–444.
+
+[https://doi.org/10.1007/s12088-016-0598-0](https://doi.org/10.1007/s12088-016-0598-0){target="_blank" rel="noopener"}
+
+*No copy is hosted here. Follow the link above for the published version.*
+
+[← Back to all publications](../research.html)

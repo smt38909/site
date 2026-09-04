@@ -1,0 +1,47 @@
+---
+# Paper page. NO hosted PDF for this one - the citation block therefore
+# carries no pdf-url, and the body offers the DOI only. Everything else
+# matches _templates/paper-template.qmd. Created 4 Sep 2026 so that every
+# publication has a crawlable landing page carrying a full abstract.
+title: "*Acinetobacter* sp. mediated synthesis of AgNPs, its optimization, characterization and synergistic antifungal activity against *C. albicans*"
+abstract: "Aims: To synthesize silver nanoparticles (AgNPs) with cell free extract of *Acinetobacter* sp. and evaluate antifungal activity against planktonic and biofilm of *Candida*. Also, to study mechanism of antifungal action of AgNPs. Methods and Result: *Acinetobacter* spp were screened for synthesis of AgNPs. Physio-chemical parameters were optimized to obtained monodispersed nanoparticles. Optimized nanoparticles were characterized using spectroscopic, microscopic and diffraction techniques. Antifungal and biofilm disruption activity of AgNPs (10 ± 5 nm) were investigated against *C. albicans*. Mechanism of antifungal activity of nanosilver was deduced by growth curve, reactive oxygen species generation, thiol interaction and microscopic analysis. *Acinetobacter* sp. GWRFH 45 gave maximum synthesis of AgNPs. At optimized condition monodispersed, spherical nanoparticles were obtained which were crystalline with negative surface charge. AgNPs exhibited antifungal activity against planktonic cells and biofilm of *Candida*. AgNPs showed synergistic effect with amphotericin B as well as fluconazole against biofilm disruption. AgNPs were found to affect growth of *Candida*, generate reactive oxygen species and disrupt cellular morphology. Conclusions: Cell free extract of *A. calcoaceticus* GWRFH 45 has ability to synthesize AgNPs. AgNPs alone and in combination with drugs have potential to inhibit *C. albicans*. Significance and Impact of the Study: This is the first report of bacteriogenic AgNPs used in combination with antifungal drugs against *Candida*."
+author:
+  - name:
+      given: "S.B."
+      family: "Nadhe"
+  - name:
+      given: "R."
+      family: "Singh"
+  - name:
+      given: "S.A."
+      family: "Wadhwani"
+  - name:
+      given: "B.A."
+      family: "Chopade"
+date: "2019-06-07"
+citation:
+  type: article-journal
+  container-title: "Journal of Applied Microbiology"
+  container-title-short: "J Appl Microbiol"
+  issn: "1365-2672"
+  volume: "127"
+  issue: "2"
+  page: "445-458"
+  issued: "2019-06-07"
+  doi: "10.1111/jam.14305"
+google-scholar: true
+# citation_abstract_html_url is not something Quarto emits; the canonical
+# link is not either. Both name THIS page as the article landing page.
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2019-agnp-candida-antifungal.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2019-agnp-candida-antifungal.html">
+---
+
+Nadhe SB, **Singh R**, Wadhwani SA, Chopade BA (2019). *Journal of Applied Microbiology* 127(2): 445–458.
+
+[https://doi.org/10.1111/jam.14305](https://doi.org/10.1111/jam.14305){target="_blank" rel="noopener"}
+
+*No copy is hosted here. Follow the link above for the published version.*
+
+[← Back to all publications](../research.html)

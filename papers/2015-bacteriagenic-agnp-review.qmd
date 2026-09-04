@@ -1,0 +1,44 @@
+---
+# Paper page. Front matter ONLY — Quarto turns it into the Google Scholar
+# citation_* meta tags. Generated 31 Aug 2026; see _templates/paper-template.qmd.
+title: "Bacteriagenic silver nanoparticles: synthesis, mechanism, and applications"
+abstract: "Silver nanoparticles (AgNPs) have received a tremendous attention due to their significant antimicrobial properties. Large numbers of reports are available on physical, chemical and biological synthesis of colloidal AgNPs. Since there is a great need to develop ecofriendly and sustainable methods, biological systems like bacteria, fungi and plants are being employed to synthesize these nanoparticles. The present review focuses specifically on bacterial-mediated synthesis of AgNPs, its mechanism and applications. Bacterial synthesis of extra- and intra-cellular AgNPs have been reported using biomass, supernatant, cell-free extract and derived components. Extracellular mode of synthesis is preferred over intracellular mode owing to easy recovery of nanoparticles. Silver-resistant genes, c-type cytochromes, peptides, cellular enzymes like nitrate reducatse and reducing cofactors play significant roles in AgNP synthesis in bacteria. Organic material released by bacteria act as natural capping and stabilizing agents for AgNPs, thereby, preventing their aggregation and providing stability for a longer time. Regulation over reaction conditions has been suggested to control the morphology, dispersion and yield of nanoparticles. Bacterial AgNPs have anticancer and antioxidant property. Moreover, antimicrobial activity of AgNPs in combination with antibiotics signifies their importance in combating the multidrug-resistant pathogenic microorganisms. Multiple microbicidal mechanisms exhibited by AgNPs, depending upon their size and shape, make them very promising as novel nano-antibiotics."
+author:
+  - name:
+      given: "Richa"
+      family: "Singh"
+  - name:
+      given: "Utkarsha U."
+      family: "Shedbalkar"
+  - name:
+      given: "Sweety A."
+      family: "Wadhwani"
+  - name:
+      given: "Balu A."
+      family: "Chopade"
+date: "2015-05-09"
+citation:
+  type: article-journal
+  container-title: "Applied Microbiology and Biotechnology"
+  container-title-short: "Appl. Microbiol. Biotechnol."
+  issn: "1432-0614"   # citation_issn; electronic, Crossref
+  volume: "99"
+  issue: "11"
+  page: "4579-4593"
+  issued: "2015-05-09"
+  doi: "10.1007/s00253-015-6622-1"
+  pdf-url: "https://drrichasingh.in/papers/2015-bacteriagenic-agnp-review.pdf"
+google-scholar: true
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2015-bacteriagenic-agnp-review.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2015-bacteriagenic-agnp-review.html">
+---
+
+*Applied Microbiology and Biotechnology* 99(11): 4579-4593 (2015).
+
+[Download the PDF](2015-bacteriagenic-agnp-review.pdf){target="_blank" rel="noopener"}
+
+[https://doi.org/10.1007/s00253-015-6622-1](https://doi.org/10.1007/s00253-015-6622-1){target="_blank" rel="noopener"}
+
+[← Back to all publications](../research.html)

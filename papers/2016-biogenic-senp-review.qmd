@@ -1,0 +1,47 @@
+---
+# Paper page. NO hosted PDF for this one - the citation block therefore
+# carries no pdf-url, and the body offers the DOI only. Everything else
+# matches _templates/paper-template.qmd. Created 4 Sep 2026 so that every
+# publication has a crawlable landing page carrying a full abstract.
+title: "Biogenic selenium nanoparticles: current status and future prospects"
+abstract: "Selenium nanoparticles (SeNPs) are gaining importance in the field of medicine owing to their antibacterial and anticancer properties. SeNPs are biocompatible and non-toxic compared to the counterparts, selenite (SeO3 −2) and selenate (SeO4 −2). They can be synthesized by physical, chemical, and biological methods and have distinct bright orange-red color. Biogenic SeNPs are stable and do not aggregate owing to natural coating of the biomolecules. Various hypotheses have been proposed to describe the mechanism of microbial synthesis of SeNPs. It is primarily a two-step reduction process from SeO4 −2 to SeO3 −2 to insoluble elemental selenium (Se0) catalyzed by selenate and selenite reductases. Phenazine-1-carboxylic acid and glutathione are involved in selenite reduction. Se factor A (SefA) and metalloid reductase Rar A present on the surface of SeNPs confer stability to the nanoparticles. SeNPs act as potent chemopreventive and chemotherapeutic agents. Conjugation with antibiotics enhances their anticancer efficacy. These also have applications in nanobiosensors and environmental remediation."
+author:
+  - name:
+      given: "Sweety A."
+      family: "Wadhwani"
+  - name:
+      given: "Utkarsha U."
+      family: "Shedbalkar"
+  - name:
+      given: "Richa"
+      family: "Singh"
+  - name:
+      given: "Balu A."
+      family: "Chopade"
+date: "2016-01-22"
+citation:
+  type: article-journal
+  container-title: "Applied Microbiology and Biotechnology"
+  container-title-short: "Appl Microbiol Biotechnol"
+  issn: "1432-0614"
+  volume: "100"
+  issue: "6"
+  page: "2555-2566"
+  issued: "2016-01-22"
+  doi: "10.1007/s00253-016-7300-7"
+google-scholar: true
+# citation_abstract_html_url is not something Quarto emits; the canonical
+# link is not either. Both name THIS page as the article landing page.
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2016-biogenic-senp-review.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2016-biogenic-senp-review.html">
+---
+
+Wadhwani SA, Shedbalkar UU, **Singh R**, Chopade BA (2016). *Applied Microbiology and Biotechnology* 100(6): 2555–2566.
+
+[https://doi.org/10.1007/s00253-016-7300-7](https://doi.org/10.1007/s00253-016-7300-7){target="_blank" rel="noopener"}
+
+*No copy is hosted here. Follow the link above for the published version.*
+
+[← Back to all publications](../research.html)

@@ -1,0 +1,38 @@
+---
+# Paper page. Front matter ONLY - Quarto turns it into the Google Scholar
+# citation_* meta tags. See _templates/paper-template.qmd.
+title: "Biosorption of Procion Magenta and Black Azabache textile dyes using banana and carrot peel waste: a comparative analysis of pure and blended systems"
+abstract: "The textile industry generates large volumes of toxic dye-laden wastewater, necessitating sustainable treatment strategies. This study presents the first comparative evaluation of the adsorption of a pure dye, Procion MX Magenta (PM), and a blended dye, Black Azabache (RB), using banana and carrot peel waste as low-cost biosorbents. Optimal biosorption occurred at a dye concentration of 100 mg L⁻¹ using 2% biosorbent at pH 2 within 60 min, resulting in >70% dye removal. Adsorption capacities of biosorbents ranged from 8.7 to 36.6 mg g⁻¹. Kinetic studies demonstrated that dye uptake followed a pseudo-second-order model (R²>0.9). Isotherm analysis revealed that adsorption on banana followed the Freundlich model, whereas RB-carrot peel data did not conform to any conventional isotherm model, indicating more complex adsorption behavior in the blended dye system. FTIR, SEM, and BET analyses confirmed pore-filling and surface binding of the dye mediated by weak interactions involving hydroxyl, carboxyl, amine, and aromatic functional groups. Acidic regeneration of immobilized biosorbent enabled its effective reuse over five successive cycles, highlighting a sustainable and efficient approach for dye removal coupled with domestic waste valorization."
+author:
+  - name:
+      given: "Samiksha B."
+      family: "Patil"
+  - name:
+      given: "Richa"
+      family: "Singh"
+date: "2026-04-23"
+citation:
+  type: article-journal
+  container-title: "International Journal of Phytoremediation"
+  container-title-short: "Int. J. Phytoremediation"
+  issn: "1549-7879"   # citation_issn; electronic, Crossref
+  page: "1-19"
+  issued: "2026-04-23"
+  doi: "10.1080/15226514.2026.2660151"
+  pdf-url: "https://drrichasingh.in/papers/2026-biosorption-dye-peel-waste.pdf"
+google-scholar: true
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2026-biosorption-dye-peel-waste.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2026-biosorption-dye-peel-waste.html">
+---
+
+*International Journal of Phytoremediation*, advance online publication, pp. 1-19 (2026).
+
+*Accepted manuscript, posted as permitted by the publishing agreement.*
+
+[Download the PDF](2026-biosorption-dye-peel-waste.pdf){target="_blank" rel="noopener"}
+
+[https://doi.org/10.1080/15226514.2026.2660151](https://doi.org/10.1080/15226514.2026.2660151){target="_blank" rel="noopener"}
+
+[← Back to all publications](../research.html)

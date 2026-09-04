@@ -20,12 +20,28 @@ project:
   # entry in the navbar below. Both — a page with no navbar entry is unreachable,
   # a navbar entry with no page is a 404.
   #
+  # WHEN research.qmd GOES LIVE, the sixteen papers/*.qmd pages must go into the
+  # render list with it (`- papers/*.qmd` covers them). They are what carry the
+  # citation_* meta tags Google Scholar reads, research.qmd links to each one,
+  # and an unrendered one is a 404 on a link Scholar is meant to follow. The
+  # sixteen PDFs also have to be copied into papers/ from private/papers-staging
+  # and private/manuscripts-source, or every PDF link on that page 404s too.
+  #
   # TO GO BACK TO THE HOLDING PAGE: change the render list to `- holding.qmd`.
   # holding.qmd is untouched in this folder and carries its own noindex tag.
   render:
     - index.qmd
+    - research.qmd
+    - papers/*.qmd
   resources:
     - "!*.qmd"
+
+  # Runs after every render, local and on GitHub Actions. Rewrites
+  # citation_author to "Last, First" and the citation dates to Scholar's
+  # YYYY/MM/DD slash form, neither of which Quarto can be made to emit from the
+  # front matter without corrupting the BibTeX. See the docstring in the script.
+  post-render:
+    - tools/scholar-meta.py
   # ===============================================================
 
 website:
@@ -45,16 +61,15 @@ website:
     # Three short tabs fit comfortably on a tablet — only phones need the
     # hamburger. Default is 'lg' (992px), which hides the tabs on an iPad.
     collapse-below: md
-    # No tabs while the site is a single page (30 Aug 2026): two tabs leading
-    # to pages that do not exist would 404, and one lone "Profile" tab beside
-    # the name is redundant. The navbar shows her name and the search box.
+    # Two tabs live since 4 Sep 2026. Teaching stays commented out until
+    # teaching.qmd is finished - a navbar entry with no rendered page is a 404.
     # Uncomment an entry here at the same time as adding its page to the render
     # list above.
-    # left:
-    #   - href: index.html
-    #     text: Profile
-    #   - href: research.html
-    #     text: Research & Papers
+    left:
+      - href: index.html
+        text: Profile
+      - href: research.html
+        text: Research & Publications
     #   - href: teaching.html
     #     text: Teaching
 
@@ -73,6 +88,13 @@ format:
     # The little paragraph anchors Quarto adds beside headings are ~15px tap
     # targets on a phone, right next to real links. Off.
     anchor-sections: false
+    # Every outbound link opens in a new tab, so a visitor reading the
+    # publication list never loses their place (3 Sep 2026). This covers the
+    # links QUARTO generates itself -- notably the DOI in the citation block at
+    # the foot of each paper page. Links written by hand in the .qmd files carry
+    # their own {target="_blank" rel="noopener"}, because this setting reaches
+    # external URLs only and the PDF and Cite links are internal.
+    link-external-newwindow: true
     # 900px so the Profile page's paired columns (Appointments beside Education)
     # have room. Running text does NOT follow it out that far: styles.scss caps
     # section paragraphs at 74ch, which keeps the ~70-character measure that
@@ -82,9 +104,30 @@ format:
     # Typefaces. Fallback stacks in styles.scss cover it if these ever fail to load.
     include-in-header:
       - text: |
-          <link rel="apple-touch-icon" sizes="180x180" href="images/rs-icon-180.png">
+          <!-- Root-relative on purpose. Everything in include-in-header is copied
+               through verbatim - Quarto rewrites paths in the page body and in the
+               tags it generates itself, but NOT here. With "images/..." this 404s on
+               every papers/*.html page. Verified 3 Sep 2026 in a full local render. -->
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/rs-icon-180.png">
+          <!-- Backstop for link-external-newwindow. That setting rewrites links in
+               the BODY, but not the ones Quarto builds afterwards in the citation
+               appendix at the foot of each paper page - 16 DOIs were still opening
+               in the same tab. This catches every off-site link whatever generated
+               it. Same-host links are left alone on purpose: the "Back to all
+               publications" link and the citation block's own self-reference are
+               return links, and a new tab for those is wrong. Added 3 Sep 2026. -->
+          <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll("a[href^='http']").forEach(function (a) {
+              if (a.hostname && a.hostname !== window.location.hostname) {
+                a.target = "_blank";
+                a.rel = "noopener";
+              }
+            });
+          });
+          </script>
           <link rel="preconnect" href="https://fonts.googleapis.com">
           <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap">
     # google-scholar is set PER PAPER PAGE (in each papers/*.qmd), not globally,
     # because only paper pages should emit citation meta tags. See _templates/paper-template.qmd.

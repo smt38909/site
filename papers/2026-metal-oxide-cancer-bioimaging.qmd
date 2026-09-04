@@ -1,0 +1,40 @@
+---
+# Paper page. NO hosted PDF for this one - the citation block therefore
+# carries no pdf-url, and the body offers the DOI only. Everything else
+# matches _templates/paper-template.qmd. Created 4 Sep 2026 so that every
+# publication has a crawlable landing page carrying a full abstract.
+title: "Metal and metal-oxide nanoparticles: emerging tools in cancer therapy and bioimaging"
+abstract: "Cancer is one of the most pressing global health challenges. Despite significant advancements in conventional therapies, mortality rates for some cancers are still high. Key barriers, such as multidrug resistance, tumor heterogeneity, non-specific targeting, toxicity, and late-stage diagnosis, limit the efficacy of existing therapies. The rapid advancement in nanomedicine has opened new avenues in cancer therapy, particularly through the integration of metal and metal oxide nanoparticles (M/MONPs). These nanoparticles play a crucial role in cancer bioimaging, serving as contrast agents in various imaging modalities. Their ability to accumulate selectively in tumor tissues makes them ideal candidates for early detection and real-time monitoring of cancer progression. This chapter provides a comprehensive overview of the synthesis and biomedical applications of M/MONPs in cancer treatment. It highlights their roles as therapeutic and diagnostic tools, elucidates their mechanisms of action, and addresses key concerns related to toxicity, biocompatibility, and clinical translation."
+author:
+  - name:
+      given: "Richa"
+      family: "Singh"
+date: "2026"
+citation:
+  type: chapter
+  container-title: "Applications of Nanomaterials for Oncology"
+  publisher: "IGI Global"
+  publisher-place: "New York"
+  isbn: "979-8-3373-3765-4"
+  page: "189-230"
+  issued: "2026"
+  doi: "10.4018/979-8-3373-3765-4.ch007"
+google-scholar: true
+# citation_abstract_html_url is not something Quarto emits; the canonical
+# link is not either. Both name THIS page as the article landing page.
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2026-metal-oxide-cancer-bioimaging.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2026-metal-oxide-cancer-bioimaging.html">
+      <!-- Crossref holds only the year for this one; tools/scholar-meta.py
+           reads this marker, trims the date tags to the bare year and deletes it. -->
+      <meta name="x-scholar-date-precision" content="year">
+---
+
+**Singh R** (2026). In: *Applications of Nanomaterials for Oncology*, IGI Global, New York, pp. 189–230.
+
+[https://doi.org/10.4018/979-8-3373-3765-4.ch007](https://doi.org/10.4018/979-8-3373-3765-4.ch007){target="_blank" rel="noopener"}
+
+*No copy is hosted here. Follow the link above for the published version.*
+
+[← Back to all publications](../research.html)

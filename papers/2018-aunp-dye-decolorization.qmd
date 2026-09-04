@@ -1,0 +1,49 @@
+---
+# Paper page. NO hosted PDF for this one - the citation block therefore
+# carries no pdf-url, and the body offers the DOI only. Everything else
+# matches _templates/paper-template.qmd. Created 4 Sep 2026 so that every
+# publication has a crawlable landing page carrying a full abstract.
+title: "Decolorization of textile dyes by combination of gold nanocatalysts obtained from *Acinetobacter* sp. SW30 and NaBH~4~"
+abstract: "In the present work, a new strategy for decolorization of textile dyes such as direct black 22 (DB) and reactive yellow 186 (RY) has been studied using sodium borohydride 100 mM (NaBH4) as a reducing agent and 6.5 µg/ml bacteriogenic gold nanoparticles (AuNP) as nanocatalysts. The combination of two could decolorize 93 and 83% of DB and RY in 20 and 30 min respectively. The rate constant for both the dyes were very less, indicating the higher affinity of AuNP for dyes. FTIR, HPLC and GC–MS confirm that NaBH4 reduces the dye at azo bond leading to decolorization of dyes. Phytotoxic and cytotoxic studies were performed on bulbs of *Allium cepa* which revealed the non-toxic nature of degraded metabolites towards onion bulbs. AuNP can be immobilized in sodium alginate beads and can be reused for 3 times with same efficiency of decolorization. This is the first report on the decolorization of textile azo dyes using AuNP as catalysts."
+author:
+  - name:
+      given: "Sweety A."
+      family: "Wadhwani"
+  - name:
+      given: "Utkarsha U."
+      family: "Shedbalkar"
+  - name:
+      given: "Shradhda"
+      family: "Nadhe"
+  - name:
+      given: "Richa"
+      family: "Singh"
+  - name:
+      given: "Balu A."
+      family: "Chopade"
+date: "2018-02"
+citation:
+  type: article-journal
+  container-title: "Environmental Technology & Innovation"
+  container-title-short: "Environ Technol Innov"
+  issn: "2352-1864"
+  volume: "9"
+  page: "186-197"
+  issued: "2018-02"
+  doi: "10.1016/j.eti.2017.12.001"
+google-scholar: true
+# citation_abstract_html_url is not something Quarto emits; the canonical
+# link is not either. Both name THIS page as the article landing page.
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2018-aunp-dye-decolorization.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2018-aunp-dye-decolorization.html">
+---
+
+Wadhwani SA, Shedbalkar UU, Nadhe S, **Singh R**, Chopade BA (2018). *Environmental Technology & Innovation* 9: 186–197.
+
+[https://doi.org/10.1016/j.eti.2017.12.001](https://doi.org/10.1016/j.eti.2017.12.001){target="_blank" rel="noopener"}
+
+*No copy is hosted here. Follow the link above for the published version.*
+
+[← Back to all publications](../research.html)

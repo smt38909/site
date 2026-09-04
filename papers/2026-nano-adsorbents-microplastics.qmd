@@ -1,0 +1,37 @@
+---
+# Paper page. Front matter ONLY - Quarto turns it into the Google Scholar
+# citation_* meta tags. See _templates/paper-template.qmd.
+title: "Nano-adsorbents for microplastic removal – cross-material insights, performance and practical applications"
+abstract: "The widespread pollution of ecosystems by microplastics poses a major environmental and health crisis. Conventional remediation technologies remain largely ineffective for removing these minute and persistent pollutants, resulting in a critical “microplastic–nanoplastic gap.” This review evaluates nano-adsorbents as a promising solution to address this challenge. It presents a comprehensive classification of nano-adsorbents, including carbon-based nanomaterials, metal–organic frameworks, magnetic nanoparticles, and sustainable bio-based nanomaterials, alongside a critical evaluation of their structure–function relationships. Key adsorption mechanisms, such as hydrophobic interactions, electrostatic forces, hydrogen bonding, π–π stacking, and physical entrapment, are systematically analyzed, along with commonly employed modeling approaches. Furthermore, comparative analysis of adsorption capacities and process efficiencies across studies is carried out to address inconsistencies in the literature. The review also discusses the performance of nano-adsorbents in real-water matrices and their application in continuous-flow systems, highlighting the influence of complex environmental conditions on adsorption behavior. Although nano-adsorbents demonstrate superior adsorption capacity, rapid kinetics, and tunable selectivity compared to conventional materials, significant challenges, including high production costs, scalability limitations, potential ecotoxicity, and post-treatment recovery, remain critical barriers to practical implementation. By integrating material-level insights with process-level considerations, this review provides a critical framework to guide the rational design, evaluation, and translation of nano-adsorbents for scalable and sustainable microplastic remediation"
+author:
+  - name:
+      given: "Richa"
+      family: "Singh"
+date: "2026-05-26"
+citation:
+  type: article-journal
+  container-title: "Next Research"
+  container-title-short: "Next Res."
+  issn: "3050-4759"   # citation_issn; Crossref (single ISSN)
+  volume: "10"
+  page: "101928"
+  issued: "2026-05-26"
+  doi: "10.1016/j.nexres.2026.101928"
+  pdf-url: "https://drrichasingh.in/papers/2026-nano-adsorbents-microplastics.pdf"
+google-scholar: true
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2026-nano-adsorbents-microplastics.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2026-nano-adsorbents-microplastics.html">
+      <meta name="citation_article_number" content="101928">
+---
+
+*Next Research* 10: 101928 (2026).
+
+*Accepted manuscript, posted as permitted by the publisher’s sharing policy and made available under a CC BY-NC-ND 4.0 licence.*
+
+[Download the PDF](2026-nano-adsorbents-microplastics.pdf){target="_blank" rel="noopener"}
+
+[https://doi.org/10.1016/j.nexres.2026.101928](https://doi.org/10.1016/j.nexres.2026.101928){target="_blank" rel="noopener"}
+
+[← Back to all publications](../research.html)

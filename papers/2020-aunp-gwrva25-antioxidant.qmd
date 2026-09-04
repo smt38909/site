@@ -1,0 +1,44 @@
+---
+# Paper page. Front matter ONLY — Quarto turns it into the Google Scholar
+# citation_* meta tags. Generated 31 Aug 2026; see _templates/paper-template.qmd.
+title: "Green Synthesis of AuNPs by Acinetobacter sp. GWRVA25: Optimization, Characterization, and Its Antioxidant Activity"
+abstract: "Bacteriogenic synthesis of metal nanoparticles is ecofriendly and greatly influenced by physico-chemical reaction parameters with respect to shape and size. Thus, present work aimed to synthesize and optimization of bacteriogenic gold nanoparticles (AuNPs) and study their antioxidant activity. *Acinetobacter* sp. cells were able to synthesize AuNPs, when challenged with tetra-chloroauric acid (HAuCl₄). By physicochemical optimization, maximum synthesis was obtained with 72 h old culture using 2.1 × 10⁹ CFU/ml cell density. Whereas, pH-7 is suitable for AuNPs synthesis. HAuCl₄ concentration (0.5 mM) enhanced the formation of monodispersed and spherical nanoparticles (15 ± 10 nm). At 37 °C temperature, *Acinetobacter* sp. released nanoparticles in supernatant. From characterization, AuNPs were found to be crystalline in nature with negative surface charge. AuNPs showed up to 86% different radical scavenging ability, exhibiting antioxidant activity. In conclusion, spherical AuNPs can be synthesized using *Acinetobacter* sp. through physicochemical optimization. This is the first report of antioxidant activity exhibited by monodispersed bacteriogenic AuNPs synthesized using *Acinetobacter* sp"
+author:
+  - name:
+      given: "Shradhda B."
+      family: "Nadhe"
+  - name:
+      given: "Sweety A."
+      family: "Wadhwani"
+  - name:
+      given: "Richa"
+      family: "Singh"
+  - name:
+      given: "Balu A."
+      family: "Chopade"
+date: "2020-06-18"
+citation:
+  type: article-journal
+  container-title: "Frontiers in Chemistry"
+  container-title-short: "Front. Chem."
+  issn: "2296-2646"   # citation_issn; electronic, Crossref
+  volume: "8"
+  page: "474"
+  issued: "2020-06-18"
+  doi: "10.3389/fchem.2020.00474"
+  pdf-url: "https://drrichasingh.in/papers/2020-aunp-gwrva25-antioxidant.pdf"
+google-scholar: true
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2020-aunp-gwrva25-antioxidant.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2020-aunp-gwrva25-antioxidant.html">
+      <meta name="citation_article_number" content="474">
+---
+
+*Frontiers in Chemistry* 8: 474 (2020).
+
+[Download the PDF](2020-aunp-gwrva25-antioxidant.pdf){target="_blank" rel="noopener"}
+
+[https://doi.org/10.3389/fchem.2020.00474](https://doi.org/10.3389/fchem.2020.00474){target="_blank" rel="noopener"}
+
+[← Back to all publications](../research.html)

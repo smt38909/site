@@ -1,0 +1,44 @@
+---
+# Paper page. Front matter ONLY — Quarto turns it into the Google Scholar
+# citation_* meta tags. Generated 31 Aug 2026; see _templates/paper-template.qmd.
+title: "Naturally occurring nanoparticles (NONPs): A review"
+abstract: "Nanotechnology represents a burgeoning scientific field that focuses on materials within the nanometer size range. Nanoparticles, categorized as incidental, engineered and naturally occurring nanoparticles (NONPs), constitute a critical aspect of nanotechnology. Incidental nanoparticles are inadvertently generated as byproducts, engineered nanoparticles are synthesized by humans for diverse applications and NONPs exist naturally in the environment. NONPs are further categorized based on their location in the environment, such as Naturally Occurring Carbon Nanoparticles, Naturally Occurring Metal Nanoparticles, NONPs present in food, NONPs of biological origin and NONPs present in the aquatic environment. NONPs exhibit ubiquity, spanning the atmosphere, hydrosphere, lithosphere and biosphere. They exhibit distinct properties in comparison to their bulk counterparts, such as a substantial surface area-to-volume ratio, immune-boosting capabilities, scavenger activity, nutritional significance and electron-donor attributes. NONPs have been utilized by humans since ancient times. Owing to these properties, they have been used unknowingly in various fields like medicine, cosmetics, decor, textile and the food industry. NONPs are found in artifacts such as Copper Ruby and the Lycurgus Cup, as well as in medicine, cosmetics and the food industry. Even today, NONPs continue to play pivotal roles in diverse fields such as cancer treatment, biosensors and the food industry. Also they contribute to environmental processes, soil fertility, nutrient transport and bioremediation. This review sheds light on multifaceted significance of NONPs in our evolving scientific landscape and comprehensively explores the history, sources, properties, types and uses of NONPs. It also focuses on the fate of NONPs in water, soil and plants and their environmental and human hazards. A special section on the environmental transformation of NONPs is included"
+author:
+  - name:
+      given: "Sailee S."
+      family: "Raut"
+  - name:
+      given: "Richa"
+      family: "Singh"
+  - name:
+      given: "Utkarsha M."
+      family: "Lekhak"
+date: "2024"
+citation:
+  type: article-journal
+  container-title: "Next Sustainability"
+  container-title-short: "Next Sustain."
+  issn: "2949-8236"   # citation_issn; Crossref (single ISSN)
+  volume: "3"
+  page: "100037"
+  issued: "2024"
+  doi: "10.1016/j.nxsust.2024.100037"
+  pdf-url: "https://drrichasingh.in/papers/2024-naturally-occurring-nanoparticles.pdf"
+google-scholar: true
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2024-naturally-occurring-nanoparticles.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2024-naturally-occurring-nanoparticles.html">
+      <!-- Crossref holds only the year for this one; tools/scholar-meta.py
+           reads this marker, trims the date tags to the bare year and deletes it. -->
+      <meta name="x-scholar-date-precision" content="year">
+      <meta name="citation_article_number" content="100037">
+---
+
+*Next Sustainability* 3: 100037 (2024).
+
+[Download the PDF](2024-naturally-occurring-nanoparticles.pdf){target="_blank" rel="noopener"}
+
+[https://doi.org/10.1016/j.nxsust.2024.100037](https://doi.org/10.1016/j.nxsust.2024.100037){target="_blank" rel="noopener"}
+
+[← Back to all publications](../research.html)

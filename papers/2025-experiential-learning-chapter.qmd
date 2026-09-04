@@ -1,0 +1,42 @@
+---
+# Paper page. NO hosted PDF for this one - the citation block therefore
+# carries no pdf-url, and the body offers the DOI only. Everything else
+# matches _templates/paper-template.qmd. Created 4 Sep 2026 so that every
+# publication has a crawlable landing page carrying a full abstract.
+title: "Experiential learning: a blend of MOOCs, project-based learning and internships"
+abstract: "Experiential learning is learning by doing, i.e. immersing students in practical encounters and using reflection to build new competencies. This chapter argues for integrating three complementary routes: (i) MOOCs, (ii) project-based learning, and (iii) internships, into undergraduate curricula, so that graduates leave with a skill set matched to what industry expects."
+author:
+  - name:
+      given: "Tara"
+      family: "Menon"
+  - name:
+      given: "Subi"
+      family: "Yoosuf"
+  - name:
+      given: "Richa"
+      family: "Singh"
+date: "2025"
+citation:
+  type: chapter
+  container-title: "Teaching Learning Innovations"
+  publisher: "Higher Education Forum"
+  publisher-place: "India"
+  page: "25-29"
+  issued: "2025"
+google-scholar: true
+# citation_abstract_html_url is not something Quarto emits; the canonical
+# link is not either. Both name THIS page as the article landing page.
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/papers/2025-experiential-learning-chapter.html">
+      <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2025-experiential-learning-chapter.html">
+      <!-- Crossref holds only the year for this one; tools/scholar-meta.py
+           reads this marker, trims the date tags to the bare year and deletes it. -->
+      <meta name="x-scholar-date-precision" content="year">
+---
+
+Menon T, Yoosuf S, **Singh R** (2025). In: *Teaching Learning Innovations*, Higher Education Forum, India, pp. 25–29.
+
+*No copy is hosted here, and this chapter has no DOI.*
+
+[← Back to all publications](../research.html)
