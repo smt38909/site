@@ -16,7 +16,9 @@ citation:
   container-title: "International Journal of Phytoremediation"
   container-title-short: "Int. J. Phytoremediation"
   issn: "1549-7879"   # citation_issn; electronic, Crossref
-  page: "1-19"
+  volume: "28"
+  issue: "11"
+  page: "2567-2585"
   issued: "2026-04-23"
   doi: "10.1080/15226514.2026.2660151"
   pdf-url: "https://drrichasingh.in/papers/2026-biosorption-dye-peel-waste.pdf"
@@ -27,7 +29,7 @@ include-in-header:
       <meta name="citation_abstract_html_url" content="https://drrichasingh.in/papers/2026-biosorption-dye-peel-waste.html">
 ---
 
-*International Journal of Phytoremediation*, advance online publication, pp. 1-19 (2026).
+*International Journal of Phytoremediation* 28(11): 2567-2585 (2026).
 
 *Accepted manuscript, posted as permitted by the publishing agreement.*
 

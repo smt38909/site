@@ -104,7 +104,7 @@ published, turning the training exercise itself into a peer-reviewed contributio
 
 [[Biosorption of Procion Magenta and Black Azabache textile dyes using banana and carrot peel waste: a comparative analysis of pure and blended systems](papers/2026-biosorption-dye-peel-waste.html){target="_blank" rel="noopener"}]{.pub-title}
 
-[Patil SB, **Singh R** (2026). *International Journal of Phytoremediation*, advance online publication, pp. 1–19.]{.pub-cite}
+[Patil SB, **Singh R** (2026). *International Journal of Phytoremediation* 28(11): 2567–2585.]{.pub-cite}
 
 [[PDF](papers/2026-biosorption-dye-peel-waste.pdf){target="_blank" rel="noopener"} [HTML](papers/2026-biosorption-dye-peel-waste.html){target="_blank" rel="noopener"} [https://doi.org/10.1080/15226514.2026.2660151](https://doi.org/10.1080/15226514.2026.2660151){target="_blank" rel="noopener"}]{.pub-links}
 :::
