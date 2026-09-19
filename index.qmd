@@ -26,6 +26,19 @@ pagetitle: "Dr. Richa Singh — Assistant Professor of Biotechnology, SIES Colle
 title-prefix: ""
 title: "Dr. Richa Singh"
 subtitle: "Assistant Professor, Department of Biotechnology · SIES College of Arts, Science and Commerce (Autonomous), Mumbai"
+# Canonical URL. Google reported the homepage as "Duplicate without
+# user-selected canonical" (Search Console, 19 Sep 2026) because / and
+# /index.html serve identical content. This names the winner. The papers/
+# pages carry their own canonical the same way; page-level
+# include-in-header MERGES with the project-level one in _quarto.yml, so
+# the fonts, apple-touch-icon and new-tab backstop all survive. Verified
+# against the live papers/2016-nanoparticles-biofilm-control.html.
+# Do NOT switch on `canonical-url: true` under format: html: instead -- it
+# would emit a SECOND canonical on every paper page, and Google ignores
+# both when they conflict.
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/">
 ---
 
 <!-- ===========================================================================
