@@ -1,0 +1,69 @@
+---
+# Tool landing page: Level of Significance (α), Error and Power of Test.
+# (Renamed 22 Nov 2026 from "…Type I Error and Power", before first publish,
+# together with its URL slug, formerly significance-type-i-error-power.)
+# Created 22 Nov 2026 from the Transcription in Prokaryotes landing page.
+#
+# tutor.html is Richa's simulator file los_type1_error_simulator_v7.html with
+# one fix made 22 Nov 2026 at Akhil's request: the confidence-interval overlay
+# is now one-sided for right- and left-tailed tests, so "CI misses μ₀" always
+# agrees with the test's reject decision. Plus the 3 site additions (site bar,
+# favicon, robots noindex). To update the tool, replace tutor.html with the new
+# file and re-add those 3 things.
+#
+# The simulator has no chapters or #ids, so the "What's inside" cards are plain
+# boxes, not links. It has no feedback form and saves nothing in the browser.
+pagetitle: "Level of Significance (α), Error and Power of Test — interactive simulator by Dr. Richa Singh"
+title-prefix: ""
+title: "Level of Significance (α), Error and Power of Test"
+description: "A free interactive simulator for level of significance, Type I error, Type II error and power, told through a chocolate-factory quality-inspection story, with live curves and a 2×2 decision table."
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/teaching/biostatistics/significance-error-power-of-test/">
+      <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var t = document.querySelector('.navbar a.nav-link[href$="teaching.html"]');
+        if (t) { t.classList.add("active"); t.setAttribute("aria-current", "page"); }
+      });
+      </script>
+---
+
+```{=html}
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../../../teaching.html">Teaching</a> &rsaquo; <a href="../">Biostatistics</a> &rsaquo; Level of Significance (α), Error and Power of Test</nav>
+<p class="kicker">Interactive simulator</p>
+<h1 class="page-h1">Level of Significance (α), Error and Power of Test</h1>
+<p class="tool-lead">You are the quality inspector at a chocolate company that promises 100 mg of glucose per 100 g. Test batches, set your own α, and watch false alarms, misses and power add up, one batch or a thousand at a time.</p>
+
+<div class="start-row">
+  <a class="start-btn" href="tutor.html">Open the simulator &rarr;</a>
+  <p class="start-note">Opens full-screen. Nothing to install, no sign-in.</p>
+</div>
+```
+
+## What's inside
+
+```{=html}
+<div class="chapter-grid">
+  <div class="chapter-card"><span class="ch-num">1</span><span class="ch-text"><span class="ch-title">Set up the test</span><span class="ch-does">Choose the claimed mean, α, batch size and a two-, right- or left-tailed test; the red rejection zone redraws instantly.</span></span></div>
+  <div class="chapter-card"><span class="ch-num">2</span><span class="ch-text"><span class="ch-title">Play God</span><span class="ch-does">Decide the hidden truth: is the machine fine, or has it drifted, and by how much?</span></span></div>
+  <div class="chapter-card"><span class="ch-num">3</span><span class="ch-text"><span class="ch-title">Test batches</span><span class="ch-does">Test one batch with its p-value and verdict, or run up to 2,000 at once.</span></span></div>
+  <div class="chapter-card"><span class="ch-num">4</span><span class="ch-text"><span class="ch-title">The 2&times;2 decision table</span><span class="ch-does">Type I errors, misses and correct decisions fill in live, next to the rates theory predicts.</span></span></div>
+  <div class="chapter-card"><span class="ch-num">5</span><span class="ch-text"><span class="ch-title">Confidence-interval overlay</span><span class="ch-does">See that a test rejects exactly when the interval misses the claim.</span></span></div>
+  <div class="chapter-card"><span class="ch-num">6</span><span class="ch-text"><span class="ch-title">Why α is the Type I error rate</span><span class="ch-does">A plain-words explanation, plus three common misconceptions about α.</span></span></div>
+</div>
+```
+
+## How to use it
+
+- Start with the hidden reality set to "claim is true" and run 1,000 experiments: the rejection rate settles near α.
+- Then switch to "machine drifted" and watch power and misses (β) change as you move the drift, the batch size and α.
+- Hover over any control (on a phone, tap it) for a plain-language explanation.
+- Teachers are welcome to use it in class or set it as homework.
+
+```{=html}
+<div class="credit-box">
+  <p><strong>Developed by Dr. Richa Singh</strong>, Department of Biotechnology, SIESASCS, Mumbai. Free for any student or teacher to use.</p>
+  <p class="credit-cite">Suggested citation: Singh, R. (2026). <em>Level of Significance (α), Error and Power of Test: an interactive simulator</em>. https://drrichasingh.in/teaching/biostatistics/significance-error-power-of-test/</p>
+  <p><a href="../">&larr; Back to Biostatistics</a></p>
+</div>
+```

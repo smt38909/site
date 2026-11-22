@@ -1,0 +1,63 @@
+---
+# Tool landing page: Confidence Level Explorer.
+# Created 22 Nov 2026 from the Transcription in Prokaryotes landing page.
+#
+# tutor.html is Richa's file confidence-level-explorer_1_.html with two changes
+# made 22 Nov 2026 at Akhil's request: (1) sample size starts at n = 30 and the
+# page says "large samples", because the interval uses the normal z*, not t;
+# (2) tooltips open on tap on phones (copied from the Type I error simulator).
+# Plus the 3 site additions (site bar, favicon, robots noindex). To update the
+# tool, replace tutor.html with the new file and re-add those 3 things.
+#
+# The explorer has no #ids, so the "What's inside" cards are plain boxes, not
+# links. It has no feedback form and saves nothing in the browser.
+pagetitle: "Confidence Level Explorer — interactive tool by Dr. Richa Singh"
+title-prefix: ""
+title: "Confidence Level Explorer"
+description: "A free interactive explorer for confidence levels and confidence intervals: move the sliders to see how sample mean, SD, sample size and confidence level shape the interval, then simulate repeated sampling."
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/teaching/biostatistics/confidence-level-explorer/">
+      <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var t = document.querySelector('.navbar a.nav-link[href$="teaching.html"]');
+        if (t) { t.classList.add("active"); t.setAttribute("aria-current", "page"); }
+      });
+      </script>
+---
+
+```{=html}
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../../../teaching.html">Teaching</a> &rsaquo; <a href="../">Biostatistics</a> &rsaquo; Confidence Level Explorer</nav>
+<p class="kicker">Interactive explorer</p>
+<h1 class="page-h1">Confidence Level Explorer</h1>
+<p class="tool-lead">Move the sliders and watch the confidence interval respond: how the sample mean, sample SD, sample size and confidence level shape it, and what "95% confidence" really means when you repeat the study many times.</p>
+
+<div class="start-row">
+  <a class="start-btn" href="tutor.html">Open the explorer &rarr;</a>
+  <p class="start-note">Opens full-screen. Nothing to install, no sign-in.</p>
+</div>
+```
+
+## What's inside
+
+```{=html}
+<div class="chapter-grid">
+  <div class="chapter-card"><span class="ch-num">1</span><span class="ch-text"><span class="ch-title">One confidence interval</span><span class="ch-does">Set μ, x̄, s, n and the confidence level; see the curve, z*, the margin of error and the limits update live.</span></span></div>
+  <div class="chapter-card"><span class="ch-num">2</span><span class="ch-text"><span class="ch-title">Repeated-sampling intervals</span><span class="ch-does">Simulate up to 100 studies and count how many intervals capture the true mean.</span></span></div>
+</div>
+```
+
+## How to use it
+
+- In tab 1, change one slider at a time: a larger n narrows the interval, a larger s or a higher confidence level widens it.
+- In tab 2, compare the share of intervals that contain μ with the confidence level you chose.
+- The explorer works with large samples (n ≥ 30), where the normal critical value z* applies.
+- Teachers are welcome to use it in class or set it as homework.
+
+```{=html}
+<div class="credit-box">
+  <p><strong>Developed by Dr. Richa Singh</strong>, Department of Biotechnology, SIESASCS, Mumbai. Free for any student or teacher to use.</p>
+  <p class="credit-cite">Suggested citation: Singh, R. (2026). <em>Confidence Level Explorer: an interactive tool</em>. https://drrichasingh.in/teaching/biostatistics/confidence-level-explorer/</p>
+  <p><a href="../">&larr; Back to Biostatistics</a></p>
+</div>
+```

@@ -1017,6 +1017,9 @@ h1.page-h1 {
   color: $ink-2;
 }
 .chapter-card:hover { border-color: $accent-edge; background: $accent-tint; }
+// Tools without chapter #ids list their features as plain boxes (div, not a
+// link), so no hover change.
+div.chapter-card:hover { border-color: $rule; background: transparent; }
 .ch-num {
   flex: none;
   font-family: $font-family-monospace;

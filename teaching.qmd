@@ -44,5 +44,11 @@ this page.
     <span class="folder-tools">Transcription in Prokaryotes</span>
     <span class="folder-count">1 tool &rarr;</span>
   </a>
+  <a class="folder-card" href="teaching/biostatistics/">
+    <svg class="folder-icon" aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+    <span class="folder-name">Biostatistics</span>
+    <span class="folder-tools">Level of Significance (α), Error and Power of Test &middot; Confidence Level Explorer</span>
+    <span class="folder-count">2 tools &rarr;</span>
+  </a>
 </div>
 ```

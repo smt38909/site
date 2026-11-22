@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Interactive simulator on level of significance, Type I error and power, by Dr. Richa Singh.">
+<meta name="robots" content="noindex, follow">
+<link rel="icon" type="image/png" href="/images/rs-icon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/rs-icon-180.png">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Level of Significance (α), Error &amp; Power of Test — SweetCo Glucose Simulator</title>
+<style>
+  :root{
+    --ink:#1e2433; --muted:#5b6474; --line:#e4e7ee; --bg:#f6f7fa; --card:#ffffff;
+    --blue:#0072B2; --blue-soft:rgba(0,114,178,.10);
+    --orange:#E69F00; --verm:#D55E00; --verm-soft:rgba(213,94,0,.22);
+    --green:#009E73; --green-soft:rgba(0,158,115,.10);
+    --purple:#CC79A7; --purple-soft:rgba(204,121,167,.30);
+    --gray:#999999; --amber-soft:rgba(230,159,0,.12);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       background:var(--bg); color:var(--ink); padding:24px 16px 48px;}
+  .wrap{max-width:1200px; margin:0 auto;}
+  header h1{font-size:1.45rem; font-weight:700; letter-spacing:-.01em;}
+  .byline{margin-top:6px; font-size:.9rem; color:var(--muted); font-style:italic;}
+  .byline b{color:var(--ink); font-style:normal;}
+  header p{color:var(--muted); margin-top:6px; font-size:.95rem; max-width:75ch;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px;
+        padding:18px 20px; margin-top:18px; box-shadow:0 1px 2px rgba(16,24,40,.04);}
+  .story{border-left:5px solid var(--orange); background:linear-gradient(135deg,#fffaf0,#fff);
+         font-size:.95rem; line-height:1.65;}
+  .story p{margin-top:8px;}
+  .story p:first-child{margin-top:0;}
+  .story .now{margin-top:10px; padding:10px 14px; background:#fff; border:1px dashed #e3cf9e;
+              border-radius:10px; font-size:.92rem;}
+
+  /* ---- side-by-side workspace ---- */
+  .workspace{display:grid; grid-template-columns:360px minmax(0,1fr); gap:18px;
+             align-items:start; margin-top:18px;}
+  .workspace .card{margin-top:0;}
+  .leftcol{position:sticky; top:12px;}
+
+  .controls{display:grid; grid-template-columns:1fr; gap:16px;}
+  .ctl label{display:flex; justify-content:space-between; font-size:.82rem; font-weight:600; color:var(--muted); margin-bottom:6px;}
+  .ctl label output{color:var(--ink); font-variant-numeric:tabular-nums;}
+  input[type=range]{width:100%; accent-color:var(--blue);}
+  select{font:inherit; padding:6px 10px; border:1px solid var(--line); border-radius:8px; background:#fff; width:100%;}
+  .chips{display:flex; gap:6px; margin-top:6px;}
+  .chip{font-size:.75rem; padding:3px 10px; border:1px solid var(--line); border-radius:999px;
+        background:#fff; cursor:pointer; color:var(--muted);}
+  .chip.active{border-color:var(--blue); color:var(--blue); background:var(--blue-soft); font-weight:600;}
+  .toggle{display:flex; align-items:center; gap:10px; font-size:.9rem; font-weight:600;}
+  .toggle input{width:18px; height:18px; accent-color:var(--blue); flex:0 0 auto;}
+  .toggle .sub{font-weight:400; color:var(--muted); font-size:.78rem;}
+  #muTrueCtl{transition:opacity .2s;}
+  #muTrueCtl.disabled{opacity:.35; pointer-events:none;}
+  /* hover tooltips (desktop) + tap-to-toggle (touch, via .tip-open) */
+  .tip{cursor:help;}
+  .tip[data-tip]{position:relative;}
+  .tip[data-tip]:hover::after, .tip.tip-open[data-tip]::after{
+    content:attr(data-tip); position:absolute; bottom:calc(100% + 10px); left:0; z-index:60;
+    background:#1e2433; color:#fff; font-size:.78rem; font-weight:400; line-height:1.5;
+    padding:9px 12px; border-radius:9px; width:250px; max-width:78vw; white-space:normal; text-transform:none;
+    letter-spacing:0; box-shadow:0 6px 18px rgba(16,24,40,.25); pointer-events:none;
+  }
+  .tip[data-tip]:hover::before, .tip.tip-open[data-tip]::before{
+    content:''; position:absolute; bottom:calc(100% + 2px); left:18px; z-index:61;
+    border:5px solid transparent; border-top-color:#1e2433; pointer-events:none;
+  }
+  .tip.tip-right[data-tip]:hover::after, .tip.tip-right.tip-open[data-tip]::after{left:auto; right:0;}
+  .tip.tip-right[data-tip]:hover::before, .tip.tip-right.tip-open[data-tip]::before{left:auto; right:18px;}
+  .tip.tip-below[data-tip]:hover::after, .tip.tip-below.tip-open[data-tip]::after{bottom:auto; top:calc(100% + 10px);}
+  .tip.tip-below[data-tip]:hover::before, .tip.tip-below.tip-open[data-tip]::before{bottom:auto; top:calc(100% + 2px); border-top-color:transparent; border-bottom-color:#1e2433;}
+  .theory{margin-top:16px; border:1px dashed var(--line); border-radius:10px; padding:12px 16px;
+          display:flex; flex-wrap:wrap; gap:10px 24px; font-size:.88rem; background:#fbfcfe;}
+  .theory b{font-variant-numeric:tabular-nums;}
+  .theory .t-k{color:var(--muted); font-size:.8rem; font-weight:700;}
+  .theory > span{border-bottom:1px dotted #c3c9d4; padding-bottom:2px;}
+  /* action bar sits on top of the plot panel */
+  .btns{display:flex; flex-wrap:wrap; gap:10px; margin:0 0 14px; padding-bottom:14px;
+        border-bottom:1px solid var(--line); align-items:center;}
+  .btns .cap{font-size:.8rem; color:var(--muted); margin-left:auto;}
+  button.action{font:inherit; font-weight:600; font-size:.9rem; padding:10px 18px; border-radius:10px;
+    border:1px solid transparent; cursor:pointer; transition:transform .05s;}
+  button.action:active{transform:scale(.97);}
+  #btnOne{background:var(--blue); color:#fff;}
+  #btnMany{background:#fff; color:var(--blue); border-color:var(--blue);}
+  #btnReset{background:#fff; color:var(--muted); border-color:var(--line);}
+  canvas{width:100%; height:540px; display:block;}
+  #verdict{margin-top:14px; padding:12px 16px; border-radius:10px; font-size:.95rem; font-weight:600;
+    background:var(--blue-soft); border:1px solid var(--line); min-height:48px; display:flex; align-items:center;}
+  #verdict.good{background:var(--green-soft); border-color:rgba(0,158,115,.4);}
+  #verdict.bad{background:var(--verm-soft); border-color:rgba(213,94,0,.4);}
+  #verdict.warn{background:var(--amber-soft); border-color:rgba(230,159,0,.45);}
+  #callout{margin-top:10px; padding:10px 14px; border-radius:10px; font-size:.86rem; line-height:1.5;
+    background:#f3f0fa; border:1px solid #ddd3ee; color:#4a3f63; display:none;}
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-top:16px;}
+  .stat{border:1px solid var(--line); border-radius:10px; padding:12px 14px;}
+  .stat .k{font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:700;}
+  .stat .v{font-size:1.35rem; font-weight:700; margin-top:4px; font-variant-numeric:tabular-nums;}
+  .stat .hint{font-size:.75rem; color:var(--muted); margin-top:2px;}
+  h2{font-size:1.05rem; margin:0 0 8px;}
+  .tablewrap{overflow-x:auto;}
+  table{border-collapse:collapse; width:100%; margin-top:8px; font-size:.9rem;}
+  th,td{padding:10px 12px; border:1px solid var(--line); text-align:left; vertical-align:top;}
+  thead th{font-size:.78rem; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); background:#fafbfc;}
+  tbody th{font-size:.88rem; background:#fafbfc; width:170px;}
+  tbody th .sub{display:block; font-weight:400; color:var(--muted); font-size:.75rem; margin-top:2px; text-transform:none;}
+  .cellTitle{font-weight:700; font-size:.85rem;}
+  .cellN{font-size:1.4rem; font-weight:700; font-variant-numeric:tabular-nums; margin-top:2px;}
+  .cellPct{font-size:.78rem; color:var(--muted); font-variant-numeric:tabular-nums;}
+  td.c-bad{background:rgba(213,94,0,.07);} td.c-bad .cellTitle{color:var(--verm);}
+  td.c-good{background:rgba(0,158,115,.07);} td.c-good .cellTitle{color:var(--green);}
+  td.c-warn{background:rgba(230,159,0,.10);} td.c-warn .cellTitle{color:#b07700;}
+  .legend{display:flex; flex-wrap:wrap; gap:14px; margin-top:10px; font-size:.8rem; color:var(--muted);}
+  .legend span{display:inline-flex; align-items:center; gap:6px;}
+  .swatch{width:12px; height:12px; border-radius:3px; display:inline-block;}
+  /* alpha explainer */
+  .steps{counter-reset:step; margin-top:10px;}
+  .step{display:flex; gap:14px; margin-top:14px; align-items:flex-start;}
+  .step::before{counter-increment:step; content:counter(step); flex:0 0 30px; height:30px;
+    background:var(--blue); color:#fff; font-weight:700; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:.9rem;}
+  .step div{flex:1; font-size:.95rem; line-height:1.65;}
+  .step b{color:var(--ink);}
+  .symbolbox{margin-top:16px; padding:14px 16px; background:#fbfcfe; border:1px dashed var(--line);
+             border-radius:10px; font-size:.95rem; line-height:1.7;}
+  .symbolbox .f{font-size:1.05rem; font-weight:700; color:var(--ink);}
+  .notlist{margin-top:12px; font-size:.92rem; line-height:1.65; list-style:none; padding:0;}
+  .notlist li{margin-top:10px; padding-left:26px; position:relative;}
+  .notlist li::before{content:'🚫'; position:absolute; left:0; top:0;}
+  footer{margin-top:22px; color:var(--muted); font-size:.88rem; line-height:1.6; max-width:88ch;}
+  footer ul{margin:8px 0 0 20px;}
+  footer li{margin-top:4px;}
+  .credit{margin-top:26px; padding-top:16px; border-top:1px solid var(--line);
+          font-size:.9rem; color:var(--ink); text-align:center; max-width:none;}
+  .credit b{font-weight:700;}
+
+  /* ---- mobile-only adjustments (desktop identical to v6) ---- */
+  @media (max-width:940px){
+    .workspace{grid-template-columns:1fr;}
+    .leftcol{position:static;}
+    canvas{height:480px;}
+    button.action{min-height:44px; padding:12px 20px;}
+    .chip{padding:10px 16px; font-size:.85rem;}
+    .toggle input{width:22px; height:22px;}
+    #grid thead th, #grid tbody th, #grid td{padding:8px; font-size:.8rem;}
+    #grid tbody th{width:auto; min-width:110px;}
+    #grid .cellN{font-size:1.15rem;}
+    #grid .cellTitle{font-size:.78rem;}
+  }
+</style>
+</head>
+<body>
+<div class="sitebar" style="background:#12263A;font-family:'Source Sans 3',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:14px;padding:6px 18px;margin:-24px -16px 18px;">
+  <a href="./" style="color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:8px;min-height:32px;">&larr; drrichasingh.in &middot; About this tool</a>
+</div>
+
+<div class="wrap">
+
+  <header>
+    <h1>Level of Significance (α), Error &amp; Power of Test</h1>
+    <div class="byline">by <b>Dr. Richa Singh</b>, Department of Biotechnology, SIESASCS, Mumbai</div>
+    <p>Controls on the left, live curve on the right — every change redraws the plot instantly, and the run buttons sit right above the curve. Hover (on mobile: tap) any control for a plain-language explanation.</p>
+  </header>
+
+  <div class="card story">
+    <p>🍫 <b>The SweetCo Chocolate Company</b> stamps a promise on every wrapper: <i>“mean glucose: 100 mg per 100 g.”</i>
+    Regulators require that promise to be honest, and the brand’s reputation rides on it. Bars vary naturally from one to the
+    next — glucose wanders with a standard deviation of <b>σ = 1 mg/100g</b> — so even a perfectly tuned machine produces
+    batches whose averages wobble around the claim.</p>
+    <p>You are the <b>quality inspector</b>. Testing every bar is impossible, so you draw a batch of <b>n bars</b>, average
+    their glucose (<b>x̄</b>), and must decide: does the batch pass, or do you reject the company’s claim? Two mistakes haunt you.
+    <b>Reject a good batch</b> and you trigger a needless, expensive recall — a false alarm. <b>Wave through a drifted machine</b>
+    and mislabeled bars reach customers — a costly miss. Your decision rule is fixed <i>before</i> you test: reject the claim
+    whenever x̄ lands beyond the red lines, and choose <b>α</b> to cap how often you cry wolf on innocent batches.</p>
+    <div class="now" id="story"></div>
+  </div>
+
+  <div class="workspace">
+    <!-- LEFT: controls -->
+    <div class="leftcol">
+      <div class="card">
+        <div class="controls">
+          <div class="ctl tip" data-tip="The claimed mean glucose printed on the wrapper — the null hypothesis H₀. Every calculation is done ASSUMING this claim is true.">
+            <label>Claimed mean glucose μ₀ (mg/100g) <output id="mu0Out">100.0</output></label>
+            <input type="range" id="mu0" min="94" max="106" step="0.5" value="100">
+          </div>
+          <div class="ctl tip" data-tip="Your false-alarm tolerance: out of 100 good batches, how many you are willing to reject by mistake. You choose it BEFORE testing. It is simply the size of the red zone.">
+            <label>Level of significance α <output id="alphaOut">0.050</output></label>
+            <input type="range" id="alpha" min="0.01" max="0.20" step="0.005" value="0.05">
+            <div class="chips">
+              <button class="chip" data-a="0.10">0.10</button>
+              <button class="chip active" data-a="0.05">0.05</button>
+              <button class="chip" data-a="0.01">0.01</button>
+            </div>
+          </div>
+          <div class="ctl tip" data-tip="How many bars you test per batch. More bars → batch averages wobble less (SE = σ/√n gets smaller) → the curve gets narrower → you make fewer mistakes of both kinds.">
+            <label>Batch size n (bars tested) <output id="nOut">30</output></label>
+            <input type="range" id="n" min="5" max="200" step="5" value="30">
+          </div>
+          <div class="ctl tip" data-tip="Two-tailed: catch drift in EITHER direction (glucose too high or too low). One-tailed: you only care about one direction, so all of α sits in one tail.">
+            <label>Test type</label>
+            <select id="tails">
+              <option value="two" selected>Two-tailed</option>
+              <option value="right">Right-tailed</option>
+              <option value="left">Left-tailed</option>
+            </select>
+          </div>
+          <div class="ctl tip" data-tip="The hidden-reality switch — here you play God and DECIDE the truth. In real life this is forever unknown; the god's-eye view is what lets you count how often the test errs in each world.">
+            <label>Hidden reality (simulation only)</label>
+            <div class="toggle">
+              <input type="checkbox" id="h0true" checked>
+              <span>Claim is true <span class="sub">(you play God — unknowable in real life)</span></span>
+            </div>
+          </div>
+          <div class="ctl tip disabled" id="muTrueCtl" data-tip="Where the machine has ACTUALLY drifted to. The further μ is from μ₀, the easier the drift is to catch — power rises and misses (β) fall.">
+            <label>True mean μ when drifted (mg/100g) <output id="muTrueOut">104.0</output></label>
+            <input type="range" id="muTrue" min="94.5" max="110" step="0.5" value="104">
+          </div>
+          <div class="ctl tip" data-tip="How many imaginary batches to test in one run. The more you run, the closer the observed rejection rate gets to the theoretical rate.">
+            <label>Experiments per run <output id="batchOut">1000</output></label>
+            <input type="range" id="batchN" min="10" max="2000" step="10" value="1000">
+          </div>
+          <div class="ctl tip" data-tip="Overlay the latest batch's confidence interval — the range where the true mean probably sits. For a one-tailed test it is a one-sided interval (open on one end). If the claimed μ₀ falls outside it, the test rejects the claim — the two always agree.">
+            <label>Overlay</label>
+            <div class="toggle">
+              <input type="checkbox" id="showCI">
+              <span>Confidence interval <span class="sub">(1−α CI of latest batch; one-sided for one-tailed tests)</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="theory" id="theory"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: run buttons + live plot + results -->
+    <div class="rightcol">
+      <div class="card">
+        <div class="btns">
+          <button class="action tip tip-below" id="btnOne" data-tip="Draw one batch of n bars from the chosen hidden reality, compute its average x̄, and announce the decision.">🎲 Test one batch</button>
+          <button class="action tip tip-below" id="btnMany" data-tip="Repeat the whole inspection many times and tally every decision in the 2×2 table.">▶ Run 1000 experiments</button>
+          <button class="action tip tip-below" id="btnReset" data-tip="Clear all batches, counts, and the 2×2 table.">↺ Reset</button>
+          <span class="cap">results appear below ↓</span>
+        </div>
+        <canvas id="cv"></canvas>
+        <div class="legend">
+          <span><span class="swatch" style="background:var(--verm-soft); border:1px solid var(--verm);"></span> Red zone: reject the claim (size = α)</span>
+          <span><span class="swatch" style="background:var(--purple-soft); border:1px solid var(--purple);"></span> p-value area (beyond latest x̄)</span>
+          <span style="color:var(--verm); font-weight:700;">▲</span><span style="margin-left:-12px;">Wrongly rejected good batch (Type I error)</span>
+          <span style="color:var(--green); font-weight:700;">▲</span><span style="margin-left:-12px;">Correctly caught drift</span>
+          <span style="color:var(--gray); font-weight:700;">●</span><span style="margin-left:-12px;">Batch passed</span>
+        </div>
+        <div id="verdict">Press “Test one batch” — the batch average x̄ is drawn from the H₀ curve, because you set the hidden reality to “claim true.”</div>
+        <div id="callout"></div>
+
+        <div class="stats">
+          <div class="stat tip" data-tip="Batches tested under the CURRENT hidden reality. The 2×2 table tracks both realities separately."><div class="k">Experiments (this reality)</div><div class="v" id="stN">0</div></div>
+          <div class="stat tip" data-tip="How many of those batches led to rejecting the claim."><div class="k">Rejections of H₀</div><div class="v" id="stR">0</div></div>
+          <div class="stat tip" data-tip="Rejections ÷ experiments. The more you run, the closer this gets to the theoretical rate — that settling is the whole point."><div class="k">Observed rejection rate</div><div class="v" id="stP">—</div><div class="hint" id="stPH"></div></div>
+          <div class="stat tip tip-right" data-tip="What theory promises: α when the claim is true (false-alarm rate); power = 1−β when the machine has drifted (catch rate)."><div class="k">Theoretical rate</div><div class="v" id="stT">—</div><div class="hint" id="stTH"></div></div>
+        </div>
+
+        <h2 style="margin-top:20px;">The 2×2 decision table — filling in live</h2>
+        <div class="tablewrap">
+        <table id="grid">
+          <thead>
+            <tr><th></th><th>Hidden reality: claim is true (machine fine)</th><th>Hidden reality: claim is false (machine drifted)</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Reject the claim<span class="sub">batch fails inspection</span></th>
+              <td class="c-bad" id="cTR"></td>
+              <td class="c-good" id="cFR"></td>
+            </tr>
+            <tr>
+              <th>Let the batch pass<span class="sub">batch ships to shops</span></th>
+              <td class="c-good" id="cTF"></td>
+              <td class="c-warn" id="cFF"></td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Why does α equal the chance of a Type I error? — in plain words</h2>
+    <div class="steps">
+      <div class="step"><div><b>You make a rule before testing.</b> You say: “If the batch average falls outside these red lines, I will reject the company’s claim.” You fix this rule before you see any numbers, and you do not change it afterwards.</div></div>
+      <div class="step"><div><b>α is just the size of the red zone.</b> You place the red lines so the red area is exactly α. Pick α = 0.05 and the red zone covers exactly 5% of the curve — the curve of a <i>good</i> machine. Nothing more is hidden in α. It is a size.</div></div>
+      <div class="step"><div><b>A Type I error = good machine + unlucky batch.</b> Even a perfect machine produces an odd batch once in a while, just by luck. If that unlucky batch lands in the red zone, you reject a claim that was actually true. That mistake is a Type I error.</div></div>
+      <div class="step"><div><b>So the chance of that mistake is just the red area.</b> If 5% of all good batches land in the red zone, then 5% of the time you will reject a good batch by mistake. That is the whole reason why α = the chance of a Type I error.</div></div>
+    </div>
+    <div class="symbolbox">
+      <span class="f">Level of significance (α) = chance of a Type I error<br>= chance of rejecting the claim when the claim is actually true</span><br>
+      Read the formula like a sentence: <i>“The claim is true. Even then, how often will my test reject it? Answer: α of the time.”</i>
+      When the machine has drifted, the mistake has a different name — β — and a different chance.
+    </div>
+    <ul class="notlist">
+      <li><b>α does not tell you how likely the claim is true.</b> It says nothing about the claim itself. You pick α yourself, before testing — it is the size of your red zone, nothing else.</li>
+      <li><b>α is not “the chance of being wrong” in general.</b> It counts only one kind of mistake: rejecting a true claim. The other mistake — letting a drifted machine pass — has its own chance, called β.</li>
+      <li><b>Smaller α is not always better.</b> Shrink the red zone and you cry wolf less often — but you also miss more real drifts. Fewer false alarms, more misses. It is a seesaw, and you choose where to sit.</li>
+    </ul>
+    <table>
+      <thead><tr><th>α you choose</th><th>Size of the red zone</th><th>Good batches rejected by mistake (out of 1000)</th></tr></thead>
+      <tbody>
+        <tr><td>0.10</td><td>10%</td><td>about 100</td></tr>
+        <tr><td>0.05</td><td>5%</td><td>about 50</td></tr>
+        <tr><td>0.01</td><td>1%</td><td>about 10</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    <ul>
+      <li>Letting a batch pass does not prove the claim true — your batch may simply have missed the drift.</li>
+      <li>The p-value is not the chance the claim is true. It answers: “If the claim were true, how surprising would this batch be?”</li>
+      <li>The red zone is just the reject zone. It only counts as Type I errors when the claim is actually true.</li>
+      <li>In real life you never know the truth — that is why this simulator lets you play God and peek.</li>
+    </ul>
+    <div class="credit">This interactive pedagogical tool is developed by <b>Dr. Richa Singh</b>, Department of Biotechnology, SIESASCS, Mumbai.</div>
+  </footer>
+</div>
+
+<script>
+// ---------- statistics helpers ----------
+function phi(x){ return Math.exp(-0.5*x*x)/Math.sqrt(2*Math.PI); }
+function erf(x){
+  const t=1/(1+0.3275911*Math.abs(x));
+  const y=1-((((((1.061405429*t-1.453152027)*t)+1.421413741)*t-0.284496736)*t+0.254829592)*t)*Math.exp(-x*x);
+  return x>=0?y:-y;
+}
+function Phi(x){ return 0.5*(1+erf(x/Math.SQRT2)); }
+function qnorm(p){
+  const a=[-3.969683028665376e+01,2.209460984245205e+02,-2.759285104469687e+02,1.383577518672690e+02,-3.066479806614716e+01,2.506628277459239e+00];
+  const b=[-5.447609879822406e+01,1.615858368580409e+02,-1.556989798598866e+02,6.680131188771972e+01,-1.328068155288572e+01];
+  const c=[-7.784894002430293e-03,-3.223964580411365e-01,-2.400758277161838e+00,-2.549732539343734e+00,4.374664141464968e+00,2.938163982698783e+00];
+  const d=[7.784695709041462e-03,3.224671290700398e-01,2.445134137142996e+00,3.754408661907416e+00];
+  const plow=0.02425, phigh=1-plow; let q,r,x;
+  if(p<plow){ q=Math.sqrt(-2*Math.log(p));
+    x=(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+  } else if(p<=phigh){ q=p-0.5; r=q*q;
+    x=(((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q/(((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);
+  } else { q=Math.sqrt(-2*Math.log(1-p));
+    x=-(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+  }
+  return x;
+}
+function randn(){ let u=0,v=0; while(u===0)u=Math.random(); while(v===0)v=Math.random();
+  return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
+
+// ---------- state ----------
+const S={ mu0:100, alpha:0.05, tails:'two', n:30, h0true:true, muTrue:104,
+          batchN:1000, showCI:false, sigma:1,
+          samples:[], last:null,
+          counts:{ t:{rej:0,fail:0}, f:{rej:0,fail:0} } };
+const SE=()=>S.sigma/Math.sqrt(S.n);
+const fmtZ=z=>(z>=0?'+':'−')+Math.abs(z).toFixed(2);
+
+function crits(){
+  const se=SE();
+  if(S.tails==='two'){ const z=qnorm(1-S.alpha/2); return {lo:S.mu0-z*se, hi:S.mu0+z*se}; }
+  if(S.tails==='right') return {lo:-Infinity, hi:S.mu0+qnorm(1-S.alpha)*se};
+  return {lo:S.mu0+qnorm(S.alpha)*se, hi:Infinity};
+}
+function inRejection(x){
+  const c=crits();
+  if(S.tails==='two') return x<=c.lo||x>=c.hi;
+  if(S.tails==='right') return x>=c.hi;
+  return x<=c.lo;
+}
+function pvalue(x){
+  const z=(x-S.mu0)/SE();
+  if(S.tails==='two') return 2*(1-Phi(Math.abs(z)));
+  if(S.tails==='right') return 1-Phi(z);
+  return Phi(z);
+}
+function theoreticalPower(){
+  const se=SE(), c=crits();
+  if(S.tails==='two') return Phi((c.lo-S.muTrue)/se)+1-Phi((c.hi-S.muTrue)/se);
+  if(S.tails==='right') return 1-Phi((c.hi-S.muTrue)/se);
+  return Phi((c.lo-S.muTrue)/se);
+}
+function drawMean(){ return (S.h0true?S.mu0:S.muTrue)+randn()*SE(); }
+function fmtP(p){ return p<0.001?'< 0.001':p.toFixed(3); }
+
+// ---------- canvas ----------
+const cv=document.getElementById('cv'), ctx=cv.getContext('2d');
+const padT=34, padB=130;
+
+function xDomain(){
+  const a=S.mu0, b=S.h0true?S.mu0:S.muTrue, se=SE();
+  return [Math.min(a,b)-4.5*se, Math.max(a,b)+4.5*se];
+}
+function tri(x,y,r){ ctx.beginPath(); ctx.moveTo(x,y-r); ctx.lineTo(x-r*0.95,y+r*0.75); ctx.lineTo(x+r*0.95,y+r*0.75); ctx.closePath(); }
+
+function draw(){
+  const dpr=window.devicePixelRatio||1;
+  const W=cv.clientWidth, H=cv.clientHeight||540;
+  const narrow = W<560;
+  cv.width=W*dpr; cv.height=H*dpr;
+  ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,W,H);
+
+  const [x0,x1]=xDomain(), se=SE();
+  const padL=54,padR=18, plotW=W-padL-padR, plotH=H-padT-padB;
+  const yMax=phi(0)/se*1.25;
+  const X=v=>padL+(v-x0)/(x1-x0)*plotW, Y=d=>padT+plotH-(d/yMax)*plotH, baseY=Y(0);
+
+  ctx.strokeStyle='#cfd4dd'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(padL,baseY); ctx.lineTo(W-padR,baseY); ctx.stroke();
+
+  // p-value region FIRST (light, underneath)
+  if(S.last!==null){
+    const x=S.last, d=Math.abs(x-S.mu0);
+    ctx.fillStyle='rgba(204,121,167,.30)';
+    for(let px=padL;px<=W-padR;px++){
+      const xv=x0+(px-padL)/plotW*(x1-x0);
+      const inP = S.tails==='two' ? Math.abs(xv-S.mu0)>=d : (S.tails==='right' ? xv>=x : xv<=x);
+      if(inP){ const yT=Y(phi((xv-S.mu0)/se)/se); ctx.fillRect(px,yT,1,baseY-yT); }
+    }
+  }
+  // rejection region ON TOP
+  const c=crits();
+  ctx.fillStyle='rgba(213,94,0,.28)';
+  for(let px=padL;px<=W-padR;px++){
+    const xv=x0+(px-padL)/plotW*(x1-x0);
+    if(inRejection(xv)){ const yT=Y(phi((xv-S.mu0)/se)/se); ctx.fillRect(px,yT,1,baseY-yT); }
+  }
+  // H0 curve
+  ctx.beginPath();
+  for(let px=padL;px<=W-padR;px++){
+    const xv=x0+(px-padL)/plotW*(x1-x0), yv=Y(phi((xv-S.mu0)/se)/se);
+    px===padL?ctx.moveTo(px,yv):ctx.lineTo(px,yv);
+  }
+  ctx.strokeStyle=S.h0true?'#0072B2':'#8a94ad'; ctx.lineWidth=2.2;
+  ctx.setLineDash(S.h0true?[]:[6,5]); ctx.stroke(); ctx.setLineDash([]);
+  // true curve
+  if(!S.h0true){
+    ctx.beginPath();
+    for(let px=padL;px<=W-padR;px++){
+      const xv=x0+(px-padL)/plotW*(x1-x0), yv=Y(phi((xv-S.muTrue)/se)/se);
+      px===padL?ctx.moveTo(px,yv):ctx.lineTo(px,yv);
+    }
+    ctx.strokeStyle='#E69F00'; ctx.lineWidth=2.4; ctx.stroke();
+    ctx.fillStyle='#b07700'; ctx.font='12px sans-serif';
+    ctx.fillText(narrow?'true (drifted)':'true distribution (drifted)', Math.min(X(S.muTrue)+8,W-150), Y(phi(0)/se)-6);
+  }
+  // critical lines + labels
+  ctx.strokeStyle='#D55E00'; ctx.lineWidth=1.8; ctx.setLineDash([5,4]);
+  const cl=[]; if(isFinite(c.lo))cl.push(c.lo); if(isFinite(c.hi))cl.push(c.hi);
+  cl.forEach(v=>{ ctx.beginPath(); ctx.moveTo(X(v),padT); ctx.lineTo(X(v),baseY); ctx.stroke(); });
+  ctx.setLineDash([]);
+  ctx.fillStyle='#D55E00'; ctx.font='12px sans-serif';
+  cl.forEach((v,i)=>{
+    const z=(v-S.mu0)/se;
+    if(narrow){
+      ctx.fillText(v.toFixed(2), Math.min(Math.max(X(v)+4,4),W-56), padT+14+i*14);
+    } else {
+      ctx.fillText('critical = '+v.toFixed(2)+'  (z = '+fmtZ(z)+')', Math.min(Math.max(X(v)+6,padL+2),W-190), padT+14);
+    }
+  });
+  // alpha annotation + count note (top-left)
+  ctx.fillStyle='#D55E00'; ctx.font='bold 12px sans-serif';
+  if(narrow){
+    ctx.fillText(S.tails==='two' ? 'α = '+S.alpha.toFixed(3)+'  ('+(S.alpha/2).toFixed(3)+' per tail)'
+                                 : 'red area = α = '+S.alpha.toFixed(3), padL+4, padT-6);
+  } else {
+    ctx.fillText(S.tails==='two' ? 'red area per tail = α/2 = '+(S.alpha/2).toFixed(3)+'  (total α = '+S.alpha.toFixed(3)+')'
+                                 : 'red area = α = '+S.alpha.toFixed(3), padL+4, padT-6);
+  }
+  if(S.samples.length>400){
+    ctx.fillStyle='#5b6474'; ctx.font='11px sans-serif';
+    ctx.fillText('showing last 400 of '+S.samples.length+' batches', padL+4, narrow?padT+44:padT+30);
+  }
+
+  // ---- bottom zones (no overlaps) ----
+  // zone A: mu0 tick label
+  ctx.fillStyle='#1e2433'; ctx.font='12px sans-serif';
+  ctx.fillText('μ₀ = '+S.mu0.toFixed(1)+' (claim)', Math.min(Math.max(X(S.mu0)-40,padL),W-140), baseY+16);
+  ctx.strokeStyle='#8a94ad'; ctx.beginPath(); ctx.moveTo(X(S.mu0),baseY); ctx.lineTo(X(S.mu0),baseY+5); ctx.stroke();
+  // zone B: dot strip — 6 rows, smaller marks for clean rendering
+  const dotY0=baseY+32;
+  const dots=S.samples.slice(-400);
+  dots.forEach((xv,i)=>{
+    const y=dotY0+(i%6)*10, rej=inRejection(xv);
+    if(rej){ ctx.fillStyle=S.h0true?'#D55E00':'#009E73'; tri(X(xv),y,4); ctx.fill(); }
+    else { ctx.fillStyle='#999999'; ctx.beginPath(); ctx.arc(X(xv),y,3.1,0,2*Math.PI); ctx.fill(); }
+  });
+  // zone C: latest sample marker + label with connector
+  if(S.last!==null){
+    const xv=S.last, rej=inRejection(xv), z=(xv-S.mu0)/se;
+    const col=rej?(S.h0true?'#D55E00':'#009E73'):'#6c757d';
+    ctx.fillStyle=col;
+    if(rej){ tri(X(xv),dotY0,8); ctx.fill(); ctx.lineWidth=2; ctx.strokeStyle='#fff'; ctx.stroke(); }
+    else { ctx.beginPath(); ctx.arc(X(xv),dotY0,7,0,2*Math.PI); ctx.fill(); ctx.lineWidth=2; ctx.strokeStyle='#fff'; ctx.stroke(); }
+    const labelY=baseY+110;
+    ctx.strokeStyle='#c3c9d4'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(X(xv),dotY0+10); ctx.lineTo(X(xv),labelY-6); ctx.stroke();
+    ctx.fillStyle='#1e2433'; ctx.font='bold 12px sans-serif';
+    ctx.fillText((narrow?'x̄ = ':'latest x̄ = ')+xv.toFixed(2)+'  (z = '+fmtZ(z)+')', Math.min(Math.max(X(xv)-70,padL),W-(narrow?170:190)), labelY+4);
+  }
+  // zone D: axis title
+  ctx.fillStyle='#5b6474'; ctx.font='12px sans-serif';
+  ctx.fillText(narrow?'x̄ (mg/100g)':'batch mean glucose x̄ (mg/100g)', W/2-(narrow?40:90), H-10);
+
+  // CI overlay for latest sample — matches the test type, so "CI misses μ₀"
+  // always agrees with the test's reject decision.
+  //   two-tailed  → two-sided (1−α) CI  [x̄ − z(1−α/2)·SE , x̄ + z(1−α/2)·SE]
+  //   right-tailed→ one-sided lower bound [x̄ − z(1−α)·SE , ∞)
+  //   left-tailed → one-sided upper bound (−∞ , x̄ + z(1−α)·SE]
+  if(S.showCI && S.last!==null){
+    const yCI=padT+40;
+    let lo,hi;
+    if(S.tails==='two'){ const z=qnorm(1-S.alpha/2); lo=S.last-z*se; hi=S.last+z*se; }
+    else if(S.tails==='right'){ lo=S.last-qnorm(1-S.alpha)*se; hi=Infinity; }
+    else { lo=-Infinity; hi=S.last+qnorm(1-S.alpha)*se; }
+    const contains=S.mu0>=lo&&S.mu0<=hi, col=contains?'#0072B2':'#D55E00';
+    const xL=isFinite(lo)?X(lo):padL, xR=isFinite(hi)?X(hi):W-padR;
+    ctx.strokeStyle='#c9ced8'; ctx.setLineDash([2,3]);
+    ctx.beginPath(); ctx.moveTo(X(S.mu0),yCI-10); ctx.lineTo(X(S.mu0),baseY); ctx.stroke(); ctx.setLineDash([]);
+    ctx.strokeStyle=col; ctx.lineWidth=2.4;
+    ctx.beginPath(); ctx.moveTo(xL,yCI); ctx.lineTo(xR,yCI); ctx.stroke();
+    // finite ends get a bar; an open (infinite) end gets an arrowhead
+    if(isFinite(lo)){ ctx.beginPath(); ctx.moveTo(xL,yCI-5); ctx.lineTo(xL,yCI+5); ctx.stroke(); }
+    else { ctx.beginPath(); ctx.moveTo(xL+8,yCI-5); ctx.lineTo(xL,yCI); ctx.lineTo(xL+8,yCI+5); ctx.stroke(); }
+    if(isFinite(hi)){ ctx.beginPath(); ctx.moveTo(xR,yCI-5); ctx.lineTo(xR,yCI+5); ctx.stroke(); }
+    else { ctx.beginPath(); ctx.moveTo(xR-8,yCI-5); ctx.lineTo(xR,yCI); ctx.lineTo(xR-8,yCI+5); ctx.stroke(); }
+    ctx.fillStyle=col; ctx.beginPath(); ctx.arc(X(S.last),yCI,4,0,2*Math.PI); ctx.fill();
+    ctx.font='12px sans-serif';
+    const loT=isFinite(lo)?lo.toFixed(2):'−∞', hiT=isFinite(hi)?hi.toFixed(2):'∞';
+    const kind=S.tails==='two'?'':' one-sided';
+    const ciText = narrow
+      ? ((1-S.alpha)*100).toFixed(0)+'%'+kind+' CI ['+loT+', '+hiT+'] '+(contains?'∋ μ₀ → pass':'misses μ₀ → reject')
+      : ((1-S.alpha)*100).toFixed(1)+'%'+kind+' CI ['+loT+', '+hiT+'] '+(contains?'contains μ₀ → fail to reject':'misses μ₀ → reject');
+    const tw=ctx.measureText(ciText).width;
+    // place the label beside the finite end, kept inside the canvas
+    let tx = isFinite(hi) ? xR+8 : xL-8-tw;
+    if(S.tails==='two') tx = xR+8;
+    tx=Math.min(Math.max(tx,4), W-tw-4);
+    ctx.fillText(ciText, tx, yCI-10);
+  }
+}
+
+// ---------- UI updates ----------
+const $=id=>document.getElementById(id);
+const verdictEl=$('verdict'), calloutEl=$('callout');
+function setVerdict(html,cls){ verdictEl.className=cls||''; verdictEl.innerHTML=html; }
+function setCallout(text){ if(text){ calloutEl.style.display='block'; calloutEl.innerHTML='💡 '+text; } else calloutEl.style.display='none'; }
+
+function story(){
+  $('story').innerHTML =
+    '<b>Right now:</b> the claim under test is <b>μ₀ = '+S.mu0.toFixed(1)+' mg/100g</b>, you test <b>n = '+S.n+' bars</b> per batch, '+
+    'and your false-alarm tolerance is <b>α = '+S.alpha.toFixed(3)+'</b>. The test <b>assumes</b> the claim is true — the red lines and '+
+    'p-values are all worked out under that assumption. As for the hidden reality, which no inspector can ever know in real life, you play God here: '+
+    (S.h0true
+      ? '<b>the machine really is running perfectly</b> (claim actually true).'
+      : '<b>the machine has actually drifted to μ = '+S.muTrue.toFixed(1)+' mg/100g</b> (claim actually false).');
+}
+function theory(){
+  const se=SE(), c=crits();
+  let crit = S.tails==='two' ? c.lo.toFixed(3)+'  and  '+c.hi.toFixed(3)
+           : (S.tails==='right' ? '≥ '+c.hi.toFixed(3) : '≤ '+c.lo.toFixed(3));
+  let html='<span class="tip" data-tip="How much the batch average x̄ typically wobbles from batch to batch. σ is the bar-to-bar spread of glucose; n is how many bars you test."><span class="t-k">Standard error · SE = σ/√n</span><br><b>'+se.toFixed(4)+'</b></span>'+
+           '<span class="tip" data-tip="The red decision lines: if x̄ falls beyond these, reject the claim. They are placed so the red zone has size exactly α."><span class="t-k">Critical value(s)</span><br><b>'+crit+'</b> mg/100g</span>'+
+           '<span class="tip" data-tip="Built on purpose to equal α — this is why α is the chance of a Type I error."><span class="t-k">Red zone size</span><br><b>α = '+S.alpha.toFixed(3)+'</b></span>';
+  if(!S.h0true){
+    const pw=theoreticalPower();
+    html+='<span class="tip" data-tip="Out of 100 drifted batches, how many slip past your inspection."><span class="t-k">β · chance of a miss</span><br><b>'+(1-pw).toFixed(3)+'</b></span>'+
+          '<span class="tip" data-tip="Out of 100 drifted batches, how many your inspection catches. Grows when n grows or the drift is bigger."><span class="t-k">Power = 1−β · catch rate</span><br><b>'+pw.toFixed(3)+'</b></span>';
+  }
+  $('theory').innerHTML=html;
+}
+function updateStats(){
+  const k=S.h0true?'t':'f', d=S.counts[k], tot=d.rej+d.fail;
+  $('stN').textContent=tot; $('stR').textContent=d.rej;
+  $('stP').textContent=tot?(100*d.rej/tot).toFixed(1)+'%':'—';
+  $('stPH').textContent=S.h0true?'compare with α':'estimates power';
+  const t=S.h0true?S.alpha:theoreticalPower();
+  $('stT').textContent=(100*t).toFixed(1)+'%';
+  $('stTH').textContent=S.h0true?'= α':'= 1−β (power)';
+}
+function cell(id,title,count,total){
+  $(id).innerHTML='<div class="cellTitle">'+title+'</div><div class="cellN">'+count+'</div>'+
+    '<div class="cellPct">'+(total?(100*count/total).toFixed(1)+'% of this column':'—')+'</div>';
+}
+function updateTable(){
+  const t=S.counts.t, f=S.counts.f, tt=t.rej+t.fail, ff=f.rej+f.fail;
+  cell('cTR','Type I error ❌ (rate → α)',t.rej,tt);
+  cell('cTF','Correct ✅ (rate → 1−α)',t.fail,tt);
+  cell('cFR','Correct catch ✅ (rate → power)',f.rej,ff);
+  cell('cFF','Type II error ⚠️ a miss (rate → β)',f.fail,ff);
+}
+function refreshAll(){ story(); theory(); updateStats(); updateTable(); draw(); }
+
+function takeSample(showVerdict){
+  const x=drawMean(), rej=inRejection(x), p=pvalue(x);
+  S.samples.push(x); S.last=x;
+  const k=S.h0true?'t':'f';
+  rej?S.counts[k].rej++:S.counts[k].fail++;
+  if(!showVerdict) return;
+  const cmp = p<S.alpha ? 'p = '+fmtP(p)+' &lt; α = '+S.alpha.toFixed(3)+' → <b>reject the claim</b>'
+                        : 'p = '+fmtP(p)+' ≥ α = '+S.alpha.toFixed(3)+' → <b>let the batch pass</b>';
+  if(S.h0true){
+    if(rej){ setVerdict('❌ x̄ = '+x.toFixed(2)+' mg/100g · '+cmp+'. <b>Type I error</b> — a perfectly good batch was rejected.','bad');
+      setCallout('α is not the chance that the claim is true. It is how often good batches get rejected by mistake — a number you chose before testing.'); }
+    else { setVerdict('✅ x̄ = '+x.toFixed(2)+' mg/100g · '+cmp+'. Correct decision — the batch ships.','good');
+      setCallout('Letting the batch pass does not prove the claim true — this batch simply gave no strong reason to doubt it.'); }
+  } else {
+    if(rej){ setVerdict('✅ x̄ = '+x.toFixed(2)+' mg/100g · '+cmp+'. <b>Correct catch</b> — the machine really has drifted, so this is NOT a Type I error.','good');
+      setCallout('The red zone is just the reject zone. It only counts as Type I errors when the claim is actually true — here, landing in it is a win.'); }
+    else { setVerdict('⚠️ x̄ = '+x.toFixed(2)+' mg/100g · '+cmp+'. <b>Type II error (a miss)</b> — the drifted machine slipped past inspection.','warn');
+      setCallout('Misses (β) become rarer when you test more bars per batch or when the drift is bigger. Try raising n and watch the curve narrow.'); }
+  }
+}
+
+function resetAll(msg){
+  S.samples=[]; S.last=null;
+  S.counts={t:{rej:0,fail:0},f:{rej:0,fail:0}};
+  setCallout(null); refreshAll();
+  if(msg) setVerdict(msg,'');
+}
+
+// ---------- controls ----------
+$('mu0').addEventListener('input',e=>{ S.mu0=parseFloat(e.target.value); $('mu0Out').textContent=S.mu0.toFixed(1);
+  resetAll('Claim changed — counts reset. The red lines moved so the red zone still has size α.'); });
+$('alpha').addEventListener('input',e=>{ S.alpha=parseFloat(e.target.value); $('alphaOut').textContent=S.alpha.toFixed(3);
+  document.querySelectorAll('.chip').forEach(ch=>ch.classList.toggle('active',Math.abs(parseFloat(ch.dataset.a)-S.alpha)<1e-9));
+  resetAll('α changed — counts reset. The red zone now covers '+(S.alpha*100).toFixed(1)+'% of the good-machine curve.'); });
+document.querySelectorAll('.chip').forEach(ch=>ch.addEventListener('click',()=>{ $('alpha').value=ch.dataset.a; $('alpha').dispatchEvent(new Event('input')); }));
+$('n').addEventListener('input',e=>{ S.n=parseInt(e.target.value); $('nOut').textContent=S.n;
+  resetAll('Batch size changed — counts reset. Watch SE = σ/√n shrink and the curve narrow.'); });
+$('tails').addEventListener('change',e=>{ S.tails=e.target.value; resetAll('Test type changed — counts reset.'); });
+$('h0true').addEventListener('change',e=>{ S.h0true=e.target.checked;
+  $('muTrueCtl').classList.toggle('disabled',S.h0true);
+  resetAll(S.h0true
+    ? 'Hidden reality set to “claim true” — batches come from the good-machine curve, so every rejection is a Type I error.'
+    : 'Hidden reality set to “machine drifted” — batches come from the orange curve. Rejections are correct catches; passes are misses.'); });
+$('muTrue').addEventListener('input',e=>{ S.muTrue=parseFloat(e.target.value); $('muTrueOut').textContent=S.muTrue.toFixed(1);
+  resetAll('True mean changed — counts reset. Note how β and power respond.'); });
+$('batchN').addEventListener('input',e=>{ S.batchN=parseInt(e.target.value);
+  $('batchOut').textContent=S.batchN;
+  $('btnMany').textContent='▶ Run '+S.batchN+' experiments'; });
+$('showCI').addEventListener('change',e=>{ S.showCI=e.target.checked; draw(); });
+
+$('btnOne').addEventListener('click',()=>{ takeSample(true); draw(); updateStats(); updateTable(); });
+$('btnMany').addEventListener('click',()=>{
+  const total=S.batchN; let done=0;
+  const k=S.h0true?'t':'f', startRej=S.counts[k].rej;
+  const timer=setInterval(()=>{
+    const step=Math.max(1,Math.floor(total/25));
+    for(let i=0;i<step&&done<total;i++){ takeSample(false); done++; }
+    draw(); updateStats(); updateTable();
+    if(done>=total){
+      clearInterval(timer);
+      const r=S.counts[k].rej-startRej, pct=(100*r/total).toFixed(1);
+      if(S.h0true)
+        setVerdict('Ran '+total+' experiments with hidden reality “claim true”: <b>'+r+' rejections ('+pct+'%)</b> — expected about α = '+(S.alpha*100).toFixed(1)+'%. Every one is a Type I error.','bad');
+      else
+        setVerdict('Ran '+total+' experiments with hidden reality “drifted”: <b>'+r+' rejections ('+pct+'%)</b> — theory promised power = '+(100*theoreticalPower()).toFixed(1)+'%. These are correct catches.','good');
+    }
+  },20);
+});
+$('btnReset').addEventListener('click',()=>resetAll('Counts reset. Press “Test one batch” to begin.'));
+
+// ---------- touch-only: tap-to-toggle tooltips ----------
+if(window.matchMedia('(hover: none)').matches){
+  document.addEventListener('click',e=>{
+    const t=e.target.closest('.tip');
+    document.querySelectorAll('.tip.tip-open').forEach(el=>{ if(el!==t) el.classList.remove('tip-open'); });
+    if(t && !t.classList.contains('action')) t.classList.toggle('tip-open');
+  });
+}
+
+window.addEventListener('resize',draw);
+refreshAll();
+</script>
+</body>
+</html>

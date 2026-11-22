@@ -1,0 +1,43 @@
+---
+# Subject folder: Biostatistics.  Created 22 Nov 2026, copied from
+# teaching/molecular-biology/index.qmd (see teaching.qmd for the folder
+# structure). One .tool-row per tool; add new tools at the bottom.
+pagetitle: "Biostatistics — interactive tools by Dr. Richa Singh"
+title-prefix: ""
+title: "Biostatistics"
+description: "Interactive self-study tools for biostatistics by Dr. Richa Singh: level of significance, Type I error and power; confidence levels and confidence intervals."
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/teaching/biostatistics/">
+      <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var t = document.querySelector('.navbar a.nav-link[href$="teaching.html"]');
+        if (t) { t.classList.add("active"); t.setAttribute("aria-current", "page"); }
+      });
+      </script>
+---
+
+```{=html}
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../../teaching.html">Teaching</a> &rsaquo; Biostatistics</nav>
+<p class="kicker">Interactive tools</p>
+<h1 class="page-h1">Biostatistics</h1>
+
+<div class="tool-list">
+  <a class="tool-row" href="significance-error-power-of-test/">
+    <span class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19h18"></path><path d="M4 19c3 0 4.5-13 8-13s5 13 8 13"></path><path d="M17 19v-5"></path></svg></span>
+    <span class="tool-text">
+      <span class="tool-name">Level of Significance (α), Error and Power of Test</span>
+    </span>
+    <span class="tool-open">Open &rarr;</span>
+  </a>
+  <a class="tool-row" href="confidence-level-explorer/">
+    <span class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"></path><path d="M5 7h10"></path><path d="M9 12h11"></path><path d="M4 17h12"></path></svg></span>
+    <span class="tool-text">
+      <span class="tool-name">Confidence Level Explorer</span>
+    </span>
+    <span class="tool-open">Open &rarr;</span>
+  </a>
+</div>
+
+<p class="back-link"><a href="../../teaching.html">&larr; Back to Teaching</a></p>
+```
