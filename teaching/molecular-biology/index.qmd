@@ -1,0 +1,38 @@
+---
+# Subject folder: Molecular Biology.  Created 22 Nov 2026 (see teaching.qmd for
+# the folder structure). One .tool-row per tool; add new tools at the bottom.
+# The Quarto title block is hidden by styles.scss on any page with .crumbs, so
+# the breadcrumb can sit above the heading as in the approved mockup.
+# `title` still feeds the browser tab and search results.
+pagetitle: "Molecular Biology — interactive tools by Dr. Richa Singh"
+title-prefix: ""
+title: "Molecular Biology"
+description: "Interactive self-study tools for molecular biology by Dr. Richa Singh: Transcription in Prokaryotes."
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/teaching/molecular-biology/">
+      <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var t = document.querySelector('.navbar a.nav-link[href$="teaching.html"]');
+        if (t) { t.classList.add("active"); t.setAttribute("aria-current", "page"); }
+      });
+      </script>
+---
+
+```{=html}
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../../teaching.html">Teaching</a> &rsaquo; Molecular Biology</nav>
+<p class="kicker">Interactive tools</p>
+<h1 class="page-h1">Molecular Biology</h1>
+
+<div class="tool-list">
+  <a class="tool-row" href="prokaryotic-transcription/">
+    <span class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3c0 6 10 6 10 12s-10 6-10 6"></path><path d="M17 3c0 6-10 6-10 12"></path><path d="M8.5 7h7"></path><path d="M8.5 17h7"></path></svg></span>
+    <span class="tool-text">
+      <span class="tool-name">Transcription in Prokaryotes</span>
+    </span>
+    <span class="tool-open">Open &rarr;</span>
+  </a>
+</div>
+
+<p class="back-link"><a href="../../teaching.html">&larr; Back to Teaching</a></p>
+```

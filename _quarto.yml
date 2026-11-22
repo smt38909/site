@@ -33,8 +33,15 @@ project:
     - index.qmd
     - research.qmd
     - papers/*.qmd
+    # Teaching live from 22 Nov 2026: the Teaching page, every subject folder
+    # page and every tool landing page under teaching/ (see teaching.qmd).
+    - teaching.qmd
+    - teaching/**/*.qmd
   resources:
     - "!*.qmd"
+    # The interactive tools themselves are finished stand-alone HTML pages.
+    # They are copied across as-is, never rendered by Quarto.
+    - "teaching/**/tutor.html"
 
   # Runs after every render, local and on GitHub Actions. Rewrites
   # citation_author to "Last, First" and the citation dates to Scholar's
@@ -61,17 +68,16 @@ website:
     # Three short tabs fit comfortably on a tablet — only phones need the
     # hamburger. Default is 'lg' (992px), which hides the tabs on an iPad.
     collapse-below: md
-    # Two tabs live since 4 Sep 2026. Teaching stays commented out until
-    # teaching.qmd is finished - a navbar entry with no rendered page is a 404.
-    # Uncomment an entry here at the same time as adding its page to the render
-    # list above.
+    # Two tabs live since 4 Sep 2026; Teaching added 22 Nov 2026, in the same
+    # change that added teaching.qmd to the render list above. A navbar entry
+    # with no rendered page is a 404, so the two always move together.
     left:
       - href: index.html
         text: Profile
       - href: research.html
         text: Research & Publications
-    #   - href: teaching.html
-    #     text: Teaching
+      - href: teaching.html
+        text: Teaching
 
   page-footer:
     left: "© Dr. Richa Singh · Department of Biotechnology, SIES College, Mumbai"

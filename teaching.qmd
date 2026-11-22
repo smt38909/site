@@ -1,9 +1,30 @@
 ---
-# Tab 3 — Teaching.  Structure: v2 §7.  Page title: v2 §8.1.
-pagetitle: "Teaching Notes & E-content — Dr. Richa Singh"
+# Tab 3 — Teaching.  Rebuilt 22 Nov 2026 from the approved mockup
+# (claude.ai design canvas "Transcription tutor page — layout options").
+#
+# STRUCTURE (agreed with Akhil, 22 Nov 2026)
+# Teaching shows ONLY the interactive tools, grouped into subject folders.
+# Courses taught, mentoring and student projects were removed on purpose;
+# do not restore them without asking.
+#   teaching.html                                 this page: one card per subject
+#   teaching/<subject>/                           folder page: one row per tool
+#   teaching/<subject>/<tool>/                    tool landing page
+#   teaching/<subject>/<tool>/tutor.html          the tool itself, full screen
+# A subject card appears here only once its first tool is live. No empty
+# "coming soon" folders.
+#
+# TO ADD A SUBJECT: copy the <a class="folder-card"> block below, then create
+# teaching/<subject>/index.qmd by copying teaching/molecular-biology/index.qmd.
+# The render list in _quarto.yml already picks up every teaching/**/*.qmd.
+# URLs are permanent once published (same rule as the paper PDFs).
+pagetitle: "Teaching — interactive tools by Dr. Richa Singh"
 title-prefix: ""
 title: "Teaching"
-subtitle: "Course notes and interactive tools, free for anyone to use."
+subtitle: "Interactive tools, free for anyone to use."
+description: "Free interactive self-study tools for biotechnology and life-science students, grouped by subject, by Dr. Richa Singh, SIES College, Mumbai."
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/teaching.html">
 ---
 
 I have taught undergraduate and postgraduate biotechnology at SIES College since
@@ -11,64 +32,17 @@ I have taught undergraduate and postgraduate biotechnology at SIES College since
 and the college's autonomous framework. Anything I can usefully share ends up on
 this page.
 
-## Courses taught
-
-- Nanotechnology
-- Intellectual Property Rights
-- Biostatistics
-- Immunology
-- Cytogenetics
-- Research Methodology
-
-## Course notes
-
-<!-- TODO: drop PDFs into site/teaching/ and add a row per set of notes.
-     Keep filenames permanent once published — a renamed file breaks every
-     link and bookmark pointing at it (v2 §6). -->
-
-| Course | Material | Format |
-|--------|----------|--------|
-| *Notes will appear here as they are prepared.* | | |
-
 ## Interactive tools
 
-Small teaching tools that run entirely in the browser — nothing to install, and
-free for any student or teacher to use.
+[Self-study tools that run in the browser, grouped by subject. Nothing to install.]{.section-lead}
 
-<!-- TODO: drop a standalone HTML tool into site/tools/ and point the iframe at
-     it, then delete this comment. Until there is a real tool here, this whole
-     section is commented out so the page doesn't show an empty box.
-
-::: {.tool-frame}
 ```{=html}
-<iframe src="tools/example-tool.html"
-        height="520"
-        title="Interactive teaching tool"></iframe>
+<div class="folder-grid">
+  <a class="folder-card" href="teaching/molecular-biology/">
+    <svg class="folder-icon" aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+    <span class="folder-name">Molecular Biology</span>
+    <span class="folder-tools">Transcription in Prokaryotes</span>
+    <span class="folder-count">1 tool &rarr;</span>
+  </a>
+</div>
 ```
-:::
-
-[Open full screen](tools/example-tool.html){.linkbtn}
--->
-
-*Coming soon.*
-
-## Mentoring
-
-- Mentor for SWAYAM-NPTEL courses since 2018, with more than ten topper mentees
-- Academic and career mentoring for undergraduate and postgraduate students
-- Convener, RUSA-sponsored Bioinformatics workshop for undergraduates
-- Organiser of LTMT-sponsored workshops on proteomics and epigenetics for faculty and research scholars
-- Organiser of seminars, guest lectures, exhibitions, field projects, industrial visits and alumni meets
-
-## Student research projects
-
-Postgraduate dissertations guided, each leading to publications and conference
-presentations:
-
-- Synthesis, optimisation and biotechnological applications of silver nanoparticles (2018)
-- The material matters: exploring consumer practices and safety perceptions of cookware materials (2024)
-- Exploring the potential of banana and carrot peels for dye biosorption (2025)
-
-Seven undergraduate projects have also been guided to conference presentation,
-including work on bioethanol from plant and waste mangrove apple feedstocks, and
-CRISPR/Cas9 genome editing in *Staphylococcus aureus*.

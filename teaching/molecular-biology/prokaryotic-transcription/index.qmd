@@ -1,0 +1,75 @@
+---
+# Tool landing page: Transcription in Prokaryotes.  Created 22 Nov 2026 from
+# the approved mockup (option A: landing page here, tool full screen in
+# tutor.html beside this file).
+#
+# tutor.html is the interactive tutor exactly as built in Claude (artifact
+# "Transcription in Prokaryotes — Interactive Tutor", version 1795344830-8ee8),
+# with three additions only: a slim dark "back to the site" bar at the top of
+# <body>, the site favicon, and a robots noindex tag so search results land
+# visitors here first. To update the tutor, replace tutor.html with the new
+# export and re-add those three things.
+#
+# The chapter links use the tutor's own #ids (warmup, unit, promoter, rnap,
+# initiation, elongation, termination, inhibitors, final). If the tutor ever
+# renames a chapter id, update the links below.
+#
+# The feedback link goes to a Google Form that the tutor also links to. Whoever
+# owns that form receives the answers.
+pagetitle: "Transcription in Prokaryotes — interactive tutor by Dr. Richa Singh"
+title-prefix: ""
+title: "Transcription in Prokaryotes"
+description: "A free interactive self-study tutor on bacterial transcription: strands, promoters, RNA polymerase and sigma factors, initiation, elongation, termination and inhibitors, with simulators and checkpoints."
+include-in-header:
+  - text: |
+      <link rel="canonical" href="https://drrichasingh.in/teaching/molecular-biology/prokaryotic-transcription/">
+      <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var t = document.querySelector('.navbar a.nav-link[href$="teaching.html"]');
+        if (t) { t.classList.add("active"); t.setAttribute("aria-current", "page"); }
+      });
+      </script>
+---
+
+```{=html}
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../../../teaching.html">Teaching</a> &rsaquo; <a href="../">Molecular Biology</a> &rsaquo; Transcription in Prokaryotes</nav>
+<p class="kicker">Interactive self-study tool</p>
+<h1 class="page-h1">Transcription in Prokaryotes</h1>
+<p class="tool-lead">Work through bacterial transcription step by step, from strands and promoters to termination and the drugs that block it. Simulators, worked problems and a checkpoint at the end of every chapter.</p>
+
+<div class="start-row">
+  <a class="start-btn" href="tutor.html">Start the tutor &rarr;</a>
+  <p class="start-note">Opens full-screen. Your progress is saved in this browser, on this device. Nothing to install, no sign-in.</p>
+</div>
+```
+
+## What's inside
+
+```{=html}
+<div class="chapter-grid">
+  <a class="chapter-card" href="tutor.html#warmup"><span class="ch-num">0</span><span class="ch-text"><span class="ch-title">Warm-up: strands and direction</span><span class="ch-does">Convert between strands and write the RNA product.</span></span></a>
+  <a class="chapter-card" href="tutor.html#unit"><span class="ch-num">1</span><span class="ch-text"><span class="ch-title">The transcription unit</span><span class="ch-does">Find the template strand for genes on either strand.</span></span></a>
+  <a class="chapter-card" href="tutor.html#promoter"><span class="ch-num">2</span><span class="ch-text"><span class="ch-title">The promoter</span><span class="ch-does">Explore the &minus;35 and &minus;10 boxes; test promoter strength.</span></span></a>
+  <a class="chapter-card" href="tutor.html#rnap"><span class="ch-num">3</span><span class="ch-text"><span class="ch-title">RNA polymerase and &sigma; factors</span><span class="ch-does">Build the holoenzyme; switch &sigma; factors.</span></span></a>
+  <a class="chapter-card" href="tutor.html#initiation"><span class="ch-num">4</span><span class="ch-text"><span class="ch-title">Initiation</span><span class="ch-does">Step through initiation; simulate abortive cycling.</span></span></a>
+  <a class="chapter-card" href="tutor.html#elongation"><span class="ch-num">5</span><span class="ch-text"><span class="ch-title">Elongation</span><span class="ch-does">Run the elongation complex; proofreading and arrest.</span></span></a>
+  <a class="chapter-card" href="tutor.html#termination"><span class="ch-num">6</span><span class="ch-text"><span class="ch-title">Termination</span><span class="ch-does">Build a Rho-independent terminator; watch Rho act.</span></span></a>
+  <a class="chapter-card" href="tutor.html#inhibitors"><span class="ch-num">7</span><span class="ch-text"><span class="ch-title">Inhibitors of transcription</span><span class="ch-does">Run drug experiments on each stage.</span></span></a>
+  <a class="chapter-card" href="tutor.html#final"><span class="ch-num">&check;</span><span class="ch-text"><span class="ch-title">Final assessment</span><span class="ch-does">20 mixed questions covering every chapter.</span></span></a>
+</div>
+```
+
+## How to use it
+
+- Go in order the first time: each chapter builds on the one before.
+- Answer the checkpoint at the end of each chapter before moving on.
+- Keep **Numbers to remember** open as a quick revision sheet before exams.
+- Teachers are welcome to use it in class or set chapters as homework.
+
+```{=html}
+<div class="credit-box">
+  <p><strong>Developed by Dr. Richa Singh</strong>, SIES College. Free for any student or teacher to use.</p>
+  <p class="credit-cite">Suggested citation: Singh, R. (2026). <em>Transcription in Prokaryotes: an interactive self-study tool</em>. https://drrichasingh.in/teaching/molecular-biology/prokaryotic-transcription/</p>
+  <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSd2AjlX_lQxNK4d3XJFm-A60xXKAgN1XYOf1Pq8AhjajCzO0Q/viewform" target="_blank" rel="noopener">Send feedback</a> &middot; <a href="../">&larr; Back to Molecular Biology</a></p>
+</div>
+```

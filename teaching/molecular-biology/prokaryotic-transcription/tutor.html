@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, follow">
+<meta name="description" content="Interactive self-study tutor on transcription in prokaryotes, by Dr. Richa Singh.">
+<link rel="icon" type="image/png" href="/images/rs-icon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/rs-icon-180.png">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transcription in Prokaryotes — Interactive Tutor</title>
+<style>
+:root{
+  --bg:#f6f5f1; --card:#ffffff; --ink:#1d2330; --muted:#5b6475; --line:#e3e1da;
+  --accent:#2457d6; --accent-soft:#e8eefc;
+  --dna:#2b4c7e; --tmpl:#3b3f4a; --rna:#e0582f; --sigma:#7b2cbf; --core:#1f8a7f;
+  --ok:#157a3c; --ok-soft:#e4f4ea; --bad:#b3261e; --bad-soft:#fbe9e7; --warn:#a15c00; --warn-soft:#fff3dc;
+  --up:#c98a00; --m35:#d1495b; --m10:#2f7dd1; --ext:#8a5cf6; --disc:#13a89e; --plus1:#111;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;font-size:16px}
+button{font:inherit;cursor:pointer}
+input,select{font:inherit}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+/* header */
+.top{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:14px;padding:10px 18px;background:#fff;border-bottom:1px solid var(--line)}
+.brand{display:flex;flex-direction:column;line-height:1.2;flex:1;min-width:0}
+.brand b{font-size:17px}
+.brand span{font-size:12.5px;color:var(--muted)}
+.prog{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.prog .bar{width:140px;height:8px;background:#ecebe6;border-radius:99px;overflow:hidden}
+.prog .bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .4s}
+#menuBtn{display:none;border:1px solid var(--line);background:#fff;border-radius:10px;padding:6px 10px}
+.btn{border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:10px;padding:7px 14px;font-size:14.5px;font-weight:600}
+.btn:hover{filter:brightness(1.07)}
+.btn.ghost{background:#fff;color:var(--accent)}
+.btn.small{padding:4px 10px;font-size:13.5px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+/* layout */
+.layout{display:grid;grid-template-columns:270px 1fr;min-height:calc(100vh - 58px)}
+nav#side{border-right:1px solid var(--line);background:#fbfaf7;padding:16px 10px;position:sticky;top:58px;height:calc(100vh - 58px);overflow:auto}
+nav#side h4{margin:4px 10px 10px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.navitem{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:0;background:none;padding:9px 10px;border-radius:10px;color:var(--ink);font-size:14.5px}
+.navitem:hover{background:#efede6}
+.navitem.active{background:var(--accent-soft);color:var(--accent);font-weight:650}
+.navitem .num{flex:0 0 26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#e9e7e0;font-size:12.5px;font-weight:700;color:#444}
+.navitem.done .num{background:var(--ok);color:#fff}
+.navitem.locked{color:#9a9a9a}
+.navitem .st{margin-left:auto;font-size:13px}
+.sidenote{margin:18px 10px 0;font-size:12.5px;color:var(--muted)}
+main{min-width:0;padding:26px clamp(14px,3vw,44px) 80px;max-width:1080px;width:100%}
+section.chap h2{font-size:clamp(24px,3vw,31px);margin:0 0 4px;letter-spacing:-.01em}
+.kicker{font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
+.lead{color:var(--muted);margin:6px 0 18px;font-size:16.5px}
+.goals{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:12px 18px;margin-bottom:18px}
+.goals b{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.goals ul{margin:6px 0 0;padding-left:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:16px 0}
+.card h3{margin:0 0 6px;font-size:19px}
+.card .sub{color:var(--muted);font-size:14.5px;margin:0 0 12px}
+details.notes{background:#fff;border:1px solid var(--line);border-radius:var(--radius);margin:14px 0;padding:0 20px}
+details.notes summary{cursor:pointer;padding:14px 0;font-weight:700;font-size:17px;list-style:none}
+details.notes summary::before{content:"▸ ";color:var(--accent)}
+details.notes[open] summary::before{content:"▾ "}
+details.notes .body{padding-bottom:14px}
+details.notes ul{padding-left:20px;margin:6px 0}
+details.notes li{margin:4px 0}
+.module{border-left:5px solid var(--accent)}
+.module h3::before{content:"⚙ ";color:var(--accent)}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:99px;background:var(--warn-soft);color:var(--warn);vertical-align:middle;margin-left:6px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.chip{font-size:13px;padding:4px 10px;border-radius:99px;background:#f0efe9;border:1px solid var(--line)}
+.chip.k{background:var(--accent-soft);border-color:#c9d6f7;color:#1e3f9e}
+.chip.ok{background:var(--ok-soft);border-color:#bfe3cb;color:var(--ok)}
+.chip.bad{background:var(--bad-soft);border-color:#f2c4bf;color:var(--bad)}
+.info{background:#f9f8f4;border:1px dashed #d8d5cc;border-radius:12px;padding:12px 14px;margin-top:10px;min-height:52px;font-size:15px}
+.info b.t{display:block;margin-bottom:2px}
+svg{max-width:100%;height:auto;display:block}
+svg text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.svgwrap{background:#fcfcfa;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.clickable{cursor:pointer}
+.clickable:hover{filter:brightness(1.08)}
+table.cmp{border-collapse:collapse;width:100%;font-size:14.5px}
+table.cmp th,table.cmp td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+table.cmp th{background:#f3f2ec}
+.seqin{width:100%;max-width:520px;padding:8px 10px;border:1px solid #cfcbc0;border-radius:10px;font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase}
+.seqout{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15.5px;background:#fbfaf6;border:1px solid var(--line);border-radius:10px;padding:12px;overflow-x:auto;white-space:pre}
+.seqout .lab{font-family:system-ui,sans-serif;font-size:12.5px;color:var(--muted)}
+.c-cod{color:var(--dna);font-weight:700}.c-tmp{color:var(--tmpl);font-weight:700}.c-rna{color:var(--rna);font-weight:700}
+select{padding:6px 8px;border-radius:9px;border:1px solid #cfcbc0;background:#fff;max-width:100%}
+input[type=text],input[type=number]{padding:7px 9px;border-radius:9px;border:1px solid #cfcbc0}
+.fb{margin-top:8px;padding:10px 12px;border-radius:10px;font-size:15px}
+.fb.ok{background:var(--ok-soft);color:#0f5129;border:1px solid #bfe3cb}
+.fb.bad{background:var(--bad-soft);color:#7a1b14;border:1px solid #f2c4bf}
+.fb.neutral{background:var(--warn-soft);color:#6b3e00;border:1px solid #f0d9a8}
+/* promoter grid */
+.pgrid{overflow-x:auto;padding:6px 0 10px}
+.prow{display:flex;white-space:nowrap;align-items:center}
+.plab{flex:0 0 190px;position:sticky;left:0;z-index:2;background:#fff;font-size:12px;color:var(--muted);padding-right:8px;line-height:24px}
+.pcell{flex:0 0 14px;width:14px;height:24px;line-height:24px!important;text-align:center;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:20px;border-radius:2px}
+.prow.ruler .pcell{font-size:10.5px;color:var(--muted);font-weight:700;overflow:visible;position:relative}
+.prow.ruler .pcell span{position:absolute;left:50%;top:0;transform:translateX(-50%);white-space:nowrap}
+.prow.ruler{margin-bottom:4px;border-bottom:1px solid var(--line)}
+.pcell.el{cursor:pointer;color:#fff;font-weight:700}
+.pcell.e-up{background:var(--up)}.pcell.e-m35{background:var(--m35)}.pcell.e-ext{background:var(--ext)}.pcell.e-m10{background:var(--m10)}.pcell.e-disc{background:var(--disc)}.pcell.e-p1{background:#111}
+.pcell.bub{box-shadow:inset 0 -3px 0 var(--rna)}
+.pcell.fp{background-color:rgba(31,138,127,.13)}
+.pcell.e-up.fp,.pcell.e-m35.fp,.pcell.e-m10.fp,.pcell.e-ext.fp,.pcell.e-disc.fp,.pcell.e-p1.fp{background-image:linear-gradient(rgba(31,138,127,.0),rgba(31,138,127,.0))}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:13px;margin-top:6px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.boxin{display:flex;gap:3px;margin-top:4px}
+.boxin span{width:22px;height:24px;display:grid;place-items:center;border-radius:5px;font-family:ui-monospace,Menlo,monospace;font-size:13px;font-weight:700;color:#fff}
+.boxin span.m{background:var(--ok)} .boxin span.x{background:var(--bad)}
+.meter{height:20px;background:#ecebe6;border-radius:99px;overflow:hidden;position:relative}
+.meter i{display:block;height:100%;width:0;border-radius:99px;transition:width .35s, background .35s}
+.labgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.labgrid .field{background:#fbfaf6;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.labgrid label{font-size:13.5px;font-weight:650;color:var(--muted)}
+/* stepper */
+.stepper{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.stepper button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:4px 11px;font-size:13px}
+.stepper button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.stagebox{display:grid;grid-template-columns:1fr;gap:6px}
+.stagebox h4{margin:8px 0 2px;font-size:17px}
+.stagebox ul{margin:4px 0;padding-left:20px}
+/* quiz */
+.checkpoint{border:2px solid var(--accent);background:linear-gradient(#fff,#fbfcff)}
+.checkpoint>h3::before{content:"✎ ";}
+.q{border-top:1px solid var(--line);padding:14px 0}
+.q:first-of-type{border-top:0}
+.qh{font-weight:650;margin-bottom:8px}
+.qh .qn{color:var(--accent);margin-right:6px}
+.opt{display:block;width:100%;text-align:left;margin:5px 0;padding:9px 12px;border:1px solid #d6d3ca;border-radius:10px;background:#fff;font-size:15px}
+.opt:hover{border-color:var(--accent)}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt:disabled{cursor:default;color:var(--ink)}
+.ordlist{list-style:none;padding:0;margin:0}
+.ordlist li{display:flex;align-items:center;gap:8px;border:1px solid #d6d3ca;border-radius:10px;padding:7px 10px;margin:5px 0;background:#fff}
+.ordlist li .ix{font-weight:700;color:var(--accent);width:20px}
+.ordlist li .tx{flex:1}
+.ordlist li button{border:1px solid var(--line);background:#f6f5f1;border-radius:7px;width:30px;height:28px}
+.ordlist li.right{border-color:var(--ok);background:var(--ok-soft)}
+.ordlist li.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.matchrow{display:grid;grid-template-columns:minmax(140px,1fr) 1.3fr;gap:10px;align-items:center;margin:5px 0}
+.matchrow .l{font-weight:600}
+.matchrow select.right{border-color:var(--ok);background:var(--ok-soft)}
+.matchrow select.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.qactions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.qsum{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;background:var(--accent-soft);border-radius:10px;padding:10px 14px;margin-top:8px;font-size:14.5px}
+.navbtns{display:flex;justify-content:space-between;margin-top:26px;gap:10px}
+.credit a.btn{text-decoration:none;display:inline-block;margin-left:6px}
+.credit{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);text-align:center;font-size:13.5px;color:var(--muted)}
+.lockpanel{text-align:center;padding:60px 20px}
+.lockpanel .big{font-size:48px}
+/* drawer */
+.drawer{position:fixed;top:0;right:0;height:100vh;width:min(420px,92vw);background:#fff;border-left:1px solid var(--line);box-shadow:-10px 0 30px rgba(0,0,0,.08);z-index:50;transform:translateX(105%);transition:transform .3s;overflow:auto;padding:18px 20px}
+.drawer.open{transform:none}
+.drawer h3{margin-top:0}
+.numtable{width:100%;border-collapse:collapse;font-size:14px}
+.numtable td{border-bottom:1px solid var(--line);padding:7px 4px;vertical-align:top}
+.numtable td:first-child{color:var(--muted);width:52%}
+.numtable td:last-child{font-weight:650}
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:40;display:none}
+.scrim.on{display:block}
+.scorebanner{font-size:20px;font-weight:700;padding:16px;border-radius:12px;text-align:center;margin:12px 0}
+.hist{display:flex;align-items:flex-end;gap:6px;height:70px;margin-top:6px}
+.hist div{flex:1;background:var(--rna);border-radius:4px 4px 0 0;position:relative;min-height:2px;transition:height .3s}
+.hist div span{position:absolute;bottom:-18px;left:0;right:0;text-align:center;font-size:11px;color:var(--muted)}
+.hist div b{position:absolute;top:-17px;left:0;right:0;text-align:center;font-size:11px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.two.chgrid{grid-template-columns:1.25fr 1fr}
+.two>*{min-width:0}
+.scen{background:#fbfaf6;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.kbd{font-family:ui-monospace,Menlo,monospace;background:#f1f0ea;border:1px solid var(--line);border-radius:6px;padding:1px 6px}
+@media (max-width:860px){
+  #unitMap,#strandSvg,#smSvg,#inSvg,#abSvg,#elSvg,#tcSvg,#tbSvg,#rhSvg,#dgSvg{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  #unitMap svg,#strandSvg svg,#smSvg svg,#inSvg svg,#abSvg svg,#elSvg svg,#tcSvg svg,#tbSvg svg,#rhSvg svg,#dgSvg svg{min-width:720px;max-width:none}
+  #elSvg svg,#tbSvg svg{min-width:900px}
+  #unitMap::before,#strandSvg::before,#smSvg::before,#inSvg::before,#abSvg::before,#elSvg::before,#tcSvg::before,#tbSvg::before,#rhSvg::before,#dgSvg::before{content:"← swipe sideways to see the whole diagram →";display:block;position:sticky;left:0;font-size:12px;color:var(--muted);padding:6px 10px 0;width:calc(100vw - 80px)}
+  .two.chgrid{grid-template-columns:1fr}
+  .row label select{width:100%}
+  .row label{max-width:100%}
+  .matchrow{grid-template-columns:1fr}
+  .card{padding:14px 14px}
+  main{padding:18px 12px 60px}
+  .layout{grid-template-columns:1fr}
+  nav#side{position:fixed;left:0;top:58px;z-index:45;width:280px;transform:translateX(-105%);transition:transform .3s;box-shadow:10px 0 30px rgba(0,0,0,.1)}
+  nav#side.open{transform:none}
+  #menuBtn{display:block}
+  .prog .bar{width:70px}
+  .labgrid,.two{grid-template-columns:1fr}
+  .brand span{display:none}
+}
+@media (max-width:520px){ #numBtn .t{display:none} .prog{display:none} }
+</style>
+</head>
+<body>
+<div class="sitebar" style="background:#12263A;font-family:'Source Sans 3',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:14px;padding:6px 18px;">
+  <a href="./" style="color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:8px;min-height:32px;">&larr; drrichasingh.in &middot; About this tool</a>
+</div>
+
+<header class="top">
+  <button id="menuBtn" aria-label="Open chapter list">☰</button>
+  <div class="brand"><b>Transcription in Prokaryotes</b><span>Interactive self-study tool – Developed by Dr. Richa Singh</span></div>
+  <div class="prog" title="Checkpoints attempted"><div class="bar"><i id="progFill"></i></div><span id="progTxt">0%</span></div>
+  <button id="numBtn" class="btn ghost small">📌 <span class="t">Numbers to remember</span></button>
+</header>
+<div class="scrim" id="scrim"></div>
+<div class="layout">
+<nav id="side"></nav>
+<main id="main">
+
+<!-- ============ CH 0 WARM-UP ============ -->
+<section class="chap" id="warmup" hidden>
+  <div class="kicker">Chapter 0 · Warm-up</div>
+  <h2>Strands, direction &amp; the RNA product</h2>
+  <div class="goals"><b>You should be able to</b><ul>
+    <li>Name both strands of a gene (coding/sense/+ vs template/antisense/–).</li>
+    <li>Write the RNA transcript 5′→3′ from either strand, however it is written.</li></ul></div>
+  <details class="notes" open><summary>Key points</summary><div class="body"><ul>
+    <li>RNA is synthesised <b>5′→3′</b>. The DNA strand that is read (antiparallel, <b>3′→5′</b>) is the <b>template strand</b>.</li>
+    <li>The other strand has the <b>same sequence as the RNA</b> (T instead of U). It is called the <b>coding / sense / plus (+) / non-template</b> strand. Databases list this strand.</li>
+    <li>The template strand is also called the <b>non-coding / antisense / minus (–)</b> strand.</li>
+    <li>For a single gene only <b>one</b> strand is used as the template. Different genes on the same chromosome can use different strands.</li>
+  </ul></div></details>
+
+  <div class="card module">
+    <h3>Strand converter</h3>
+    <p class="sub">Type a sequence and choose which strand it is. The tool lines up all three molecules and labels them.</p>
+    <div class="row"><label>This sequence is the&nbsp;
+      <select id="wuMode">
+        <option value="coding">coding (non-template) strand, written 5′→3′</option>
+        <option value="t35">template strand, written 3′→5′</option>
+        <option value="t53">template strand, written 5′→3′</option>
+      </select></label></div>
+    <input id="wuSeq" class="seqin" value="ATGATCTCGTAA" spellcheck="false" aria-label="DNA sequence">
+    <div id="wuOut" class="seqout" style="margin-top:10px"></div>
+    <div id="wuNote" class="info"></div>
+  </div>
+
+  <div class="card module">
+    <h3>Practice: write the RNA</h3>
+    <p class="sub">A new problem every time. Watch the direction the strand is written in, because that is where most marks are lost.</p>
+    <div id="wuPq" class="scen"></div>
+    <div class="row"><input id="wuPa" type="text" class="seqin" placeholder="Type the RNA, 5′→3′ (e.g. AUGC…)" spellcheck="false">
+      <button class="btn" id="wuPcheck">Check</button><button class="btn ghost" id="wuPnew">New problem</button></div>
+    <div id="wuPfb"></div>
+  </div>
+
+  <div class="card checkpoint"><h3>Checkpoint 0</h3><div class="quiz" data-quiz="warmup"></div></div>
+  <div class="navbtns"><span></span><button class="btn" data-go="unit">Next: The transcription unit →</button></div>
+</section>
+
+<!-- ============ CH 1 UNIT ============ -->
+<section class="chap" id="unit" hidden>
+  <div class="kicker">Chapter 1</div>
+  <h2>The transcription unit</h2>
+  <p class="lead">A bacterial gene has a promoter, an RNA-coding sequence and a terminator.</p>
+  <div class="goals"><b>You should be able to</b><ul>
+    <li>Name the three parts of a transcription unit and what each does.</li>
+    <li>Explain how the promoter sets the direction of transcription and which strand is the template.</li>
+    <li>List the substrates of RNA polymerase.</li></ul></div>
+  <details class="notes" open><summary>Key points</summary><div class="body"><ul>
+    <li><b>DNA-dependent RNA polymerase</b> catalyses transcription and makes RNA 5′→3′.</li>
+    <li>Substrates are the ribonucleoside triphosphates <b>ATP, GTP, CTP, UTP</b>. The next nucleotide is chosen by base-pairing with the exposed template base, and pyrophosphate is released.</li>
+    <li><b>RNA polymerase needs no primer.</b> Unlike DNA polymerase, it can start a new chain on its own.</li>
+    <li><b>Promoter</b>: lies upstream; RNA polymerase binds here. Its orientation tells the enzyme which strand is the template and where to start, so every RNA begins at the same site (+1).</li>
+    <li><b>RNA-coding sequence</b>: the stretch of DNA that is copied into RNA.</li>
+    <li><b>Terminator</b>: specifies where transcription stops.</li>
+    <li>A gene with its promoter is an <b>independent unit</b>. Some genes use one strand as the template; others use the opposite strand.</li>
+  </ul></div></details>
+
+  <div class="card module">
+    <h3>Explore a transcription unit</h3>
+    <p class="sub">Click each coloured region.</p>
+    <div class="svgwrap" id="unitMap"></div>
+    <div class="info" id="unitInfo">Click the promoter, the RNA-coding sequence or the terminator.</div>
+  </div>
+
+  <div class="card module">
+    <h3>Which strand is the template?</h3>
+    <p class="sub">Two neighbouring genes point in opposite directions. Choose a gene to see its template strand and its RNA.</p>
+    <div class="row"><button class="btn small" id="gA">Gene A (→)</button><button class="btn small ghost" id="gB">Gene B (←)</button></div>
+    <div class="svgwrap" id="strandSvg"></div>
+    <div class="info" id="strandInfo"></div>
+  </div>
+
+  <div class="card checkpoint"><h3>Checkpoint 1</h3><div class="quiz" data-quiz="unit"></div></div>
+  <div class="navbtns"><button class="btn ghost" data-go="warmup">← Back</button><button class="btn" data-go="promoter">Next: The promoter →</button></div>
+</section>
+
+<!-- ============ CH 2 PROMOTER ============ -->
+<section class="chap" id="promoter" hidden>
+  <div class="kicker">Chapter 2</div>
+  <h2>The promoter</h2>
+  <p class="lead">Short DNA elements tell RNA polymerase where to bind and how often to start. How closely they match the consensus sets the promoter's strength.</p>
+  <div class="goals"><b>You should be able to</b><ul>
+    <li>Give the consensus sequences and positions of the –35 and –10 boxes.</li>
+    <li>Describe the UP element, the extended –10 element and the discriminator.</li>
+    <li>Predict the relative strength of promoters from their sequences.</li></ul></div>
+  <details class="notes" open><summary>Key points</summary><div class="body"><ul>
+    <li>Most <i>E. coli</i> promoters have two key elements, about <b>35 and 10 bp upstream of +1</b> (the first transcribed base pair).</li>
+    <li><b>–35 box</b> consensus: <span class="mono">5′-TTGACA-3′</span>. <b>–10 box</b> (formerly the <i>Pribnow box</i>): <span class="mono">5′-TATAAT-3′</span>. They are usually separated by about <b>17 bp</b>.</li>
+    <li>A <b>consensus</b> is derived by comparing many promoters. Very few match it exactly; most differ at a few positions.</li>
+    <li><b>Promoter strength</b> = the number of transcripts initiated per unit time. It depends on (i) initial binding of the polymerase, (ii) how efficiently isomerization occurs and (iii) how readily the polymerase escapes.</li>
+    <li>Promoters closer to the consensus are generally <b>stronger</b>. For example, a –10 box of <span class="mono">GATACT</span> initiates less often than <span class="mono">TATAAT</span> because σ recognises it less well. Genes needed at high levels tend to have near-consensus promoters, which is why promoter sequences vary so much.</li>
+    <li><b>UP element</b>: an extra AT-rich element upstream of –35 in some strong promoters (e.g. rRNA genes). It provides an additional specific contact with the polymerase, so binding is stronger.</li>
+    <li><b>Extended –10</b>: some promoters lack a –35 region and instead have a short extra element at the upstream end of the –10 box (e.g. the <i>gal</i> genes). The extra contacts compensate for the missing –35.</li>
+    <li><b>Discriminator</b>: an element just downstream of –10. How strongly it interacts with the polymerase affects the stability of the enzyme–promoter complex.</li>
+  </ul></div></details>
+
+  <div class="card module">
+    <h3>Promoter explorer</h3>
+    <p class="sub">A model σ<sup>70</sup> promoter from –60 to +20 (there is no position 0). Click a coloured element. You can also overlay the open-complex bubble and the polymerase footprint, which come up again in Chapter 4.</p>
+    <div class="row"><label><input type="checkbox" id="pxBub"> Show open-complex bubble (–11 to +2)</label><label><input type="checkbox" id="pxFp"> Show polymerase footprint (–55 to +20)</label></div>
+    <div class="pgrid" id="pxGrid"></div>
+    <div class="legend">
+      <span><i style="background:var(--up)"></i>UP element</span><span><i style="background:var(--m35)"></i>–35 box</span><span><i style="background:var(--ext)"></i>Extended –10 (TG)</span><span><i style="background:var(--m10)"></i>–10 box</span><span><i style="background:var(--disc)"></i>Discriminator</span><span><i style="background:#111"></i>+1 start site</span>
+    </div>
+    <div class="info" id="pxInfo">Click any coloured element in the sequence.</div>
+  </div>
+
+  <div class="card module">
+    <h3>Promoter Strength Lab</h3>
+    <p class="sub">Change the promoter and watch the predicted strength. The meter compares promoters with each other. It is not real experimental data.</p>
+    <div class="row" id="labPresets"></div>
+    <div class="labgrid">
+      <div class="field"><label>–35 box (5′→3′, 6 nt)</label><br><input id="lab35" class="seqin" maxlength="6" value="TTGACA" style="max-width:150px"><div class="boxin" id="lab35v"></div></div>
+      <div class="field"><label>–10 box (5′→3′, 6 nt)</label><br><input id="lab10" class="seqin" maxlength="6" value="TATAAT" style="max-width:150px"><div class="boxin" id="lab10v"></div></div>
+      <div class="field"><label>Spacer length between boxes: <b id="labSpV">17</b> bp</label><br><input id="labSp" type="range" min="13" max="21" value="17" style="width:100%"></div>
+      <div class="field"><label>Extra elements</label><br>
+        <label style="font-weight:400;color:var(--ink)"><input type="checkbox" id="labUp"> UP element (AT-rich, upstream of –35)</label><br>
+        <label style="font-weight:400;color:var(--ink)"><input type="checkbox" id="labExt"> Extended –10 (TG just upstream of –10)</label></div>
+    </div>
+    <div style="margin-top:14px"><b>Predicted strength:</b> <span id="labLbl"></span><div class="meter" style="margin-top:6px"><i id="labMeter"></i></div></div>
+    <div class="info" id="labWhy"></div>
+  </div>
+
+  <div class="card checkpoint"><h3>Checkpoint 2</h3><div class="quiz" data-quiz="promoter"></div></div>
+  <div class="navbtns"><button class="btn ghost" data-go="unit">← Back</button><button class="btn" data-go="rnap">Next: RNA polymerase &amp; σ →</button></div>
+</section>
+
+<!-- ============ CH 3 RNAP ============ -->
+<section class="chap" id="rnap" hidden>
+  <div class="kicker">Chapter 3</div>
+  <h2>RNA polymerase &amp; σ factors</h2>
+  <p class="lead">One enzyme, many σ factors. The core enzyme makes RNA, and σ tells it <i>where</i> to start.</p>
+  <div class="goals"><b>You should be able to</b><ul>
+    <li>Give the subunit composition of core enzyme and holoenzyme, with genes and functions.</li>
+    <li>Explain why σ is needed for initiation but not for elongation.</li>
+    <li>Map the σ<sup>70</sup> regions (and αCTD) to the promoter elements they recognise.</li>
+    <li>Match alternative σ factors to the conditions in which they act.</li></ul></div>
+  <details class="notes" open><summary>Key points</summary><div class="body"><ul>
+    <li>Bacteria have <b>only one type of RNA polymerase</b>. It transcribes all classes of gene: mRNA, tRNA and rRNA.</li>
+    <li><b>Core enzyme</b> = α<sub>2</sub>ββ′ω. Adding <b>σ</b> (the initiation factor) gives the <b>holoenzyme</b>.</li>
+    <li>Without σ, the core enzyme binds anywhere on the DNA and starts at incorrect sites. σ <b>greatly reduces non-specific binding</b> and gives the enzyme its promoter-specific binding. σ is <b>not needed for elongation or termination</b>.</li>
+    <li>σ<sup>70</sup> has four regions. <b>Region 4</b> recognises –35 using a <b>helix-turn-helix</b>: one helix sits in the major groove and contacts the bases, while the other lies across the groove and contacts the backbone. <b>Region 2</b> recognises –10 with an α-helix whose aromatic residues bind non-template bases and stabilise the melted DNA. <b>Region 2.3</b> melts the DNA.</li>
+    <li><b>Region 3</b> recognises the extended –10 (two specific base pairs). <b>Region 1.2</b> recognises the discriminator.</li>
+    <li>The <b>UP element</b> is recognised not by σ but by the <b>α C-terminal domain (αCTD)</b>. The αCTD is joined to αNTD by a flexible linker, so it can reach UP elements that lie further upstream.</li>
+    <li>Different σ factors direct the core enzyme to different sets of promoters, for example <b>σ<sup>32</sup></b> during heat shock (its promoter elements lie at about –39 and –15).</li>
+  </ul></div></details>
+
+  <div class="card module">
+    <h3>Build the holoenzyme</h3>
+    <p class="sub">Add the subunits in the order they assemble. Each subunit you add shows its gene and function.</p>
+    <div class="row" id="hbBtns">
+      <button class="btn small ghost" data-s="a">α</button><button class="btn small ghost" data-s="b">β</button><button class="btn small ghost" data-s="bp">β′</button><button class="btn small ghost" data-s="w">ω</button><button class="btn small ghost" data-s="s">σ⁷⁰</button><button class="btn small" id="hbReset" style="margin-left:auto">Reset</button>
+    </div>
+    <div class="svgwrap" id="hbSvg"></div>
+    <div class="info" id="hbInfo">Start by adding the subunit needed for core assembly.</div>
+  </div>
+
+  <div class="card module">
+    <h3>Who reads which promoter element?</h3>
+    <p class="sub">Click a σ<sup>70</sup> region or the αCTD (top) to see which part of the promoter it contacts (bottom).</p>
+    <div class="svgwrap" id="smSvg"></div>
+    <div class="info" id="smInfo">Click a region.</div>
+  </div>
+
+  <div class="card module">
+    <h3>σ factor switcher</h3>
+    <p class="sub">Choose a condition the cell is in. The matching σ factor loads onto the core enzyme and directs it to a new set of genes.</p>
+    <div class="row" id="sfBtns"></div>
+    <div class="two"><div class="svgwrap" id="sfSvg"></div><div class="info" id="sfInfo" style="margin-top:0"></div></div>
+  </div>
+
+  <div class="card checkpoint"><h3>Checkpoint 3</h3><div class="quiz" data-quiz="rnap"></div></div>
+  <div class="navbtns"><button class="btn ghost" data-go="promoter">← Back</button><button class="btn" data-go="initiation">Next: Initiation →</button></div>
+</section>
+
+<!-- ============ CH 4 INITIATION ============ -->
+<section class="chap" id="initiation" hidden>
+  <div class="kicker">Chapter 4</div>
+  <h2>Initiation</h2>
+  <p class="lead">Initiation goes from a closed complex to an open complex, then through abortive cycles and scrunching, and ends when the enzyme escapes the promoter.</p>
+  <div class="goals"><b>You should be able to</b><ul>
+    <li>Describe the closed and open complexes, and isomerization, with the positions and footprint sizes.</li>
+    <li>Explain why abortive initiation happens and how scrunching powers promoter escape.</li>
+    <li>Name the five channels of RNA polymerase.</li></ul></div>
+  <details class="notes" open><summary>Key points</summary><div class="body"><ul>
+    <li>The holoenzyme first contacts <b>–35</b>, then binds the whole promoter with the DNA still double-stranded. This is the <b>closed complex</b>, and its formation is <b>readily reversible</b>.</li>
+    <li><b>Isomerization</b> converts it to the <b>open complex</b>: the DNA melts from <b>–11 to +2</b> (the transcription bubble, about 12–14 bp). With σ<sup>70</sup> this needs <b>no ATP</b>; it is a spontaneous conformational change to a more favourable form. It is <b>essentially irreversible</b> and normally guarantees that initiation follows.</li>
+    <li>In the –10 box, <b>A–11 and T–7</b> of the non-template strand flip out of the base stack into pockets in σ. This stabilises the single-stranded form and drives melting.</li>
+    <li>In the open complex the polymerase contacts about <b>75 bp (–55 to +20)</b>.</li>
+    <li>The first two NTPs are aligned on the template and joined, then more are added. This is the <b>initial transcribing complex</b>. Adding the first ~10 nt is inefficient, and short RNAs (&lt;10 nt) are repeatedly released: <b>abortive synthesis</b>.</li>
+    <li>Proposed reason: the σ <b>region 3/4 linker mimics RNA</b> and sits in the RNA exit channel. It must be ejected before the RNA can grow beyond about 10 nt, and this can take several attempts.</li>
+    <li><b>Scrunching</b> (the accepted model): the enzyme stays put and pulls downstream DNA into itself, so the bubble grows to <b>22–24 bp</b>. This stores energy, which is used to eject the 3/4 linker and break the polymerase–promoter and core–σ contacts.</li>
+    <li>Once the transcript is longer than about 10 nt the enzyme has <b>escaped the promoter</b>. Scrunching reverses, the bubble collapses back to 12–14 bp, and a stable <b>ternary complex</b> (enzyme + DNA + RNA) begins elongation. σ is weakened or lost.</li>
+  </ul></div></details>
+
+  <div class="card module">
+    <h3>Initiation, step by step</h3>
+    <p class="sub">Step through each stage, or press ▶ to play them all. The drawing is to scale on the position axis: top strand = non-template, bottom strand = template.</p>
+    <div class="row"><button class="btn small ghost" id="inPrev">← Prev</button><button class="btn small" id="inPlay">▶ Play</button><button class="btn small ghost" id="inNext">Next →</button></div>
+    <div class="stepper" id="inSteps"></div>
+    <div class="svgwrap" id="inSvg"></div>
+    <div class="stagebox" id="inText"></div>
+  </div>
+
+  <div class="card module">
+    <h3>Abortive initiation simulator</h3>
+    <p class="sub">Add nucleotides one at a time. Short RNAs are often released and synthesis restarts, because the σ 3/4 linker blocks the RNA exit channel. Scrunching increases the bubble size until the polymerase escapes the promoter.</p>
+    <div class="row"><button class="btn" id="abAdd">+ Add NTP</button><button class="btn ghost" id="abAuto">Auto-run</button><button class="btn ghost" id="abReset">Reset</button></div>
+    <div class="svgwrap" id="abSvg"></div>
+    <div class="two" style="margin-top:10px">
+      <div class="info" id="abMsg" style="margin-top:0">Press “Add NTP”. The first step joins the first two ribonucleotides.</div>
+      <div class="scen"><b style="font-size:14px">Abortive transcripts released (by length)</b><div class="hist" id="abHist"></div><div style="height:18px"></div><span id="abCount" style="font-size:13.5px;color:var(--muted)"></span></div>
+    </div>
+  </div>
+
+  <div class="card module">
+    <h3>The five channels of RNA polymerase</h3>
+    <p class="sub">The diagram shows DNA, RNA and NTPs moving through RNA polymerase during transcription. Name the channel at each numbered opening.</p>
+    <div class="two chgrid"><div class="svgwrap" id="chSvg"></div><div id="chForm"></div></div>
+  </div>
+
+
+  <div class="card checkpoint"><h3>Checkpoint 4</h3><div class="quiz" data-quiz="initiation"></div></div>
+  <div class="navbtns"><button class="btn ghost" data-go="rnap">← Back</button><button class="btn" data-go="elongation">Next: Elongation →</button></div>
+</section>
+
+<!-- ============ CH 5 ELONGATION ============ -->
+<section class="chap" id="elongation" hidden>
+  <div class="kicker">Chapter 5</div>
+  <h2>Elongation</h2>
+  <p class="lead">The core enzyme moves along the gene with a bubble of constant size, proofreads its work, and is rescued when it stalls.</p>
+  <div class="goals"><b>You should be able to</b><ul>
+    <li>Give the size of the bubble, the RNA–DNA hybrid, the footprint and the rate of elongation.</li>
+    <li>Distinguish pyrophosphorolytic editing from hydrolytic editing.</li>
+    <li>Explain transcription-coupled repair by TRCF.</li></ul></div>
+  <details class="notes" open><summary>Key points</summary><div class="body"><ul>
+    <li>Once the transcript is about 10 nt or longer it no longer fits in the hybrid region and threads into the RNA exit channel. All contacts with the promoter and its regulators are broken.</li>
+    <li>σ is released after about 10 nt, and the <b>core enzyme alone</b> completes the gene. The enzyme becomes more compact and contacts about <b>40 bp</b> of DNA, with a bubble of <b>12–14 bp</b> that stays the same size throughout elongation.</li>
+    <li>Within the bubble about <b>9 nt of RNA</b> is base-paired to the template (the RNA–DNA hybrid). The rest leaves the enzyme as a single strand, and the DNA strands re-anneal behind the enzyme.</li>
+    <li>The rate is about <b>40 nt/s</b> at 37 °C. Because RNA is displaced just behind the active site, <b>many polymerases can transcribe the same gene at once</b>.</li>
+    <li>Error rate: about <b>1 in 10<sup>4</sup></b>, compared with about 1 in 10<sup>7</sup> for replication, because transcription has less proofreading.</li>
+    <li>Proofreading: <b>pyrophosphorolytic editing</b> (the enzyme reverses the synthesis reaction, removing the wrong nucleotide, then re-adds the correct one) and <b>hydrolytic editing</b> (the enzyme backs up one or more nt and cleaves the RNA, then resumes).</li>
+    <li>When the polymerase is arrested (e.g. at DNA damage), <b>TRCF</b> (an ATPase) binds DNA upstream, translocates to the stalled polymerase and pushes it. The polymerase either restarts or, more often, the ternary complex dissociates. TRCF then recruits <b>UvrA(B)C</b>: <b>transcription-coupled repair</b>.</li>
+  </ul></div></details>
+
+  <div class="card module">
+    <h3>Elongation complex simulator</h3>
+    <p class="sub">Watch the transcription bubble travel along the gene. The bubble (13 bp), hybrid (9 bp) and footprint (~40 bp) stay the same size while the RNA grows.</p>
+    <div class="row"><button class="btn small" id="elPlay">▶ Play</button><button class="btn small ghost" id="elStep">Step +1</button><button class="btn small ghost" id="elReset">Reset</button>
+      <label style="font-size:14px">Speed <input type="range" id="elSpeed" min="1" max="12" value="4"></label></div>
+    <div class="svgwrap" id="elSvg"></div>
+    <div class="chips" id="elStats"></div>
+  </div>
+
+  <div class="card module">
+    <h3>How long does it take?</h3>
+    <div class="two">
+      <div><label>Gene length (nt): <input type="number" id="calcL" value="1200" min="10" step="10" style="width:110px"></label>
+        <div class="info" id="calcOut"></div></div>
+      <div><b style="font-size:14.5px">Many polymerases on one gene</b>
+        <div class="row"><label style="font-size:14px">Polymerases: <input type="range" id="cvN" min="1" max="7" value="4"></label><button class="btn small ghost" id="cvPlay">▶ Animate</button></div>
+        <div class="svgwrap" id="cvSvg"></div></div>
+    </div>
+  </div>
+
+  <div class="card module">
+    <h3>Proofreading: which mechanism?</h3>
+    <p class="sub">Read the scenario and choose the editing mechanism it describes.</p>
+    <div id="prBox"></div>
+  </div>
+
+  <div class="card module">
+    <h3>Arrest &amp; transcription-coupled repair</h3>
+    <p class="sub">Step through what happens when RNA polymerase stalls at a damaged base.</p>
+    <div class="row"><button class="btn small ghost" id="tcPrev">← Prev</button><button class="btn small" id="tcPlay">▶ Play</button><button class="btn small ghost" id="tcNext">Next →</button><span id="tcLbl" style="font-size:14px;color:var(--muted)"></span></div>
+    <div class="svgwrap" id="tcSvg"></div>
+    <div class="info" id="tcInfo"></div>
+  </div>
+
+  <div class="card checkpoint"><h3>Checkpoint 5</h3><div class="quiz" data-quiz="elongation"></div></div>
+  <div class="navbtns"><button class="btn ghost" data-go="initiation">← Back</button><button class="btn" data-go="termination">Next: Termination →</button></div>
+</section>
+
+<!-- ============ CH 6 TERMINATION ============ -->
+<section class="chap" id="termination" hidden>
+  <div class="kicker">Chapter 6</div>
+  <h2>Termination</h2>
+  <p class="lead">Transcription stops at one of two kinds of terminator, intrinsic or Rho-dependent. (Removal of a stalled enzyme by TRCF is a special case.)</p>
+  <div class="goals"><b>You should be able to</b><ul>
+    <li>Describe a Rho-independent terminator and explain why both the hairpin and the U-tract are required.</li>
+    <li>Describe the rut site and the structure and action of Rho.</li>
+    <li>Predict the effect of mutations on termination.</li></ul></div>
+  <details class="notes" open><summary>Key points</summary><div class="body"><ul>
+    <li><b>Rho-independent</b> terminators (type I, intrinsic) are used by the core enzyme alone. <b>Rho-dependent</b> terminators (type II) need the protein Rho (ρ). A given gene has one type or the other.</li>
+    <li>An intrinsic terminator is an <b>inverted repeat (~20 bp)</b> followed by a string of about <b>8 A–T base pairs</b>. These elements act <b>only once they are transcribed</b>: they function in the RNA, not the DNA.</li>
+    <li>The inverted repeat lets the RNA fold into a <b>stem-loop (hairpin)</b>. The hairpin causes termination by (i) pushing the polymerase forward, (ii) pulling the transcript out of the polymerase, or (iii) changing the polymerase's conformation. Mutations that disrupt the hairpin reduce or abolish termination.</li>
+    <li>The hairpin works only if it is followed by a run of U's. When it forms, the RNA is then held on the template by <b>rU:dA pairs only, the weakest of all base pairs</b>, so it comes away easily.</li>
+    <li>A Rho-dependent terminator has a <b>rut site</b> (rho utilisation): about <b>40 nt, C-rich, G-poor, with no hairpin</b>.</li>
+    <li><b>Rho</b> is a <b>ring-shaped hexamer</b> of 6 identical subunits with <b>helicase and ATPase</b> activity. It binds the rut site on the single-stranded RNA as it leaves the polymerase, then moves along the RNA using ATP until it reaches the polymerase. There it unwinds the RNA–DNA hybrid, the RNA is released, and Rho and the polymerase dissociate.</li>
+  </ul></div></details>
+
+  <div class="card module">
+    <h3>Terminator builder (Rho-independent)</h3>
+    <p class="sub">Edit the two arms of the inverted repeat, the loop and the tail that follows. The RNA folds as you type and the model predicts whether termination occurs. Sequences are RNA; any T you type becomes U.</p>
+    <div class="row" id="tbPresets"></div>
+    <div class="labgrid">
+      <div class="field"><label>Stem arm 1 (5′ side)</label><br><input id="tbA" class="seqin" spellcheck="false" style="max-width:220px"></div>
+      <div class="field"><label>Loop</label><br><input id="tbL" class="seqin" spellcheck="false" style="max-width:160px"></div>
+      <div class="field"><label>Stem arm 2 (3′ side)</label> <button class="btn small ghost" id="tbAuto">Make perfect complement</button><br><input id="tbB" class="seqin" spellcheck="false" style="max-width:220px"></div>
+      <div class="field"><label>Tail after the hairpin (first 8 nt matter)</label><br><input id="tbT" class="seqin" spellcheck="false" style="max-width:220px"></div>
+    </div>
+    <div class="svgwrap" id="tbSvg" style="margin-top:12px"></div>
+    <div class="chips" id="tbStats"></div>
+    <div class="info" id="tbVerdict"></div>
+  </div>
+
+  <div class="card module">
+    <h3>Rho-dependent termination</h3>
+    <div class="row"><button class="btn small ghost" id="rhPrev">← Prev</button><button class="btn small" id="rhPlay">▶ Play</button><button class="btn small ghost" id="rhNext">Next →</button><span id="rhLbl" style="font-size:14px;color:var(--muted)"></span></div>
+    <div class="svgwrap" id="rhSvg"></div>
+    <div class="info" id="rhInfo"></div>
+  </div>
+
+  <div class="card">
+    <h3>Comparison</h3>
+    <div style="overflow-x:auto"><table class="cmp">
+      <tr><th></th><th>Rho-independent (type I, intrinsic)</th><th>Rho-dependent (type II)</th><th>TRCF (special case)</th></tr>
+      <tr><td>Signal</td><td>GC-rich inverted repeat (~20 bp) followed by ~8 A:T bp</td><td>rut site: ~40 nt, C-rich, G-poor, no hairpin</td><td>Polymerase arrested (e.g. at DNA damage)</td></tr>
+      <tr><td>Acts as</td><td>RNA hairpin + U-tract</td><td>Single-stranded RNA binding site for Rho</td><td>Upstream double-stranded DNA</td></tr>
+      <tr><td>Extra protein?</td><td>None (core enzyme alone)</td><td>Rho: hexameric ring, helicase, ATPase</td><td>TRCF: ATPase translocase</td></tr>
+      <tr><td>ATP used?</td><td>No</td><td>Yes (Rho translocation and unwinding)</td><td>Yes (TRCF translocation)</td></tr>
+      <tr><td>Key event</td><td>Hairpin forms; weak rU:dA hybrid lets go</td><td>Rho catches the polymerase and unwinds the RNA–DNA hybrid</td><td>Collision pushes the polymerase off; UvrA(B)C recruited</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card checkpoint"><h3>Checkpoint 6</h3><div class="quiz" data-quiz="termination"></div></div>
+  <div class="navbtns"><button class="btn ghost" data-go="elongation">← Back</button><button class="btn" data-go="inhibitors">Next: Inhibitors →</button></div>
+</section>
+
+<!-- ============ CH 7 INHIBITORS ============ -->
+<section class="chap" id="inhibitors" hidden>
+  <div class="kicker">Chapter 7</div>
+  <h2>Inhibitors of transcription</h2>
+  <p class="lead">Two classic drugs act at different steps. Comparing them is a good test of how well you understand initiation and elongation.</p>
+  <details class="notes" open><summary>Key points</summary><div class="body"><ul>
+    <li><b>Rifampicin</b> (rifampin) binds a pocket in the <b>β subunit</b> (gene <i>rpoB</i>) next to the active site, in the path the RNA takes. It allows the first phosphodiester bonds to form but blocks the RNA from growing beyond <b>2–3 nt</b>, so it inhibits <b>initiation</b>. Polymerases that have already escaped the promoter are <b>not affected</b> and finish their transcripts.</li>
+    <li>Rifampicin does not bind eukaryotic RNA polymerases, so it is a selective antibiotic, used especially against <i>Mycobacterium tuberculosis</i>. Resistance usually comes from point mutations in <i>rpoB</i>.</li>
+    <li><b>Actinomycin D</b> <b>intercalates</b> into double-stranded DNA, mainly at G:C pairs, and blocks the movement of RNA polymerase, so it inhibits <b>elongation</b>. It works on DNA rather than on the enzyme, so it blocks transcription in both bacteria and eukaryotes. It is too toxic for use as an antibiotic but is used as an anticancer drug.</li>
+  </ul></div></details>
+  <div class="card module">
+    <h3>Drug experiment</h3>
+    <p class="sub">Choose a drug and when to add it, then predict the outcome before you press Run.</p>
+    <div class="row"><label>Drug <select id="dgDrug"><option value="none">No drug (control)</option><option value="rif">Rifampicin</option><option value="act">Actinomycin D</option></select></label>
+      <label>Added <select id="dgWhen"><option value="before">before initiation (free polymerase + promoter)</option><option value="during">to polymerases already elongating</option></select></label>
+      <button class="btn" id="dgRun">Run</button></div>
+    <div class="svgwrap" id="dgSvg"></div>
+    <div class="info" id="dgOut">Choose a drug and a time, then press Run.</div>
+  </div>
+  <div class="card checkpoint"><h3>Checkpoint 7</h3><div class="quiz" data-quiz="inhibitors"></div></div>
+  <div class="navbtns"><button class="btn ghost" data-go="termination">← Back</button><button class="btn" data-go="final">Next: Final assessment →</button></div>
+</section>
+
+<!-- ============ FINAL ============ -->
+<section class="chap" id="final" hidden>
+  <div class="kicker">Final assessment</div>
+  <h2>Test yourself</h2>
+  <p class="lead">20 mixed questions covering every chapter. Answer them all, then submit to see your score, explanations and a review of your mistakes. Each retake shuffles the options.</p>
+  <div class="card checkpoint"><h3>Final assessment</h3><div class="quiz" data-quiz="final" data-mode="exam"></div></div>
+  <div class="navbtns"><button class="btn ghost" data-go="inhibitors">← Back</button><span></span></div>
+</section>
+
+<div id="lockView" hidden class="lockpanel card"><div class="big">🔒</div><h2>Chapter locked</h2><p id="lockMsg"></p><button class="btn" id="lockGo">Go there</button></div>
+<footer class="credit"><div style="margin-bottom:10px">Used this tool? Tell us what you think: <a class="btn small fbLink" target="_blank" rel="noopener" href="#">📝 Give feedback</a></div>This interactive pedagogical tool is developed by <b>Dr. Richa Singh</b>, Department of Biotechnology, SIESASCS, Mumbai.</footer>
+</main>
+</div>
+
+<aside class="drawer" id="numbers" aria-label="Numbers to remember">
+  <div style="display:flex;justify-content:space-between;align-items:center"><h3>📌 Numbers to remember</h3><button class="btn small ghost" id="numClose">Close</button></div>
+  <table class="numtable">
+    <tr><td>Core enzyme / holoenzyme</td><td>α₂ββ′ω / α₂ββ′ωσ</td></tr>
+    <tr><td>–35 box consensus</td><td class="mono">TTGACA</td></tr>
+    <tr><td>–10 (Pribnow) box consensus</td><td class="mono">TATAAT</td></tr>
+    <tr><td>Optimal spacer –35 to –10</td><td>17 bp</td></tr>
+    <tr><td>Housekeeping σ</td><td>σ⁷⁰ (70 kDa)</td></tr>
+    <tr><td>σ³² promoter elements</td><td>~ –39 and –15</td></tr>
+    <tr><td>Melted region, open complex</td><td>–11 to +2 (12–14 bp)</td></tr>
+    <tr><td>Flipped-out bases (non-template)</td><td>A–11 and T–7</td></tr>
+    <tr><td>Footprint, open complex</td><td>~75 bp (–55 to +20)</td></tr>
+    <tr><td>Abortive transcripts</td><td>&lt; 10 nt</td></tr>
+    <tr><td>Scrunched bubble</td><td>22–24 bp</td></tr>
+    <tr><td>Promoter escape / σ release</td><td>RNA &gt; ~10 nt</td></tr>
+    <tr><td>Footprint, elongation</td><td>~40 bp</td></tr>
+    <tr><td>Bubble during elongation</td><td>12–14 bp (constant)</td></tr>
+    <tr><td>RNA–DNA hybrid</td><td>~9 bp (8–9)</td></tr>
+    <tr><td>Elongation rate (37 °C)</td><td>~40 nt/s</td></tr>
+    <tr><td>Error rate: transcription vs replication</td><td>1 in 10⁴ vs 1 in 10⁷</td></tr>
+    <tr><td>Intrinsic terminator</td><td>~20 bp inverted repeat + ~8 A:T</td></tr>
+    <tr><td>rut site</td><td>~40 nt, C-rich, G-poor</td></tr>
+    <tr><td>Rho</td><td>Hexamer, 6 identical subunits</td></tr>
+    <tr><td>Rifampicin blocks RNA after</td><td>2–3 nt</td></tr>
+  </table>
+</aside>
+
+<script>
+"use strict";
+/* ================= helpers ================= */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+function el(tag, cls, html) { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+const COMP = { A: 'T', T: 'A', G: 'C', C: 'G' };
+const RCOMP = { A: 'U', U: 'A', G: 'C', C: 'G' };
+const comp = s => s.split('').map(c => COMP[c] || c).join('');
+const rev = s => s.split('').reverse().join('');
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function svgWrap(w, h, inner) { return `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg" role="img">${inner}</svg>`; }
+function txt(x, y, s, a = '') { return `<text x="${x}" y="${y}" ${a}>${s}</text>`; }
+
+/* ================= feedback ================= */
+const FB_BASE = 'https://docs.google.com/forms/d/e/1FAIpQLSd2AjlX_lQxNK4d3XJFm-A60xXKAgN1XYOf1Pq8AhjajCzO0Q/viewform';
+function fbUrl() { return FB_BASE + (store && store.best != null ? '?usp=pp_url&entry.1831683671=' + store.best : ''); }
+function updFb() { document.querySelectorAll('.fbLink').forEach(a => a.href = fbUrl()); }
+/* ================= storage ================= */
+const KEY = 'ptx-tutor-v1';
+let store = { attempted: {}, unlockAll: false, best: null };
+try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s) store = Object.assign(store, s); } catch (e) {}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {} }
+
+/* ================= chapters & nav ================= */
+const CH = [
+  { id: 'warmup', n: '0', t: 'Warm-up: strands', req: null },
+  { id: 'unit', n: '1', t: 'Transcription unit', req: 'warmup' },
+  { id: 'promoter', n: '2', t: 'The promoter', req: 'unit' },
+  { id: 'rnap', n: '3', t: 'RNA polymerase & σ', req: 'promoter' },
+  { id: 'initiation', n: '4', t: 'Initiation', req: 'rnap' },
+  { id: 'elongation', n: '5', t: 'Elongation', req: 'initiation' },
+  { id: 'termination', n: '6', t: 'Termination', req: 'elongation' },
+  { id: 'inhibitors', n: '7', t: 'Inhibitors', req: 'termination' },
+  { id: 'final', n: '★', t: 'Final assessment', req: 'termination' }
+];
+const chById = id => CH.find(c => c.id === id);
+/* Chapter locks: set to true to require each checkpoint before the next chapter opens */
+const LOCKS_ON = false;
+const isUnlocked = id => { const c = chById(id); return !LOCKS_ON || !c.req || store.unlockAll || !!store.attempted[c.req]; };
+let current = 'warmup';
+
+function renderNav() {
+  const nav = $('#side'); nav.innerHTML = '<h4>Chapters</h4>';
+  CH.forEach(c => {
+    const done = !!store.attempted[c.id], lock = !isUnlocked(c.id);
+    const b = el('button', 'navitem' + (c.id === current ? ' active' : '') + (done ? ' done' : '') + (lock ? ' locked' : ''),
+      `<span class="num">${done ? '✓' : c.n}</span><span>${c.t}</span><span class="st">${lock ? '🔒' : ''}</span>`);
+    b.onclick = () => { location.hash = c.id; closeMenu(); };
+    nav.appendChild(b);
+  });
+  nav.appendChild(el('div', 'sidenote', LOCKS_ON ? 'Complete each chapter’s checkpoint to unlock the next. Your progress is saved in this browser.' : 'Your progress is saved in this browser.'));
+  const total = CH.length, n = CH.filter(c => store.attempted[c.id]).length;
+  const pct = Math.round(n / total * 100);
+  updFb();
+  $('#progFill').style.width = pct + '%'; $('#progTxt').textContent = pct + '%';
+}
+function show(id) {
+  if (id === 'unlock-all') { store.unlockAll = true; save(); id = 'warmup'; history.replaceState(null, '', '#warmup'); }
+  if (!chById(id)) id = 'warmup';
+  current = id;
+  $$('section.chap').forEach(s => s.hidden = true);
+  const lv = $('#lockView');
+  if (!isUnlocked(id)) {
+    const req = chById(chById(id).req);
+    lv.hidden = false;
+    $('#lockMsg').innerHTML = `Attempt every question in the checkpoint of <b>Chapter ${req.n}: ${req.t}</b> to unlock this chapter.`;
+    $('#lockGo').onclick = () => location.hash = req.id;
+  } else { lv.hidden = true; $('#' + id).hidden = false; onShow(id); }
+  renderNav(); window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', () => show(location.hash.slice(1)));
+$$('[data-go]').forEach(b => b.onclick = () => location.hash = b.dataset.go);
+function closeMenu() { $('#side').classList.remove('open'); $('#scrim').classList.remove('on'); }
+$('#menuBtn').onclick = () => { $('#side').classList.add('open'); $('#scrim').classList.add('on'); };
+$('#scrim').onclick = () => { closeMenu(); $('#numbers').classList.remove('open'); };
+$('#numBtn').onclick = () => { $('#numbers').classList.add('open'); $('#scrim').classList.add('on'); };
+$('#numClose').onclick = () => { $('#numbers').classList.remove('open'); $('#scrim').classList.remove('on'); };
+
+const showHooks = {};
+function onShow(id) { if (showHooks[id]) showHooks[id](); }
+
+/* ================= QUIZ DATA ================= */
+const TF = (q, a, ex) => ({ t: 'mcq', q, o: ['True', 'False'], a: a ? 0 : 1, ex, fixed: true });
+const QZ = {
+warmup: [
+  { t: 'mcq', q: 'The coding strand of a gene is 5′-ATGATCTCGTAA-3′. What is the RNA transcript?', o: ['5′-AUGAUCUCGUAA-3′', '5′-UACUAGAGCAUU-3′', '3′-AUGAUCUCGUAA-5′', '5′-AAUGCUCUAGUA-3′'], a: 0, ex: 'The RNA has the same sequence as the coding (non-template) strand with U in place of T, written 5′→3′.' },
+  { t: 'mcq', q: 'In which direction does RNA polymerase read the template strand?', o: ['3′→5′', '5′→3′', 'Either direction', 'It depends on the gene'], a: 0, ex: 'RNA is made 5′→3′ and is antiparallel to the template, so the template is read 3′→5′.' },
+  { t: 'mcq', q: 'Which of these is NOT a name for the template strand?', o: ['Sense strand', 'Antisense strand', 'Minus (–) strand', 'Non-coding strand'], a: 0, ex: 'Sense, coding, plus and non-template all describe the strand whose sequence matches the RNA. The template strand is the antisense / minus / non-coding strand.' },
+  { t: 'mcq', q: 'Are both DNA strands used to transcribe a single gene?', o: ['No. One strand is the template for a given gene, though different genes may use different strands', 'Yes. One strand gives mRNA and the other gives tRNA', 'Yes. RNA polymerase switches strands every 10 nt', 'No. The coding strand is always the template'], a: 0, ex: 'For any one gene only the template strand is copied. The promoter orients RNA polymerase, so neighbouring genes can use opposite strands.' },
+  { t: 'mcq', q: 'A template strand is written 5′-TTACGGCAT-3′. What is the RNA (5′→3′)?', o: ['5′-AUGCCGUAA-3′', '5′-AAUGCCGUA-3′', '5′-UUACGGCAU-3′', '5′-UACGGCAUU-3′'], a: 0, ex: 'Read the template 3′→5′ (TACGGCATT) and pair each base: AUGCCGUAA. Equivalently, take the reverse complement and replace T with U.' }
+],
+unit: [
+  { t: 'mcq', q: 'Which element of a transcription unit specifies where transcription stops?', o: ['Terminator', 'Promoter', 'RNA-coding sequence', 'The –10 box'], a: 0, ex: 'The terminator specifies where transcription stops.' },
+  { t: 'mcq', q: 'Which of these does the promoter determine?', o: ['Where RNA polymerase binds, which strand is the template, and where transcription starts', 'Only the speed of elongation', 'Where translation begins', 'Where the transcript is cleaved after synthesis'], a: 0, ex: 'Its orientation tells the enzyme which strand to use and makes every RNA start at the same site.' },
+  { t: 'mcq', q: 'The top strand of a DNA is drawn 5′→3′ from left to right. A gene on this DNA is transcribed from right to left. Which strand is its template?', o: ['The top strand', 'The bottom strand', 'Either strand', 'Both strands'], a: 0, ex: 'The RNA grows 5′→3′ from right to left. The template is antiparallel, so it must run 5′→3′ from left to right, which is the top strand.' },
+  { t: 'mcq', q: 'Which statement about RNA polymerase is correct?', o: ['It can start a new chain without a primer', 'It needs an RNA primer like DNA polymerase', 'It uses dNTPs as substrates', 'It synthesises RNA 3′→5′'], a: 0, ex: 'RNA polymerases can initiate chains de novo; no primer is needed.' },
+  { t: 'mcq', q: 'What are the substrates of RNA polymerase?', o: ['ATP, GTP, CTP and UTP', 'dATP, dGTP, dCTP and dTTP', 'AMP, GMP, CMP and UMP', 'ATP, GTP, CTP and TTP'], a: 0, ex: 'Ribonucleoside triphosphates. Pyrophosphate is released as each nucleotide is added.' }
+],
+promoter: [
+  { t: 'mcq', q: 'What is the consensus sequence of the –10 (Pribnow) box?', o: ['5′-TATAAT-3′', '5′-TTGACA-3′', '5′-TATAAA-3′', '5′-GATACT-3′'], a: 0, ex: 'TATAAT. (TATAAA is the eukaryotic TATA box; TTGACA is the –35 box.)' },
+  { t: 'mcq', q: 'What is the consensus sequence of the –35 box?', o: ['5′-TTGACA-3′', '5′-TATAAT-3′', '5′-TGTCAA-3′', '5′-AATTGG-3′'], a: 0, ex: 'TTGACA.' },
+  { t: 'num', q: 'What is the optimal spacing (in bp) between the –35 and –10 boxes of a σ⁷⁰ promoter?', a: 17, tol: 0, unit: 'bp', ex: 'About 17 bp. With this spacing σ region 4 and σ region 2 can contact the two boxes at the same time. Spacings that differ from 17 weaken the promoter.' },
+  { t: 'mcq', q: 'Two promoters differ only in the –10 box: P1 has TATAAT and P2 has GATACT. Which statement is correct?', o: ['P1 initiates more often because σ recognises TATAAT better', 'P2 is stronger because G:C pairs are more stable', 'They are equally strong because only –35 matters', 'P2 is stronger because it is further from the consensus'], a: 0, ex: 'σ binds GATACT less well, so the rate of initiation from P2 is lower.' },
+  { t: 'mcq', q: 'Promoter strength is best defined as…', o: ['the number of transcripts initiated per unit time', 'the length of the RNA made', 'the GC content of the promoter', 'how long the closed complex lasts'], a: 0, ex: 'It depends on initial binding, isomerization efficiency and promoter escape.' },
+  { t: 'mcq', q: 'What can an extended –10 element compensate for?', o: ['A missing –35 region', 'A missing –10 region', 'A missing terminator', 'A missing σ factor'], a: 0, ex: 'Extra contacts with the polymerase make up for the missing –35, as in the <i>E. coli gal</i> promoters.' },
+  { t: 'mcq', q: 'Which promoters typically carry an UP element?', o: ['Some strong promoters, such as those of the rRNA genes', 'Every bacterial promoter', 'Only promoters without a –10 box', 'Only Rho-dependent genes'], a: 0, ex: 'The UP element adds an extra specific interaction with the polymerase and so increases binding.' }
+],
+rnap: [
+  { t: 'match', q: 'Match each gene to the core subunit it encodes.', pairs: [['<i>rpoA</i>', 'α'], ['<i>rpoB</i>', 'β'], ['<i>rpoC</i>', 'β′'], ['<i>rpoZ</i>', 'ω']], ex: '<i>rpoA</i>: α, <i>rpoB</i>: β, <i>rpoC</i>: β′, <i>rpoZ</i>: ω.' },
+  { t: 'match', q: 'Match each part of RNA polymerase to the promoter element it recognises.', pairs: [['σ region 4 (helix-turn-helix)', '–35 box'], ['σ region 2', '–10 box'], ['σ region 3', 'Extended –10 element'], ['σ region 1.2', 'Discriminator'], ['αCTD', 'UP element']], ex: 'Region 4 recognises –35, region 2 –10, region 3 the extended –10 and region 1.2 the discriminator. The UP element is read by αCTD, not by σ.' },
+  { t: 'mcq', q: 'Core enzyme without σ is mixed with DNA. What happens?', o: ['It binds anywhere on the DNA and starts RNA synthesis at incorrect sites', 'It cannot bind DNA at all', 'It binds promoters but cannot melt them', 'It transcribes only rRNA genes'], a: 0, ex: 'σ is needed to reduce non-specific binding and to give the enzyme promoter specificity.' },
+  TF('σ factor is required throughout elongation and termination.', false, 'False. σ is needed only for initiation and is released after about 10 nt.'),
+  { t: 'mcq', q: '<i>E. coli</i> cells are shifted to 42 °C. Which σ factor increases and directs RNA polymerase to stress genes?', o: ['σ³²', 'σ⁵⁴', 'σ²⁸', 'σ⁷⁰'], a: 0, ex: 'σ³², the heat-shock σ, recognises its own promoter elements at about –39 and –15.' },
+  { t: 'mcq', q: 'Which σ factor directs transcription of flagellar and chemotaxis genes?', o: ['σ²⁸', 'σ³⁸', 'σ¹⁹', 'σ³²'], a: 0, ex: 'σ²⁸ is the flagellar σ. σ³⁸ acts in stationary phase and σ¹⁹ in ferric citrate (iron) uptake.' },
+  { t: 'mcq', q: 'How many kinds of RNA polymerase transcribe the mRNA, tRNA and rRNA genes of a bacterium?', o: ['One', 'Two', 'Three', 'Five'], a: 0, ex: 'Bacteria have a single type of RNA polymerase. Eukaryotes have three nuclear ones.' }
+],
+initiation: [
+  { t: 'order', q: 'Put the events of initiation in order.', items: ['Core enzyme binds σ to form the holoenzyme', 'Holoenzyme contacts –35 and forms the closed complex', 'Isomerization: DNA melts from –11 to +2 (open complex)', 'First two NTPs are joined and abortive transcripts are released', 'Scrunching: the bubble grows to 22–24 bp', 'σ 3/4 linker is ejected, the enzyme escapes the promoter and σ is released'], ex: 'Holoenzyme, closed complex, open complex, initial transcribing complex (abortive), scrunching, escape.' },
+  { t: 'mcq', q: 'For the σ⁷⁰ holoenzyme, the closed → open complex transition…', o: ['is spontaneous and needs no ATP hydrolysis', 'needs ATP hydrolysis by σ', 'needs a separate helicase', 'needs GTP hydrolysis by β′'], a: 0, ex: 'It is a spontaneous conformational change to a more energetically favourable form.' },
+  { t: 'mcq', q: 'Which bases flip out of the base stack into pockets of σ, stabilising the melted –10 region?', o: ['A–11 and T–7 of the non-template strand', 'T–12 and A–8 of the template strand', 'Bases +1 and +2 of the template strand', 'All six bases of the –35 box'], a: 0, ex: 'A–11 and T–7 of the non-template strand flip out and insert into pockets in σ.' },
+  { t: 'num', q: 'In the open complex, RNA polymerase contacts DNA from –55 to +20. About how many bp is this footprint?', a: 75, tol: 3, unit: 'bp', ex: 'About 75 bp. (–55 to –1 is 55 bp and +1 to +20 is 20 bp; there is no position 0.)' },
+  { t: 'mcq', q: 'Which step is readily reversible?', o: ['Formation of the closed complex', 'Isomerization to the open complex', 'Promoter escape', 'Ejection of the σ 3/4 linker'], a: 0, ex: 'The closed complex can easily dissociate. Isomerization is essentially irreversible.' },
+  { t: 'mcq', q: 'What does the leading model say causes abortive initiation?', o: ['The σ region 3/4 linker sits in the RNA exit channel, mimics RNA, and must be ejected', 'The template strand breaks after 10 nt', 'NTPs run out after 10 additions', 'Rho removes the short RNAs'], a: 0, ex: 'The linker blocks the path of the RNA, and ejecting it can take several attempts.' },
+  { t: 'mcq', q: 'During scrunching…', o: ['the enzyme stays put and pulls downstream DNA into itself, so the bubble grows to 22–24 bp', 'the enzyme slides forward 10 bp at a time', 'the bubble shrinks to about 5 bp', 'σ hydrolyses ATP to move'], a: 0, ex: 'Scrunching stores energy that is used to break the promoter and σ contacts at escape.' },
+  { t: 'match', q: 'Match each RNA polymerase channel to what passes through it.', pairs: [['NTP uptake channel', 'Ribonucleotides enter'], ['RNA exit channel', 'Growing RNA leaves'], ['Non-template strand (NT) channel', 'Non-template strand leaves'], ['Template strand (T) channel', 'Template strand leaves'], ['DNA entry channel', 'Downstream double-stranded DNA enters']], ex: 'RNA polymerase has five channels.' }
+],
+elongation: [
+  { t: 'num', q: 'About how many nucleotides of RNA are base-paired to the template in the RNA–DNA hybrid during elongation?', a: 9, tol: 1, unit: 'nt', ex: 'About 9 nt (often quoted as 8–9 bp).' },
+  { t: 'num', q: 'At about 40 nt/s, how many seconds does RNA polymerase take to transcribe a 2,000-nt gene?', a: 50, tol: 1, unit: 's', ex: '2000 ÷ 40 = 50 s.' },
+  { t: 'mcq', q: 'How do the error rates of transcription and replication compare?', o: ['About 1 in 10⁴ for transcription and 1 in 10⁷ for replication', 'About 1 in 10⁷ for both', 'About 1 in 10² for transcription and 1 in 10⁴ for replication', 'Transcription is more accurate than replication'], a: 0, ex: 'Transcription has fewer proofreading mechanisms. An occasional faulty RNA matters far less than a permanent mutation in DNA.' },
+  { t: 'mcq', q: 'RNA polymerase backs up two nucleotides and cuts the RNA to remove an error. What is this called?', o: ['Hydrolytic editing', 'Pyrophosphorolytic editing', 'Transcription-coupled repair', 'Abortive initiation'], a: 0, ex: 'Hydrolytic editing: the enzyme backtracks and cleaves the RNA. Pyrophosphorolytic editing is the reverse of the synthesis reaction.' },
+  { t: 'mcq', q: 'Which statement about TRCF is correct?', o: ['It uses ATP to move along upstream DNA, pushes the stalled polymerase, and recruits UvrA(B)C', 'It is a σ factor for DNA-repair genes', 'It inserts missing nucleotides into RNA', 'It binds the rut site'], a: 0, ex: 'TRCF (transcription-repair coupling factor) couples removal of the stalled polymerase with recruitment of repair enzymes.' },
+  { t: 'mcq', q: 'During elongation, how much DNA does RNA polymerase contact?', o: ['About 40 bp, with a 12–14 bp bubble', 'About 75 bp, with a 22–24 bp bubble', 'About 10 bp, with no bubble', 'About 200 bp, with a 40 bp bubble'], a: 0, ex: 'After escape the enzyme becomes more compact.' },
+  TF('Several RNA polymerase molecules can transcribe the same gene at the same time.', true, 'True. The RNA is displaced just behind the active site, so polymerases can follow closely one behind another.')
+],
+termination: [
+  { t: 'mcq', q: 'What does a Rho-independent terminator consist of?', o: ['An inverted repeat (~20 bp) followed by ~8 A:T base pairs', 'A C-rich, G-poor stretch of ~40 nt', 'A TATAAT box', 'A binding site for TRCF'], a: 0, ex: 'The inverted repeat forms the hairpin and the A:T run gives the U-tract in the RNA.' },
+  { t: 'mcq', q: 'Why must the hairpin be followed by a run of U’s?', o: ['rU:dA pairs are the weakest base pairs, so the hybrid holding the RNA is easily disrupted', 'The U’s form part of the stem', 'The U’s recruit Rho', 'The U’s block NTP entry'], a: 0, ex: 'When the hairpin forms, the RNA is held on the template only by weak rU:dA pairs, so it dissociates easily.' },
+  { t: 'mcq', q: 'When do terminator sequences act?', o: ['Only after they have been transcribed, because they function in the RNA', 'While they are still in DNA, before the polymerase arrives', 'Only while σ is bound', 'Only during initiation'], a: 0, ex: 'Terminators function in the RNA, not in the DNA.' },
+  { t: 'mcq', q: 'A point mutation changes a G to an A in one arm of the hairpin stem, breaking a G:C pair. What is the predicted effect?', o: ['The hairpin is weakened, so termination falls and read-through increases', 'Termination becomes stronger', 'No change, because only the U-tract matters', 'The terminator becomes Rho-dependent'], a: 0, ex: 'Mutations that disrupt the hairpin partially or completely prevent termination.' },
+  { t: 'mcq', q: 'Which description of Rho is correct?', o: ['A ring-shaped hexameric RNA helicase with ATPase activity', 'A monomeric DNA polymerase', 'A σ factor', 'A small regulatory RNA'], a: 0, ex: 'Rho is a ring of 6 identical subunits with helicase and ATPase activity.' },
+  TF('Like intrinsic terminators, rut sites form strong hairpins.', false, 'False. rut sites are C-rich and G-poor and have no hairpin structure.'),
+  { t: 'order', q: 'Put the steps of Rho-dependent termination in order.', items: ['Rho binds the rut site on the emerging RNA', 'Rho moves along the RNA using ATP hydrolysis', 'Rho reaches the polymerase and unwinds the RNA–DNA hybrid', 'The RNA is released and the polymerase and Rho dissociate'], ex: 'Binding, translocation, unwinding, release.' }
+],
+inhibitors: [
+  { t: 'mcq', q: 'How does rifampicin inhibit bacterial transcription?', o: ['It binds the β subunit and blocks the RNA from growing beyond 2–3 nt', 'It intercalates into GC-rich DNA', 'It binds region 4 of σ⁷⁰', 'It degrades mRNA'], a: 0, ex: 'It physically blocks the path of the RNA, so it inhibits initiation.' },
+  { t: 'mcq', q: 'Rifampicin is added to cells that are actively transcribing. What happens to polymerases that are already elongating?', o: ['They finish their transcripts; only new initiation is blocked', 'They stop immediately', 'They release their RNA at once', 'They switch to σ³²'], a: 0, ex: 'Once the RNA occupies the exit channel, rifampicin can no longer act.' },
+  { t: 'mcq', q: 'Why is actinomycin D not used as an antibiotic?', o: ['It intercalates into DNA, so it also blocks transcription in human cells', 'It has no effect on bacteria', 'It blocks only translation', 'Rho destroys it'], a: 0, ex: 'It acts on DNA rather than on the bacterial enzyme, so it is not selective.' },
+  { t: 'mcq', q: 'In <i>M. tuberculosis</i>, rifampicin resistance usually comes from mutations in…', o: ['<i>rpoB</i>', '<i>rpoD</i>', '<i>rho</i>', '<i>rpoZ</i>'], a: 0, ex: '<i>rpoB</i> encodes the β subunit, which contains the rifampicin-binding pocket.' }
+],
+final: [
+  { t: 'mcq', q: 'Template strand: 3′-TACGGA-5′. What is the RNA?', o: ['5′-AUGCCU-3′', '5′-UACGGA-3′', '5′-UCCGUA-3′', '3′-AUGCCU-5′'], a: 0, ex: 'Pair each template base, reading 3′→5′: AUGCCU, written 5′→3′.' },
+  { t: 'mcq', q: 'Which part of RNA polymerase recognises the UP element?', o: ['αCTD', 'σ region 4', 'β′', 'ω'], a: 0, ex: 'The C-terminal domain of α, attached by a flexible linker.' },
+  { t: 'num', q: 'The open complex is melted from –11 to +2. How many base pairs is that? (Remember there is no position 0.)', a: 13, tol: 0, unit: 'bp', ex: '–11 to –1 is 11 bp, plus +1 and +2: 13 bp, within the quoted 12–14 bp.' },
+  { t: 'mcq', q: 'In which σ region is the helix-turn-helix that reads the –35 box?', o: ['Region 4', 'Region 2', 'Region 1.2', 'Region 3'], a: 0, ex: 'One helix lies in the major groove and contacts the bases; the other lies across the groove and contacts the backbone.' },
+  { t: 'mcq', q: 'Which σ factor helps <i>E. coli</i> survive stationary phase?', o: ['σ³⁸', 'σ⁵⁴', 'σ²⁸', 'σ¹⁹'], a: 0, ex: 'σ³⁸ is the stationary-phase σ.' },
+  { t: 'mcq', q: 'Which σ factor controls nitrogen metabolism genes?', o: ['σ⁵⁴', 'σ³²', 'σ⁷⁰', 'σ²⁸'], a: 0, ex: 'σ⁵⁴ is the nitrogen-regulation σ.' },
+  { t: 'mcq', q: 'A mutant σ⁷⁰ lacking region 2.3 binds promoters normally. Where will initiation stall?', o: ['At the closed complex, because the DNA cannot be melted', 'At promoter escape', 'During elongation', 'At termination'], a: 0, ex: 'Region 2.3 is responsible for melting the DNA, so the open complex cannot form.' },
+  { t: 'mcq', q: 'How long are abortive transcripts?', o: ['Shorter than about 10 nt', 'About 40 nt', 'About 75 nt', 'Full-length'], a: 0, ex: 'Short RNAs of fewer than about 10 nt are released before escape.' },
+  { t: 'mcq', q: 'What energy source drives promoter escape?', o: ['Energy stored by scrunching, released when the bubble collapses', 'ATP hydrolysis by σ', 'GTP hydrolysis by β', 'Rho helicase activity'], a: 0, ex: 'Releasing the scrunched DNA provides the energy to break the polymerase–promoter and core–σ contacts.' },
+  { t: 'mcq', q: 'What does the stable ternary complex consist of?', o: ['RNA polymerase, DNA and RNA', 'σ, core enzyme and DNA', 'Rho, RNA and DNA', 'TRCF, DNA and RNA polymerase'], a: 0, ex: 'Enzyme + DNA + RNA: the elongation complex.' },
+  { t: 'mcq', q: 'The <i>lac</i> promoter has the –10 box TATGTT. Which change would make it stronger?', o: ['TATGTT → TATAAT', 'TATGTT → GATGTT', 'Spacer 17 → 20 bp', 'Deleting the –35 box'], a: 0, ex: 'Moving closer to the TATAAT consensus strengthens the promoter. (The real <i>lacUV5</i> mutation does exactly this.)' },
+  { t: 'mcq', q: 'What is pyrophosphorolytic editing?', o: ['Reversal of the synthesis reaction to remove the wrong nucleotide', 'Backtracking and cleaving the RNA', 'Removing the stalled polymerase by TRCF', 'Rho unwinding the hybrid'], a: 0, ex: 'The enzyme backs up one step by reversing polymerization, then inserts the correct nucleotide.' },
+  { t: 'mcq', q: 'What is the most common outcome when TRCF collides with a stalled polymerase?', o: ['The ternary complex dissociates', 'The polymerase always restarts', 'TRCF rebinds σ', 'The RNA is extended across the lesion'], a: 0, ex: 'Restart can happen, but dissociation is more common. This makes way for repair enzymes and for another polymerase.' },
+  { t: 'mcq', q: 'Which nuclease does TRCF recruit for transcription-coupled repair?', o: ['UvrA(B)C endonuclease', 'RNase H', 'DNase I', 'Rho'], a: 0, ex: 'UvrA(B)C.' },
+  { t: 'mcq', q: 'Which of these is NOT one of the proposed ways a hairpin causes termination?', o: ['σ rebinds to the hairpin', 'Pushing the polymerase forward', 'Pulling the transcript out of the polymerase', 'Inducing a conformational change in the polymerase'], a: 0, ex: 'σ plays no part in termination.' },
+  { t: 'mcq', q: 'Which features describe a rut site?', o: ['About 40 nt, C-rich, G-poor, no hairpin', 'About 20 bp, GC-rich, forms a hairpin', 'TATAAT at –10', 'A string of 8 U’s'], a: 0, ex: 'The rut site is the Rho utilisation site.' },
+  { t: 'mcq', q: 'Which subunit does rifampicin bind?', o: ['β (<i>rpoB</i>)', 'β′ (<i>rpoC</i>)', 'σ⁷⁰ (<i>rpoD</i>)', 'α (<i>rpoA</i>)'], a: 0, ex: 'A pocket in β that lies in the path of the RNA.' },
+  TF('Isomerization to the open complex is essentially irreversible.', true, 'True. Once it has occurred, initiation normally follows (although regulation can still act later in some cases).'),
+  { t: 'mcq', q: 'How does the polymerase footprint change from the open complex to the elongation complex?', o: ['From ~75 bp to ~40 bp', 'From ~40 bp to ~75 bp', 'It stays at ~75 bp', 'From ~13 bp to ~24 bp'], a: 0, ex: 'The enzyme becomes more compact during elongation.' },
+  { t: 'mcq', q: 'Which statement best explains why transcription has less proofreading than replication?', o: ['A faulty RNA is temporary and one of many copies; a DNA error is permanent and inherited', 'RNA polymerase has no proofreading at all', 'RNA has no 3′-OH', 'Rho corrects transcription errors'], a: 0, ex: 'It makes sense for the cell to worry more about the accuracy of replication than of transcription.' }
+]
+};
+
+/* ================= QUIZ ENGINE ================= */
+function buildQ(q, idx, mode, onAnswer) {
+  const node = el('div', 'q');
+  node.appendChild(el('div', 'qh', `<span class="qn">Q${idx + 1}.</span>${q.q}`));
+  const body = el('div'); node.appendChild(body);
+  const fb = el('div'); node.appendChild(fb);
+  const acts = el('div', 'qactions'); node.appendChild(acts);
+  let api = {};
+  if (q.t === 'mcq') {
+    const perm = q.fixed ? q.o.map((_, i) => i) : shuffle(q.o.map((_, i) => i));
+    let sel = null; const btns = [];
+    perm.forEach((oi, k) => { const b = el('button', 'opt', q.o[oi]); b.onclick = () => { if (api.locked) return; sel = k; btns.forEach(x => x.classList.remove('sel')); b.classList.add('sel'); if (mode === 'exam') onAnswer(null); }; btns.push(b); body.appendChild(b); });
+    api.complete = () => sel !== null;
+    api.grade = () => sel !== null && perm[sel] === q.a;
+    api.mark = ok => { btns.forEach((b, k) => { b.disabled = true; if (perm[k] === q.a) b.classList.add('right'); else if (k === sel) b.classList.add('wrong'); }); };
+    api.reset = () => { sel = null; btns.forEach(b => { b.disabled = false; b.className = 'opt'; }); };
+  } else if (q.t === 'num') {
+    const inp = el('input'); inp.type = 'number'; inp.style.width = '140px'; inp.placeholder = 'Your answer';
+    body.append(inp, el('span', '', ' ' + (q.unit || '')));
+    inp.oninput = () => { if (mode === 'exam') onAnswer(null); };
+    api.complete = () => inp.value.trim() !== '';
+    api.grade = () => Math.abs(parseFloat(inp.value) - q.a) <= (q.tol || 0);
+    api.mark = () => { inp.disabled = true; };
+    api.reset = () => { inp.disabled = false; inp.value = ''; };
+  } else if (q.t === 'order') {
+    let cur = shuffle(q.items.map((_, i) => i));
+    if (cur.every((v, i) => v === i)) cur = cur.reverse();
+    const ul = el('ul', 'ordlist'); body.appendChild(ul);
+    let touched = false;
+    const draw = () => { ul.innerHTML = ''; cur.forEach((it, k) => { const li = el('li', '', `<span class="ix">${k + 1}</span><span class="tx">${q.items[it]}</span>`); const up = el('button', '', '↑'), dn = el('button', '', '↓'); up.disabled = k === 0 || api.locked; dn.disabled = k === cur.length - 1 || api.locked; up.onclick = () => { [cur[k - 1], cur[k]] = [cur[k], cur[k - 1]]; touched = true; draw(); if (mode === 'exam') onAnswer(null); }; dn.onclick = () => { [cur[k + 1], cur[k]] = [cur[k], cur[k + 1]]; touched = true; draw(); if (mode === 'exam') onAnswer(null); }; li.append(up, dn); ul.appendChild(li); }); };
+    draw();
+    body.appendChild(el('div', '', '<span style="font-size:13px;color:var(--muted)">Use ↑ ↓ to arrange the steps, then press Check.</span>'));
+    api.complete = () => touched || mode !== 'exam';
+    api.grade = () => cur.every((v, i) => v === i);
+    api.mark = () => { draw(); $$('li', ul).forEach((li, k) => li.classList.add(cur[k] === k ? 'right' : 'wrong')); };
+    api.reset = () => { cur = shuffle(cur); touched = false; draw(); };
+    api.correctText = () => '<br><b>Correct order:</b> ' + q.items.map((s, i) => `${i + 1}. ${s}`).join(' → ');
+  } else if (q.t === 'match') {
+    const rights = shuffle(q.pairs.map(p => p[1])); const sels = [];
+    q.pairs.forEach(p => { const r = el('div', 'matchrow'); r.appendChild(el('div', 'l', p[0])); const s = el('select'); s.innerHTML = '<option value="">— choose —</option>' + rights.map(x => `<option>${x}</option>`).join(''); s.onchange = () => { if (mode === 'exam') onAnswer(null); }; sels.push(s); r.appendChild(s); body.appendChild(r); });
+    api.complete = () => sels.every(s => s.value);
+    api.grade = () => sels.every((s, i) => s.value === q.pairs[i][1]);
+    api.mark = () => sels.forEach((s, i) => { s.disabled = true; s.classList.add(s.value === q.pairs[i][1] ? 'right' : 'wrong'); });
+    api.reset = () => sels.forEach(s => { s.disabled = false; s.value = ''; s.className = ''; });
+    api.correctText = () => '<br><b>Answer:</b> ' + q.pairs.map(p => `${p[0]} → ${p[1]}`).join('; ');
+  }
+  api.node = node;
+  api.showFb = ok => {
+    let extra = '';
+    if (!ok && q.t === 'num') extra = `<br><b>Answer:</b> ${q.a} ${q.unit || ''}`;
+    if (!ok && api.correctText) extra = api.correctText();
+    fb.innerHTML = `<div class="fb ${ok ? 'ok' : 'bad'}"><b>${ok ? '✓ Correct.' : '✗ Not quite.'}</b> ${q.ex || ''}${extra}</div>`;
+  };
+  api.clearFb = () => { fb.innerHTML = ''; };
+  if (mode !== 'exam') {
+    const chk = el('button', 'btn small', 'Check'); const again = el('button', 'btn small ghost', 'Try again'); again.hidden = true;
+    chk.onclick = () => {
+      if (!api.complete()) { fb.innerHTML = '<div class="fb neutral">Answer the question first.</div>'; return; }
+      const ok = api.grade(); api.locked = true; api.mark(ok); api.showFb(ok); chk.hidden = true; again.hidden = false; onAnswer(ok);
+    };
+    again.onclick = () => { api.locked = false; api.reset(); api.clearFb(); chk.hidden = false; again.hidden = true; };
+    acts.append(chk, again);
+  }
+  return api;
+}
+
+function renderQuiz(container) {
+  const id = container.dataset.quiz, mode = container.dataset.mode || 'check';
+  const qs = QZ[id]; container.innerHTML = '';
+  const state = qs.map(() => ({ ans: false, ok: false }));
+  const sum = el('div', 'qsum');
+  const apis = qs.map((q, i) => buildQ(q, i, mode, ok => { if (ok === null) { update(); return; } state[i] = { ans: true, ok }; update(); }));
+  apis.forEach(a => container.appendChild(a.node));
+  container.appendChild(sum);
+  function update() {
+    if (mode === 'exam') return updExam();
+    const nAns = state.filter(s => s.ans).length, nOk = state.filter(s => s.ok).length;
+    const all = nAns === qs.length;
+    if (all && !store.attempted[id]) { store.attempted[id] = true; save(); renderNav(); }
+    const idx = CH.findIndex(c => c.id === id); const next = CH[idx + 1];
+    sum.innerHTML = `<span>Answered <b>${nAns}/${qs.length}</b> · correct on latest try <b>${nOk}</b></span>` +
+      (all || store.attempted[id] ? `<span class="chip ok">✓ Checkpoint complete${next && LOCKS_ON ? ' — next chapter unlocked' : ''}</span>` : `<span class="chip">${LOCKS_ON ? 'Answer all questions to unlock the next chapter' : 'Answer all questions to complete this checkpoint'}</span>`);
+  }
+  let submitted = false;
+  function updExam() {
+    if (submitted) return;
+    const n = apis.filter(a => a.complete()).length;
+    sum.innerHTML = `<span>Answered <b>${n}/${qs.length}</b></span>`;
+    const b = el('button', 'btn', 'Submit answers'); b.onclick = submit; sum.appendChild(b);
+  }
+  function submit() {
+    const n = apis.filter(a => a.complete()).length;
+    if (n < qs.length && !sum.dataset.warned) { sum.dataset.warned = '1'; sum.insertAdjacentHTML('afterbegin', `<span class="chip bad">${qs.length - n} unanswered: press Submit again to submit anyway</span>`); return; }
+    submitted = true;
+    let score = 0;
+    apis.forEach(a => { const ok = a.complete() && a.grade(); if (ok) score++; a.locked = true; a.mark(ok); a.showFb(ok); a.node.dataset.ok = ok ? '1' : '0'; });
+    const pct = Math.round(score / qs.length * 100);
+    store.attempted[id] = true; store.best = Math.max(store.best || 0, pct); save(); renderNav();
+    const col = pct >= 80 ? 'var(--ok-soft)' : pct >= 50 ? 'var(--warn-soft)' : 'var(--bad-soft)';
+    const msg = pct >= 80 ? 'Excellent. You have mastered prokaryotic transcription.' : pct >= 50 ? 'Good effort. Review the explanations for the questions you missed.' : 'Revisit the chapters linked to the questions you missed, then retake.';
+    const banner = el('div', 'scorebanner', `Score: ${score}/${qs.length} (${pct}%)<div style="font-size:15px;font-weight:500;margin-top:4px">${msg} Best so far: ${store.best}%</div><a class="btn fbLink" target="_blank" rel="noopener" href="${fbUrl()}" style="display:inline-block;margin-top:10px;text-decoration:none">📝 Give feedback on this tool</a>`);
+    banner.style.background = col;
+    container.insertBefore(banner, container.firstChild);
+    sum.innerHTML = '';
+    const tog = el('button', 'btn ghost', 'Show only my mistakes'); let only = false;
+    tog.onclick = () => { only = !only; tog.textContent = only ? 'Show all questions' : 'Show only my mistakes'; apis.forEach(a => a.node.hidden = only && a.node.dataset.ok === '1'); };
+    const re = el('button', 'btn', 'Retake (shuffled)'); re.onclick = () => { renderQuiz(container); container.scrollIntoView({ behavior: 'smooth' }); };
+    sum.append(el('span', '', `<b>${score}/${qs.length}</b> correct`), tog, re);
+    banner.scrollIntoView({ behavior: 'smooth' });
+  }
+  update();
+}
+$$('.quiz').forEach(renderQuiz);
+
+/* ================= CH0 WARM-UP ================= */
+(function () {
+  const mode = $('#wuMode'), inp = $('#wuSeq'), out = $('#wuOut'), note = $('#wuNote');
+  function coding53(s, m) { if (m === 'coding') return s; if (m === 't35') return comp(s); return rev(comp(s)); }
+  function render() {
+    let s = inp.value.toUpperCase().replace(/[^ACGT]/g, '');
+    if (!s) { out.textContent = 'Enter a DNA sequence (A, C, G, T).'; return; }
+    const c = coding53(s, mode.value), t = comp(c), r = c.replace(/T/g, 'U');
+    out.innerHTML =
+      `<span class="lab">Coding / sense / + / non-template      </span>5′– <span class="c-cod">${c}</span> –3′\n` +
+      `<span class="lab">Template / antisense / – / non-coding  </span>3′– <span class="c-tmp">${t}</span> –5′\n` +
+      `<span class="lab">                                       </span>    ${'→'.repeat(Math.min(c.length, 40))}  RNA polymerase moves this way\n` +
+      `<span class="lab">RNA transcript                         </span>5′– <span class="c-rna">${r}</span> –3′`;
+    const tips = { coding: 'You were given the coding strand. The RNA is the same sequence with U for T.', t35: 'You were given the template written 3′→5′. Complement each base in place to get the coding strand and the RNA.', t53: 'You were given the template written 5′→3′. You must <b>reverse</b> it as well as complement it. This is the most common exam trap.' };
+    note.innerHTML = tips[mode.value] + ' The template is read 3′→5′; the RNA is made 5′→3′.';
+  }
+  mode.onchange = render; inp.oninput = render; render();
+
+  let prob = null;
+  function newProb() {
+    const L = 9 + Math.floor(Math.random() * 4); let c = '';
+    for (let i = 0; i < L; i++) c += 'ACGT'[Math.floor(Math.random() * 4)];
+    const kinds = ['coding', 't35', 't53']; const k = kinds[Math.floor(Math.random() * 3)];
+    const shown = k === 'coding' ? `5′-${c}-3′` : k === 't35' ? `3′-${comp(c)}-5′` : `5′-${rev(comp(c))}-3′`;
+    const label = k === 'coding' ? 'coding (non-template) strand' : 'template strand';
+    prob = { c, k, rna: c.replace(/T/g, 'U') };
+    $('#wuPq').innerHTML = `The <b>${label}</b> of a gene is:<div class="mono" style="font-size:18px;margin-top:6px">${shown}</div>Write the RNA transcript 5′→3′.`;
+    $('#wuPa').value = ''; $('#wuPfb').innerHTML = '';
+  }
+  $('#wuPnew').onclick = newProb;
+  $('#wuPcheck').onclick = () => {
+    const raw = $('#wuPa').value.toUpperCase().replace(/5′|3′|5'|3'/g, '').replace(/[^ACGUT]/g, '');
+    if (!raw) { $('#wuPfb').innerHTML = '<div class="fb neutral">Type your answer first.</div>'; return; }
+    let msg;
+    if (raw === prob.rna) msg = '<div class="fb ok"><b>✓ Correct!</b></div>';
+    else if (raw.replace(/T/g, 'U') === prob.rna) msg = '<div class="fb neutral"><b>Almost:</b> the sequence is right, but RNA contains <b>U</b>, not T.</div>';
+    else if (raw.replace(/T/g, 'U') === rev(prob.rna)) msg = `<div class="fb bad"><b>✗ Reversed.</b> Your sequence is written 3′→5′. Correct RNA: <span class="mono">5′-${prob.rna}-3′</span></div>`;
+    else msg = `<div class="fb bad"><b>✗ Not quite.</b> Correct RNA: <span class="mono">5′-${prob.rna}-3′</span>. ${prob.k === 't53' ? 'The template was written 5′→3′, so reverse it, then complement it.' : prob.k === 't35' ? 'Complement each template base in place (A→U, T→A, G→C, C→G).' : 'Copy the coding strand, changing T to U.'}</div>`;
+    $('#wuPfb').innerHTML = msg;
+  };
+  newProb();
+})();
+
+/* ================= CH1 UNIT ================= */
+(function () {
+  const info = {
+    pro: ['Promoter', 'A sequence <b>upstream</b> of the RNA-coding region where RNA polymerase binds. The way the enzyme binds sets the <b>direction</b> of transcription, chooses the <b>template strand</b>, and ensures every RNA starts at the <b>same site (+1)</b>.'],
+    cod: ['RNA-coding sequence', 'The DNA sequence that RNA polymerase transcribes into RNA. It begins at <b>+1</b>; positions upstream are numbered negatively (there is no 0).'],
+    ter: ['Terminator', 'Specifies where transcription stops. It is transcribed into RNA and acts <b>in the RNA</b>, as a hairpin with a U-tract or as a rut site for Rho (Chapter 6).']
+  };
+  const s = svgWrap(900, 170,
+    `<line x1="30" y1="80" x2="870" y2="80" stroke="${'#2b4c7e'}" stroke-width="4"/><line x1="30" y1="96" x2="870" y2="96" stroke="#3b3f4a" stroke-width="4"/>
+     ${txt(14, 85, '5′', 'font-size="13"')}${txt(874, 85, '3′', 'font-size="13"')}${txt(14, 101, '3′', 'font-size="13"')}${txt(874, 101, '5′', 'font-size="13"')}
+     <g class="clickable" data-k="pro"><rect x="110" y="66" width="160" height="44" rx="8" fill="#2a9d55" opacity=".9"/>${txt(190, 93, 'Promoter', 'text-anchor="middle" fill="#fff" font-weight="700"')}</g>
+     <g class="clickable" data-k="cod"><rect x="272" y="66" width="420" height="44" rx="8" fill="#2f7dd1" opacity=".9"/>${txt(482, 93, 'RNA-coding sequence', 'text-anchor="middle" fill="#fff" font-weight="700"')}</g>
+     <g class="clickable" data-k="ter"><rect x="694" y="66" width="120" height="44" rx="8" fill="#d1495b" opacity=".9"/>${txt(754, 93, 'Terminator', 'text-anchor="middle" fill="#fff" font-weight="700"')}</g>
+     <path d="M272,66 V38 H330" fill="none" stroke="#111" stroke-width="2.5" marker-end="url(#ah)"/>${txt(276, 30, '+1', 'font-weight="700" font-size="14"')}
+     <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#111"/></marker>
+     <marker id="ahr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#e0582f"/></marker></defs>
+     ${txt(110, 140, 'Upstream (–)', 'font-size="13" fill="#5b6475"')}${txt(814, 140, 'Downstream (+)', 'font-size="13" fill="#5b6475" text-anchor="end"')}
+     <path d="M285,150 H690" stroke="#e0582f" stroke-width="4" marker-end="url(#ahr)"/>${txt(482, 166, 'RNA 5′ → 3′', 'text-anchor="middle" font-size="13" fill="#e0582f" font-weight="700"')}`);
+  $('#unitMap').innerHTML = s;
+  $$('#unitMap [data-k]').forEach(g => g.onclick = () => { const [t, d] = info[g.dataset.k]; $('#unitInfo').innerHTML = `<b class="t">${t}</b>${d}`; });
+
+  function strand(which) {
+    const A = which === 'A';
+    $('#gA').className = 'btn small' + (A ? '' : ' ghost'); $('#gB').className = 'btn small' + (A ? ' ghost' : '');
+    const yT = 90, yB = 130;
+    let g = `<defs><marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#e0582f"/></marker></defs>`;
+    g += `<line x1="40" y1="${yT}" x2="860" y2="${yT}" stroke="#2b4c7e" stroke-width="${A ? 3 : 7}" opacity="${A ? .45 : 1}"/>`;
+    g += `<line x1="40" y1="${yB}" x2="860" y2="${yB}" stroke="#3b3f4a" stroke-width="${A ? 7 : 3}" opacity="${A ? 1 : .45}"/>`;
+    g += txt(20, yT + 5, '5′', 'font-size="14" font-weight="700"') + txt(866, yT + 5, '3′', 'font-size="14" font-weight="700"') + txt(20, yB + 5, '3′', 'font-size="14" font-weight="700"') + txt(866, yB + 5, '5′', 'font-size="14" font-weight="700"');
+    g += `<rect x="80" y="${yT - 8}" width="70" height="${yB - yT + 16}" rx="6" fill="#2a9d55" opacity="${A ? .9 : .35}"/>${txt(115, yB + 30, 'P(A)', 'text-anchor="middle" font-size="13" font-weight="700"')}`;
+    g += `<rect x="150" y="${yT - 8}" width="270" height="${yB - yT + 16}" rx="6" fill="#2f7dd1" opacity="${A ? .25 : .1}"/>${txt(285, yT - 14, 'Gene A', 'text-anchor="middle" font-size="14" font-weight="700"')}`;
+    g += `<rect x="760" y="${yT - 8}" width="70" height="${yB - yT + 16}" rx="6" fill="#2a9d55" opacity="${A ? .35 : .9}"/>${txt(795, yB + 30, 'P(B)', 'text-anchor="middle" font-size="13" font-weight="700"')}`;
+    g += `<rect x="490" y="${yT - 8}" width="270" height="${yB - yT + 16}" rx="6" fill="#d1495b" opacity="${A ? .1 : .25}"/>${txt(625, yT - 14, 'Gene B', 'text-anchor="middle" font-size="14" font-weight="700"')}`;
+    if (A) g += `<path d="M155,170 H415" stroke="#e0582f" stroke-width="5" marker-end="url(#ar2)"/>${txt(150, 190, '5′', 'font-weight="700" fill="#e0582f"')}${txt(422, 190, '3′', 'font-weight="700" fill="#e0582f"')}${txt(285, 205, 'RNA of gene A', 'text-anchor="middle" fill="#e0582f" font-size="13"')}`;
+    else g += `<path d="M755,50 H495" stroke="#e0582f" stroke-width="5" marker-end="url(#ar2)"/>${txt(762, 40, '5′', 'font-weight="700" fill="#e0582f"')}${txt(470, 40, '3′', 'font-weight="700" fill="#e0582f"')}${txt(625, 30, 'RNA of gene B', 'text-anchor="middle" fill="#e0582f" font-size="13"')}`;
+    $('#strandSvg').innerHTML = svgWrap(900, 215, g);
+    $('#strandInfo').innerHTML = A
+      ? '<b class="t">Gene A is transcribed left → right.</b>Its RNA grows 5′→3′ to the right, so the template must run <b>3′→5′ left to right</b>: the <b>bottom strand</b> (thick). Its coding strand is the top strand.'
+      : '<b class="t">Gene B is transcribed right → left.</b>Its promoter points the other way. The RNA grows 5′→3′ to the left, so the template is the <b>top strand</b> (thick). The same DNA molecule uses <b>different template strands for different genes</b>.';
+  }
+  $('#gA').onclick = () => strand('A'); $('#gB').onclick = () => strand('B'); strand('A');
+})();
+
+/* ================= CH2 PROMOTER ================= */
+(function () {
+  const POS = []; for (let p = -60; p <= 20; p++) if (p !== 0) POS.push(p);
+  const fill = 'GCATCGCTAGTCCAGGTACTCGGCTACAGTCGGATCAGCCTGACGTGCTAGCCAGTCGAGCTAGGCTCAGTGCATCCAGTGCTA';
+  const seq = {}; POS.forEach((p, i) => seq[p] = fill[i % fill.length]);
+  const put = (from, s) => { let p = from; for (const ch of s) { if (p === 0) p = 1; seq[p] = ch; p++; } };
+  put(-58, 'AAAATTTTTAAAATTATTTT'); put(-35, 'TTGACA'); put(-15, 'TG'); put(-12, 'TATAAT'); put(-6, 'GCC'); put(1, 'A');
+  const ELS = [
+    { k: 'up', from: -58, to: -39, name: 'UP element (–58 to –39, AT-rich)', d: 'Found in some <b>strong</b> promoters, such as the rRNA genes. It is recognised by the <b>αCTD</b> (C-terminal domain of α), not by σ. Because the αCTD is on a flexible linker, it can reach UP elements that lie further upstream. The extra specific contact increases binding of the polymerase.' },
+    { k: 'm35', from: -35, to: -30, name: '–35 box: 5′-TTGACA-3′', d: 'Recognised by <b>σ region 4</b> through a <b>helix-turn-helix</b>. One helix sits in the major groove and reads the bases; the other contacts the backbone. The holoenzyme contacts –35 <b>first</b> when it forms the closed complex.' },
+    { k: 'ext', from: -15, to: -14, name: 'Extended –10 element (TG at –15/–14)', d: 'A short element at the upstream end of the –10 box, recognised by an α-helix of <b>σ region 3</b> that contacts these two base pairs. In promoters that lack a –35 region (e.g. <i>gal</i>), the extra contacts make up for it.' },
+    { k: 'm10', from: -12, to: -7, name: '–10 (Pribnow) box: 5′-TATAAT-3′', d: 'Recognised by an α-helix of <b>σ region 2</b>. Melting starts <b>here</b>: <b>A–11 and T–7</b> of the non-template strand flip out into pockets in σ, and aromatic residues stabilise the single strand. Region 2.3 melts the DNA.' },
+    { k: 'disc', from: -6, to: -4, name: 'Discriminator (just downstream of –10)', d: 'Recognised by <b>σ region 1.2</b>. How strongly it interacts with the polymerase affects the stability of the enzyme–promoter complex.' },
+    { k: 'p1', from: 1, to: 1, name: '+1: the transcription start site', d: 'The first nucleotide of the RNA, usually a purine (A or G). Bases upstream are numbered negatively and downstream positively; there is no position 0.' }
+  ];
+  const elOf = p => ELS.find(e => p >= e.from && p <= e.to);
+  function draw() {
+    const bub = $('#pxBub').checked, fp = $('#pxFp').checked;
+    const g = $('#pxGrid'); g.innerHTML = '';
+    const mk = (cls, label) => { const r = el('div', 'prow ' + cls); r.appendChild(el('div', 'plab', label)); return r; };
+    const ruler = mk('ruler', 'Position'), top = mk('', 'Non-template (coding) 5′→3′'), bot = mk('', 'Template 3′→5′');
+    POS.forEach(p => {
+      const e = elOf(p);
+      const rc = el('div', 'pcell'); if ([-60, -50, -40, -35, -30, -20, -10, 1, 10, 20].includes(p)) rc.innerHTML = `<span>${p > 0 ? '+' + p : p}</span>`; ruler.appendChild(rc);
+      const extra = (bub && p >= -11 && p <= 2 ? ' bub' : '') + (fp && p >= -55 && p <= 20 ? ' fp' : '');
+      const c1 = el('div', 'pcell' + (e ? ' el e-' + e.k : '') + extra, seq[p]);
+      const c2 = el('div', 'pcell' + (e ? ' el e-' + e.k : '') + extra, COMP[seq[p]]);
+      c2.style.opacity = e ? .78 : 1;
+      if (e) { c1.onclick = c2.onclick = () => $('#pxInfo').innerHTML = `<b class="t">${e.name}</b>${e.d}`; c1.title = c2.title = e.name; }
+      top.appendChild(c1); bot.appendChild(c2);
+    });
+    g.append(ruler, top, bot);
+    if (bub) g.insertAdjacentHTML('beforeend', '<div style="font-size:12px;color:var(--rna);margin-top:4px">Orange underline = DNA melted in the open complex (–11 to +2, about 13 bp)</div>');
+    if (fp) g.insertAdjacentHTML('beforeend', '<div style="font-size:12px;color:var(--core);margin-top:2px">Teal shading = region contacted by the holoenzyme in the open complex (–55 to +20, about 75 bp)</div>');
+  }
+  $('#pxBub').onchange = draw; $('#pxFp').onchange = draw; draw();
+
+  /* strength lab */
+  const C35 = 'TTGACA', C10 = 'TATAAT';
+  const PRE = [
+    { n: 'Consensus', m35: 'TTGACA', m10: 'TATAAT', sp: 17, up: false, ext: false, note: 'Ideal σ⁷⁰ promoter. Very few natural promoters match it exactly.' },
+    { n: '–10 GATACT', m35: 'TTGACA', m10: 'GATACT', sp: 17, up: false, ext: false, note: 'σ recognises GATACT less well than TATAAT, so initiation is less frequent.' },
+    { n: '<i>lac</i> (wild type)', m35: 'TTTACA', m10: 'TATGTT', sp: 17, up: false, ext: false, note: 'A deliberately weak promoter. In the cell it also needs an activator (CAP). The <i>lacUV5</i> mutation changes the –10 to TATAAT.' },
+    { n: '<i>lacUV5</i> mutant', m35: 'TTTACA', m10: 'TATAAT', sp: 17, up: false, ext: false, note: 'Same as <i>lac</i> but with a consensus –10: much stronger.' },
+    { n: 'rRNA-type (with UP)', m35: 'TTGTCT', m10: 'TATAAT', sp: 16, up: true, ext: false, note: 'Illustrative rRNA-type promoter: a good –10, a decent –35 and an UP element for very high expression.' },
+    { n: '<i>gal</i>-type (extended –10)', m35: 'GCATCC', m10: 'TATGGT', sp: 17, up: false, ext: true, note: 'Illustrative: almost no –35, but an extended –10 compensates.' }
+  ];
+  const pres = $('#labPresets');
+  PRE.forEach(p => { const b = el('button', 'btn small ghost', p.n); b.onclick = () => { $('#lab35').value = p.m35; $('#lab10').value = p.m10; $('#labSp').value = p.sp; $('#labUp').checked = p.up; $('#labExt').checked = p.ext; lab(p.note); }; pres.appendChild(b); });
+  function boxView(s, c, tgt) { tgt.innerHTML = c.split('').map((ch, i) => { const x = (s[i] || '·'); return `<span class="${x === ch ? 'm' : 'x'}" title="consensus ${ch}">${x}</span>`; }).join(''); }
+  function lab(presetNote) {
+    const s35 = $('#lab35').value.toUpperCase().replace(/[^ACGT]/g, '').slice(0, 6); $('#lab35').value = s35;
+    const s10 = $('#lab10').value.toUpperCase().replace(/[^ACGT]/g, '').slice(0, 6); $('#lab10').value = s10;
+    const sp = +$('#labSp').value; $('#labSpV').textContent = sp;
+    const up = $('#labUp').checked, ext = $('#labExt').checked;
+    boxView(s35, C35, $('#lab35v')); boxView(s10, C10, $('#lab10v'));
+    const m35 = C35.split('').filter((c, i) => s35[i] === c).length, m10 = C10.split('').filter((c, i) => s10[i] === c).length;
+    let s = m35 * 1.0 + m10 * 1.5; const why = [];
+    why.push(`–35 box matches consensus at <b>${m35}/6</b> positions${m35 === 6 ? '' : m35 >= 4 ? ' (good; σ region 4 binds fairly well)' : ' (poor; weak σ region 4 contact)'}.`);
+    why.push(`–10 box matches at <b>${m10}/6</b>${m10 === 6 ? '' : m10 >= 4 ? ' (σ region 2 binds less well)' : ' (poor binding <i>and</i> poor melting)'}.`);
+    if (s10.length === 6 && s10[1] !== 'A') { s -= 1.2; why.push('A–11 is mutated. It is one of the two bases that flip into σ to start melting, so isomerization to the open complex is impaired.'); }
+    if (s10.length === 6 && s10[5] !== 'T') { s -= 1.2; why.push('T–7 is mutated. It is the second flipped base, so the open complex is less stable.'); }
+    const pen = Math.abs(sp - 17) * 2.2; s -= pen;
+    if (sp !== 17) why.push(`Spacer of ${sp} bp (optimum 17). The –35 and –10 boxes are no longer positioned for σ regions 4 and 2 to contact them at the same time.`);
+    if (ext) { s += 1.5 + Math.max(0, 4 - m35) * 1.0; why.push(m35 <= 3 ? 'The extended –10 (read by σ region 3) <b>compensates</b> for the weak –35.' : 'The extended –10 adds extra contacts with σ region 3.'); }
+    if (up) { s += 3; why.push('The UP element adds a contact with <b>αCTD</b>, so the polymerase binds more strongly.'); }
+    const pct = Math.max(0, Math.min(100, Math.round(s / 20 * 100)));
+    const lbl = pct >= 70 ? ['Strong', 'var(--ok)'] : pct >= 45 ? ['Moderate', '#4a8fd6'] : ['Weak', 'var(--bad)'];
+    $('#labMeter').style.width = pct + '%'; $('#labMeter').style.background = lbl[1];
+    $('#labLbl').innerHTML = `<b style="color:${lbl[1]}">${lbl[0]}</b>`;
+    $('#labWhy').innerHTML = (typeof presetNote === 'string' ? `<b class="t">${presetNote}</b>` : '') + '<ul style="margin:4px 0;padding-left:18px">' + why.map(w => `<li>${w}</li>`).join('') + '</ul>';
+  }
+  ['#lab35', '#lab10', '#labSp', '#labUp', '#labExt'].forEach(s => $(s).addEventListener('input', () => lab()));
+  lab('Consensus promoter. Edit any element or pick a preset.');
+})();
+
+/* ================= CH3 RNAP ================= */
+(function () {
+  const SUB = {
+    a: { n: 'α', gene: 'rpoA', d: 'Two copies (αI and αII); the third-largest subunit. <b>Required for assembly</b> of the core enzyme, and interacts with some regulatory proteins. Its C-terminal domain (αCTD), on a flexible linker, binds the <b>UP element</b>.' },
+    b: { n: 'β', gene: 'rpoB', d: 'The second-largest subunit. Carries the <b>DNA-binding active centre</b> and takes part in catalysis, chain initiation and elongation. It is the target of <b>rifampicin</b>.' },
+    bp: { n: 'β′', gene: 'rpoC', d: 'The <b>largest</b> subunit. <b>Binds the DNA template</b>; together with β it forms the catalytic cleft.' },
+    w: { n: 'ω', gene: 'rpoZ', d: 'The <b>smallest</b> subunit. Helps assembly and stabilises RNA polymerase; can help restore denatured enzyme.' },
+    s: { n: 'σ⁷⁰', gene: 'rpoD', d: 'The initiation factor. Turns the core into the <b>holoenzyme</b>, greatly reduces non-specific DNA binding and gives promoter-specific binding. <b>Not needed</b> for elongation or termination.' }
+  };
+  const ORDER = ['a', 'a', 'b', 'bp', 'w', 's'];
+  let built = [];
+  function drawHB() {
+    const has = i => built.length > i;
+    let g = '';
+    if (has(2)) g += `<ellipse cx="330" cy="120" rx="95" ry="70" fill="#2a9d8f" opacity=".85"/>${txt(330, 126, 'β', 'text-anchor="middle" font-size="30" fill="#fff" font-weight="700"')}`;
+    if (has(3)) g += `<ellipse cx="500" cy="120" rx="110" ry="78" fill="#1f6f8b" opacity=".85"/>${txt(510, 126, 'β′', 'text-anchor="middle" font-size="30" fill="#fff" font-weight="700"')}`;
+    if (has(0)) g += `<ellipse cx="370" cy="215" rx="42" ry="30" fill="#e9a23b"/>${txt(370, 222, 'αI', 'text-anchor="middle" font-size="20" font-weight="700"')}`;
+    if (has(1)) g += `<ellipse cx="450" cy="215" rx="42" ry="30" fill="#e9a23b"/>${txt(450, 222, 'αII', 'text-anchor="middle" font-size="20" font-weight="700"')}`;
+    if (has(4)) g += `<circle cx="600" cy="200" r="24" fill="#9aa5b1"/>${txt(600, 207, 'ω', 'text-anchor="middle" font-size="20" font-weight="700"')}`;
+    if (has(5)) g += `<path d="M215,70 q-40,40 -10,90 q30,40 80,10 q20,-60 -70,-100z" fill="#7b2cbf" opacity=".92"/>${txt(232, 128, 'σ⁷⁰', 'text-anchor="middle" font-size="22" fill="#fff" font-weight="700"')}`;
+    let label = 'Empty';
+    if (built.length === 1) label = 'α'; if (built.length === 2) label = 'α₂ (dimer)'; if (built.length === 3) label = 'α₂β'; if (built.length === 4) label = 'α₂ββ′';
+    if (built.length === 5) label = 'Core enzyme α₂ββ′ω'; if (built.length === 6) label = 'Holoenzyme α₂ββ′ωσ';
+    g += txt(450, 286, label, 'text-anchor="middle" font-size="18" font-weight="700" fill="#1d2330"');
+    $('#hbSvg').innerHTML = svgWrap(900, 300, g);
+  }
+  $$('#hbBtns [data-s]').forEach(b => b.onclick = () => {
+    const k = b.dataset.s;
+    if (built.length >= ORDER.length) { $('#hbInfo').innerHTML = '<b class="t">The holoenzyme is complete.</b>Press Reset to build it again.'; return; }
+    const exp = ORDER[built.length]; const S = SUB[k];
+    if (k !== exp) {
+      const hint = { a: 'Assembly starts with α. Two α subunits form a dimer, and α is “required for assembly of the core enzyme”.', b: 'Next comes β, which binds the α dimer.', bp: 'Next comes β′, the largest subunit.', w: 'ω joins last of the core subunits and stabilises the enzyme.', s: 'σ joins only after the core enzyme (α₂ββ′ω) is complete.' }[exp];
+      $('#hbInfo').innerHTML = `<div class="fb bad" style="margin:0"><b>Not yet.</b> ${hint}</div><div style="margin-top:6px"><b>${S.n}</b> (gene <i>${S.gene}</i>): ${S.d}</div>`; return;
+    }
+    built.push(k); drawHB();
+    $('#hbInfo').innerHTML = `<b class="t">${S.n} added (gene <i>${S.gene}</i>)</b>${S.d}` + (built.length === 5 ? '<div class="fb ok">Core enzyme complete. It can make RNA but binds DNA non-specifically. Now add σ.</div>' : '') + (built.length === 6 ? '<div class="fb ok">Holoenzyme formed. It can now find promoters.</div>' : '');
+  });
+  $('#hbReset').onclick = () => { built = []; drawHB(); $('#hbInfo').innerHTML = 'Start by adding the subunit needed for core assembly.'; };
+  drawHB();
+
+  /* sigma map */
+  const REG = [
+    { k: 'a', n: 'αCTD', x1: 60, x2: 195, to: 'up', d: '<b>αCTD → UP element.</b> The UP element is <b>not</b> read by σ but by the C-terminal domain of α, which hangs on a flexible linker from αNTD. It can reach UP elements located further upstream.' },
+    { k: '4', n: '4 (HTH)', x1: 225, x2: 355, to: 'm35', d: '<b>Region 4 → –35 box</b> through a <b>helix-turn-helix</b>. One helix inserts into the major groove and reads the bases; the other lies across the groove and contacts the backbone.' },
+    { k: 'L', n: '3/4 linker', x1: 355, x2: 440, to: null, d: '<b>Region 3/4 linker</b>: not a promoter contact. It sits in the <b>RNA exit channel</b> and mimics RNA. It must be ejected before the RNA can grow past about 10 nt, which explains <b>abortive initiation</b>.' },
+    { k: '3', n: '3', x1: 440, x2: 490, to: 'ext', d: '<b>Region 3 → extended –10.</b> An α-helix contacts the two specific base pairs of the extended –10 element.' },
+    { k: '2', n: '2 (2.3, 2.4)', x1: 490, x2: 610, to: 'm10', d: '<b>Region 2 → –10 box.</b> An α-helix of region 2 recognises –10. Aromatic residues bind non-template bases and stabilise the melted DNA. <b>Region 2.3 melts the DNA</b>; A–11 and T–7 flip into pockets here.' },
+    { k: '12', n: '1.2', x1: 610, x2: 685, to: 'disc', d: '<b>Region 1.2 → discriminator.</b> The strength of this contact affects the stability of the enzyme–promoter complex.' },
+    { k: '11', n: '1.1', x1: 685, x2: 760, to: null, d: '<b>Region 1.1</b>: in free σ it masks the DNA-binding regions, so σ on its own does not bind promoters well. It moves aside when σ binds the core.' }
+  ];
+  const PEL = { up: [60, 195, 'UP', '#c98a00'], m35: [240, 340, '–35', '#d1495b'], ext: [445, 485, 'ext –10', '#8a5cf6'], m10: [500, 600, '–10', '#2f7dd1'], disc: [615, 680, 'disc', '#13a89e'] };
+  let selR = null;
+  function drawSM() {
+    let g = txt(212, 54, 'C', 'text-anchor="end" font-weight="700" fill="#5b6475"') + txt(768, 54, 'N', 'font-weight="700" fill="#5b6475"') + txt(225, 20, 'σ⁷⁰ lies along the promoter: C-terminal region 4 upstream, N-terminal region 1 downstream', 'font-size="12.5" fill="#5b6475"') + txt(60, 20, 'α subunit', 'font-size="12.5" fill="#5b6475"');
+    REG.forEach(r => {
+      const on = selR === r.k; const fill = r.k === 'a' ? '#e9a23b' : r.k === 'L' ? '#c39be6' : '#7b2cbf';
+      g += `<g class="clickable" data-r="${r.k}"><rect x="${r.x1 + 1}" y="30" width="${r.x2 - r.x1 - 2}" height="38" rx="7" fill="${fill}" opacity="${selR && !on ? .35 : 1}" stroke="${on ? '#111' : 'none'}" stroke-width="2"/>${txt((r.x1 + r.x2) / 2, 54, r.n, `text-anchor="middle" fill="${r.k === 'a' ? '#111' : '#fff'}" font-weight="700" font-size="13.5"`)}</g>`;
+    });
+    g += `<line x1="30" y1="232" x2="870" y2="232" stroke="#2b4c7e" stroke-width="4"/><line x1="30" y1="246" x2="870" y2="246" stroke="#3b3f4a" stroke-width="4"/>`;
+    Object.entries(PEL).forEach(([k, [a, b, n, c]]) => {
+      const hit = selR && REG.find(r => r.k === selR).to === k;
+      g += `<rect x="${a}" y="222" width="${b - a}" height="34" rx="6" fill="${c}" opacity="${selR && !hit ? .3 : .95}"/>${txt((a + b) / 2, 278, n, 'text-anchor="middle" font-size="13" font-weight="700"')}`;
+    });
+    g += `<path d="M712,222 V202 H744" stroke="#111" stroke-width="2.5" fill="none"/>${txt(716, 196, '+1', 'font-size="13" font-weight="700"')}`;
+    g += txt(30, 300, 'Promoter (upstream → downstream)', 'font-size="13" fill="#5b6475"');
+    if (selR) { const r = REG.find(x => x.k === selR); if (r.to) { const p = PEL[r.to]; const x1 = (r.x1 + r.x2) / 2, x2 = (p[0] + p[1]) / 2; g += `<path d="M${x1},70 C${x1},150 ${x2},140 ${x2},220" stroke="#111" stroke-width="2.5" fill="none" stroke-dasharray="6 4"/><circle cx="${x2}" cy="220" r="5" fill="#111"/>`; } }
+    $('#smSvg').innerHTML = svgWrap(900, 310, g);
+    $$('#smSvg [data-r]').forEach(n => n.onclick = () => { selR = n.dataset.r; drawSM(); $('#smInfo').innerHTML = REG.find(r => r.k === selR).d; });
+  }
+  drawSM();
+
+  /* sigma switcher */
+  const SF = [
+    { c: 'Normal growth', s: 'σ⁷⁰', g: 'rpoD', col: '#7b2cbf', d: '<b>Housekeeping σ</b> (70 kDa). Transcribes essential genes from promoters with –35 TTGACA and –10 TATAAT.' },
+    { c: 'Heat shock (42 °C)', s: 'σ³²', g: 'rpoH', col: '#d1495b', d: '<b>Heat-shock σ</b> (32 kDa). Its level rises under heat and other stresses, directing some polymerase to promoters of stress-protein genes such as chaperones. These promoters have σ³²-specific elements at about <b>–39 and –15</b>.' },
+    { c: 'Nitrogen limitation', s: 'σ⁵⁴', g: 'rpoN', col: '#f2c300', d: '<b>Nitrogen-regulation σ.</b> Controls nitrogen-metabolism genes. Unusually, it recognises elements at –24/–12 and needs an ATP-hydrolysing activator protein to form the open complex.' },
+    { c: 'Stationary phase', s: 'σ³⁸', g: 'rpoS', col: '#d6338a', d: '<b>Stationary-phase σ.</b> Switches on genes for survival in stationary phase and under general stress.' },
+    { c: 'Building flagella', s: 'σ²⁸', g: 'fliA', col: '#2f7dd1', d: '<b>Flagellar σ.</b> Transcribes flagellar and chemotaxis genes.' },
+    { c: 'Iron (ferric citrate)', s: 'σ¹⁹', g: 'fecI', col: '#8a5cf6', d: '<b>Ferric citrate σ.</b> Transcribes genes for iron transport and utilisation.' }
+  ];
+  const box = $('#sfBtns');
+  function pick(i) {
+    $$('button', box).forEach((b, k) => b.className = 'btn small' + (k === i ? '' : ' ghost'));
+    const f = SF[i];
+    $('#sfSvg').innerHTML = svgWrap(420, 220, `<ellipse cx="230" cy="125" rx="140" ry="72" fill="#2a9d8f" opacity=".85"/>${txt(240, 132, 'Core α₂ββ′ω', 'text-anchor="middle" fill="#fff" font-weight="700" font-size="17"')}
+      <circle cx="105" cy="70" r="46" fill="${f.col}"/>${txt(105, 78, f.s, `text-anchor="middle" fill="${f.col === '#f2c300' ? '#1d2330' : '#fff'}" font-size="22" font-weight="700"`)}
+      ${txt(210, 212, f.c, 'text-anchor="middle" font-size="14" fill="#5b6475"')}`);
+    $('#sfInfo').innerHTML = `<b class="t">${f.c} → ${f.s} (gene <i>${f.g}</i>)</b>${f.d}<div style="margin-top:6px;font-size:14px;color:var(--muted)">Each σ binds the <b>same core</b> and changes which promoters the holoenzyme recognises.</div>`;
+  }
+  SF.forEach((f, i) => { const b = el('button', 'btn small ghost', f.c); b.onclick = () => pick(i); box.appendChild(b); });
+  pick(0);
+})();
+
+/* ================= CH4 INITIATION ================= */
+(function () {
+  const X = p => 60 + (p + 60) * 8; // -60..40
+  const yT = 160, yB = 180, UP = 24;
+  function dna(bub) {
+    let g = '';
+    for (let p = -60; p <= 40; p++) { if (p === 0) continue; if (bub && p >= bub[0] && p <= bub[1]) continue; g += `<line x1="${X(p)}" y1="${yT}" x2="${X(p)}" y2="${yB}" stroke="#c9c6bc" stroke-width="1.5"/>`; }
+    let top, bot;
+    if (bub) { const a = X(bub[0]) - 4, b = X(bub[1]) + 4; top = `M${X(-60)},${yT} L${a},${yT} L${a + 10},${yT - UP} L${b - 10},${yT - UP} L${b},${yT} L${X(40)},${yT}`; bot = `M${X(-60)},${yB} L${a},${yB} L${a + 10},${yB + UP} L${b - 10},${yB + UP} L${b},${yB} L${X(40)},${yB}`; }
+    else { top = `M${X(-60)},${yT} L${X(40)},${yT}`; bot = `M${X(-60)},${yB} L${X(40)},${yB}`; }
+    g += `<path d="${top}" fill="none" stroke="#2b4c7e" stroke-width="4"/><path d="${bot}" fill="none" stroke="#3b3f4a" stroke-width="4"/>`;
+    g += `<rect x="${X(-35) - 4}" y="${yT - 6}" width="${6 * 8}" height="${yB - yT + 12}" rx="4" fill="#d1495b" opacity=".35"/>${txt(X(-32), yB + 50, '–35', 'text-anchor="middle" font-size="12" font-weight="700" fill="#d1495b"')}`;
+    g += `<rect x="${X(-12) - 4}" y="${yT - 6 - (bub ? UP : 0)}" width="${6 * 8}" height="${yB - yT + 12 + (bub ? UP * 2 : 0)}" rx="4" fill="#2f7dd1" opacity=".22"/>${txt(X(-9), yB + 50, '–10', 'text-anchor="middle" font-size="12" font-weight="700" fill="#2f7dd1"')}`;
+    g += `<path d="M${X(1)},${yB + 34} v8" stroke="#111" stroke-width="2"/>${txt(X(1), yB + 58, '+1', 'text-anchor="middle" font-size="12" font-weight="700"')}`;
+    g += txt(18, yT + 5, '5′', 'font-size="12"') + txt(870, yT + 5, '3′', 'font-size="12"') + txt(18, yB + 5, '3′', 'font-size="12"') + txt(870, yB + 5, '5′', 'font-size="12"');
+    return g;
+  }
+  const rnap = (a, b, op = .16) => `<rect x="${X(a)}" y="100" width="${X(b) - X(a)}" height="140" rx="45" fill="#1f8a7f" opacity="${op}" stroke="#1f8a7f" stroke-width="2"/>`;
+  const sigma = (x1, x2, y = 112, released = false) => `<rect x="${x1}" y="${y}" width="${x2 - x1}" height="30" rx="14" fill="#7b2cbf" opacity="${released ? .55 : .9}" ${released ? 'stroke-dasharray="5 4" stroke="#7b2cbf"' : ''}/>${txt((x1 + x2) / 2, y + 20, 'σ', 'text-anchor="middle" fill="#fff" font-weight="700" font-size="16"')}`;
+  const rna = (from, to, y = yB + UP - 9) => `<line x1="${X(from)}" y1="${y}" x2="${X(to)}" y2="${y}" stroke="#e0582f" stroke-width="6" stroke-linecap="round"/>`;
+  const STAGES = [
+    { t: 'Holoenzyme forms', svg: () => dna(null) + `<rect x="${X(-52)}" y="22" width="${X(-8) - X(-52)}" height="80" rx="38" fill="#1f8a7f" opacity=".18" stroke="#1f8a7f" stroke-width="2"/>` + sigma(X(-46), X(-20), 34) + txt(X(-30), 92, 'holoenzyme searching for a promoter', 'text-anchor="middle" font-size="12" fill="#1f8a7f"'),
+      chips: ['Core α₂ββ′ω + σ⁷⁰ → holoenzyme', 'σ lowers non-specific binding'], pts: ['σ binds the core enzyme, giving the holoenzyme.', 'The holoenzyme binds non-specific DNA only weakly, so it can find promoters.'] },
+    { t: 'Closed complex', svg: () => dna(null) + rnap(-55, 20) + sigma(X(-40), X(-6)) + `<path d="M${X(-32)},142 v14 M${X(-9)},142 v14" stroke="#7b2cbf" stroke-width="3"/>` + txt(X(-20), 92, '⇄ readily reversible', 'text-anchor="middle" font-size="14" font-weight="700" fill="#a15c00"'),
+      chips: ['DNA still double-stranded', 'Reversible', '–35 contacted first'], pts: ['The holoenzyme contacts the <b>–35 box first</b>, then binds the whole promoter while the DNA is still a double helix.', 'Binding is <b>readily reversible</b>: the polymerase can dissociate as easily as it can go on to isomerize.'] },
+    { t: 'Open complex (isomerization)', svg: () => dna([-11, 2]) + rnap(-55, 20) + sigma(X(-40), X(-6), 100) + `<circle cx="${X(-11)}" cy="${yT - UP}" r="6" fill="#e9a23b" stroke="#111"/><circle cx="${X(-7)}" cy="${yT - UP}" r="6" fill="#e9a23b" stroke="#111"/>` + txt(X(-9), yT - UP - 12, 'A–11 · T–7 flip into σ', 'text-anchor="middle" font-size="11.5" font-weight="700"') + txt(X(-18), 260, '← footprint ~75 bp (–55 to +20) →', 'text-anchor="middle" font-size="12.5" fill="#1f8a7f" font-weight="700"'),
+      chips: ['Melted –11 to +2', 'Bubble 12–14 bp', 'No ATP needed (σ⁷⁰)', 'Essentially irreversible', 'Footprint ~75 bp'], pts: ['<b>Isomerization</b>: a spontaneous conformational change. With σ⁷⁰ it does <b>not</b> need ATP hydrolysis.', 'The DNA melts from <b>–11 to +2</b>, exposing the template and non-template strands.', '<b>A–11 and T–7</b> of the non-template strand flip out of the stack into pockets in σ, stabilising the single strand.', 'The step is <b>essentially irreversible</b> and normally guarantees that initiation follows.'] },
+    { t: 'Initial transcribing complex', svg: () => dna([-11, 2]) + rnap(-55, 20) + sigma(X(-40), X(-6), 100) + rna(1, 6) + `<rect x="${X(9)}" y="${yB + UP - 18}" width="26" height="18" rx="5" fill="#c39be6" stroke="#7b2cbf"/>` + txt(X(11), yB + UP + 16, '3/4 linker blocks RNA path', 'text-anchor="middle" font-size="11.5" fill="#7b2cbf" font-weight="700"') + txt(X(-30), 270, 'short RNAs (<10 nt) released → restart', 'text-anchor="middle" font-size="12.5" fill="#e0582f" font-weight="700"'),
+      chips: ['First 2 NTPs joined', 'Abortive RNAs < 10 nt', 'σ 3/4 linker in RNA exit channel'], pts: ['The first two ribonucleotides are aligned on the template and joined; more are added in the same way.', 'Adding the first ~10 nt is inefficient. The enzyme repeatedly releases short transcripts and starts again: <b>abortive synthesis</b>.', 'Model: the σ <b>region 3/4 linker mimics RNA</b> and sits in the RNA exit channel. It must be pushed out, which may take several attempts.'] },
+    { t: 'Scrunching', svg: () => dna([-11, 12]) + rnap(-55, 20) + sigma(X(-40), X(-6), 100) + rna(1, 10) + `<path d="M${X(30)},110 h-40" stroke="#111" stroke-width="2" marker-end="url(#ia)"/>` + txt(X(30), 104, 'downstream DNA pulled in', 'text-anchor="middle" font-size="11.5"') + txt(X(0), 270, 'enzyme stays put · bubble 22–24 bp · energy stored', 'text-anchor="middle" font-size="12.5" font-weight="700" fill="#1f8a7f"'),
+      chips: ['Enzyme stationary', 'Bubble grows to 22–24 bp', 'Stores energy'], pts: ['<b>Scrunching</b> (the accepted model): the enzyme stays in place and <b>pulls downstream DNA into itself</b>.', 'The bubble expands to <b>22–24 bp</b>, storing energy.', 'This energy is used to eject the 3/4 linker and to break the strong contacts with the promoter and with σ.'] },
+    { t: 'Promoter escape → elongation', svg: () => dna([24, 37]) + rnap(-2, 38, .2) + sigma(X(-56), X(-30), 40, true) + txt(X(-43), 32, 'σ released', 'text-anchor="middle" font-size="12" fill="#7b2cbf" font-weight="700"') + rna(27, 35) + `<path d="M${X(27)},${yB + UP - 9} C${X(20)},235 ${X(10)},250 ${X(-5)},262" stroke="#e0582f" stroke-width="6" fill="none" stroke-linecap="round"/>` + txt(X(18), 92, 'stable ternary complex: enzyme + DNA + RNA', 'text-anchor="middle" font-size="12.5" font-weight="700" fill="#1f8a7f"') + txt(X(-35), yT - 30, 'promoter re-closes', 'text-anchor="middle" font-size="12" fill="#5b6475"'),
+      chips: ['RNA > 10 nt', 'Bubble collapses to 12–14 bp', 'Footprint ~40 bp', 'σ released'], pts: ['Once the RNA is longer than about 10 nt, the 3/4 linker has been ejected and the enzyme has <b>escaped the promoter</b>.', 'Scrunching reverses: the bubble collapses back to <b>12–14 bp</b>, and the released energy breaks the promoter and σ contacts.', 'A stable <b>ternary complex</b> (enzyme, DNA, RNA) forms. The enzyme becomes more compact (~40 bp footprint), and σ is weakened or lost.'] }
+  ];
+  const defs = `<defs><marker id="ia" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#111"/></marker></defs>`;
+  let st = 0, timer = null;
+  const steps = $('#inSteps');
+  STAGES.forEach((s, i) => { const b = el('button', '', `${i + 1}. ${s.t}`); b.onclick = () => { stop(); go(i); }; steps.appendChild(b); });
+  function go(i) {
+    st = (i + STAGES.length) % STAGES.length; const S = STAGES[st];
+    $$('button', steps).forEach((b, k) => b.classList.toggle('on', k === st));
+    $('#inSvg').innerHTML = svgWrap(900, 285, defs + S.svg());
+    $('#inText').innerHTML = `<h4>${st + 1}. ${S.t}</h4><div class="chips">${S.chips.map(c => `<span class="chip k">${c}</span>`).join('')}</div><ul>${S.pts.map(p => `<li>${p}</li>`).join('')}</ul>`;
+  }
+  function stop() { clearInterval(timer); timer = null; $('#inPlay').textContent = '▶ Play'; }
+  $('#inPrev').onclick = () => { stop(); go(st - 1); }; $('#inNext').onclick = () => { stop(); go(st + 1); };
+  $('#inPlay').onclick = () => { if (timer) return stop(); if (st === STAGES.length - 1) go(0); else go(st + 1); $('#inPlay').textContent = '⏸ Pause'; timer = setInterval(() => { if (st === STAGES.length - 1) return stop(); go(st + 1); }, 2500); };
+  go(0);
+
+  /* abortive simulator */
+  let len = 0, escaped = false, aborted = [], tries = 0, autoT = null;
+  const histBins = [2, 3, 4, 5, 6, 7, 8, 9];
+  function drawAB(flash) {
+    const bub = escaped ? 13 : Math.min(24, 13 + Math.max(0, len - 1));
+    let g = '';
+    g += `<line x1="60" y1="120" x2="860" y2="120" stroke="#3b3f4a" stroke-width="4"/>` + txt(20, 125, '3′', 'font-size="12"') + txt(866, 125, '5′', 'font-size="12"') + txt(60, 145, 'template', 'font-size="11.5" fill="#5b6475"');
+    for (let i = 0; i < 30; i++) g += `<line x1="${200 + i * 22}" y1="114" x2="${200 + i * 22}" y2="126" stroke="#3b3f4a" stroke-width="1.5"/>`;
+    g += txt(200, 145, '+1', 'text-anchor="middle" font-size="12" font-weight="700"');
+    const shown = Math.min(len, 28);
+    for (let i = 0; i < shown; i++) g += `<circle cx="${200 + i * 22}" cy="98" r="9" fill="${flash === 'abort' ? '#f2a48b' : '#e0582f'}"/>`;
+    if (len > 28) g += txt(200 + 28 * 22, 103, `+${len - 28}`, 'font-size="12" font-weight="700"');
+    if (!escaped) g += `<rect x="${200 + 9.5 * 22}" y="80" width="44" height="34" rx="7" fill="#c39be6" stroke="#7b2cbf" stroke-width="2"/>` + txt(200 + 10.5 * 22, 70, 'σ 3/4 linker', 'text-anchor="middle" font-size="12" fill="#7b2cbf" font-weight="700"');
+    else g += txt(420, 70, 'linker ejected · σ released · polymerase has escaped', 'text-anchor="middle" font-size="13" fill="#157a3c" font-weight="700"');
+    g += txt(60, 172, 'Bubble:', 'font-size="13" font-weight="700"') + `<rect x="120" y="160" width="600" height="16" rx="8" fill="#ecebe6"/><rect x="120" y="160" width="${bub / 26 * 600}" height="16" rx="8" fill="${bub > 16 ? '#e0582f' : '#2f7dd1'}"/>` + txt(730, 173, `${bub} bp${!escaped && bub > 16 ? ' (scrunched)' : ''}`, 'font-size="13" font-weight="700"');
+    $('#abSvg').innerHTML = svgWrap(900, 190, g);
+    const h = $('#abHist'); h.innerHTML = '';
+    const mx = Math.max(1, ...histBins.map(b => aborted.filter(x => x === b).length));
+    histBins.forEach(b => { const n = aborted.filter(x => x === b).length; const d = el('div', '', `<b>${n || ''}</b><span>${b}</span>`); d.style.height = (n / mx * 60 + 2) + 'px'; h.appendChild(d); });
+    $('#abCount').textContent = `${aborted.length} abortive transcript(s) released · ${tries} start(s)`;
+  }
+  function add() {
+    if (escaped) { len++; drawAB(); $('#abMsg').innerHTML = `<b class="t">Elongating: RNA = ${len} nt</b>The bubble stays at about 13 bp. σ is gone and the core enzyme carries on alone.`; if (len > 40) stopAuto(); return; }
+    if (len === 0) { len = 2; tries++; drawAB(); $('#abMsg').innerHTML = '<b class="t">First phosphodiester bond formed.</b>Two NTPs were aligned on the template at +1 and +2 and joined. No primer was needed.'; return; }
+    len++;
+    if (len >= 10) {
+      if (tries >= 20 || Math.random() < 0.5) { escaped = true; drawAB(); $('#abMsg').innerHTML = `<div class="fb ok" style="margin:0"><b>Promoter escape!</b> The ${len}-nt RNA pushed the 3/4 linker out of the exit channel. The stored scrunching energy is released, the bubble collapses to ~13 bp, and σ is let go. This is now a stable ternary complex.</div>`; stopAuto(); return; }
+      aborted.push(9); len = 0; drawAB('abort'); $('#abMsg').innerHTML = '<b class="t">Blocked by the linker. Transcript released.</b>The RNA reached the σ 3/4 linker but failed to eject it. A short RNA (about 9 nt) is released, the bubble un-scrunches, and the enzyme, still on the promoter, starts again.'; return;
+    }
+    const p = tries >= 20 ? 0 : 0.05 + 0.015 * len;
+    if (Math.random() < p) { aborted.push(len); const L = len; len = 0; drawAB('abort'); $('#abMsg').innerHTML = `<b class="t">Abortive transcript (${L} nt) released.</b>The polymerase does not leave the promoter. It starts again at +1.`; return; }
+    drawAB(); $('#abMsg').innerHTML = `<b class="t">RNA = ${len} nt (still at the promoter)</b>Downstream DNA is being scrunched into the enzyme, so the bubble grows while the enzyme stays put.`;
+  }
+  function stopAuto() { clearInterval(autoT); autoT = null; $('#abAuto').textContent = 'Auto-run'; }
+  $('#abAdd').onclick = add;
+  $('#abAuto').onclick = () => { if (autoT) return stopAuto(); $('#abAuto').textContent = 'Stop'; autoT = setInterval(add, 450); };
+  $('#abReset').onclick = () => { stopAuto(); len = 0; escaped = false; aborted = []; tries = 0; drawAB(); $('#abMsg').innerHTML = 'Press “Add NTP”. The first step joins the first two ribonucleotides.'; };
+  drawAB();
+
+  /* five channels */
+  const CHN = ['DNA entry channel', 'NTP uptake channel', 'RNA exit channel', 'Non-template strand (NT) channel', 'Template strand (T) channel'];
+  const ans = { 1: CHN[0], 2: CHN[1], 3: CHN[2], 4: CHN[3], 5: CHN[4] };
+  const mk = (id, c) => `<marker id="${id}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="${c}"/></marker>`;
+  let g = `<defs>${mk('cnb', '#2b4c7e')}${mk('cnt', '#3b3f4a')}${mk('cnr', '#e0582f')}${mk('cng', '#7d8793')}</defs>
+    <path d="M95,95 Q230,35 395,105 L340,152 L340,200 L405,238 Q250,330 95,272 Q35,185 95,95z" fill="#1f8a7f" opacity=".16" stroke="#1f8a7f" stroke-width="2.5"/>
+    ${txt(205, 300, 'RNA polymerase', 'text-anchor="middle" font-size="13" font-weight="700" fill="#1f8a7f"')}
+    <line x1="560" y1="162" x2="350" y2="162" stroke="#2b4c7e" stroke-width="4" marker-end="url(#cnb)"/>
+    <line x1="560" y1="182" x2="350" y2="182" stroke="#3b3f4a" stroke-width="4" marker-end="url(#cnt)"/>
+    ${[380, 405, 430, 455, 480, 505, 530].map(x => `<line x1="${x}" y1="164" x2="${x}" y2="180" stroke="#c9c6bc" stroke-width="2"/>`).join('')}
+    ${txt(560, 148, 'Downstream DNA (double-stranded)', 'text-anchor="end" font-size="12" font-weight="700"')}
+    <path d="M340,162 Q300,135 270,110 Q245,85 228,25" fill="none" stroke="#2b4c7e" stroke-width="3.5" marker-end="url(#cnb)"/>
+    ${txt(240, 18, 'Non-template strand', 'font-size="12" font-weight="700" fill="#2b4c7e"')}
+    <path d="M340,182 Q300,192 262,196 Q170,215 40,262" fill="none" stroke="#3b3f4a" stroke-width="3.5" marker-end="url(#cnt)"/>
+    ${txt(30, 285, 'Template strand', 'font-size="12" font-weight="700" fill="#3b3f4a"')}
+    <path d="M262,188 Q200,160 160,120 Q120,80 70,45" fill="none" stroke="#e0582f" stroke-width="5" marker-end="url(#cnr)"/>
+    ${txt(20, 32, 'RNA (5′ end first)', 'font-size="12" font-weight="700" fill="#e0582f"')}
+    <path d="M345,335 Q300,290 268,205" fill="none" stroke="#7d8793" stroke-width="2.5" stroke-dasharray="5 4" marker-end="url(#cng)"/>
+    ${[[338, 322], [322, 300], [306, 276], [292, 250]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="5.5" fill="#9aa5b1"/>`).join('')}
+    ${txt(355, 336, 'NTPs', 'font-size="12" font-weight="700" fill="#5b6475"')}
+    <circle cx="262" cy="192" r="8" fill="#e9a23b" stroke="#111"/>${txt(262, 222, 'active site', 'text-anchor="middle" font-size="11"')}`;
+  [[385, 210], [318, 262], [128, 72], [268, 62], [98, 228]].forEach(([x, y], i) => g += `<circle cx="${x}" cy="${y}" r="13" fill="#fff" stroke="#111" stroke-width="2"/>${txt(x, y + 5, i + 1, 'text-anchor="middle" font-weight="700" font-size="14"')}`);
+  $('#chSvg').innerHTML = svgWrap(570, 345, g);
+  const form = $('#chForm');
+  form.insertAdjacentHTML('beforeend', '<p style="margin:0 0 8px;font-size:14.5px">Follow each molecule into or out of the enzyme, then name the channel at each numbered opening.</p>');
+  const sh = shuffle(CHN); const sels = [];
+  [1, 2, 3, 4, 5].forEach(n => { const r = el('div', 'matchrow'); r.appendChild(el('div', 'l', `Channel ${n}`)); const s = el('select'); s.innerHTML = '<option value="">— choose —</option>' + sh.map(c => `<option>${c}</option>`).join(''); sels.push(s); r.appendChild(s); form.appendChild(r); });
+  const cb = el('button', 'btn small', 'Check'), fb = el('div'); form.append(cb, fb);
+  cb.onclick = () => { let ok = 0; sels.forEach((s, i) => { const r = s.value === ans[i + 1]; s.className = s.value ? (r ? 'right' : 'wrong') : ''; if (r) ok++; }); fb.innerHTML = ok === 5 ? '<div class="fb ok"><b>✓ All five correct.</b> Downstream double-stranded DNA enters (1), NTPs enter (2), RNA leaves (3), and the non-template (4) and template (5) strands leave through their own channels.</div>' : `<div class="fb bad">${ok}/5 correct. Look at which molecule passes through each numbered opening and in which direction it moves.</div>`; };
+})();
+
+/* ================= CH5 ELONGATION ================= */
+(function () {
+  const GENE = 'ATGGCTAGCAAAGGAGAAGAACTTTTCACTGGAGTTGTCCCAATTCTTGTTGAATTAGATGGTGATGTTAATGGGCACAAATTTTCTGTCAGTGGAGAGGG';
+  const L = GENE.length, W = 8.8, X = i => 14 + i * W;
+  let p = 12, timer = null;
+  function draw() {
+    const b0 = p - 10, b1 = p + 2, h0 = p - 8;
+    let g = `<rect x="${X(p - 25)}" y="40" width="${X(p + 15) - X(p - 25)}" height="240" rx="34" fill="#1f8a7f" opacity=".12" stroke="#1f8a7f" stroke-width="2"/>`;
+    g += txt(X(p - 5), 58, 'RNA polymerase (core) · footprint ~40 bp', 'text-anchor="middle" font-size="11.5" fill="#1f8a7f" font-weight="700"');
+    for (let i = 0; i < L; i++) {
+      const inB = i >= b0 && i <= b1;
+      const yt = inB ? 90 : 122, yb = inB ? 200 : 146;
+      if (!inB) g += `<line x1="${X(i)}" y1="126" x2="${X(i)}" y2="134" stroke="#ddd"/>`;
+      g += txt(X(i), yt, GENE[i], `text-anchor="middle" font-size="10.5" class="mono" fill="#2b4c7e" font-weight="${inB ? 700 : 500}"`);
+      g += txt(X(i), yb, COMP[GENE[i]], `text-anchor="middle" font-size="10.5" class="mono" fill="#3b3f4a" font-weight="${inB ? 700 : 500}"`);
+    }
+    for (let i = Math.max(0, h0); i <= p; i++) { g += txt(X(i), 228, GENE[i] === 'T' ? 'U' : GENE[i], 'text-anchor="middle" font-size="12" fill="#e0582f" font-weight="700"'); g += `<line x1="${X(i)}" y1="205" x2="${X(i)}" y2="216" stroke="#e0582f" stroke-width="1.2"/>`; }
+    for (let k = 1; k <= Math.min(h0, 24); k++) { const i = h0 - k; g += txt(X(h0) - k * 7, 228 + k * 9.5, GENE[i] === 'T' ? 'U' : GENE[i], 'text-anchor="middle" font-size="12" fill="#e0582f" font-weight="700"'); }
+    g += txt(X(h0) - (Math.min(h0, 24) + 1) * 7 - 4, 228 + (Math.min(h0, 24) + 1) * 9.5, h0 > 24 ? '…5′' : '5′', 'text-anchor="middle" font-size="12" fill="#e0582f" font-weight="700"');
+    g += `<circle cx="${X(p) + 6}" cy="214" r="5" fill="#e9a23b"/>` + txt(X(p) + 12, 262, 'active site · NTP enters ↑', 'font-size="10.5"');
+    g += `<path d="M${X(b0) - 4},78 h${X(b1) - X(b0) + 8}" stroke="#e0582f" stroke-width="1.5" stroke-dasharray="3 3"/>` + txt((X(b0) + X(b1)) / 2, 74, 'bubble 13 bp', 'text-anchor="middle" font-size="10.5" fill="#e0582f" font-weight="700"');
+    g += txt(4, 125, '5′', 'font-size="10"') + txt(4, 150, '3′', 'font-size="10"') + txt(X(p + 16), 228, '← RNA–DNA hybrid (9 bp)', 'font-size="11" fill="#e0582f"');
+    g += txt(X(L - 1) + 4, 125, '3′', 'font-size="10"');
+    g += `<path d="M${X(p + 15) + 4},300 h40" stroke="#1f8a7f" stroke-width="2.5" marker-end="url(#ea)"/>` + txt(X(p + 15) + 50, 304, 'direction', 'font-size="11" fill="#1f8a7f"');
+    $('#elSvg').innerHTML = svgWrap(910, 470, `<defs><marker id="ea" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#1f8a7f"/></marker></defs>` + g);
+    const wrap = $('#elSvg'), sv = $('svg', wrap); if (sv && wrap.scrollWidth > wrap.clientWidth + 4) { const sc = sv.getBoundingClientRect().width / 910; wrap.scrollLeft = Math.max(0, X(p) * sc - wrap.clientWidth / 2); }
+    const n = p + 1;
+    $('#elStats').innerHTML = [`RNA length: <b>${n} nt</b>`, 'Bubble: <b>13 bp</b> (12–14)', 'RNA–DNA hybrid: <b>9 bp</b>', 'Footprint: <b>~40 bp</b>', `Real time at 40 nt/s: <b>${(n / 40).toFixed(2)} s</b>`].map(s => `<span class="chip k">${s}</span>`).join('') + (p >= L - 16 ? '<span class="chip ok">Approaching the terminator…</span>' : '');
+  }
+  function stop() { clearInterval(timer); timer = null; $('#elPlay').textContent = '▶ Play'; }
+  function play() { stop(); $('#elPlay').textContent = '⏸ Pause'; timer = setInterval(() => { if (p >= L - 16) return stop(); p++; draw(); }, 1000 / +$('#elSpeed').value); }
+  $('#elPlay').onclick = () => timer ? stop() : play();
+  $('#elSpeed').oninput = () => { if (timer) play(); };
+  $('#elStep').onclick = () => { stop(); if (p < L - 16) p++; draw(); };
+  $('#elReset').onclick = () => { stop(); p = 12; draw(); };
+  draw();
+
+  /* calculator */
+  const calc = () => { const L = Math.max(1, +$('#calcL').value || 0); const s = L / 40; $('#calcOut').innerHTML = `<b class="t">${L.toLocaleString()} nt ÷ 40 nt/s = ${s.toFixed(1)} s</b>${s >= 60 ? `(about ${(s / 60).toFixed(1)} min). ` : ''}This is a single polymerase at 37 °C. Many polymerases can follow one another on the same gene, so the cell produces many transcripts in that time.`; };
+  $('#calcL').oninput = calc; calc();
+
+  /* convoy */
+  let cvRun = false, cvT = 0, raf = null;
+  function cvDraw() {
+    const N = +$('#cvN').value; const x0 = 30, x1 = 400;
+    let g = `<line x1="${x0}" y1="150" x2="${x1}" y2="150" stroke="#2b4c7e" stroke-width="4"/><rect x="${x0}" y="142" width="24" height="16" fill="#2a9d55"/>` + txt(x0, 175, 'promoter', 'font-size="10.5"') + `<rect x="${x1 - 20}" y="142" width="20" height="16" fill="#d1495b"/>` + txt(x1 - 30, 175, 'terminator', 'font-size="10.5"');
+    for (let i = 0; i < N; i++) {
+      const f = ((cvT / 600) + i / N) % 1; const x = x0 + 30 + f * (x1 - x0 - 60); const Lr = (x - x0 - 30) * 0.32;
+      g += `<line x1="${x}" y1="140" x2="${x - Lr * 0.35}" y2="${140 - Lr}" stroke="#e0582f" stroke-width="3" stroke-linecap="round"/><ellipse cx="${x}" cy="150" rx="11" ry="9" fill="#1f8a7f"/>`;
+    }
+    g += txt(215, 20, '“Christmas tree”: RNAs get longer along the gene', 'text-anchor="middle" font-size="11.5" fill="#5b6475"');
+    $('#cvSvg').innerHTML = svgWrap(430, 190, g);
+  }
+  function loop() { if (!cvRun) return; cvT += 1; cvDraw(); raf = requestAnimationFrame(loop); }
+  $('#cvPlay').onclick = () => { cvRun = !cvRun; $('#cvPlay').textContent = cvRun ? '⏸ Pause' : '▶ Animate'; if (cvRun) loop(); };
+  $('#cvN').oninput = cvDraw; cvDraw();
+
+  /* proofreading game */
+  const SC = [
+    { s: 'The wrong nucleotide is the <b>last one added</b> and is still in the active site. The enzyme runs the <b>polymerisation reaction in reverse</b>, using PPi, removes it, then adds the correct one.', a: 'pyro', v: ['3′-TACGGA<b>C</b>-5′', '5′-AUGCC<b style="color:#b3261e">A</b>'] },
+    { s: 'The enzyme <b>backtracks two nucleotides</b>, so the 3′ end carrying the error is pushed out of the active site. A <b>cut</b> in the RNA then creates a new 3′-OH and synthesis restarts.', a: 'hydro', v: ['3′-TACGGACT-5′', '5′-AUGC<b style="color:#b3261e">U</b>GA ✂'] },
+    { s: 'The incorrect nucleotide is removed when the enzyme <b>reverses its synthesis reaction and backs up one step</b>. This is similar to DNA polymerase proofreading.', a: 'pyro', v: ['3′-TACG<b>G</b>-5′', '5′-AUG<b style="color:#b3261e">G</b>'] },
+    { s: 'The enzyme <b>moves back one or more nucleotides</b> and <b>cleaves</b> the RNA at that position, releasing a short fragment that contains the error. In bacteria this is stimulated by the factors GreA and GreB.', a: 'hydro', v: ['3′-TACGGACG-5′', '5′-AUGC<b style="color:#b3261e">A</b>UG ✂'] }
+  ];
+  let si = Math.floor(Math.random() * SC.length), streak = 0;
+  const box = $('#prBox');
+  function prDraw(fbHtml) {
+    const S = SC[si];
+    box.innerHTML = `<div class="scen">${S.s}<div class="mono" style="margin-top:8px;font-size:15px">Template: ${S.v[0]}<br>RNA:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${S.v[1]}</div></div>
+      <div class="row"><button class="btn ghost" data-a="pyro">Pyrophosphorolytic editing</button><button class="btn ghost" data-a="hydro">Hydrolytic editing</button><span class="chip">Streak: ${streak}</span></div>${fbHtml || ''}`;
+    $$('[data-a]', box).forEach(b => b.onclick = () => {
+      const ok = b.dataset.a === S.a; streak = ok ? streak + 1 : 0;
+      const ex = S.a === 'pyro' ? 'Pyrophosphorolytic editing is the <b>reverse of polymerisation</b>: PPi attacks and removes the last nucleotide, then the correct one is added.' : 'Hydrolytic editing: the enzyme <b>backtracks</b> and <b>cleaves</b> the RNA, then resumes synthesis forward.';
+      const fb = `<div class="fb ${ok ? 'ok' : 'bad'}"><b>${ok ? '✓ Correct.' : '✗ No.'}</b> ${ex}</div><button class="btn small" id="prNext" style="margin-top:8px">Next scenario →</button>`;
+      prDraw(fb); $$('[data-a]', box).forEach(x => x.disabled = true);
+      $('#prNext').onclick = () => { si = (si + 1 + Math.floor(Math.random() * (SC.length - 1))) % SC.length; prDraw(); };
+    });
+  }
+  prDraw();
+
+  /* TCR stepper */
+  const TX = x => x;
+  const base = (extra) => `<line x1="30" y1="140" x2="870" y2="140" stroke="#2b4c7e" stroke-width="4"/><line x1="30" y1="154" x2="870" y2="154" stroke="#3b3f4a" stroke-width="4"/>` + extra;
+  const pol = (x, label = 'RNAP', op = .85) => `<ellipse cx="${x}" cy="147" rx="48" ry="34" fill="#1f8a7f" opacity="${op}"/>${txt(x, 152, label, 'text-anchor="middle" fill="#fff" font-weight="700" font-size="13"')}`;
+  const lesion = (x, on = true) => on ? `<path d="M${x},160 l6,10 l-12,0z M${x},160 m-9,4 l18,0" fill="#b3261e"/><text x="${x}" y="188" text-anchor="middle" font-size="11" fill="#b3261e" font-weight="700">lesion</text><circle cx="${x}" cy="157" r="7" fill="#b3261e"/>` : '';
+  const rnaL = (x, len) => `<path d="M${x - 30},120 q-${len / 3},-${len / 2} -${len},-${len / 1.6}" stroke="#e0582f" stroke-width="4" fill="none"/>`;
+  const TC = [
+    { t: '1. Normal elongation', g: base(pol(420) + rnaL(420, 70) + lesion(560)), d: 'RNA polymerase is elongating. Further along the <b>template strand</b> is damaged DNA (red).' },
+    { t: '2. Arrest', g: base(pol(530) + rnaL(530, 90) + lesion(560) + pol(380, 'RNAP 2', .5) + rnaL(380, 50)) + txt(455, 60, 'roadblock!', 'text-anchor="middle" font-size="14" font-weight="700" fill="#b3261e"'), d: 'The polymerase <b>stalls</b> at the lesion. No product is made, which can be catastrophic if the gene is essential, and the stalled enzyme blocks <b>other polymerases</b> transcribing the same gene.' },
+    { t: '3. TRCF arrives', g: base(pol(530) + rnaL(530, 90) + lesion(560) + `<rect x="300" y="125" width="80" height="44" rx="10" fill="#c98a00"/>` + txt(340, 152, 'TRCF', 'text-anchor="middle" fill="#fff" font-weight="700"') + `<path d="M390,190 h70" stroke="#111" stroke-width="2" marker-end="url(#tca)"/>` + txt(425, 210, 'ATP → ADP + Pi', 'text-anchor="middle" font-size="12"')), d: '<b>TRCF</b> (transcription-repair coupling factor, an ATPase) binds the <b>double-stranded DNA upstream</b> of the polymerase and uses its ATP-driven motor to translocate until it reaches the stalled enzyme.' },
+    { t: '4. Collision', g: base(`<rect x="440" y="125" width="80" height="44" rx="10" fill="#c98a00"/>` + txt(480, 152, 'TRCF', 'text-anchor="middle" fill="#fff" font-weight="700"') + pol(610, 'RNAP', .5) + `<path d="M600,100 q30,-50 90,-60" stroke="#e0582f" stroke-width="4" fill="none" stroke-dasharray="6 4"/>` + lesion(560) + txt(640, 70, 'ternary complex dissociates', 'font-size="12.5" font-weight="700"')), d: 'The collision pushes the polymerase forward. Occasionally it <b>restarts</b> elongation, but <b>more often the ternary complex (RNAP + DNA + RNA) dissociates</b>, ending transcription by that enzyme.' },
+    { t: '5. Repair', g: base(`<rect x="510" y="122" width="100" height="50" rx="12" fill="#8a5cf6"/>` + txt(560, 152, 'UvrA(B)C', 'text-anchor="middle" fill="#fff" font-weight="700" font-size="13"') + pol(300, 'RNAP 2', .85) + rnaL(300, 50)), d: 'TRCF recruits repair enzymes, especially the <b>UvrA(B)C endonuclease</b>, which removes the damage. This is <b>transcription-coupled repair</b>, and another polymerase can now transcribe the gene.' }
+  ];
+  let ti = 0;
+  function tc() { const S = TC[ti]; $('#tcSvg').innerHTML = svgWrap(900, 230, `<defs><marker id="tca" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#111"/></marker></defs>` + S.g); $('#tcInfo').innerHTML = `<b class="t">${S.t}</b>${S.d}`; $('#tcLbl').textContent = `Step ${ti + 1} of ${TC.length}`; }
+  let tt = null;
+  const tstop = () => { clearInterval(tt); tt = null; $('#tcPlay').textContent = '▶ Play'; };
+  $('#tcPrev').onclick = () => { tstop(); ti = Math.max(0, ti - 1); tc(); }; $('#tcNext').onclick = () => { tstop(); ti = Math.min(TC.length - 1, ti + 1); tc(); };
+  $('#tcPlay').onclick = () => { if (tt) return tstop(); ti = ti >= TC.length - 1 ? 0 : ti + 1; tc(); $('#tcPlay').textContent = '⏸ Pause'; tt = setInterval(() => { if (ti >= TC.length - 1) return tstop(); ti++; tc(); }, 2500); };
+  tc();
+  showHooks.elongation = () => {};
+})();
+
+/* ================= CH6 TERMINATION ================= */
+(function () {
+  const PRE = [
+    { n: 'Typical intrinsic terminator', A: 'AGCCCGCC', L: 'UAAU', B: 'GGCGGGCU', T: 'UUUUUUUUAC' },
+    { n: 'Stem mutation (G→A ×2)', A: 'AGCCCGCC', L: 'UAAU', B: 'GGCAAGCU', T: 'UUUUUUUUAC' },
+    { n: 'U-tract replaced by GC-rich tail', A: 'AGCCCGCC', L: 'UAAU', B: 'GGCGGGCU', T: 'GCGCAGCGAC' },
+    { n: 'AU-rich (weak) stem', A: 'AUAUAUAU', L: 'UAAU', B: 'AUAUAUAU', T: 'UUUUUUUUAC' },
+    { n: 'Short U-tract (UUA…)', A: 'AGCCCGCC', L: 'UAAU', B: 'GGCGGGCU', T: 'UUAGCAGCAC' }
+  ];
+  const pr = $('#tbPresets');
+  PRE.forEach(p => { const b = el('button', 'btn small ghost', p.n); b.onclick = () => { $('#tbA').value = p.A; $('#tbL').value = p.L; $('#tbB').value = p.B; $('#tbT').value = p.T; draw(); }; pr.appendChild(b); });
+  const clean = s => s.toUpperCase().replace(/T/g, 'U').replace(/[^ACGU]/g, '');
+  const pairType = (a, b) => { const s = a + b; if (['AU', 'UA'].includes(s)) return 'AU'; if (['GC', 'CG'].includes(s)) return 'GC'; if (['GU', 'UG'].includes(s)) return 'GU'; return null; };
+  $('#tbAuto').onclick = () => { const A = clean($('#tbA').value); $('#tbB').value = rev(A).split('').map(c => RCOMP[c]).join(''); draw(); };
+  function draw() {
+    const A = clean($('#tbA').value).slice(0, 12), Lp = clean($('#tbL').value).slice(0, 10), B = clean($('#tbB').value).slice(0, 12), T = clean($('#tbT').value).slice(0, 14);
+    ['#tbA', '#tbL', '#tbB', '#tbT'].forEach((s, i) => { const v = [A, Lp, B, T][i]; if ($(s).value !== v) $(s).value = v; });
+    const n = Math.min(A.length, B.length);
+    const r = Math.max(26, (Lp.length + 1) * 6.5); const cx = 430, xA = cx - r, xB = cx + r, yBase = 250, dy = 21;
+    let g = '', pairs = 0, gc = 0, run = 0, best = 0, mism = 0;
+    for (let i = 0; i < n; i++) { const pt = pairType(A[A.length - n + i] || A[i], B[B.length - 1 - i]); }
+    // positions: A[i] at y = yBase - (i)*dy  (5'→3' going up). B[j] at y = yBase - (B.length-1-j)*dy (going down)
+    const topA = yBase - (A.length - 1) * dy, topB = yBase - (B.length - 1) * dy;
+    for (let i = 0; i < A.length; i++) {
+      const y = yBase - i * dy; g += txt(xA, y + 5, A[i], 'text-anchor="middle" font-size="15" font-weight="700" class="mono"');
+    }
+    for (let j = 0; j < B.length; j++) { const y = yBase - (B.length - 1 - j) * dy; g += txt(xB, y + 5, B[j], 'text-anchor="middle" font-size="15" font-weight="700" class="mono"'); }
+    for (let i = 0; i < n; i++) {
+      const a = A[i], b = B[B.length - 1 - i]; const pt = pairType(a, b); const y = yBase - i * dy;
+      if (pt) { pairs++; if (pt === 'GC') gc++; run++; best = Math.max(best, run); g += `<line x1="${xA + 9}" y1="${y}" x2="${xB - 9}" y2="${y}" stroke="${pt === 'GC' ? '#157a3c' : pt === 'AU' ? '#2f7dd1' : '#a15c00'}" stroke-width="${pt === 'GC' ? 3.5 : 2}" ${pt === 'GU' ? 'stroke-dasharray="3 3"' : ''}/>`; }
+      else { run = 0; mism++; g += txt(cx, y + 5, '✕', 'text-anchor="middle" fill="#b3261e" font-weight="700"'); }
+    }
+    const yTop = Math.min(topA, topB) - 16;
+    for (let k = 0; k < Lp.length; k++) { const ang = Math.PI - (k + 1) * Math.PI / (Lp.length + 1); g += txt(cx + r * Math.cos(ang), yTop - r * Math.sin(ang) * 0.9 + 5, Lp[k], 'text-anchor="middle" font-size="14" fill="#5b6475" class="mono"'); }
+    for (let k = 0; k < 6; k++) g += txt(xA - 24 - k * 18, yBase + 5, 'ACGUAC'[k], 'text-anchor="middle" font-size="14" fill="#9aa5b1" class="mono"');
+    g += txt(xA - 24 - 6 * 18 - 10, yBase + 5, '5′…', 'text-anchor="end" font-size="13" fill="#9aa5b1"');
+    let uCount = 0;
+    for (let k = 0; k < T.length; k++) {
+      const x = xB + 24 + k * 19, isU = T[k] === 'U'; if (k < 8 && isU) uCount++;
+      g += txt(x, yBase + 5, T[k], `text-anchor="middle" font-size="15" font-weight="700" class="mono" fill="${isU ? '#e0582f' : '#1d2330'}"`);
+      if (k < 8) { const tb = { U: 'A', A: 'T', G: 'C', C: 'G' }[T[k]]; g += `<line x1="${x}" y1="${yBase + 10}" x2="${x}" y2="${yBase + 22}" stroke="${isU ? '#e0582f' : '#3b3f4a'}" stroke-width="${isU ? 1.2 : 2.5}" ${isU ? 'stroke-dasharray="2 2"' : ''}/>` + txt(x, yBase + 37, tb, 'text-anchor="middle" font-size="14" class="mono" fill="#3b3f4a"'); }
+    }
+    g += txt(xB + 24, yBase + 58, 'template DNA (dA under U = weakest pairs)', 'font-size="11.5" fill="#5b6475"');
+    g += `<rect x="${xB + 130}" y="${yBase - 40}" width="${Math.max(60, T.length * 19 - 80)}" height="90" rx="24" fill="#1f8a7f" opacity=".1" stroke="#1f8a7f"/>` + txt(xB + 150, yBase - 46, 'RNAP', 'font-size="12" fill="#1f8a7f" font-weight="700"');
+    const H = yBase + 70; const minY = Math.min(yTop - r - 20, 20);
+    $('#tbSvg').innerHTML = `<svg viewBox="0 ${minY} 900 ${H - minY}" xmlns="http://www.w3.org/2000/svg">${g}</svg>`;
+    const loopOk = Lp.length >= 3 && Lp.length <= 9;
+    const hairOk = best >= 5 && gc >= 3 && loopOk;
+    const hairWeak = !hairOk && best >= 4;
+    const uOk = uCount >= 6 && T.slice(0, 3) === 'UUU', uPart = uCount >= 4 && !uOk;
+    $('#tbStats').innerHTML = [`Base pairs in stem: <b>${pairs}/${n}</b>`, `G:C pairs: <b>${gc}</b>`, `Longest uninterrupted stem: <b>${best} bp</b>`, `Mismatches: <b>${mism}</b>`, `Loop: <b>${Lp.length} nt</b>${loopOk ? '' : ' (should be 3–9)'}`, `U's in first 8 nt of tail: <b>${uCount}</b>`].map(s => `<span class="chip k">${s}</span>`).join('');
+    let v, cls;
+    if (hairOk && uOk) { v = '<b>✓ Efficient termination.</b> A stable GC-rich hairpin forms in the RNA just behind the polymerase. At that moment the RNA is held on the template only by weak <b>rU:dA</b> pairs, so the hairpin (by pushing the polymerase, pulling the RNA or changing the enzyme\'s shape) releases the transcript.'; cls = 'ok'; }
+    else if (hairOk && uPart) { v = '<b>~ Partial termination.</b> The hairpin forms, but the U-tract is short. Some G:C/A:T pairs still anchor the RNA–DNA hybrid, so release is inefficient and many polymerases read through.'; cls = 'neutral'; }
+    else if (hairOk) { v = '<b>✗ Read-through (pause only).</b> A good hairpin forms, but there is no U-tract. The hybrid behind it contains strong G:C pairs, so the RNA is not released. The hairpin works only when it is <b>followed by a stretch of A:U pairs</b>.'; cls = 'bad'; }
+    else if (uOk || uPart) { v = `<b>✗ Read-through.</b> The U-tract is present, but ${loopOk ? (best < 5 ? 'the stem is broken by mismatches' : 'the stem has too few G:C pairs to be stable') : 'the loop size prevents a proper hairpin'}. Mutations that disrupt the hairpin <b>partially or completely prevent termination</b>.`; cls = 'bad'; }
+    else { v = '<b>✗ No termination.</b> There is neither a stable hairpin nor a U-tract.'; cls = 'bad'; }
+    $('#tbVerdict').innerHTML = `<div class="fb ${cls}" style="margin:0">${v}</div>`;
+  }
+  ['#tbA', '#tbL', '#tbB', '#tbT'].forEach(s => $(s).addEventListener('input', draw));
+  $('#tbA').value = PRE[0].A; $('#tbL').value = PRE[0].L; $('#tbB').value = PRE[0].B; $('#tbT').value = PRE[0].T; draw();
+
+  /* Rho */
+  const dnaL = `<line x1="30" y1="190" x2="870" y2="190" stroke="#2b4c7e" stroke-width="4"/><line x1="30" y1="206" x2="870" y2="206" stroke="#3b3f4a" stroke-width="4"/>`;
+  const pol = x => `<ellipse cx="${x}" cy="198" rx="55" ry="38" fill="#1f8a7f" opacity=".8"/>${txt(x, 203, 'RNAP', 'text-anchor="middle" fill="#fff" font-weight="700"')}`;
+  const rnaPath = (x) => `M${x - 30},170 C${x - 90},120 ${x - 200},80 ${x - 380},60`;
+  const rho = (cx, cy) => { let s = ''; for (let k = 0; k < 6; k++) { const a = k * Math.PI / 3; s += `<circle cx="${cx + 18 * Math.cos(a)}" cy="${cy + 18 * Math.sin(a)}" r="11" fill="#c98a00" stroke="#fff" stroke-width="1.5"/>`; } return s + txt(cx, cy - 34, 'Rho (hexamer)', 'text-anchor="middle" font-size="12" font-weight="700" fill="#a15c00"'); };
+  const rut = x => `<path d="M${x - 150},103 C${x - 200},85 ${x - 240},74 ${x - 290},68" stroke="#7b2cbf" stroke-width="9" fill="none" opacity=".45"/>` + txt(x - 230, 108, 'rut site (C-rich, G-poor, ~40 nt)', 'font-size="11.5" fill="#7b2cbf" font-weight="700"');
+  const RH = [
+    { t: '1. Elongation', g: x => dnaL + `<path d="${rnaPath(x)}" stroke="#e0582f" stroke-width="4" fill="none"/>` + pol(x), d: 'The polymerase is transcribing a gene with a Rho-dependent terminator. The RNA leaves the enzyme as a single strand.', x: 600 },
+    { t: '2. rut site emerges', g: x => dnaL + `<path d="${rnaPath(x)}" stroke="#e0582f" stroke-width="4" fill="none"/>` + rut(x) + pol(x), d: 'A <b>rut site</b> appears in the RNA: about <b>40 nt</b>, <b>C-rich and G-poor</b>, with <b>no hairpin</b>. It is not well defined, and works only with Rho.', x: 640 },
+    { t: '3. Rho binds', g: x => dnaL + `<path d="${rnaPath(x)}" stroke="#e0582f" stroke-width="4" fill="none"/>` + rut(x) + rho(x - 230, 82) + pol(x), d: '<b>Rho</b>, a ring of <b>6 identical subunits</b> with helicase and ATPase activity, binds the rut site on the single-stranded RNA as it leaves the polymerase.', x: 680 },
+    { t: '4. Rho translocates', g: x => dnaL + `<path d="${rnaPath(x)}" stroke="#e0582f" stroke-width="4" fill="none"/>` + rho(x - 90, 125) + `<path d="M${x - 150},150 l40,-10" stroke="#111" stroke-width="2" marker-end="url(#rha)"/>` + txt(x - 210, 175, 'ATP → ADP + Pi', 'font-size="12"') + pol(x) + txt(x, 258, 'paused at termination site', 'text-anchor="middle" font-size="12" fill="#5b6475"'), d: 'Using energy from <b>ATP hydrolysis</b>, Rho moves along the transcript 5′→3′ towards the polymerase, which pauses at the termination site.', x: 700 },
+    { t: '5. Hybrid unwound', g: x => dnaL + `<path d="${rnaPath(x)}" stroke="#e0582f" stroke-width="4" fill="none"/>` + pol(x) + rho(x - 48, 160) + txt(x, 260, 'helicase unwinds RNA–DNA hybrid', 'text-anchor="middle" font-size="12.5" font-weight="700"'), d: 'Rho reaches the polymerase, where the newest RNA is base-paired to the template. Its <b>helicase</b> activity unwinds the <b>RNA–DNA hybrid</b> using ATP. (The same three models of release as for intrinsic terminators have been proposed.)', x: 700 },
+    { t: '6. Release', g: x => dnaL + `<path d="M${x - 120},140 C${x - 200},100 ${x - 300},80 ${x - 460},60" stroke="#e0582f" stroke-width="4" fill="none"/>` + `<g opacity=".55">${pol(x + 60).replace('cy="198"', 'cy="120"').replace('y="203"', 'y="125"')}</g>` + rho(x - 90, 120) + txt(x - 300, 120, 'RNA released', 'font-size="13" font-weight="700" fill="#e0582f"') + txt(x + 60, 60, 'RNAP & Rho dissociate', 'text-anchor="middle" font-size="12.5" font-weight="700"'), d: 'The RNA is released, the DNA double helix re-forms, and both the polymerase and Rho dissociate from the DNA. <b>Transcription has terminated.</b>', x: 700 }
+  ];
+  let ri = 0, rt = null;
+  function rh() { const S = RH[ri]; $('#rhSvg').innerHTML = svgWrap(900, 280, `<defs><marker id="rha" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#111"/></marker></defs>` + S.g(S.x)); $('#rhInfo').innerHTML = `<b class="t">${S.t}</b>${S.d}`; $('#rhLbl').textContent = `Step ${ri + 1} of ${RH.length}`; }
+  function stop() { clearInterval(rt); rt = null; $('#rhPlay').textContent = '▶ Play'; }
+  $('#rhPrev').onclick = () => { stop(); ri = Math.max(0, ri - 1); rh(); }; $('#rhNext').onclick = () => { stop(); ri = Math.min(RH.length - 1, ri + 1); rh(); };
+  $('#rhPlay').onclick = () => { if (rt) return stop(); if (ri === RH.length - 1) ri = -1; $('#rhPlay').textContent = '⏸ Pause'; rt = setInterval(() => { if (ri >= RH.length - 1) return stop(); ri++; rh(); }, 2200); ri = Math.max(ri, 0); rh(); };
+  rh();
+})();
+
+/* ================= CH7 INHIBITORS ================= */
+(function () {
+  const OUT = {
+    'none-before': ['Normal initiation and elongation.', 'Holoenzyme binds, the open complex forms, the enzyme escapes, and full-length RNA is made.', 'full'],
+    'none-during': ['Normal: the polymerases finish their transcripts.', 'With no drug, the elongating polymerases complete their RNAs and new rounds of initiation continue.', 'full'],
+    'rif-before': ['Only very short (2–3 nt) RNAs: no full-length transcript.', 'The holoenzyme still binds the promoter and forms the open complex, and the first bonds are made. But rifampicin sits in a pocket of the <b>β subunit</b> in the path of the RNA, so the chain cannot grow beyond <b>2–3 nt</b>. Initiation is blocked.', 'short'],
+    'rif-during': ['Elongating polymerases finish; RNA synthesis then gradually stops.', 'Polymerases that have already escaped the promoter have RNA filling the exit channel and are <b>resistant</b>, so they complete their transcripts. Every new round of initiation is blocked, so total RNA synthesis declines as the existing polymerases run off.', 'finish'],
+    'act-before': ['Little or no RNA. Elongation is blocked along the DNA.', 'Actinomycin D <b>intercalates</b> into the DNA (mainly at G:C pairs). Polymerase may start, but it cannot move past the drug-bound sites, so elongation is blocked. The target is DNA, so the drug blocks human transcription too.', 'stall'],
+    'act-during': ['Polymerases already elongating stall at intercalated sites.', 'Unlike rifampicin, actinomycin D stops <b>elongating</b> polymerases, because it acts on the DNA template ahead of them. Transcription stops quickly, not gradually.', 'stall']
+  };
+  $('#dgRun').onclick = () => {
+    const k = $('#dgDrug').value + '-' + $('#dgWhen').value; const [h, d, kind] = OUT[k];
+    let g = `<line x1="40" y1="120" x2="860" y2="120" stroke="#2b4c7e" stroke-width="4"/><line x1="40" y1="134" x2="860" y2="134" stroke="#3b3f4a" stroke-width="4"/><rect x="40" y="112" width="70" height="30" fill="#2a9d55" opacity=".8"/>` + txt(75, 160, 'promoter', 'text-anchor="middle" font-size="11.5"') + `<rect x="790" y="112" width="70" height="30" fill="#d1495b" opacity=".8"/>`;
+    const polx = kind === 'short' ? 135 : kind === 'stall' ? ($('#dgWhen').value === 'during' ? 430 : 200) : kind === 'finish' ? 760 : 760;
+    g += `<ellipse cx="${polx}" cy="127" rx="40" ry="28" fill="#1f8a7f" opacity=".85"/>`;
+    if (kind === 'short') g += `<circle cx="150" cy="95" r="6" fill="#e0582f"/><circle cx="162" cy="95" r="6" fill="#e0582f"/><circle cx="174" cy="95" r="6" fill="#e0582f" opacity=".5"/><rect x="152" y="70" width="34" height="18" rx="5" fill="#b3261e"/>` + txt(169, 83, 'Rif', 'text-anchor="middle" fill="#fff" font-size="11" font-weight="700"') + txt(260, 70, 'RNA stuck at 2–3 nt', 'font-size="13" font-weight="700" fill="#b3261e"');
+    else if (kind === 'stall') { for (let x = 240; x < 780; x += 70) g += `<rect x="${x}" y="114" width="12" height="26" fill="#b3261e" opacity=".8"/>`; g += `<path d="M${polx - 30},100 Q${polx - 120},60 ${Math.max(60, polx - 230)},50" stroke="#e0582f" stroke-width="4" fill="none"/>` + txt(polx + 50, 80, 'blocked by intercalated drug', 'font-size="13" font-weight="700" fill="#b3261e"'); }
+    else { g += `<path d="M${polx - 30},100 Q${polx - 250},40 ${polx - 600},30" stroke="#e0582f" stroke-width="4" fill="none"/>` + txt(450, 185, kind === 'finish' ? 'escaped polymerases complete; new initiation blocked' : 'full-length RNA', 'text-anchor="middle" font-size="13" font-weight="700" fill="#157a3c"'); if (kind === 'finish') g += `<rect x="85" y="70" width="34" height="18" rx="5" fill="#b3261e"/>` + txt(102, 83, 'Rif', 'text-anchor="middle" fill="#fff" font-size="11" font-weight="700"') + `<ellipse cx="75" cy="127" rx="30" ry="22" fill="#1f8a7f" opacity=".45"/>`; }
+    $('#dgSvg').innerHTML = svgWrap(900, 200, g);
+    $('#dgOut').innerHTML = `<b class="t">${h}</b>${d}`;
+  };
+  $('#dgRun').click();
+})();
+
+/* ================= boot ================= */
+show(location.hash.slice(1) || 'warmup');
+</script>
+</body>
+</html>
